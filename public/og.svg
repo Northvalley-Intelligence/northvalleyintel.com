@@ -1,0 +1,11 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F7F6F0"/>
+  <rect x="76" y="76" width="1048" height="478" rx="26" fill="#0F1720"/>
+  <rect x="122" y="124" width="118" height="118" rx="20" fill="#F7F6F0"/>
+  <path d="M150 211V155H163L205 189.8V155H218V211H205L163 176.2V211H150Z" fill="#0F1720"/>
+  <path d="M150 211L218 155" stroke="#2F8C7E" stroke-width="6" stroke-linecap="round"/>
+  <text x="122" y="330" fill="#F7F6F0" font-family="Arial, sans-serif" font-size="74" font-weight="800">Northvalley Intelligence</text>
+  <text x="122" y="407" fill="#CAD6DD" font-family="Arial, sans-serif" font-size="34">Operational AI for Real-World Businesses</text>
+  <rect x="122" y="458" width="356" height="54" rx="8" fill="#2F8C7E"/>
+  <text x="150" y="493" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="24" font-weight="700">Assessment-first consulting</text>
+</svg>
