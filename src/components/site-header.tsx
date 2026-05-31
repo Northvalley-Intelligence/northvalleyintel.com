@@ -18,10 +18,10 @@ export function SiteHeader() {
           aria-label="Northvalley Intelligence home"
         >
           <Image
-            src="/brand-mark.svg"
+            src="/northvalley-logo.png"
             alt=""
-            width={36}
-            height={36}
+            width={40}
+            height={40}
             priority
             className="rounded-md"
           />
