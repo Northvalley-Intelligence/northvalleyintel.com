@@ -67,6 +67,48 @@ export const assessments = [
   },
 ];
 
+export const medinaCaseStudy = {
+  name: "Medina Clean",
+  client: "Rosa Medina",
+  url: "https://www.medinaclean.com",
+  sourceUrl:
+    "https://feroshjacob.github.io/posts/2026/06/01/the-end-of-software-scarcity-part-2-rosas-story",
+  context:
+    "A growing cleaning business near Woodstock, Georgia needed affordable software that respected how the owner already worked: direct customer communication, bilingual service, recurring clients, and practical scheduling constraints.",
+  summary:
+    "Northvalley Intelligence helped turn a website request into the foundation for a tailored operating system: public lead capture, guided estimates, bilingual content, appointment intake, moderated reviews, client records, recurring cleaning tasks, crew scheduling, and a private admin dashboard.",
+};
+
+export const medinaOutcomes = [
+  {
+    label: "Public presence",
+    detail:
+      "A bilingual website for Medina Clean with service pages, rate guidance, referral messaging, reviews, and appointment requests.",
+  },
+  {
+    label: "Lead handling",
+    detail:
+      "Guided estimate and appointment flows collect the details Rosa needs before deciding whether a job is a fit.",
+  },
+  {
+    label: "Operational memory",
+    detail:
+      "Client records preserve language preference, contact details, cleaning frequency, pricing, notes, and recurring service context.",
+  },
+  {
+    label: "Scheduling support",
+    detail:
+      "Admin tools help create the next recurring cleaning, find an available crew slot, block unavailable time, and review calendar activity.",
+  },
+];
+
+export const medinaPrinciples = [
+  "Start from the business owner’s real question, not a generic software package.",
+  "Keep public marketing, lead intake, and private operations connected.",
+  "Use low-cost infrastructure first, with deterministic rules around pricing, service area, and booking facts.",
+  "Build in English and Spanish so customer communication matches the way the business actually serves clients.",
+];
+
 export const workflowSteps = [
   "Lead intake from forms, calls, SMS, and social channels",
   "Customer qualification and recurring appointment setup",
