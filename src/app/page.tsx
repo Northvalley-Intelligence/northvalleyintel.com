@@ -1,9 +1,15 @@
 import {
   BrainCircuit,
+  CalendarCheck2,
   CheckCircle2,
+  ExternalLink,
+  Languages,
   MapPinned,
+  MessageSquareText,
   SearchCheck,
+  ShieldCheck,
 } from "lucide-react";
+import Image from "next/image";
 
 import { OperationsVisual } from "@/components/operations-visual";
 import { SiteHeader } from "@/components/site-header";
@@ -11,9 +17,12 @@ import { ButtonLink } from "@/components/ui/button";
 import {
   assessments,
   industries,
+  medinaCaseStudy,
+  medinaOutcomes,
+  medinaPrinciples,
   services,
   siteConfig,
-  workflowSteps,
+  teamMembers,
 } from "@/lib/site";
 
 const jsonLd = {
@@ -28,7 +37,22 @@ const jsonLd = {
     "Operational AI Assessment",
     "Knowledge Chaos Assessment",
     "Workflow Intelligence Consulting",
+    "Small Business Operations System",
   ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Assessment-led implementation examples",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Medina Clean operations case study",
+          url: medinaCaseStudy.url,
+        },
+      },
+    ],
+  },
 };
 
 export default function Home() {
@@ -166,33 +190,134 @@ export default function Home() {
           id="case-study"
           className="bg-north-ink px-5 py-20 text-white md:px-10 md:py-28 lg:px-18"
         >
-          <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.92fr_1.08fr]">
             <div>
               <p className="mb-4 text-sm font-extrabold uppercase text-[#77c0b7]">
-                Case Study Direction
+                First Use Case
               </p>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
-                Cleaning business operational modernization workflow
+                {medinaCaseStudy.name}: from website request to operating
+                foundation
               </h2>
               <p className="mt-5 text-lg leading-8 text-[#c6d0d8]">
-                A service business often runs across web forms, calls, SMS,
-                social media, spreadsheets, scheduling tools, crew notes, and
-                customer preferences. Northvalley Intelligence helps turn that
-                scattered activity into a coordinated workflow the team can
-                trust.
+                {medinaCaseStudy.context}
               </p>
-            </div>
-            <div className="grid gap-3">
-              {workflowSteps.map((step, index) => (
-                <div
-                  key={step}
-                  className="grid min-h-18 grid-cols-[2.75rem_1fr] items-center gap-4 rounded-lg border border-white/12 bg-white/8 p-4"
+              <p className="mt-5 text-lg leading-8 text-[#c6d0d8]">
+                {medinaCaseStudy.summary}
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink
+                  href={medinaCaseStudy.url}
+                  variant="light"
+                  showIcon={false}
                 >
-                  <span className="grid h-11 w-11 place-items-center rounded-md bg-[#e6c26e] font-black text-north-ink">
-                    {index + 1}
-                  </span>
-                  <p className="m-0 text-[#eaf0f4]">{step}</p>
-                </div>
+                  View Medina Clean
+                  <ExternalLink
+                    aria-hidden="true"
+                    size={17}
+                    strokeWidth={2.4}
+                  />
+                </ButtonLink>
+                <ButtonLink
+                  href={medinaCaseStudy.sourceUrl}
+                  variant="light"
+                  showIcon={false}
+                >
+                  Read the background
+                  <ExternalLink
+                    aria-hidden="true"
+                    size={17}
+                    strokeWidth={2.4}
+                  />
+                </ButtonLink>
+              </div>
+            </div>
+            <div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {medinaOutcomes.map((outcome, index) => {
+                  const Icon = [
+                    Languages,
+                    MessageSquareText,
+                    ShieldCheck,
+                    CalendarCheck2,
+                  ][index];
+
+                  return (
+                    <article
+                      key={outcome.label}
+                      className="rounded-lg border border-white/12 bg-white/8 p-5"
+                    >
+                      <div className="mb-4 grid h-11 w-11 place-items-center rounded-md bg-[#e6c26e] text-north-ink">
+                        <Icon aria-hidden="true" size={22} />
+                      </div>
+                      <h3 className="text-lg font-extrabold text-white">
+                        {outcome.label}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-[#dbe5eb]">
+                        {outcome.detail}
+                      </p>
+                    </article>
+                  );
+                })}
+              </div>
+              <div className="mt-5 rounded-lg border border-white/12 bg-white/8 p-5">
+                <h3 className="text-lg font-extrabold">
+                  What made it a Northvalley project
+                </h3>
+                <ul className="mt-4 grid gap-3">
+                  {medinaPrinciples.map((principle) => (
+                    <li
+                      key={principle}
+                      className="flex gap-3 text-sm leading-6 text-[#dbe5eb]"
+                    >
+                      <CheckCircle2
+                        aria-hidden="true"
+                        className="mt-0.5 shrink-0 text-[#77c0b7]"
+                        size={18}
+                      />
+                      <span>{principle}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-b border-north-line bg-white px-5 py-16 md:px-10 md:py-20 lg:px-18">
+          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.78fr_1.22fr]">
+            <div>
+              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                Implementation Notes
+              </p>
+              <h2 className="text-[clamp(1.8rem,3vw,2.7rem)] font-black leading-tight tracking-normal">
+                The important work was operational shape, not just screens.
+              </h2>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {[
+                [
+                  "Assessment",
+                  "Clarified the real workflow around leads, pricing, recurring customers, language, and follow-up.",
+                ],
+                [
+                  "Build",
+                  "Delivered a practical public site and private admin surface on low-cost infrastructure.",
+                ],
+                [
+                  "Next layer",
+                  "Created a foundation for scheduling, reminders, calendar coordination, and customer memory to improve over time.",
+                ],
+              ].map(([title, body]) => (
+                <article
+                  key={title}
+                  className="rounded-lg border border-north-line bg-[#f8faf9] p-5"
+                >
+                  <h3 className="text-lg font-extrabold">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-north-muted">
+                    {body}
+                  </p>
+                </article>
               ))}
             </div>
           </div>
@@ -211,6 +336,65 @@ export default function Home() {
               operational clarity: preserved knowledge, cleaner handoffs,
               stronger follow-through, and AI systems that support the business.
             </p>
+          </div>
+        </section>
+
+        <section
+          id="people"
+          className="border-t border-north-line bg-[#f8faf9] px-5 py-20 md:px-10 md:py-28 lg:px-18"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                People
+              </p>
+              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
+                Experienced builders for practical operational systems.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-north-muted">
+                Northvalley Intelligence combines product judgment, AI depth,
+                and hands-on implementation experience for businesses that need
+                clear systems more than software theater.
+              </p>
+            </div>
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+              {teamMembers.map((member) => (
+                <article
+                  key={member.name}
+                  className="rounded-lg border border-north-line bg-white p-6"
+                >
+                  <div className="mb-5 overflow-hidden rounded-md border border-north-line bg-[#eef2f3]">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      width={628}
+                      height={835}
+                      className="aspect-[4/3] w-full object-cover object-top"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-extrabold">{member.name}</h3>
+                    <p className="mt-1 text-sm font-bold uppercase text-north-teal">
+                      {member.role}
+                    </p>
+                  </div>
+                  <p className="mt-4 text-sm leading-6 text-north-muted">
+                    {member.description}
+                  </p>
+                  <a
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-north-ink hover:text-north-teal"
+                    href={member.url}
+                  >
+                    View profile
+                    <ExternalLink
+                      aria-hidden="true"
+                      size={16}
+                      strokeWidth={2.4}
+                    />
+                  </a>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
