@@ -72,7 +72,7 @@ export const teamMembers = [
     name: "Ferosh Jacob",
     role: "Founder",
     url: "https://feroshjacob.github.io/",
-    initials: "FJ",
+    image: "/people-ferosh-jacob.png",
     description:
       "Leads Northvalley Intelligence with a focus on practical AI systems, operational software, and assessment-led modernization.",
   },
@@ -80,7 +80,7 @@ export const teamMembers = [
     name: "Theresa Burt",
     role: "Product",
     url: "https://www.linkedin.com/in/theresaburt",
-    initials: "TB",
+    image: "/people-theresa-burt.png",
     description:
       "Shapes product direction around usable workflows, clear decisions, and systems that fit how teams actually operate.",
   },
@@ -88,7 +88,7 @@ export const teamMembers = [
     name: "Glen Soans",
     role: "AI Expert",
     url: "https://www.linkedin.com/in/glen-soans-4a050923",
-    initials: "GS",
+    image: "/people-glen-soans.png",
     description:
       "Works across information retrieval and data science, with experience since 2015 in autocomplete and search systems for large retailers including Home Depot and GPC/NAPA.",
   },

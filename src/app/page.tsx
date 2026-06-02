@@ -9,6 +9,7 @@ import {
   SearchCheck,
   ShieldCheck,
 } from "lucide-react";
+import Image from "next/image";
 
 import { OperationsVisual } from "@/components/operations-visual";
 import { SiteHeader } from "@/components/site-header";
@@ -362,20 +363,22 @@ export default function Home() {
                   key={member.name}
                   className="rounded-lg border border-north-line bg-white p-6"
                 >
-                  <div className="mb-5 flex items-center gap-4">
-                    <div className="grid h-13 w-13 shrink-0 place-items-center rounded-md bg-north-ink text-sm font-black text-white">
-                      {member.initials}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-extrabold">
-                        {member.name}
-                      </h3>
-                      <p className="mt-1 text-sm font-bold uppercase text-north-teal">
-                        {member.role}
-                      </p>
-                    </div>
+                  <div className="mb-5 overflow-hidden rounded-md border border-north-line bg-[#eef2f3]">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      width={628}
+                      height={835}
+                      className="aspect-[4/3] w-full object-cover object-top"
+                    />
                   </div>
-                  <p className="text-sm leading-6 text-north-muted">
+                  <div>
+                    <h3 className="text-xl font-extrabold">{member.name}</h3>
+                    <p className="mt-1 text-sm font-bold uppercase text-north-teal">
+                      {member.role}
+                    </p>
+                  </div>
+                  <p className="mt-4 text-sm leading-6 text-north-muted">
                     {member.description}
                   </p>
                   <a
