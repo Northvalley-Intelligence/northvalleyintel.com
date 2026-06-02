@@ -21,6 +21,7 @@ import {
   medinaPrinciples,
   services,
   siteConfig,
+  teamMembers,
 } from "@/lib/site";
 
 const jsonLd = {
@@ -334,6 +335,63 @@ export default function Home() {
               operational clarity: preserved knowledge, cleaner handoffs,
               stronger follow-through, and AI systems that support the business.
             </p>
+          </div>
+        </section>
+
+        <section
+          id="people"
+          className="border-t border-north-line bg-[#f8faf9] px-5 py-20 md:px-10 md:py-28 lg:px-18"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                People
+              </p>
+              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
+                Experienced builders for practical operational systems.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-north-muted">
+                Northvalley Intelligence combines product judgment, AI depth,
+                and hands-on implementation experience for businesses that need
+                clear systems more than software theater.
+              </p>
+            </div>
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+              {teamMembers.map((member) => (
+                <article
+                  key={member.name}
+                  className="rounded-lg border border-north-line bg-white p-6"
+                >
+                  <div className="mb-5 flex items-center gap-4">
+                    <div className="grid h-13 w-13 shrink-0 place-items-center rounded-md bg-north-ink text-sm font-black text-white">
+                      {member.initials}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-extrabold">
+                        {member.name}
+                      </h3>
+                      <p className="mt-1 text-sm font-bold uppercase text-north-teal">
+                        {member.role}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm leading-6 text-north-muted">
+                    {member.description}
+                  </p>
+                  <a
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-north-ink hover:text-north-teal"
+                    href={member.url}
+                  >
+                    View profile
+                    <ExternalLink
+                      aria-hidden="true"
+                      size={16}
+                      strokeWidth={2.4}
+                    />
+                  </a>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
