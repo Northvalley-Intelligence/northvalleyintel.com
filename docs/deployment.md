@@ -60,9 +60,3 @@ After a change is merged to `main`, wait for the Cloudflare Pages production dep
 - `https://www.northvalleyintel.com`
 
 For UI and content changes, verify the rendered production page and deployed assets, not just the source code.
-
-## Legacy Vercel Setup
-
-Vercel was the previous hosting target. Do not deploy production from Vercel after Cloudflare Pages is live and verified.
-
-The `vercel.json` file may remain temporarily as rollback documentation during the migration. Remove it after the Cloudflare production deployment and custom domains are verified.

@@ -16,4 +16,4 @@ The website is a Next.js App Router application. The initial version is mostly s
 
 ## Deployment Model
 
-GitHub is the source of truth. Vercel builds and deploys production from `main`, while Cloudflare manages DNS and domain-level controls.
+GitHub is the source of truth. Cloudflare Pages builds and deploys production from `main`, while Cloudflare DNS manages domain routing.
