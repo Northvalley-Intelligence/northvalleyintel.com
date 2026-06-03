@@ -29,7 +29,7 @@ Prioritize:
 - Tailwind CSS
 - App Router
 - shadcn/ui-style component conventions
-- Vercel deployment
+- Cloudflare Pages deployment
 - Cloudflare DNS
 
 ## Code Standards
@@ -49,14 +49,19 @@ For each feature, bug fix, or content change, treat production verification as p
 - Start by identifying the expected behavior and the verification that currently fails or is missing.
 - Verify locally first: run the relevant local check, test, build, or page inspection before deploying.
 - A change is not complete just because it passes locally or is committed.
-- After merge or deployment, verify the live production site at the public domain.
+- Production deploys must only happen from `main`.
+- Do not deploy feature branches, PR branches, local dirty worktrees, detached commits, or unmerged code to production.
+- `main` and production must stay in sync: code reaches production by merging to `main`, and production should reflect the current `main` commit.
+- Do not merge code to `main` unless the required deployment path for `main` is expected to deploy successfully.
+- If production deployment fails after merge, treat the work as incomplete and either fix forward immediately or revert through a new reviewed/checked change.
+- After merge to `main` and deployment, verify the live production site at the public domain.
 - For UI/content changes, production verification should check the actual rendered page or deployed HTML/assets, not just source code.
 - For bug fixes, production verification should reproduce the previous failure condition against production and confirm it now passes.
 - Do not report a feature, bug fix, or content update as complete until the production check passes, or explicitly state that production verification is blocked and why.
-- Keep GitHub, Vercel, and Cloudflare roles clear:
+- Keep GitHub and Cloudflare roles clear:
   - GitHub is the source of truth for code, PRs, review, and CI.
-  - Vercel builds and serves the deployed Next.js site.
-  - Cloudflare controls DNS and routes the domain to Vercel; it does not contain the application code.
+  - Cloudflare Pages builds and serves the deployed Next.js site from `main`.
+  - Cloudflare DNS routes the domain to Cloudflare Pages.
 
 ## Brand Voice
 
