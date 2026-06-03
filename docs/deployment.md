@@ -2,34 +2,67 @@
 
 ## Recommended Hosting
 
-Use Vercel for the Next.js application and Cloudflare for DNS.
+Use Cloudflare Pages for the Next.js application and Cloudflare DNS for the domain.
 
-## Vercel Setup
+The site is configured as a static Next.js export:
 
-1. Go to Vercel and import the GitHub repository.
+```bash
+npm run build
+```
+
+The generated production artifact is `out/`.
+
+## Cloudflare Pages Setup
+
+1. Go to Cloudflare Pages and connect the GitHub repository.
 2. Select the `Northvalley-Intelligence/northvalleyintel.com` repository.
-3. Use the detected Next.js framework settings.
-4. Production branch: `main`.
-5. Build command: `npm run build`.
-6. Install command: `npm ci`.
-7. Output settings: leave as Vercel default for Next.js.
+3. Configure the Pages project:
+   - Framework preset: None/static site, or Next.js static export if available.
+   - Production branch: `main`.
+   - Build command: `npm run build`.
+   - Install command: `npm ci`.
+   - Build output directory: `out`.
+   - Environment variable: `NODE_VERSION=22`.
+4. Add GitHub Actions secrets:
+   - `CLOUDFLARE_ACCOUNT_ID`
+   - `CLOUDFLARE_API_TOKEN` with Cloudflare Pages write access.
+5. Preview deployments are created by the `cloudflare-pages-preview` GitHub Actions job on pull requests to `main`.
+6. Production deployments are created by the `cloudflare-pages-production` GitHub Actions job on pushes to `main`.
+7. After the first pull request preview deployment runs, add `cloudflare-pages-preview` as a required check in GitHub branch protection for `main`.
+8. Keep the existing `quality` check required for `main`.
+
+## GitHub Branch Protection
+
+`main` and production must stay in sync.
+
+1. Require pull requests before merging to `main`.
+2. Require the `quality` status check.
+3. Require the `cloudflare-pages-preview` status check.
+4. Do not allow bypassing required checks for normal feature or bug work.
+5. Let Cloudflare Pages deploy production only from `main`.
+
+Do not deploy production manually from feature branches, PR branches, local dirty worktrees, detached commits, or unmerged code.
 
 ## Cloudflare DNS Setup
 
-1. Add `northvalleyintel.com` to Cloudflare.
-2. Update the domain registrar nameservers to the Cloudflare nameservers.
-3. In Vercel, add the production domain:
+1. Add `northvalleyintel.com` to Cloudflare if it is not already managed there.
+2. In Cloudflare Pages, add the custom domains:
    - `northvalleyintel.com`
    - `www.northvalleyintel.com`
-4. In Cloudflare DNS, add the records Vercel provides.
-5. Keep proxy status DNS-only for Vercel records unless Vercel documentation for the domain recommends otherwise.
-6. In Vercel, set the primary production domain.
-7. In Cloudflare SSL/TLS, use Full mode at minimum.
+3. Let Cloudflare create or update the required DNS records for the Pages project.
+4. In Cloudflare SSL/TLS, use Full mode at minimum.
 
-## Branch Workflow
+## Production Verification
 
-- `main`: production
-- `develop`: integration
-- `feature/*`: active work
+After a change is merged to `main`, wait for the Cloudflare Pages production deployment to finish, then verify the live site at:
 
-Vercel will create preview deployments for pull requests.
+- `https://northvalleyintel.com`
+- `https://www.northvalleyintel.com`
+
+For UI and content changes, verify the rendered production page and deployed assets, not just the source code.
+
+## Legacy Vercel Setup
+
+Vercel was the previous hosting target. Do not deploy production from Vercel after Cloudflare Pages is live and verified.
+
+The `vercel.json` file may remain temporarily as rollback documentation during the migration. Remove it after the Cloudflare production deployment and custom domains are verified.
