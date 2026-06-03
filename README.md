@@ -9,8 +9,8 @@ Next.js website for Northvalley Intelligence LLC.
 - Tailwind CSS
 - ESLint
 - Prettier
-- Vercel-ready deployment
-- Cloudflare DNS-ready domain setup
+- Cloudflare Pages deployment
+- Cloudflare DNS
 
 ## Local Development
 
@@ -31,6 +31,6 @@ npm run build
 
 ## Deployment
 
-The preferred deployment target is Vercel. Cloudflare should manage DNS for `northvalleyintel.com`.
+The deployment target is Cloudflare Pages. Cloudflare also manages DNS for `northvalleyintel.com`.
 
 See [docs/deployment.md](docs/deployment.md).

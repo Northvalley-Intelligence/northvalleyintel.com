@@ -53,6 +53,8 @@ For each feature, bug fix, or content change, treat production verification as p
 - Do not deploy feature branches, PR branches, local dirty worktrees, detached commits, or unmerged code to production.
 - `main` and production must stay in sync: code reaches production by merging to `main`, and production should reflect the current `main` commit.
 - Do not merge code to `main` unless the required deployment path for `main` is expected to deploy successfully.
+- `cloudflare-pages-preview` must pass as a required GitHub status check before merging to `main`.
+- If the Cloudflare Pages deployment check is missing from branch protection, treat deployment enforcement as incomplete and restore that requirement before normal feature work continues.
 - If production deployment fails after merge, treat the work as incomplete and either fix forward immediately or revert through a new reviewed/checked change.
 - After merge to `main` and deployment, verify the live production site at the public domain.
 - For UI/content changes, production verification should check the actual rendered page or deployed HTML/assets, not just source code.
