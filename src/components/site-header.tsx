@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navigation = [
-  { href: "#services", label: "Services" },
-  { href: "#assessments", label: "Assessments" },
-  { href: "#case-study", label: "Case Study" },
-  { href: "#people", label: "People" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#services", label: "Services" },
+  { href: "/#assessments", label: "Assessments" },
+  { href: "/#case-study", label: "Case Study" },
+  { href: "/#people", label: "People" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
@@ -15,7 +15,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <Link
           className="flex items-center gap-3 text-base font-bold text-north-ink"
-          href="#top"
+          href="/"
           aria-label="Northvalley Intelligence home"
         >
           <Image

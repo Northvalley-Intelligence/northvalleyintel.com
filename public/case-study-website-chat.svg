@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Website and AI chat visual</title>
+  <desc id="desc">A website layout connected to a practical chat and intake flow.</desc>
+  <rect width="1200" height="800" fill="#f7f6f0"/>
+  <rect x="100" y="96" width="1000" height="608" rx="18" fill="#ffffff" stroke="#d9e1e7" stroke-width="3"/>
+  <rect x="146" y="148" width="482" height="504" rx="12" fill="#eef2f3"/>
+  <rect x="190" y="194" width="188" height="18" rx="9" fill="#177b70"/>
+  <rect x="190" y="238" width="332" height="13" rx="6.5" fill="#5f6d7a" opacity=".5"/>
+  <rect x="190" y="267" width="286" height="13" rx="6.5" fill="#5f6d7a" opacity=".4"/>
+  <rect x="190" y="330" width="160" height="118" rx="10" fill="#ffffff" stroke="#d9e1e7" stroke-width="2"/>
+  <rect x="376" y="330" width="160" height="118" rx="10" fill="#ffffff" stroke="#d9e1e7" stroke-width="2"/>
+  <rect x="190" y="480" width="346" height="72" rx="10" fill="#14202a"/>
+  <rect x="220" y="510" width="154" height="12" rx="6" fill="#ffffff"/>
+  <rect x="678" y="166" width="364" height="452" rx="18" fill="#14202a"/>
+  <rect x="724" y="216" width="170" height="14" rx="7" fill="#e6c26e"/>
+  <rect x="724" y="270" width="234" height="58" rx="16" fill="#ffffff" opacity=".12"/>
+  <rect x="754" y="293" width="152" height="10" rx="5" fill="#ffffff" opacity=".8"/>
+  <rect x="780" y="356" width="216" height="58" rx="16" fill="#177b70"/>
+  <rect x="810" y="379" width="124" height="10" rx="5" fill="#ffffff" opacity=".9"/>
+  <rect x="724" y="442" width="252" height="58" rx="16" fill="#ffffff" opacity=".12"/>
+  <rect x="754" y="465" width="176" height="10" rx="5" fill="#ffffff" opacity=".8"/>
+  <rect x="724" y="540" width="274" height="34" rx="17" fill="#ffffff"/>
+  <circle cx="966" cy="557" r="13" fill="#177b70"/>
+  <path d="M628 402h50" stroke="#177b70" stroke-width="5" stroke-linecap="round"/>
+  <path d="m662 382 20 20-20 20" fill="none" stroke="#177b70" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
