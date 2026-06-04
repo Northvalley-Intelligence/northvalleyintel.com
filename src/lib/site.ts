@@ -78,7 +78,7 @@ export const teamMembers = [
   },
   {
     name: "Theresa Burt",
-    role: "Product",
+    role: "Business Liaison",
     url: "https://www.linkedin.com/in/theresaburt",
     image: "/people-theresa-burt.png",
     description:
