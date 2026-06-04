@@ -14,6 +14,7 @@ import Image from "next/image";
 import { OperationsVisual } from "@/components/operations-visual";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
+import { medinaCleanCaseStudy } from "@/lib/case-studies";
 import {
   assessments,
   industries,
@@ -48,7 +49,7 @@ const jsonLd = {
         itemOffered: {
           "@type": "Service",
           name: "Medina Clean operations case study",
-          url: medinaCaseStudy.url,
+          url: `${siteConfig.url}${medinaCleanCaseStudy.href}`,
         },
       },
     ],
@@ -219,16 +220,11 @@ export default function Home() {
                   />
                 </ButtonLink>
                 <ButtonLink
-                  href={medinaCaseStudy.sourceUrl}
+                  href={medinaCleanCaseStudy.href}
                   variant="light"
                   showIcon={false}
                 >
-                  Read the background
-                  <ExternalLink
-                    aria-hidden="true"
-                    size={17}
-                    strokeWidth={2.4}
-                  />
+                  Read the case study
                 </ButtonLink>
               </div>
             </div>
