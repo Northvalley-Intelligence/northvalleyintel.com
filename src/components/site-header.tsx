@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const navigation = [
   { href: "/#services", label: "Services" },
-  { href: "/#assessments", label: "Assessments" },
-  { href: "/#case-study", label: "Case Study" },
+  { href: "/#assessments", label: "Getting Started" },
+  { href: "/#case-study", label: "Real Example" },
   { href: "/#people", label: "People" },
   { href: "/#contact", label: "Contact" },
 ];
@@ -28,7 +28,7 @@ export function SiteHeader() {
           />
           <span>Northvalley Intelligence</span>
         </Link>
-        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-north-muted">
+        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold text-north-muted">
           {navigation.map((item) => (
             <Link
               key={item.href}

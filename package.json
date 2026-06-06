@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "test:chat": "node scripts/validate-workflow-chat.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
