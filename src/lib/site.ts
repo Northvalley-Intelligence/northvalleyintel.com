@@ -6,7 +6,7 @@ export const siteConfig = {
   email: "hello@northvalleyintel.com",
   tagline: "Operational AI for Real-World Businesses",
   description:
-    "Northvalley Intelligence helps operational businesses modernize workflows, knowledge, and customer coordination with practical AI assessments.",
+    "Northvalley Intelligence helps local service businesses get found, convert leads, and clean up the workflows behind the work.",
   location: "Marietta / Atlanta",
 };
 
@@ -24,21 +24,44 @@ export const industries = [
 export const services = [
   {
     number: "01",
-    title: "Workflow Intelligence",
+    title: "Help the Right People Find You",
     description:
-      "Map lead intake, scheduling, dispatch, customer communication, documentation, and follow-up into a clearer operating model.",
+      "We look at how customers discover the business through Google, AI search, referrals, local content, and service-area pages.",
   },
   {
     number: "02",
-    title: "Operational Knowledge Systems",
+    title: "Turn Interest Into Real Leads",
     description:
-      "Identify where institutional knowledge lives, how it gets lost, and what should become searchable operational memory.",
+      "We make the next step clear, capture the right details, and help move people from interest to consultation, estimate, booking, or sale.",
   },
   {
     number: "03",
-    title: "AI Modernization Planning",
+    title: "Clean Up the Work Behind It",
     description:
-      "Prioritize practical AI opportunities without forcing a generic chatbot or fragile automation onto the business.",
+      "We organize follow-up, scheduling, customer information, team handoffs, and repeated work so the business can keep up.",
+  },
+];
+
+export const leadDiscoveryPoints = [
+  {
+    title: "Be findable before customers are ready to call",
+    description:
+      "Many customers search early: neighborhoods, local options, comparisons, costs, questions, and trusted providers. We look at whether the business shows up for those moments.",
+  },
+  {
+    title: "Be understandable to AI search and chat",
+    description:
+      "Google still matters, but people now ask ChatGPT, Gemini, Perplexity, and other assistants for local recommendations. We look at whether the website gives those systems clear, trustworthy information to work with.",
+  },
+  {
+    title: "Show why the local business is different",
+    description:
+      "Small service businesses should not compete only on generic pages. We help turn local experience, customer knowledge, and practical guidance into trust-building content.",
+  },
+  {
+    title: "Give visitors a clear next step",
+    description:
+      "A lead path should be simple: consultation request, estimate, guide, valuation, service check, or another action that matches how the business actually sells.",
   },
 ];
 
@@ -82,7 +105,7 @@ export const teamMembers = [
     url: "https://www.linkedin.com/in/theresaburt",
     image: "/people-theresa-burt.png",
     description:
-      "Shapes product direction around usable workflows, clear decisions, and systems that fit how teams actually operate.",
+      "Connects small-business conversations to practical next steps, helping owners explain where operations feel stuck and what support would be useful.",
   },
   {
     name: "Glen Soans",

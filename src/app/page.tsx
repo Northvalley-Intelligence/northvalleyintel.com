@@ -2,22 +2,29 @@ import {
   BrainCircuit,
   CalendarCheck2,
   CheckCircle2,
+  ClipboardList,
   ExternalLink,
+  FileSearch,
+  MessagesSquare,
   Languages,
   MapPinned,
   MessageSquareText,
+  MousePointerClick,
+  Route,
   SearchCheck,
   ShieldCheck,
+  Store,
 } from "lucide-react";
 import Image from "next/image";
 
-import { OperationsVisual } from "@/components/operations-visual";
+import { EngagementChatMockup } from "@/components/engagement-chat-mockup";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
 import { medinaCleanCaseStudy } from "@/lib/case-studies";
 import {
   assessments,
   industries,
+  leadDiscoveryPoints,
   medinaCaseStudy,
   medinaOutcomes,
   medinaPrinciples,
@@ -35,10 +42,10 @@ const jsonLd = {
   areaServed: ["Marietta", "Atlanta", "United States"],
   description: siteConfig.description,
   serviceType: [
+    "Local Business Lead Generation Assessment",
+    "Lead Conversion Workflow Consulting",
     "Operational AI Assessment",
-    "Knowledge Chaos Assessment",
     "Workflow Intelligence Consulting",
-    "Small Business Operations System",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -61,78 +68,194 @@ export default function Home() {
     <>
       <SiteHeader />
       <main id="top">
-        <section className="bg-[linear-gradient(130deg,rgba(23,123,112,0.12),transparent_38%),linear-gradient(315deg,rgba(31,95,139,0.12),transparent_42%)] px-5 py-16 md:px-10 md:py-24 lg:px-18">
-          <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
-            <div>
-              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
-                Boutique operational AI consultancy
-              </p>
-              <h1 className="max-w-5xl text-[clamp(3rem,8vw,5.9rem)] font-black leading-[0.97] tracking-normal text-north-ink">
-                Operational AI for Real-World Businesses
-              </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-[#42505d] md:text-2xl">
-                Northvalley Intelligence helps service and field-operation
-                businesses turn scattered workflows, tribal knowledge, and
-                customer coordination into practical operating systems.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink
-                  href={`mailto:${siteConfig.email}?subject=Operational AI Assessment`}
-                >
-                  Schedule an assessment
-                </ButtonLink>
-                <ButtonLink href="#assessments" variant="secondary">
-                  Explore assessments
-                </ButtonLink>
-              </div>
-            </div>
-            <OperationsVisual />
+        <section className="border-b border-north-line bg-north-ink">
+          <div className="mx-auto max-w-[1600px]">
+            <Image
+              src="/assessment-flow.png"
+              alt="A Northvalley assessment flow showing Understand, Qualify, and Schedule."
+              width={1536}
+              height={1024}
+              className="w-full object-cover"
+            />
           </div>
         </section>
 
-        <section className="border-y border-north-line bg-white px-5 py-5 md:px-10 lg:px-18">
-          <div className="mx-auto flex max-w-7xl flex-wrap gap-2">
-            {industries.map((industry) => (
-              <span
-                key={industry}
-                className="rounded-md bg-[#eef3f3] px-3 py-2 text-sm font-semibold text-[#33414d]"
-              >
-                {industry}
-              </span>
-            ))}
+        <section
+          id="workflow-chat"
+          className="bg-[linear-gradient(180deg,#f8faf9,white)] px-5 py-16 md:px-10 md:py-20 lg:px-18"
+        >
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+            <div>
+              <p className="mb-3 text-sm font-extrabold uppercase text-north-teal">
+                Local growth and practical AI support
+              </p>
+              <h1 className="max-w-4xl text-[clamp(2.5rem,5vw,4.5rem)] font-black leading-[1] tracking-normal text-north-ink">
+                Let&apos;s untangle the work.
+              </h1>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-[#42505d] md:text-xl">
+                We help local businesses get found, turn interest into real
+                leads, and clean up the workflow that happens after someone
+                reaches out.
+              </p>
+              <div className="mt-5 grid gap-3 text-sm font-semibold text-[#384653] sm:grid-cols-3">
+                {[
+                  "Find better leads",
+                  "Convert interest",
+                  "Clean up the work",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-2 rounded-md border border-north-line bg-white/70 px-3 py-2"
+                  >
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="shrink-0 text-north-green"
+                      size={17}
+                    />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="#workflow-chat">
+                  Share what is not working
+                </ButtonLink>
+                <ButtonLink href="#assessments" variant="secondary">
+                  See how we start
+                </ButtonLink>
+              </div>
+              <p className="mt-8 text-xs font-extrabold uppercase text-north-teal">
+                Common service businesses we support
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {industries.map((industry) => (
+                  <span
+                    key={industry}
+                    className="rounded-md bg-[#eef3f3] px-3 py-2 text-sm font-semibold text-[#33414d]"
+                  >
+                    {industry}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <EngagementChatMockup />
+          </div>
+        </section>
+
+        <section
+          aria-label="Workflow divider"
+          className="bg-white px-5 py-10 md:px-10 lg:px-18"
+        >
+          <div className="mx-auto flex max-w-5xl items-center gap-5">
+            <div className="h-px flex-1 bg-north-line" />
+            <div className="flex items-center gap-3 text-sm font-extrabold uppercase text-north-teal">
+              <span className="h-2.5 w-2.5 rounded-full bg-north-teal" />
+              Find
+              <span className="h-px w-10 bg-north-line" />
+              Convert
+              <span className="h-px w-10 bg-north-line" />
+              Simplify
+              <span className="h-2.5 w-2.5 rounded-full bg-north-amber" />
+            </div>
+            <div className="h-px flex-1 bg-north-line" />
           </div>
         </section>
 
         <section
           id="services"
-          className="px-5 py-20 md:px-10 md:py-28 lg:px-18"
+          className="bg-[#f8faf9] px-5 py-20 md:px-10 md:py-28 lg:px-18"
         >
-          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
               <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
                 Services
               </p>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
-                Practical modernization, built around how work actually moves.
+                From getting found to getting the work done.
               </h2>
+              <p className="mt-5 text-lg leading-8 text-north-muted">
+                We look at the full path for a local business: how customers
+                find you, what makes them reach out, and what has to happen
+                behind the scenes to serve them well.
+              </p>
             </div>
-            <div className="grid gap-4">
-              {services.map((service) => (
-                <article
-                  key={service.title}
-                  className="rounded-lg border border-north-line bg-white p-6"
-                >
-                  <span className="text-sm font-black text-north-amber">
-                    {service.number}
-                  </span>
-                  <h3 className="mt-2 text-xl font-extrabold">
-                    {service.title}
-                  </h3>
-                  <p className="mt-2 text-base leading-7 text-north-muted">
-                    {service.description}
-                  </p>
-                </article>
-              ))}
+
+
+            <div className="mt-14 grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+              <div className="relative pl-8">
+                <div className="absolute bottom-8 left-[1.05rem] top-8 w-px bg-north-line" />
+                {[
+                  {
+                    label: "Get found",
+                    detail: "Google, AI search, referrals, local pages, and service questions",
+                    icon: SearchCheck,
+                  },
+                  {
+                    label: "Convert leads",
+                    detail: "Clear offers, trust signals, forms, calls, estimates, and booking",
+                    icon: MessageSquareText,
+                  },
+                  {
+                    label: "Run the work",
+                    detail: "Follow-up, scheduling, customer details, handoffs, and repeat work",
+                    icon: Route,
+                  },
+                ].map((item, index) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <div
+                      key={item.label}
+                      className="relative grid gap-2 pb-10 last:pb-0"
+                    >
+                      <div className="absolute -left-8 top-0 grid h-9 w-9 place-items-center rounded-full border border-north-line bg-white text-north-teal shadow-sm">
+                        <Icon aria-hidden="true" size={18} />
+                      </div>
+                      <p className="text-xs font-black uppercase text-north-amber">
+                        Step {index + 1}
+                      </p>
+                      <h3 className="text-2xl font-extrabold">
+                        {item.label}
+                      </h3>
+                      <p className="max-w-md text-base leading-7 text-north-muted">
+                        {item.detail}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="grid gap-7">
+                {services.map((service, index) => {
+                  const Icon = [
+                    SearchCheck,
+                    MousePointerClick,
+                    ClipboardList,
+                  ][index];
+
+                  return (
+                    <article
+                      key={service.title}
+                      className="grid gap-4 border-b border-north-line pb-7 last:border-b-0 last:pb-0 sm:grid-cols-[3.5rem_1fr]"
+                    >
+                      <div className="grid h-12 w-12 place-items-center rounded-full bg-north-ink text-white">
+                        <Icon aria-hidden="true" size={22} />
+                      </div>
+                      <div>
+                        <span className="text-sm font-black text-north-amber">
+                          {service.number}
+                        </span>
+                        <h3 className="mt-1 text-2xl font-extrabold">
+                          {service.title}
+                        </h3>
+                        <p className="mt-3 text-base leading-7 text-north-muted">
+                          {service.description}
+                        </p>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
@@ -144,45 +267,96 @@ export default function Home() {
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
               <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
-                Assessments
+                Getting Started
               </p>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
-                An assessment-first approach for operational clarity.
+                We start by understanding what is happening now.
               </h2>
             </div>
             <div className="mt-10 grid gap-5 lg:grid-cols-2">
               {assessments.map((assessment) => (
                 <article
                   key={assessment.title}
-                  className="rounded-lg border border-north-line bg-white p-7"
+                  className="grid gap-5 border-t border-north-line pt-7 md:grid-cols-[3.5rem_1fr]"
                 >
-                  <div className="mb-5 grid h-12 w-12 place-items-center rounded-md bg-north-ink text-white">
+                  <div className="grid h-12 w-12 place-items-center rounded-full bg-white text-north-ink shadow-sm">
                     {assessment.title.startsWith("Operational") ? (
                       <BrainCircuit aria-hidden="true" size={24} />
                     ) : (
                       <SearchCheck aria-hidden="true" size={24} />
                     )}
                   </div>
-                  <h3 className="text-2xl font-extrabold">
-                    {assessment.title}
-                  </h3>
-                  <p className="mt-3 text-base leading-7 text-north-muted">
-                    {assessment.description}
-                  </p>
-                  <ul className="mt-6 grid gap-3">
-                    {assessment.items.map((item) => (
-                      <li key={item} className="flex gap-3 text-[#384653]">
-                        <CheckCircle2
-                          aria-hidden="true"
-                          className="mt-0.5 shrink-0 text-north-green"
-                          size={18}
-                        />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    <h3 className="text-2xl font-extrabold">
+                      {assessment.title}
+                    </h3>
+                    <p className="mt-3 text-base leading-7 text-north-muted">
+                      {assessment.description}
+                    </p>
+                    <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
+                      {assessment.items.map((item) => (
+                        <li key={item} className="flex gap-2 text-sm font-semibold text-[#384653]">
+                          <CheckCircle2
+                            aria-hidden="true"
+                            className="mt-0.5 shrink-0 text-north-green"
+                            size={17}
+                          />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white px-5 py-20 md:px-10 md:py-28 lg:px-18">
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+            <div>
+              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                When Leads Are Slow
+              </p>
+              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
+                Sometimes the problem is being found and trusted.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-north-muted">
+                For realtors, cleaners, contractors, consultants, and other
+                service businesses, more software will not fix a weak lead path.
+                We look at how people discover the business, what makes them
+                trust it, and what they are asked to do next.
+              </p>
+            </div>
+
+            <div className="grid gap-8">
+              {leadDiscoveryPoints.map((point, index) => {
+                const Icon = [
+                  FileSearch,
+                  MessagesSquare,
+                  Store,
+                  MousePointerClick,
+                ][index];
+
+                return (
+                  <article
+                    key={point.title}
+                    className="grid gap-4 border-b border-north-line pb-7 last:border-b-0 last:pb-0 sm:grid-cols-[3.5rem_1fr]"
+                  >
+                    <div className="grid h-12 w-12 place-items-center rounded-full bg-[#eef3f3] text-north-teal">
+                      <Icon aria-hidden="true" size={22} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-extrabold">
+                        {point.title}
+                      </h3>
+                      <p className="mt-3 text-base leading-7 text-north-muted">
+                        {point.description}
+                      </p>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -194,7 +368,7 @@ export default function Home() {
           <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.92fr_1.08fr]">
             <div>
               <p className="mb-4 text-sm font-extrabold uppercase text-[#77c0b7]">
-                First Use Case
+                Real Example
               </p>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
                 {medinaCaseStudy.name}: from website request to operating
@@ -229,7 +403,7 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-5">
                 {medinaOutcomes.map((outcome, index) => {
                   const Icon = [
                     Languages,
@@ -241,22 +415,24 @@ export default function Home() {
                   return (
                     <article
                       key={outcome.label}
-                      className="rounded-lg border border-white/12 bg-white/8 p-5"
+                      className="grid gap-4 border-b border-white/12 pb-5 last:border-b-0 last:pb-0 sm:grid-cols-[3rem_1fr]"
                     >
-                      <div className="mb-4 grid h-11 w-11 place-items-center rounded-md bg-[#e6c26e] text-north-ink">
+                      <div className="grid h-11 w-11 place-items-center rounded-full bg-[#e6c26e] text-north-ink">
                         <Icon aria-hidden="true" size={22} />
                       </div>
-                      <h3 className="text-lg font-extrabold text-white">
-                        {outcome.label}
-                      </h3>
-                      <p className="mt-2 text-sm leading-6 text-[#dbe5eb]">
-                        {outcome.detail}
-                      </p>
+                      <div>
+                        <h3 className="text-lg font-extrabold text-white">
+                          {outcome.label}
+                        </h3>
+                        <p className="mt-2 text-sm leading-6 text-[#dbe5eb]">
+                          {outcome.detail}
+                        </p>
+                      </div>
                     </article>
                   );
                 })}
               </div>
-              <div className="mt-5 rounded-lg border border-white/12 bg-white/8 p-5">
+              <div className="mt-8 border-t border-white/12 pt-6">
                 <h3 className="text-lg font-extrabold">
                   What made it a Northvalley project
                 </h3>
@@ -290,7 +466,7 @@ export default function Home() {
                 The important work was operational shape, not just screens.
               </h2>
             </div>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-3">
               {[
                 [
                   "Assessment",
@@ -307,7 +483,7 @@ export default function Home() {
               ].map(([title, body]) => (
                 <article
                   key={title}
-                  className="rounded-lg border border-north-line bg-[#f8faf9] p-5"
+                  className="border-l-2 border-north-teal pl-5"
                 >
                   <h3 className="text-lg font-extrabold">{title}</h3>
                   <p className="mt-2 text-sm leading-6 text-north-muted">
@@ -353,13 +529,13 @@ export default function Home() {
                 clear systems more than software theater.
               </p>
             </div>
-            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            <div className="mt-10 grid gap-8 lg:grid-cols-3">
               {teamMembers.map((member) => (
                 <article
                   key={member.name}
-                  className="rounded-lg border border-north-line bg-white p-6"
+                  className="border-t border-north-line pt-6"
                 >
-                  <div className="mb-5 overflow-hidden rounded-md border border-north-line bg-[#eef2f3]">
+                  <div className="mb-5 overflow-hidden rounded-lg bg-[#eef2f3]">
                     <Image
                       src={member.image}
                       alt={member.name}
