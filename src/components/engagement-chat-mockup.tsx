@@ -22,8 +22,6 @@ const examples = [
   "Follow-up and scheduling are messy",
 ];
 
-const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
-
 declare global {
   interface Window {
     turnstile?: {
@@ -63,9 +61,33 @@ export function EngagementChatMockup() {
   const [messages, setMessages] = useState(initialMessages);
   const [input, setInput] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [turnstileSiteKey, setTurnstileSiteKey] = useState("");
   const [turnstileToken, setTurnstileToken] = useState("");
   const turnstileRef = useRef<HTMLDivElement>(null);
   const turnstileWidgetId = useRef("");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadChatConfig() {
+      const response = await fetch("/api/workflow-chat-config", {
+        headers: { accept: "application/json" },
+      });
+      const config = (await response.json().catch(() => ({}))) as {
+        turnstileSiteKey?: string;
+      };
+
+      if (!cancelled && config.turnstileSiteKey) {
+        setTurnstileSiteKey(config.turnstileSiteKey);
+      }
+    }
+
+    loadChatConfig().catch(() => undefined);
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     if (!turnstileSiteKey || !turnstileRef.current) {
@@ -99,7 +121,7 @@ export function EngagementChatMockup() {
     renderWidget();
 
     return () => window.clearInterval(interval);
-  }, []);
+  }, [turnstileSiteKey]);
 
   async function sendMessage() {
     const content = input.trim();
@@ -248,7 +270,10 @@ export function EngagementChatMockup() {
           </div>
         </div>
         {turnstileSiteKey ? (
-          <div className="min-h-[65px]">
+          <div className="grid min-h-[88px] gap-2 rounded-lg border border-north-line bg-[#f8faf9] px-4 py-3">
+            <p className="text-xs font-bold uppercase text-north-muted">
+              Verification
+            </p>
             <div ref={turnstileRef} />
           </div>
         ) : null}
