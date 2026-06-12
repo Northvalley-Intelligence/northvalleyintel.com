@@ -4,7 +4,9 @@ import {
   CheckCircle2,
   ClipboardList,
   ExternalLink,
+  FileCheck2,
   FileSearch,
+  Globe2,
   MessagesSquare,
   Languages,
   MapPinned,
@@ -20,6 +22,7 @@ import Image from "next/image";
 import { EngagementChatMockup } from "@/components/engagement-chat-mockup";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
+import { WebsiteAssessmentTeaserForm } from "@/components/website-assessment-teaser-form";
 import { medinaCleanCaseStudy } from "@/lib/case-studies";
 import {
   assessments,
@@ -45,6 +48,7 @@ const jsonLd = {
     "Local Business Lead Generation Assessment",
     "Lead Conversion Workflow Consulting",
     "Operational AI Assessment",
+    "Website Growth Assessment",
     "Workflow Intelligence Consulting",
   ],
   hasOfferCatalog: {
@@ -57,6 +61,14 @@ const jsonLd = {
           "@type": "Service",
           name: "Medina Clean operations case study",
           url: `${siteConfig.url}${medinaCleanCaseStudy.href}`,
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Local website growth teaser report",
+          url: `${siteConfig.url}/#website-assessment`,
         },
       },
     ],
@@ -357,6 +369,83 @@ export default function Home() {
                   </article>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="website-assessment"
+          className="border-y border-north-line bg-[#f8faf9] px-5 py-20 md:px-10 md:py-28 lg:px-18"
+        >
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.94fr_1.06fr] lg:items-start">
+            <div>
+              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                Website Check
+              </p>
+              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
+                See whether your website is helping local customers choose you.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-north-muted">
+                This is not a generic SEO score, security scan, or technical
+                website doctor. We look at the public signals that matter when a
+                nearby customer is deciding who to call, trust, or ask for a
+                quote.
+              </p>
+              <p className="mt-4 text-base leading-7 text-north-muted">
+                The teaser report gives a short read on local visibility,
+                trust, AI-answer readiness, and the path from interest to lead.
+                The complete paid assessment includes the evidence trail,
+                page-level findings, scoring logic, and a prioritized fix plan.
+              </p>
+
+              <div className="mt-8 grid gap-5 sm:grid-cols-3">
+                {[
+                  {
+                    label: "Local demand",
+                    detail: "Focused on Cobb, Paulding, and Douglas counties.",
+                    icon: MapPinned,
+                  },
+                  {
+                    label: "AI discovery",
+                    detail: "Checks whether public pages are clear enough for answer engines.",
+                    icon: Globe2,
+                  },
+                  {
+                    label: "Lead path",
+                    detail: "Looks for trust proof, calls to action, and contact friction.",
+                    icon: FileCheck2,
+                  },
+                ].map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <article
+                      key={item.label}
+                      className="border-t border-north-line pt-5"
+                    >
+                      <Icon
+                        aria-hidden="true"
+                        className="text-north-teal"
+                        size={24}
+                      />
+                      <h3 className="mt-4 text-lg font-extrabold">
+                        {item.label}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-north-muted">
+                        {item.detail}
+                      </p>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div>
+              <WebsiteAssessmentTeaserForm />
+              <p className="mt-4 text-sm leading-6 text-north-muted">
+                We email the one-page teaser instead of showing the full report
+                in the browser. Public website pages only.
+              </p>
             </div>
           </div>
         </section>

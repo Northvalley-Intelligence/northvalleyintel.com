@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "test:assessment-teaser": "node scripts/validate-assessment-teaser.mjs",
     "test:chat": "node scripts/validate-workflow-chat.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

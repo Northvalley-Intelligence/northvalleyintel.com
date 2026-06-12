@@ -1,0 +1,21 @@
+{
+  "requiredChecks": [
+    "lint",
+    "typecheck",
+    "test:assessment-teaser",
+    "test:chat",
+    "build",
+    "cloudflare-pages-preview",
+    "staging_smoke_test"
+  ],
+  "phaseGate": {
+    "twoPassVerification": true,
+    "selfQaRequired": true,
+    "noUnresolvedCritical": true,
+    "noUnresolvedHigh": true,
+    "productionRequiresFounderValidation": true
+  },
+  "knownWarnings": [
+    "Verify Resend sender domain before relying on arbitrary customer email delivery."
+  ]
+}

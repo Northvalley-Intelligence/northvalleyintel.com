@@ -1,0 +1,16 @@
+{
+  "generation": 1,
+  "critical": [],
+  "high": [
+    {
+      "id": "staging-before-production",
+      "reason": "PR preview has not been created and smoke-tested yet."
+    }
+  ],
+  "low": [
+    {
+      "id": "verified-sender-domain",
+      "reason": "Resend temporary sender may not support arbitrary customer delivery."
+    }
+  ]
+}

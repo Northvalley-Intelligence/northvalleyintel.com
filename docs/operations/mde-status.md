@@ -1,0 +1,47 @@
+# MDE Status
+
+## Phase
+
+Phase 1: Assessment-led growth entry point.
+
+## Active BDDs
+
+- Critical: 4
+- High: 5
+- Low: 1
+
+## Critical Scenarios
+
+- A visitor can request a website teaser with website URL and email.
+- The public response never exposes the full assessment report, report URL, evidence trail, or scoring internals.
+- Bot verification is required when `TURNSTILE_SECRET_KEY` is configured.
+- The teaser email is sent to the requester with `contact@northvalleyintel.com` copied.
+
+## High Scenarios
+
+- Homepage explains how the assessment differs from generic website doctors.
+- Homepage states the Cobb, Paulding, and Douglas county focus.
+- The teaser PDF is one page and describes only selected signals.
+- Delivery failures from Resend fail loudly in logs instead of being silently treated as success.
+- PR preview is used as staging; production remains unchanged until review.
+
+## Low Scenario
+
+- A dedicated sender domain should replace the temporary Resend sender before broader public use.
+
+## QA Gates
+
+- Passed: `npm run lint`
+- Passed: `npm run typecheck`
+- Passed: `npm run test:assessment-teaser`
+- Passed: `npm run test:chat` against local Pages with explicit local-only Turnstile bypass and raised local rate limits
+- Passed: `npm run build`
+- Passed: local rendered-page smoke test for Website Check copy
+- Passed: local protected API smoke test, `GET /api/website-assessment-teaser` returns 405
+- Passed: local protected API smoke test, POST without Turnstile returns 403
+- Pending: PR preview deployment check
+- Pending: staging smoke test against the preview URL
+
+## Readiness
+
+Local QA is ready for staging. Production is not approved until founder review passes on the PR preview.

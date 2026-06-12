@@ -1,0 +1,25 @@
+{
+  "risks": [
+    {
+      "id": "resend-sender-domain",
+      "severity": "medium",
+      "status": "open",
+      "description": "Resend may reject customer-address delivery until a verified Northvalley sender domain is configured.",
+      "mitigation": "Staging test should use a known allowed recipient; verify sender domain before public launch."
+    },
+    {
+      "id": "preview-runtime-secrets",
+      "severity": "medium",
+      "status": "open",
+      "description": "Cloudflare Pages preview runtime may not expose all production secrets.",
+      "mitigation": "Smoke-test Turnstile config and assessment teaser endpoint on PR preview."
+    },
+    {
+      "id": "assessment-service-availability",
+      "severity": "medium",
+      "status": "open",
+      "description": "The sibling assessment service must be available for teaser generation.",
+      "mitigation": "Staging smoke test should verify the queue path reaches assessment.northvalleyintel.com."
+    }
+  ]
+}

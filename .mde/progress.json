@@ -1,0 +1,17 @@
+{
+  "updatedAt": "2026-06-12",
+  "completed": [
+    "Assessment teaser request API",
+    "Turnstile-gated frontend form",
+    "One-page PDF teaser generation",
+    "Email delivery with Northvalley CC",
+    "Homepage positioning copy",
+    "Feature-specific validation script",
+    "Local QA gates"
+  ],
+  "remaining": [
+    "Create PR preview staging deployment",
+    "Smoke-test staging",
+    "Founder validation before production"
+  ]
+}
