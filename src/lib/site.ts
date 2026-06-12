@@ -95,6 +95,12 @@ export const teamMembers = [
     name: "Ferosh Jacob",
     role: "Founder",
     url: "https://feroshjacob.github.io/",
+    links: [
+      {
+        label: "Read blog",
+        url: "https://feroshjacob.github.io/posts/",
+      },
+    ],
     image: "/people-ferosh-jacob.png",
     description:
       "Leads Northvalley Intelligence with a focus on practical AI systems, operational software, and assessment-led modernization.",

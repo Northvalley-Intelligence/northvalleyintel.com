@@ -1,0 +1,18 @@
+{
+  "generation": 1,
+  "phaseGoal": "Email-gated assessment teaser staging integration",
+  "freshBdds": {
+    "critical": 4,
+    "high": 5,
+    "low": 1
+  },
+  "qaPlan": [
+    "lint",
+    "typecheck",
+    "assessment teaser source validation",
+    "chat regression validation",
+    "static export build",
+    "PR preview staging deployment",
+    "staging smoke test"
+  ]
+}

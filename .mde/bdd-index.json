@@ -1,0 +1,53 @@
+{
+  "generation": 1,
+  "scenarios": [
+    {
+      "id": "assessment-teaser-request",
+      "priority": "Critical",
+      "status": "implemented",
+      "expected": "Visitor submits website URL and email to queue a teaser report."
+    },
+    {
+      "id": "full-report-withheld",
+      "priority": "Critical",
+      "status": "implemented",
+      "expected": "Public API returns queued status only and never returns full report data or report URL."
+    },
+    {
+      "id": "turnstile-required",
+      "priority": "Critical",
+      "status": "implemented",
+      "expected": "Requests fail when bot verification is missing and Turnstile secret is configured."
+    },
+    {
+      "id": "email-copy",
+      "priority": "Critical",
+      "status": "implemented",
+      "expected": "Requester receives the PDF teaser and Northvalley is copied."
+    },
+    {
+      "id": "plain-language-positioning",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "Homepage explains the assessment in practical local-business language."
+    },
+    {
+      "id": "county-focus",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "Assessment positioning references Cobb, Paulding, and Douglas counties."
+    },
+    {
+      "id": "resend-failure-visibility",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "Resend failures raise a logged follow-up failure."
+    },
+    {
+      "id": "staging-before-production",
+      "priority": "High",
+      "status": "pending_staging",
+      "expected": "Founder reviews PR preview before any main merge."
+    }
+  ]
+}
