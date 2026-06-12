@@ -653,6 +653,24 @@ export default function Home() {
                       strokeWidth={2.4}
                     />
                   </a>
+                  {"links" in member && member.links?.length ? (
+                    <div className="mt-3 flex flex-wrap gap-3">
+                      {member.links.map((link) => (
+                        <a
+                          key={link.url}
+                          className="inline-flex items-center gap-2 text-sm font-bold text-north-teal hover:text-north-ink"
+                          href={link.url}
+                        >
+                          {link.label}
+                          <ExternalLink
+                            aria-hidden="true"
+                            size={15}
+                            strokeWidth={2.4}
+                          />
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
                 </article>
               ))}
             </div>
