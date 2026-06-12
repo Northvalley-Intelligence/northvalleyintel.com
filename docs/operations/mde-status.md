@@ -39,9 +39,12 @@ Phase 1: Assessment-led growth entry point.
 - Passed: local rendered-page smoke test for Website Check copy
 - Passed: local protected API smoke test, `GET /api/website-assessment-teaser` returns 405
 - Passed: local protected API smoke test, POST without Turnstile returns 403
-- Pending: PR preview deployment check
-- Pending: staging smoke test against the preview URL
+- Passed: PR preview deployment check
+- Passed: staging rendered-page smoke test for Website Check copy
+- Passed: staging Turnstile config smoke test
+- Passed: staging protected API smoke test, POST without Turnstile returns 403
+- Passed: staging People section smoke test for Ferosh blog link
 
 ## Readiness
 
-Local QA is ready for staging. Production is not approved until founder review passes on the PR preview.
+Staging is ready for founder review. Production is not approved until founder review passes on the PR preview.

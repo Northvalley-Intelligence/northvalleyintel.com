@@ -1,12 +1,7 @@
 {
   "generation": 1,
   "critical": [],
-  "high": [
-    {
-      "id": "staging-before-production",
-      "reason": "PR preview has not been created and smoke-tested yet."
-    }
-  ],
+  "high": [],
   "low": [
     {
       "id": "verified-sender-domain",

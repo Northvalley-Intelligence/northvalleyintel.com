@@ -7,11 +7,11 @@
     "Email delivery with Northvalley CC",
     "Homepage positioning copy",
     "Feature-specific validation script",
-    "Local QA gates"
+    "Local QA gates",
+    "PR preview staging deployment",
+    "Staging smoke tests"
   ],
   "remaining": [
-    "Create PR preview staging deployment",
-    "Smoke-test staging",
     "Founder validation before production"
   ]
 }
