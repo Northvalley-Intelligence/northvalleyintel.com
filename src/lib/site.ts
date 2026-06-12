@@ -98,7 +98,7 @@ export const teamMembers = [
     links: [
       {
         label: "Read blog",
-        url: "https://feroshjacob.github.io/",
+        url: "https://feroshjacob.github.io/posts/",
       },
     ],
     image: "/people-ferosh-jacob.png",
