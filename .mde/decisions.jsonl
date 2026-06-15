@@ -1,0 +1,3 @@
+{"date":"2026-06-12","decision":"Use PR preview as staging for northvalleyintel.com.","reason":"Production deploys only from main; user requested staging validation before production."}
+{"date":"2026-06-12","decision":"Email the teaser PDF instead of rendering the report live.","reason":"The complete report should remain a paid service and the site should capture qualified interest."}
+{"date":"2026-06-12","decision":"Use contact@northvalleyintel.com for CC.","reason":"User-provided contact@northvalleyinte.com appears to be a typo for the known Northvalley domain."}

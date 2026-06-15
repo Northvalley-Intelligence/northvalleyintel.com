@@ -1,0 +1,83 @@
+{
+  "generation": 1,
+  "scenarios": [
+    {
+      "id": "assessment-teaser-request",
+      "priority": "Critical",
+      "status": "implemented",
+      "expected": "Visitor submits website URL and email to queue a teaser report."
+    },
+    {
+      "id": "full-report-withheld",
+      "priority": "Critical",
+      "status": "implemented",
+      "expected": "Public API returns queued status only and never returns full report data or report URL."
+    },
+    {
+      "id": "turnstile-required",
+      "priority": "Critical",
+      "status": "implemented",
+      "expected": "Requests fail when bot verification is missing and Turnstile secret is configured."
+    },
+    {
+      "id": "email-copy",
+      "priority": "Critical",
+      "status": "implemented",
+      "expected": "Requester receives the PDF teaser and Northvalley is copied."
+    },
+    {
+      "id": "plain-language-positioning",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "Homepage explains the assessment in practical local-business language."
+    },
+    {
+      "id": "county-focus",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "Assessment positioning references Cobb, Paulding, and Douglas counties."
+    },
+    {
+      "id": "resend-failure-visibility",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "Resend failures raise a logged follow-up failure."
+    },
+    {
+      "id": "staging-before-production",
+      "priority": "High",
+      "status": "pending_staging",
+      "expected": "Founder reviews PR preview before any main merge."
+    },
+    {
+      "id": "source-assessment-json",
+      "priority": "Critical",
+      "status": "implemented",
+      "expected": "/source-website-assessment.json returns crawlable machine-readable source facts instead of 404."
+    },
+    {
+      "id": "llms-source-guide",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "/llms.txt explains Northvalley services, local focus, assessment difference, and source pages for answer engines."
+    },
+    {
+      "id": "robots-sitemap-generated",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "Static export emits robots.txt and sitemap.xml with source JSON and native case-study pages."
+    },
+    {
+      "id": "homepage-answer-engine-content",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "Homepage includes visible plain-answer content and FAQ structured data."
+    },
+    {
+      "id": "metadata-source-alternates",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "Homepage metadata advertises source JSON and llms.txt alternates with crawl-friendly robots directives."
+    }
+  ]
+}

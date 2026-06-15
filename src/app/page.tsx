@@ -4,7 +4,9 @@ import {
   CheckCircle2,
   ClipboardList,
   ExternalLink,
+  FileCheck2,
   FileSearch,
+  Globe2,
   MessagesSquare,
   Languages,
   MapPinned,
@@ -20,8 +22,10 @@ import Image from "next/image";
 import { EngagementChatMockup } from "@/components/engagement-chat-mockup";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
+import { WebsiteAssessmentTeaserForm } from "@/components/website-assessment-teaser-form";
 import { medinaCleanCaseStudy } from "@/lib/case-studies";
 import {
+  aeoAnswers,
   assessments,
   industries,
   leadDiscoveryPoints,
@@ -35,16 +39,40 @@ import {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": ["ProfessionalService", "LocalBusiness"],
+  "@id": `${siteConfig.url}/#organization`,
   name: siteConfig.legalName,
+  alternateName: siteConfig.name,
   url: siteConfig.url,
   email: siteConfig.email,
-  areaServed: ["Marietta", "Atlanta", "United States"],
+  logo: `${siteConfig.url}/northvalley-logo.png`,
+  image: `${siteConfig.url}/assessment-flow.png`,
+  sameAs: ["https://feroshjacob.github.io/posts/"],
+  areaServed: siteConfig.serviceArea.map((area) => ({
+    "@type": area.includes("County") ? "AdministrativeArea" : "City",
+    name: area,
+  })),
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Marietta",
+    addressRegion: "GA",
+    addressCountry: "US",
+  },
+  knowsAbout: [
+    "Local business lead generation",
+    "AI search optimization",
+    "Answer engine optimization",
+    "Website growth assessments",
+    "Workflow automation",
+    "Operational AI",
+    "Lead conversion workflows",
+  ],
   description: siteConfig.description,
   serviceType: [
     "Local Business Lead Generation Assessment",
     "Lead Conversion Workflow Consulting",
     "Operational AI Assessment",
+    "Website Growth Assessment",
     "Workflow Intelligence Consulting",
   ],
   hasOfferCatalog: {
@@ -59,8 +87,29 @@ const jsonLd = {
           url: `${siteConfig.url}${medinaCleanCaseStudy.href}`,
         },
       },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Local website growth teaser report",
+          url: `${siteConfig.url}/#website-assessment`,
+        },
+      },
     ],
   },
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: aeoAnswers.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
 };
 
 export default function Home() {
@@ -362,6 +411,119 @@ export default function Home() {
         </section>
 
         <section
+          id="website-assessment"
+          className="border-y border-north-line bg-[#f8faf9] px-5 py-20 md:px-10 md:py-28 lg:px-18"
+        >
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.94fr_1.06fr] lg:items-start">
+            <div>
+              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                Website Check
+              </p>
+              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
+                See whether your website is helping local customers choose you.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-north-muted">
+                This is not a generic SEO score, security scan, or technical
+                website doctor. We look at the public signals that matter when a
+                nearby customer is deciding who to call, trust, or ask for a
+                quote.
+              </p>
+              <p className="mt-4 text-base leading-7 text-north-muted">
+                The teaser report gives a short read on local visibility,
+                trust, AI-answer readiness, and the path from interest to lead.
+                The complete paid assessment includes the evidence trail,
+                page-level findings, scoring logic, and a prioritized fix plan.
+              </p>
+
+              <div className="mt-8 grid gap-5 sm:grid-cols-3">
+                {[
+                  {
+                    label: "Local demand",
+                    detail: "Focused on Cobb, Paulding, and Douglas counties.",
+                    icon: MapPinned,
+                  },
+                  {
+                    label: "AI discovery",
+                    detail: "Checks whether public pages are clear enough for answer engines.",
+                    icon: Globe2,
+                  },
+                  {
+                    label: "Lead path",
+                    detail: "Looks for trust proof, calls to action, and contact friction.",
+                    icon: FileCheck2,
+                  },
+                ].map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <article
+                      key={item.label}
+                      className="border-t border-north-line pt-5"
+                    >
+                      <Icon
+                        aria-hidden="true"
+                        className="text-north-teal"
+                        size={24}
+                      />
+                      <h3 className="mt-4 text-lg font-extrabold">
+                        {item.label}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-north-muted">
+                        {item.detail}
+                      </p>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div>
+              <WebsiteAssessmentTeaserForm />
+              <p className="mt-4 text-sm leading-6 text-north-muted">
+                We email the one-page teaser instead of showing the full report
+                in the browser. Public website pages only.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="local-ai-answers"
+          className="bg-white px-5 py-20 md:px-10 md:py-28 lg:px-18"
+        >
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+            <div>
+              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                Plain Answers
+              </p>
+              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
+                Useful facts for owners, search engines, and AI assistants.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-north-muted">
+                We write the site so people and answer engines can understand
+                who we help, where we work, and what kind of problems we solve.
+                That is part of the work we help local businesses do too.
+              </p>
+            </div>
+            <div className="grid gap-6">
+              {aeoAnswers.map((item) => (
+                <article
+                  key={item.question}
+                  className="border-b border-north-line pb-6 last:border-b-0 last:pb-0"
+                >
+                  <h3 className="text-xl font-extrabold text-north-ink">
+                    {item.question}
+                  </h3>
+                  <p className="mt-3 text-base leading-7 text-north-muted">
+                    {item.answer}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
           id="case-study"
           className="bg-north-ink px-5 py-20 text-white md:px-10 md:py-28 lg:px-18"
         >
@@ -564,6 +726,24 @@ export default function Home() {
                       strokeWidth={2.4}
                     />
                   </a>
+                  {"links" in member && member.links?.length ? (
+                    <div className="mt-3 flex flex-wrap gap-3">
+                      {member.links.map((link) => (
+                        <a
+                          key={link.url}
+                          className="inline-flex items-center gap-2 text-sm font-bold text-north-teal hover:text-north-ink"
+                          href={link.url}
+                        >
+                          {link.label}
+                          <ExternalLink
+                            aria-hidden="true"
+                            size={15}
+                            strokeWidth={2.4}
+                          />
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
                 </article>
               ))}
             </div>
@@ -608,6 +788,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
     </>
   );

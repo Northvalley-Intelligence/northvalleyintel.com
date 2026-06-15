@@ -1,0 +1,27 @@
+{
+  "generation": 2,
+  "phaseGoal": "Fix website assessment source and improve SEO/AEO crawlability",
+  "freshBdds": {
+    "critical": 1,
+    "high": 6,
+    "low": 1
+  },
+  "qaPlan": [
+    "lint",
+    "typecheck",
+    "seo/aeo source validation",
+    "assessment teaser regression validation",
+    "static export build",
+    "static export file inspection",
+    "staging smoke test"
+  ],
+  "localResults": {
+    "lint": "passed",
+    "typecheck": "passed",
+    "test:seo-aeo": "passed",
+    "test:assessment-teaser": "passed",
+    "build": "passed",
+    "staticExportInspection": "passed"
+  },
+  "positioningAdjustment": "Public copy remains in customer language while machine-readable source context clarifies Northvalley as a custom software company using AI agents to make practical software more accessible."
+}

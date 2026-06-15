@@ -256,6 +256,13 @@ async function verifyTurnstile(
   token: string,
   clientIp: string,
 ) {
+  if (
+    envString(env, "WORKFLOW_CHAT_TEST_BYPASS_TURNSTILE") === "true" &&
+    (clientIp === "local" || clientIp === "127.0.0.1" || clientIp === "::1")
+  ) {
+    return { ok: true };
+  }
+
   const secret = envString(env, "TURNSTILE_SECRET_KEY");
 
   if (!secret) {
