@@ -15,3 +15,4 @@
 - Strengthened metadata with crawl directives, JSON/text alternates, keywords, publisher/creator signals, and local county focus.
 - Added visible plain-answer content and FAQ structured data for AEO.
 - Local SEO/AEO validation, lint, typecheck, assessment-teaser validation, and static build passed.
+- Clarified positioning: Northvalley is a custom software company using AI agents to make practical software more accessible, while the website remains written in customer language around leads, follow-up, scheduling, and workflow problems.

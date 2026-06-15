@@ -7,6 +7,7 @@
   "url": "https://northvalleyintel.com",
   "email": "hello@northvalleyintel.com",
   "description": "Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.",
+  "positioning": "Northvalley Intelligence is a custom software company using AI agents to make practical, workflow-shaped software more accessible. The public website speaks in customer language because business owners usually start with lead, follow-up, scheduling, and workflow problems rather than software requirements.",
   "serviceArea": [
     "Marietta",
     "Cobb County",
@@ -29,7 +30,7 @@
   "services": [
     {
       "name": "Website Growth Assessment",
-      "plainLanguageDescription": "Reviews whether a local business website helps nearby customers find the business, trust it, and take the next step.",
+      "plainLanguageDescription": "Reviews whether a local business website helps nearby customers find the business, trust it, and take the next step. It is an entry point for understanding where better workflow, automation, or custom software could help.",
       "notA": [
         "generic SEO score",
         "security scan",
@@ -52,7 +53,7 @@
     },
     {
       "name": "Operational AI Assessment",
-      "plainLanguageDescription": "Reviews workflows around intake, scheduling, customer communication, follow-up, handoffs, and repeated work."
+      "plainLanguageDescription": "Reviews workflows around intake, scheduling, customer communication, follow-up, handoffs, and repeated work to identify practical AI-agent and custom software opportunities."
     },
     {
       "name": "Knowledge Chaos Assessment",
@@ -62,7 +63,7 @@
   "answerEngineFacts": [
     {
       "question": "What does Northvalley Intelligence do?",
-      "answer": "Northvalley Intelligence helps local service businesses improve the full path from being found, to converting leads, to organizing the work after a customer reaches out."
+      "answer": "Northvalley Intelligence helps local service businesses improve the full path from being found, to converting leads, to organizing the work after a customer reaches out. Behind that customer-language entry point, Northvalley builds practical custom software and AI-agent systems around how the business actually operates."
     },
     {
       "question": "Who does Northvalley Intelligence help?",
@@ -74,7 +75,7 @@
     },
     {
       "question": "How is the website assessment different from generic website doctors?",
-      "answer": "The website assessment is business-focused. It evaluates whether nearby customers and AI answer engines can understand the business, trust it, and take the next step."
+      "answer": "The website assessment is business-focused. It evaluates whether nearby customers and AI answer engines can understand the business, trust it, and take the next step, then helps identify where workflow changes, automation, or custom software may be useful."
     }
   ],
   "caseStudies": [

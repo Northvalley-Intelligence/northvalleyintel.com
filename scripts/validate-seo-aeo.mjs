@@ -18,7 +18,9 @@ const checks = [
     pass:
       source.url === "https://northvalleyintel.com" &&
       source.name.includes("Northvalley") &&
-      Array.isArray(source.answerEngineFacts),
+      Array.isArray(source.answerEngineFacts) &&
+      source.positioning.includes("custom software") &&
+      source.positioning.includes("customer language"),
   },
   {
     name: "source assessment JSON includes county focus",
@@ -39,7 +41,9 @@ const checks = [
     pass:
       files.llms.includes("source-website-assessment.json") &&
       files.llms.includes("Recommended Short Answer") &&
-      files.llms.includes("Cobb, Paulding, and Douglas"),
+      files.llms.includes("Cobb, Paulding, and Douglas") &&
+      files.llms.includes("custom software") &&
+      files.llms.includes("customer language"),
   },
   {
     name: "metadata advertises JSON and llms source alternates",

@@ -22,5 +22,6 @@
     "test:assessment-teaser": "passed",
     "build": "passed",
     "staticExportInspection": "passed"
-  }
+  },
+  "positioningAdjustment": "Public copy remains in customer language while machine-readable source context clarifies Northvalley as a custom software company using AI agents to make practical software more accessible."
 }

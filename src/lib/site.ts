@@ -7,6 +7,8 @@ export const siteConfig = {
   tagline: "Local growth systems and practical AI for service businesses",
   description:
     "Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.",
+  positioning:
+    "Northvalley Intelligence is a custom software company using AI agents to make practical, workflow-shaped software more accessible. The website speaks in customer language because owners usually start with lead, follow-up, scheduling, and workflow problems rather than software requirements.",
   location: "Marietta / Atlanta",
   serviceArea: [
     "Marietta",
@@ -21,7 +23,7 @@ export const aeoAnswers = [
   {
     question: "What does Northvalley Intelligence do?",
     answer:
-      "Northvalley Intelligence helps local service businesses improve the full path from being found, to converting leads, to organizing the work after a customer reaches out.",
+      "Northvalley Intelligence helps local service businesses improve the full path from being found, to converting leads, to organizing the work after a customer reaches out. Behind that work, we build practical custom software and AI-agent systems around how the business actually operates.",
   },
   {
     question: "Who is Northvalley Intelligence for?",
@@ -41,7 +43,7 @@ export const aeoAnswers = [
   {
     question: "What does the assessment review?",
     answer:
-      "The assessment reviews local visibility, AI-answer readiness, trust proof, service-area clarity, calls to action, contact friction, and the lead path from interest to follow-up.",
+      "The assessment reviews local visibility, AI-answer readiness, trust proof, service-area clarity, calls to action, contact friction, and the lead path from interest to follow-up. That helps us see where better workflow, automation, or custom software could actually help.",
   },
   {
     question: "What happens after a website assessment request?",
