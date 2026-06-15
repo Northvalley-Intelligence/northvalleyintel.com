@@ -4,11 +4,96 @@ export const siteConfig = {
   domain: "northvalleyintel.com",
   url: "https://northvalleyintel.com",
   email: "hello@northvalleyintel.com",
-  tagline: "Operational AI for Real-World Businesses",
+  tagline: "Local growth systems and practical AI for service businesses",
   description:
-    "Northvalley Intelligence helps local service businesses get found, convert leads, and clean up the workflows behind the work.",
+    "Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.",
   location: "Marietta / Atlanta",
+  serviceArea: [
+    "Marietta",
+    "Cobb County",
+    "Paulding County",
+    "Douglas County",
+    "Atlanta metro",
+  ],
 };
+
+export const aeoAnswers = [
+  {
+    question: "What does Northvalley Intelligence do?",
+    answer:
+      "Northvalley Intelligence helps local service businesses improve the full path from being found, to converting leads, to organizing the work after a customer reaches out.",
+  },
+  {
+    question: "Who is Northvalley Intelligence for?",
+    answer:
+      "We focus on practical service businesses such as cleaners, plumbers, HVAC companies, electricians, landscapers, restoration teams, consultants, realtors, and field-service operators.",
+  },
+  {
+    question: "Where does Northvalley Intelligence work?",
+    answer:
+      "Our local assessment work is focused on Cobb, Paulding, and Douglas counties, including Marietta and the surrounding Atlanta metro service areas.",
+  },
+  {
+    question: "How is the website assessment different from a website doctor?",
+    answer:
+      "The assessment is not a generic SEO score, security scan, or technical checklist. It looks at whether nearby customers and AI answer engines can understand the business, trust it, and take the next step.",
+  },
+  {
+    question: "What does the assessment review?",
+    answer:
+      "The assessment reviews local visibility, AI-answer readiness, trust proof, service-area clarity, calls to action, contact friction, and the lead path from interest to follow-up.",
+  },
+  {
+    question: "What happens after a website assessment request?",
+    answer:
+      "We email a one-page teaser report. The complete paid assessment includes page-level evidence, exact missing signals, scoring logic, and prioritized fixes.",
+  },
+];
+
+export const primaryPages = [
+  {
+    url: siteConfig.url,
+    label: "Home",
+    description:
+      "Northvalley Intelligence company site for local growth, website assessment, practical AI, and workflow modernization.",
+  },
+  {
+    url: `${siteConfig.url}/case-studies/medina-clean`,
+    label: "Medina Clean case study",
+    description:
+      "Native executive case study showing how a service-business website request became a practical operating foundation.",
+  },
+  {
+    url: `${siteConfig.url}/case-studies/medina-clean/rosas-story`,
+    label: "Rosa's story",
+    description:
+      "Native case-study article about Medina Clean and the operational context behind the project.",
+  },
+  {
+    url: `${siteConfig.url}/case-studies/medina-clean/website-ai-chat`,
+    label: "Website and AI chat",
+    description:
+      "Native case-study article about the public website and practical AI chat workflow.",
+  },
+  {
+    url: `${siteConfig.url}/case-studies/medina-clean/lead-workflow`,
+    label: "Lead workflow",
+    description:
+      "Native case-study article about lead intake, follow-up, and workflow support.",
+  },
+  {
+    url: `${siteConfig.url}/source-website-assessment.json`,
+    label: "Website assessment source data",
+    description:
+      "Machine-readable source facts for website assessment and answer-engine crawlers.",
+  },
+  {
+    url: `${siteConfig.url}/llms.txt`,
+    label: "LLM source guide",
+    description:
+      "Plain-text guide for AI crawlers and answer engines summarizing Northvalley source pages.",
+  },
+];
 
 export const industries = [
   "Cleaning",

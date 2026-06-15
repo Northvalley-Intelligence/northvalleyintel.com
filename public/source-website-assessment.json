@@ -1,0 +1,96 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://northvalleyintel.com/#organization",
+  "name": "Northvalley Intelligence LLC",
+  "alternateName": "Northvalley Intelligence",
+  "url": "https://northvalleyintel.com",
+  "email": "hello@northvalleyintel.com",
+  "description": "Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.",
+  "serviceArea": [
+    "Marietta",
+    "Cobb County",
+    "Paulding County",
+    "Douglas County",
+    "Atlanta metro"
+  ],
+  "audience": [
+    "local service businesses",
+    "cleaning companies",
+    "HVAC companies",
+    "plumbers",
+    "electricians",
+    "landscapers",
+    "restoration companies",
+    "field operations teams",
+    "consultants",
+    "realtors"
+  ],
+  "services": [
+    {
+      "name": "Website Growth Assessment",
+      "plainLanguageDescription": "Reviews whether a local business website helps nearby customers find the business, trust it, and take the next step.",
+      "notA": [
+        "generic SEO score",
+        "security scan",
+        "technical website doctor"
+      ],
+      "signalsReviewed": [
+        "local visibility",
+        "AI-answer readiness",
+        "service-area clarity",
+        "trust proof",
+        "calls to action",
+        "contact friction",
+        "lead conversion path"
+      ],
+      "delivery": "A one-page teaser is emailed after request. The full paid assessment includes page-level evidence, scoring logic, exact missing signals, and prioritized fixes."
+    },
+    {
+      "name": "Local Lead Path Assessment",
+      "plainLanguageDescription": "Looks at how customers discover a business, what makes them reach out, and what has to happen after interest becomes a lead."
+    },
+    {
+      "name": "Operational AI Assessment",
+      "plainLanguageDescription": "Reviews workflows around intake, scheduling, customer communication, follow-up, handoffs, and repeated work."
+    },
+    {
+      "name": "Knowledge Chaos Assessment",
+      "plainLanguageDescription": "Finds scattered documents, notes, inboxes, CRM records, and staff know-how that should become usable operational memory."
+    }
+  ],
+  "answerEngineFacts": [
+    {
+      "question": "What does Northvalley Intelligence do?",
+      "answer": "Northvalley Intelligence helps local service businesses improve the full path from being found, to converting leads, to organizing the work after a customer reaches out."
+    },
+    {
+      "question": "Who does Northvalley Intelligence help?",
+      "answer": "Northvalley Intelligence helps service businesses such as cleaners, plumbers, HVAC companies, electricians, landscapers, restoration teams, consultants, realtors, and field-service operators."
+    },
+    {
+      "question": "Where does Northvalley Intelligence focus its local assessment work?",
+      "answer": "Northvalley Intelligence focuses local assessment work on Cobb, Paulding, and Douglas counties, including Marietta and nearby Atlanta metro service areas."
+    },
+    {
+      "question": "How is the website assessment different from generic website doctors?",
+      "answer": "The website assessment is business-focused. It evaluates whether nearby customers and AI answer engines can understand the business, trust it, and take the next step."
+    }
+  ],
+  "caseStudies": [
+    {
+      "name": "Medina Clean",
+      "url": "https://northvalleyintel.com/case-studies/medina-clean",
+      "summary": "A cleaning business website request became a practical operating foundation for bilingual public presence, guided estimates, recurring customer memory, scheduling support, and lead handling."
+    }
+  ],
+  "sourcePages": [
+    "https://northvalleyintel.com/",
+    "https://northvalleyintel.com/case-studies/medina-clean",
+    "https://northvalleyintel.com/case-studies/medina-clean/rosas-story",
+    "https://northvalleyintel.com/case-studies/medina-clean/website-ai-chat",
+    "https://northvalleyintel.com/case-studies/medina-clean/lead-workflow",
+    "https://northvalleyintel.com/llms.txt"
+  ],
+  "lastReviewed": "2026-06-15"
+}

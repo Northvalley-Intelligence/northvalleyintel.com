@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-12",
+  "updatedAt": "2026-06-15",
   "completed": [
     "Assessment teaser request API",
     "Turnstile-gated frontend form",
@@ -9,9 +9,16 @@
     "Feature-specific validation script",
     "Local QA gates",
     "PR preview staging deployment",
-    "Staging smoke tests"
+    "Staging smoke tests",
+    "Machine-readable website assessment source",
+    "LLM source guide",
+    "Robots and sitemap generation",
+    "Visible AEO answers and FAQ schema",
+    "SEO/AEO local validation"
   ],
   "remaining": [
+    "Deploy SEO/AEO fixes to staging",
+    "Smoke-test SEO/AEO files on staging",
     "Founder validation before production"
   ]
 }

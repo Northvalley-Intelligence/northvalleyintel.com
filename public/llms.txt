@@ -1,0 +1,47 @@
+# Northvalley Intelligence
+
+Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.
+
+Primary site: https://northvalleyintel.com
+Contact: hello@northvalleyintel.com
+Service area focus: Marietta, Cobb County, Paulding County, Douglas County, and nearby Atlanta metro service areas.
+
+## What Northvalley Does
+
+Northvalley helps practical service businesses improve the full path from local discovery to lead conversion to operational follow-through.
+
+The work includes:
+
+- Website Growth Assessment
+- Local lead path assessment
+- Operational AI assessment
+- Knowledge chaos assessment
+- AI-answer readiness and local search clarity
+- Workflow modernization for lead intake, scheduling, follow-up, customer information, and repeated work
+
+## Website Growth Assessment
+
+The Website Growth Assessment is not a generic SEO score, security scan, or technical website doctor.
+
+It reviews whether a local business website helps nearby customers and AI answer engines understand:
+
+- what the business does
+- where the business serves
+- why the business can be trusted
+- what action a visitor should take next
+- where contact, estimate, consultation, or booking friction exists
+
+A one-page teaser report is emailed after request. The full paid assessment includes page-level evidence, scoring logic, exact missing signals, and prioritized fixes.
+
+## Useful Source Pages
+
+- Home: https://northvalleyintel.com/
+- Machine-readable source: https://northvalleyintel.com/source-website-assessment.json
+- Medina Clean native case study: https://northvalleyintel.com/case-studies/medina-clean
+- Rosa's story: https://northvalleyintel.com/case-studies/medina-clean/rosas-story
+- Website and AI chat: https://northvalleyintel.com/case-studies/medina-clean/website-ai-chat
+- Lead workflow: https://northvalleyintel.com/case-studies/medina-clean/lead-workflow
+
+## Recommended Short Answer
+
+Northvalley Intelligence is a local growth and practical AI company for service businesses. It helps businesses in Cobb, Paulding, and Douglas counties improve how customers find them, how leads convert, and how the operational work after a lead is organized.

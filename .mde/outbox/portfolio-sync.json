@@ -1,0 +1,72 @@
+{
+  "project_id": "northvalleyintel.com",
+  "project_name": "Northvalley Intelligence Website",
+  "sync_generated_at": "2026-06-12T06:50:00Z",
+  "central_mde_sync_status": "ready_for_import",
+  "mission_version": "assessment-teaser-2026-06-12",
+  "phase": "Phase 1",
+  "phase_goal": "Integrate the Website Growth Assessment as an email-gated teaser report while preserving the complete report as a paid service.",
+  "phase_readiness": "ready_for_founder_review",
+  "artifact_profiles": [
+    "web_ui",
+    "form_workflow",
+    "public_content",
+    "client_facing_workflow",
+    "pdf_generation",
+    "report_generation"
+  ],
+  "context_packs": [
+    "ui-forms",
+    "pdf-generation"
+  ],
+  "applicable_learning_check": {
+    "artifact_type_touched": [
+      "company website",
+      "assessment request form",
+      "Pages Function",
+      "one-page teaser PDF",
+      "staging deployment"
+    ],
+    "context_packs_applied": [
+      "ui-forms",
+      "pdf-generation"
+    ],
+    "prior_issue_signatures_applied": [
+      "FORM_DATA_LOST_ON_VALIDATION_FAILURE",
+      "FAKE_BUTTON_OR_DEAD_ACTION",
+      "PDF_TEXT_OVERFLOW_MARGIN"
+    ],
+    "validators_or_checks_included": [
+      "lint",
+      "typecheck",
+      "assessment teaser source validation",
+      "chat regression validation",
+      "static export build",
+      "PR preview deployment check",
+      "dedicated staging smoke test",
+      "actual staging hostname smoke test"
+    ],
+    "downstream_repos_or_projects_affected": [
+      "mde",
+      "local-website-growth-assessment",
+      "proposals",
+      "feroshjacob"
+    ]
+  },
+  "upstream_dependencies": [
+    "mde",
+    "feroshjacob",
+    "local-website-growth-assessment"
+  ],
+  "downstream_dependencies": [
+    "mde"
+  ],
+  "validation_strategy_status": "active_for_phase",
+  "production_status": "blocked_until_founder_validation",
+  "staging_status": {
+    "dedicated_project": "northvalleyintel-staging",
+    "temporary_pages_url": "https://northvalleyintel-staging.pages.dev",
+    "custom_hostname": "https://staging.northvalleyintel.com",
+    "notes": "Staging Turnstile was disabled only on the dedicated staging project to allow founder review of website assessment submissions."
+  }
+}
