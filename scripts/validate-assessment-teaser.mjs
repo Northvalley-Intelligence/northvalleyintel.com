@@ -39,8 +39,17 @@ const checks = [
       files.api.includes("attachments"),
   },
   {
+    name: "admin is notified as soon as an assessment request is queued",
+    pass:
+      files.api.includes("sendAssessmentRequestNotification") &&
+      files.api.includes("ASSESSMENT_TEASER_NOTIFY_TO") &&
+      files.api.includes("This notification is sent as soon as the assessment is queued"),
+  },
+  {
     name: "Resend delivery failures are treated as failures",
-    pass: files.api.includes("Resend rejected the assessment teaser email"),
+    pass:
+      files.api.includes("Resend rejected the assessment teaser email") &&
+      files.api.includes("Resend rejected the assessment request notification"),
   },
   {
     name: "teaser copy withholds the paid report detail",
