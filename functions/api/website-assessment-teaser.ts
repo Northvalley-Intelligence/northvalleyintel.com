@@ -64,6 +64,19 @@ export async function onRequestPost({ request, env, waitUntil }: FunctionContext
     );
   }
 
+  const adminNotification = sendAssessmentRequestNotification({
+    env,
+    teaserRequest,
+    assessmentBaseUrl,
+    scanId: queued.scanId,
+    statusUrl: queued.statusUrl || `/api/scans/${queued.scanId}`,
+  }).catch((error) => {
+    console.warn("assessment_teaser_admin_notification_failed", {
+      error: error instanceof Error ? error.message : String(error),
+      websiteUrl: teaserRequest.websiteUrl,
+    });
+  });
+
   const followUp = completeAndSendTeaser({
     env,
     assessmentBaseUrl,
@@ -78,8 +91,10 @@ export async function onRequestPost({ request, env, waitUntil }: FunctionContext
   });
 
   if (waitUntil) {
+    waitUntil(adminNotification);
     waitUntil(followUp);
   } else {
+    adminNotification.catch(() => undefined);
     followUp.catch(() => undefined);
   }
 
@@ -143,6 +158,79 @@ async function completeAndSendTeaser(input: {
       content: base64Encode(pdf),
     },
   });
+}
+
+async function sendAssessmentRequestNotification(input: {
+  env: Record<string, unknown>;
+  teaserRequest: AssessmentTeaserRequest;
+  assessmentBaseUrl: string;
+  scanId: string;
+  statusUrl: string;
+}) {
+  const apiKey = envString(input.env, "RESEND_API_KEY");
+  const notifyTo =
+    envString(input.env, "ASSESSMENT_TEASER_NOTIFY_TO") ||
+    envString(input.env, "CHAT_NOTIFY_TO") ||
+    envString(input.env, "ASSESSMENT_HOST_EMAIL");
+  const notifyFrom =
+    envString(input.env, "ASSESSMENT_TEASER_FROM") ||
+    envString(input.env, "CHAT_NOTIFY_FROM") ||
+    "Northvalley Intelligence <alerts@northvalleyintel.com>";
+
+  if (!apiKey || !notifyTo) {
+    return;
+  }
+
+  const statusUrl = input.statusUrl.startsWith("http")
+    ? input.statusUrl
+    : `${input.assessmentBaseUrl.replace(/\/$/, "")}${input.statusUrl}`;
+
+  const response = await fetchWithTimeout(
+    "https://api.resend.com/emails",
+    {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${apiKey}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        from: notifyFrom,
+        to: [notifyTo],
+        subject: `New website assessment request: ${input.teaserRequest.websiteUrl}`,
+        text: buildAssessmentRequestNotificationText({
+          request: input.teaserRequest,
+          scanId: input.scanId,
+          statusUrl,
+        }),
+      }),
+    },
+    8000,
+  );
+
+  if (!response.ok) {
+    const errorBody = await response.text().catch(() => "");
+    throw new Error(
+      `Resend rejected the assessment request notification with status ${response.status}: ${errorBody.slice(0, 240)}`,
+    );
+  }
+}
+
+function buildAssessmentRequestNotificationText(input: {
+  request: AssessmentTeaserRequest;
+  scanId: string;
+  statusUrl: string;
+}) {
+  return [
+    "Someone requested a Northvalley website assessment teaser.",
+    "",
+    `Business: ${input.request.businessName || "Not provided"}`,
+    `Website: ${input.request.websiteUrl}`,
+    `Requester email: ${input.request.email}`,
+    `Scan ID: ${input.scanId}`,
+    `Assessment status: ${input.statusUrl}`,
+    "",
+    "This notification is sent as soon as the assessment is queued. The visitor-facing teaser email is sent separately when the scan finishes.",
+  ].join("\n");
 }
 
 async function queueAssessment(baseUrl: string, websiteUrl: string) {
