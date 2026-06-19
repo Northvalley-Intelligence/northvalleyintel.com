@@ -1,7 +1,12 @@
 {
-  "generation": 1,
+  "generation": 3,
   "critical": [],
-  "high": [],
+  "high": [
+    {
+      "id": "client-intake-subdomain",
+      "reason": "Local middleware routing is validated, but production DNS and HTTPS availability for intake.northvalleyintel.com must be configured and smoke-tested before client use."
+    }
+  ],
   "low": [
     {
       "id": "verified-sender-domain",

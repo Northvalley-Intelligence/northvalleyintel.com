@@ -78,6 +78,30 @@
       "priority": "High",
       "status": "implemented",
       "expected": "Homepage metadata advertises source JSON and llms.txt alternates with crawl-friendly robots directives."
+    },
+    {
+      "id": "client-intake-rendered",
+      "priority": "Critical",
+      "status": "locally_validated",
+      "expected": "A client can open /intake and see a friendly website launch intake with the required business, contact, offer, audience, market, action, and consent fields."
+    },
+    {
+      "id": "client-intake-private-submit",
+      "priority": "Critical",
+      "status": "locally_validated",
+      "expected": "A completed intake POST validates required fields, rejects secrets, accepts up to five images, and sends the intake through a private delivery path instead of exposing it publicly."
+    },
+    {
+      "id": "client-intake-technical-optional",
+      "priority": "High",
+      "status": "implemented",
+      "expected": "Technical details are collapsed, optional, and warn clients not to enter passwords, API keys, tokens, registrar logins, or account credentials."
+    },
+    {
+      "id": "client-intake-subdomain",
+      "priority": "High",
+      "status": "pending_production",
+      "expected": "https://intake.northvalleyintel.com resolves over HTTPS and routes visitors to the intake form before Northvalley shares the link with clients."
     }
   ]
 }

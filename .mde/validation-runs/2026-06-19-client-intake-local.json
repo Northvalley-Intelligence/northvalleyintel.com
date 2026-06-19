@@ -1,0 +1,78 @@
+{
+  "validationRunId": "2026-06-19-client-intake-local",
+  "generation": 3,
+  "phase": "Phase 1",
+  "phaseGoal": "Add a usable client website launch intake and validate the link path before client use.",
+  "startedAt": "2026-06-19T00:00:00-04:00",
+  "completedAt": "2026-06-19T00:00:00-04:00",
+  "validationsExecuted": [
+    {
+      "name": "npm run test:client-intake",
+      "category": "Functional",
+      "result": "pass",
+      "evidence": "Static validator confirmed /intake renders the real form, required fields are enforced, technical details are collapsed and warn against secrets, up to five images are accepted, submissions fail closed, Turnstile is honored, and intake subdomain middleware exists."
+    },
+    {
+      "name": "npm run lint",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "ESLint completed successfully."
+    },
+    {
+      "name": "npm run typecheck",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "TypeScript completed successfully after fixing the intake payload required-field typing."
+    },
+    {
+      "name": "changed-file prettier check",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "Prettier passed for package.json and all intake implementation files."
+    },
+    {
+      "name": "npm run build",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "Next.js static export completed and included /intake."
+    },
+    {
+      "name": "local Pages rendered/API smoke test",
+      "category": "Functional",
+      "result": "pass",
+      "evidence": "Wrangler Pages dev served /intake, returned required-field errors for empty submission, returned 400 for more than five image uploads, and returned success for a controlled test-mode submission."
+    },
+    {
+      "name": "local intake subdomain host-header smoke test",
+      "category": "Functional",
+      "result": "pass",
+      "evidence": "A request with Host: intake.northvalleyintel.com redirected to /intake after middleware was fixed to inspect the Host header."
+    }
+  ],
+  "validationsSkipped": [
+    {
+      "name": "cloudflare-pages-preview",
+      "reason": "Pending push and PR creation."
+    },
+    {
+      "name": "production HTTPS smoke test",
+      "reason": "Pending merge/deploy from main and Cloudflare custom domain configuration."
+    },
+    {
+      "name": "real Resend delivery smoke test",
+      "reason": "Pending staging/production environment confirmation; local run used CLIENT_INTAKE_TEST_MODE to avoid sending real email."
+    }
+  ],
+  "criticalFindings": [],
+  "highFindings": [
+    {
+      "id": "client-intake-subdomain",
+      "summary": "Production DNS/HTTPS availability for intake.northvalleyintel.com still needs live verification before client use.",
+      "status": "open"
+    }
+  ],
+  "gateResult": "partial_pass",
+  "phaseExitPassCountAfterRun": 0,
+  "evidenceQuality": "adequate_local",
+  "reason": "The implementation is locally validated, but production availability and custom-domain smoke testing remain open."
+}

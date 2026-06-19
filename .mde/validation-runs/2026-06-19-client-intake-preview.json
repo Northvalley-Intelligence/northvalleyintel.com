@@ -1,0 +1,55 @@
+{
+  "validationRunId": "2026-06-19-client-intake-preview",
+  "generation": 3,
+  "phase": "Phase 1",
+  "phaseGoal": "Verify the Cloudflare Pages preview for the client website launch intake before production merge.",
+  "startedAt": "2026-06-19T11:24:00-04:00",
+  "completedAt": "2026-06-19T11:25:00-04:00",
+  "validationsExecuted": [
+    {
+      "name": "GitHub CI quality",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "PR #15 quality check completed successfully."
+    },
+    {
+      "name": "Cloudflare Pages preview",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "PR #15 cloudflare-pages-preview check completed successfully and deployed https://intake-portal.northvalleyintel-com.pages.dev."
+    },
+    {
+      "name": "Preview rendered-page smoke test",
+      "category": "Usability",
+      "result": "pass",
+      "evidence": "GET https://intake-portal.northvalleyintel-com.pages.dev/intake returned the Website Launch Intake page with required fields, optional photo upload, and optional technical section."
+    },
+    {
+      "name": "Preview API empty-submit smoke test",
+      "category": "Functional",
+      "result": "pass",
+      "evidence": "POST https://intake-portal.northvalleyintel-com.pages.dev/api/client-intake with no form data returned 400 and did not silently accept an incomplete intake."
+    }
+  ],
+  "validationsSkipped": [
+    {
+      "name": "successful preview delivery smoke test",
+      "reason": "Avoided sending a real intake email from preview before production recipient confirmation."
+    },
+    {
+      "name": "live intake.northvalleyintel.com smoke test",
+      "reason": "Pending production merge/deploy and Cloudflare Pages custom-domain configuration."
+    }
+  ],
+  "criticalFindings": [],
+  "highFindings": [
+    {
+      "id": "client-intake-subdomain",
+      "summary": "Preview is live, but intake.northvalleyintel.com still needs production custom-domain configuration and HTTPS smoke test.",
+      "status": "open"
+    }
+  ],
+  "gateResult": "partial_pass",
+  "phaseExitPassCountAfterRun": 0,
+  "evidenceQuality": "adequate_preview"
+}

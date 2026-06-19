@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test:seo-aeo": "node scripts/validate-seo-aeo.mjs",
     "test:assessment-teaser": "node scripts/validate-assessment-teaser.mjs",
+    "test:client-intake": "node scripts/validate-client-intake.mjs",
     "test:chat": "node scripts/validate-workflow-chat.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

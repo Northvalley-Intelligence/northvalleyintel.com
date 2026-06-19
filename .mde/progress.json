@@ -14,11 +14,16 @@
     "LLM source guide",
     "Robots and sitemap generation",
     "Visible AEO answers and FAQ schema",
-    "SEO/AEO local validation"
+    "SEO/AEO local validation",
+    "Client website launch intake page at /intake",
+    "Private client intake submission function",
+    "Local intake page, API, and subdomain-host validation"
   ],
   "remaining": [
-    "Deploy SEO/AEO fixes to staging",
-    "Smoke-test SEO/AEO files on staging",
-    "Founder validation before production"
+    "Deploy client intake branch to PR preview",
+    "Smoke-test /intake and /api/client-intake on staging",
+    "Merge and deploy from main after validation",
+    "Configure or verify intake.northvalleyintel.com custom domain",
+    "Smoke-test the live intake subdomain before client use"
   ]
 }
