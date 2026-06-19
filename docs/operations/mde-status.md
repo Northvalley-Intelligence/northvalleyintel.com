@@ -51,6 +51,10 @@ Phase 1: Assessment-led growth and client intake entry points.
 - Passed: local Pages API smoke test for required-field errors and successful test-mode intake submission
 - Passed: local Pages API smoke test for more than five image uploads returning 400
 - Passed: local Pages host-header smoke test for `intake.northvalleyintel.com` redirecting to `/intake`
+- Passed: PR #15 `quality` check
+- Passed: PR #15 `cloudflare-pages-preview` check
+- Passed: Cloudflare Pages preview rendered-page smoke test at `https://intake-portal.northvalleyintel-com.pages.dev/intake`
+- Passed: Cloudflare Pages preview API empty-submit smoke test returning 400
 - Passed: local rendered-page smoke test for Website Check copy
 - Passed: static export file inspection for source JSON, `llms.txt`, `robots.txt`, `sitemap.xml`, metadata alternates, and FAQ schema
 - Passed: local protected API smoke test, `GET /api/website-assessment-teaser` returns 405
