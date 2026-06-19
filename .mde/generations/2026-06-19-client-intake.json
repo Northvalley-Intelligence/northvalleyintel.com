@@ -1,0 +1,80 @@
+{
+  "generation": 3,
+  "generationId": "2026-06-19-client-intake",
+  "phase": "Phase 1",
+  "missionVersion": "assessment-teaser-2026-06-12",
+  "phaseGoalVersion": "client-intake-portal-2026-06-19",
+  "focus": "Implement a usable client website launch intake at /intake and prepare intake.northvalleyintel.com routing.",
+  "reasonGenerationStarted": "The previous generator repo produced an intake portal spec but not a live client-facing link. The user reported NXDOMAIN and asked to build and verify the real site.",
+  "reasonGenerationEnded": "The intake page, API endpoint, subdomain middleware, validator, local Pages smoke tests, and MDE records were completed locally. Staging, production deploy, DNS/custom-domain, and live HTTPS smoke tests remain required.",
+  "filesChanged": [
+    "MISSION_UPDATES.md",
+    "package.json",
+    "deploy/release-checks.json",
+    "docs/operations/mde-status.md",
+    "functions/_middleware.ts",
+    "functions/api/client-intake.ts",
+    "scripts/validate-client-intake.mjs",
+    "src/app/intake/page.tsx",
+    "src/components/client-intake-form.tsx",
+    "src/lib/client-intake.ts",
+    ".mde/bdd-index.json",
+    ".mde/failing-bdds.json",
+    ".mde/generations/2026-06-19-client-intake.json",
+    ".mde/progress.json",
+    ".mde/risk-register.json",
+    ".mde/state.json",
+    ".mde/validation-runs/2026-06-19-client-intake-local.json"
+  ],
+  "validators": [
+    {
+      "tool": "npm run test:client-intake",
+      "category": "Functional",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "local Pages rendered/API smoke test",
+      "category": "Functional",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "local intake subdomain host-header smoke test",
+      "category": "Functional",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "npm run lint",
+      "category": "Technical",
+      "result": "pass",
+      "usefulness": "medium"
+    },
+    {
+      "tool": "npm run typecheck",
+      "category": "Technical",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "npm run build",
+      "category": "Technical",
+      "result": "pass",
+      "usefulness": "high"
+    }
+  ],
+  "criticalFindings": [],
+  "highFindings": [
+    {
+      "id": "client-intake-subdomain",
+      "status": "open",
+      "summary": "Production DNS/HTTPS for intake.northvalleyintel.com must be configured and smoke-tested before client use."
+    }
+  ],
+  "validationGate": {
+    "result": "partial_pass",
+    "passCount": "0/2",
+    "evidenceQuality": "adequate_local"
+  }
+}

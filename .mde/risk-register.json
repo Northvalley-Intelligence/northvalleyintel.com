@@ -20,6 +20,20 @@
       "status": "open",
       "description": "The sibling assessment service must be available for teaser generation.",
       "mitigation": "Staging smoke test should verify the queue path reaches assessment.northvalleyintel.com."
+    },
+    {
+      "id": "client-intake-subdomain-dns",
+      "severity": "high",
+      "status": "open",
+      "description": "intake.northvalleyintel.com was specified before DNS and a Pages custom domain existed, causing NXDOMAIN for the client-facing link.",
+      "mitigation": "Configure the custom domain on the Cloudflare Pages project, verify HTTPS, and smoke-test the live URL before sharing it with clients."
+    },
+    {
+      "id": "client-intake-delivery-path",
+      "severity": "medium",
+      "status": "open",
+      "description": "The intake form depends on Resend and notification recipients for private delivery.",
+      "mitigation": "Production smoke test should submit a controlled intake and confirm Northvalley receives the email and attachments."
     }
   ]
 }

@@ -16,3 +16,11 @@
 - Added visible plain-answer content and FAQ structured data for AEO.
 - Local SEO/AEO validation, lint, typecheck, assessment-teaser validation, and static build passed.
 - Clarified positioning: Northvalley is a custom software company using AI agents to make practical software more accessible, while the website remains written in customer language around leads, follow-up, scheduling, and workflow problems.
+
+## 2026-06-19
+
+- Added a client website launch intake at `/intake`.
+- Added a Pages Function at `/api/client-intake` that validates the smallest required field set, rejects secrets, accepts up to five images, honors Turnstile when configured, and sends the intake privately through Resend.
+- Added middleware so `intake.northvalleyintel.com` redirects to the intake form once that custom domain is routed to this Pages project.
+- Added `npm run test:client-intake` and local Pages validation for rendered page content, required-field errors, photo-count errors, successful test-mode submission, and subdomain-host redirect behavior.
+- Remaining production work: deploy from `main`, configure or verify the Cloudflare Pages custom domain for `intake.northvalleyintel.com`, and smoke-test the live URL before telling a client it is ready.

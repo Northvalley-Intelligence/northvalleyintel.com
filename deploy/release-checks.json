@@ -3,10 +3,12 @@
     "lint",
     "typecheck",
     "test:assessment-teaser",
+    "test:client-intake",
     "test:chat",
     "build",
     "cloudflare-pages-preview",
-    "staging_smoke_test"
+    "staging_smoke_test",
+    "intake_subdomain_smoke_test"
   ],
   "phaseGate": {
     "twoPassVerification": true,
@@ -16,6 +18,7 @@
     "productionRequiresFounderValidation": true
   },
   "knownWarnings": [
-    "Verify Resend sender domain before relying on arbitrary customer email delivery."
+    "Verify Resend sender domain before relying on arbitrary customer email delivery.",
+    "intake.northvalleyintel.com requires a Cloudflare Pages custom domain and live HTTPS smoke test before client use."
   ]
 }
