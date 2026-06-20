@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowLeft, Clock3, FileCheck2, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Clock3, FileCheck2, HelpCircle } from "lucide-react";
 import Link from "next/link";
 
 import { ClientIntakeForm } from "@/components/client-intake-form";
@@ -7,9 +7,9 @@ import { SiteHeader } from "@/components/site-header";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Website Launch Intake",
+  title: "Website Intake",
   description:
-    "A short Northvalley website launch intake for collecting the business details, photos, service area, and conversion goals needed before a client website build.",
+    "A short Northvalley intake for collecting business details before a website planning conversation.",
   alternates: {
     canonical: "/intake",
   },
@@ -23,17 +23,17 @@ const checklist = [
   {
     icon: Clock3,
     title: "Usually 8 to 12 minutes",
-    detail: "Answer the essentials first. Extra context is optional.",
+    detail: "Answer what you know. Optional details can stay blank.",
   },
   {
     icon: FileCheck2,
-    title: "Built for the launch package",
-    detail: "Your answers become the starting facts for the website build.",
+    title: "Before we meet",
+    detail: "We review this first so the conversation starts faster.",
   },
   {
-    icon: ShieldCheck,
-    title: "No passwords here",
-    detail: "Access details are handled separately if the project needs them.",
+    icon: HelpCircle,
+    title: "Not sure?",
+    detail: "Send the basics. We will ask for anything important later.",
   },
 ];
 
@@ -42,9 +42,9 @@ export default function IntakePage() {
     <>
       <SiteHeader />
       <main className="bg-[#f8faf9]">
-        <section className="border-b border-north-line bg-white px-5 py-8 md:px-10 lg:px-18">
-          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-            <div>
+        <section className="px-5 py-6 md:px-10 md:py-8 lg:px-18">
+          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_0.36fr] lg:items-start">
+            <div className="rounded-lg border border-north-line bg-[#f7f6f0] p-5 shadow-[0_24px_70px_rgba(20,32,42,0.08)] md:p-8">
               <Link
                 className="inline-flex items-center gap-2 text-sm font-extrabold text-north-teal hover:text-north-ink"
                 href="/"
@@ -52,52 +52,48 @@ export default function IntakePage() {
                 <ArrowLeft aria-hidden="true" size={17} />
                 Northvalley Intelligence
               </Link>
-              <p className="mt-8 text-sm font-extrabold uppercase text-north-teal">
-                Website launch intake
+              <p className="mt-6 text-sm font-extrabold uppercase text-north-teal">
+                Website intake
               </p>
-              <h1 className="mt-3 max-w-3xl text-[clamp(2.25rem,5vw,4.75rem)] font-black leading-[1] tracking-normal text-north-ink">
-                Tell us what the new site needs to know.
+              <h1 className="mt-2 max-w-3xl text-[clamp(1.8rem,4vw,3rem)] font-black leading-tight tracking-normal text-north-ink">
+                Share the basics before we meet.
               </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-north-muted md:text-xl">
-                Start with the practical details: what you offer, who you serve,
-                where you work, and what visitors should do next. Photos and
-                technical notes are optional.
+              <p className="mt-3 max-w-3xl text-base leading-7 text-north-muted">
+                This saves time in the first conversation. Start with what the
+                business offers, who it serves, where it works, and what a
+                visitor should do next.
               </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-              {checklist.map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <div
-                    className="flex items-start gap-3 rounded-md border border-north-line bg-[#f8faf9] p-4"
-                    key={item.title}
-                  >
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-north-ink text-white">
-                      <Icon aria-hidden="true" size={19} />
-                    </div>
-                    <div>
-                      <p className="font-extrabold text-north-ink">
-                        {item.title}
-                      </p>
-                      <p className="mt-1 text-sm font-semibold leading-6 text-north-muted">
-                        {item.detail}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-5 py-10 md:px-10 md:py-14 lg:px-18">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.68fr_0.32fr] lg:items-start">
-            <div className="rounded-lg border border-north-line bg-[#f7f6f0] p-5 shadow-[0_24px_70px_rgba(20,32,42,0.08)] md:p-8">
-              <ClientIntakeForm />
+              <div className="mt-7">
+                <ClientIntakeForm />
+              </div>
             </div>
 
             <aside className="grid gap-5 lg:sticky lg:top-28">
+              <div className="grid gap-3">
+                {checklist.map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <div
+                      className="flex items-start gap-3 rounded-md border border-north-line bg-[#f8faf9] p-4"
+                      key={item.title}
+                    >
+                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-north-ink text-white">
+                        <Icon aria-hidden="true" size={19} />
+                      </div>
+                      <div>
+                        <p className="font-extrabold text-north-ink">
+                          {item.title}
+                        </p>
+                        <p className="mt-1 text-sm font-semibold leading-6 text-north-muted">
+                          {item.detail}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
               <div className="rounded-md border border-north-line bg-white p-5">
                 <p className="text-sm font-extrabold uppercase text-north-teal">
                   What happens next
@@ -105,15 +101,15 @@ export default function IntakePage() {
                 <ol className="mt-4 grid gap-4 text-sm font-semibold leading-6 text-north-muted">
                   <li>
                     <span className="font-extrabold text-north-ink">1.</span> We
-                    review the intake and flag anything missing.
+                    review the details before the meeting.
                   </li>
                   <li>
                     <span className="font-extrabold text-north-ink">2.</span> We
-                    prepare the website mission, build brief, and content list.
+                    prepare better questions and note anything missing.
                   </li>
                   <li>
                     <span className="font-extrabold text-north-ink">3.</span> We
-                    confirm launch priorities before the build starts.
+                    use the conversation to confirm priorities and next steps.
                   </li>
                 </ol>
               </div>
@@ -124,7 +120,7 @@ export default function IntakePage() {
                 </p>
                 <p className="mt-3 text-sm font-semibold leading-6 text-white/82">
                   Send the basics and leave anything uncertain blank. We will
-                  sort out details with you before they become website copy.
+                  sort out the rest when we talk.
                 </p>
                 <a
                   className="mt-4 inline-flex min-h-11 items-center justify-center rounded-md bg-white px-4 text-sm font-extrabold text-north-ink hover:bg-[#edf7f5]"

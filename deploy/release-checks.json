@@ -19,6 +19,6 @@
   },
   "knownWarnings": [
     "Verify Resend sender domain before relying on arbitrary customer email delivery.",
-    "intake.northvalleyintel.com requires a Cloudflare Pages custom domain and live HTTPS smoke test before client use."
+    "intake.northvalleyintel.com is attached to Cloudflare Pages but still requires DNS CNAME intake -> northvalleyintel-com.pages.dev and a live HTTPS smoke test before client use."
   ]
 }

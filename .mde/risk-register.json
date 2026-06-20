@@ -25,8 +25,8 @@
       "id": "client-intake-subdomain-dns",
       "severity": "high",
       "status": "open",
-      "description": "intake.northvalleyintel.com was specified before DNS and a Pages custom domain existed, causing NXDOMAIN for the client-facing link.",
-      "mitigation": "Configure the custom domain on the Cloudflare Pages project, verify HTTPS, and smoke-test the live URL before sharing it with clients."
+      "description": "intake.northvalleyintel.com is attached to the Cloudflare Pages project but remains pending because the required CNAME record is not set. Public DNS still returns NXDOMAIN.",
+      "mitigation": "Create CNAME intake -> northvalleyintel-com.pages.dev in the northvalleyintel.com DNS zone, wait for Pages status to become active, then smoke-test the live URL before sharing it with clients."
     },
     {
       "id": "client-intake-delivery-path",

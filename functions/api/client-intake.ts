@@ -69,7 +69,7 @@ export async function onRequestPost({ request, env }: FunctionContext) {
     return json({
       status: "sent",
       message:
-        "Thanks. We received the intake and will use it to prepare the website launch package.",
+        "Thanks. We received the details. We will review them before we meet and follow up if anything important is missing.",
     });
   }
 
@@ -112,7 +112,7 @@ export async function onRequestPost({ request, env }: FunctionContext) {
             "hello@northvalleyintel.com",
         ],
         reply_to: payload.contactEmail,
-        subject: `Website launch intake: ${payload.businessName}`,
+        subject: `Website intake: ${payload.businessName}`,
         text: buildClientIntakeNotificationText({
           payload,
           files: intakeFileSummary(files),
@@ -143,7 +143,7 @@ export async function onRequestPost({ request, env }: FunctionContext) {
   return json({
     status: "sent",
     message:
-      "Thanks. We received the intake and will use it to prepare the website launch package.",
+      "Thanks. We received the details. We will review them before we meet and follow up if anything important is missing.",
   });
 }
 

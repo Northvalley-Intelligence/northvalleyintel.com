@@ -26,7 +26,7 @@ const checks = [
     name: "intake page renders the real form",
     pass:
       files.page.includes("<ClientIntakeForm />") &&
-      files.page.includes("Website launch intake"),
+      files.page.includes("Share the basics before we meet"),
   },
   {
     name: "intake page is not indexed as a public marketing page",
@@ -39,6 +39,23 @@ const checks = [
     pass: requiredFields.every(
       (field) => files.form.includes(field) && files.lib.includes(field),
     ),
+  },
+  {
+    name: "form is visible first and explains meeting-prep purpose",
+    pass:
+      files.page.includes("lg:grid-cols-[1fr_0.36fr]") &&
+      files.page.includes("This saves time in the first conversation") &&
+      files.page.includes("review the details before the meeting"),
+  },
+  {
+    name: "client-side validation runs on blur without native URL blocking",
+    pass:
+      files.form.includes("noValidate") &&
+      files.form.includes("validateFieldOnBlur") &&
+      files.form.includes('inputMode="url"') &&
+      !files.form.includes('type="url"') &&
+      files.lib.includes("normalizeWebsiteUrl") &&
+      files.lib.includes("https://${trimmed}"),
   },
   {
     name: "optional technical section is collapsed and warns against secrets",
@@ -64,7 +81,8 @@ const checks = [
       files.api.includes("RESEND_API_KEY") &&
       files.api.includes("CLIENT_INTAKE_NOTIFY_TO") &&
       files.api.includes("reply_to: payload.contactEmail") &&
-      files.api.includes("not fully configured yet"),
+      files.api.includes("not fully configured yet") &&
+      files.api.includes("review them before we meet"),
   },
   {
     name: "Turnstile verification is honored when configured",

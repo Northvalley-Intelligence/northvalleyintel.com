@@ -1,0 +1,78 @@
+{
+  "generation": 3,
+  "generationId": "2026-06-20-client-intake-production-check",
+  "phase": "Phase 1",
+  "missionVersion": "assessment-teaser-2026-06-12",
+  "phaseGoalVersion": "client-intake-portal-2026-06-19",
+  "focus": "Resume paused intake work by validating production availability and clarifying the remaining subdomain blocker.",
+  "reasonGenerationStarted": "User asked to continue paused intake work after handling the prior setup step.",
+  "reasonGenerationEnded": "Confirmed the intake is live on the main domain and that the intended intake subdomain is still blocked by a missing DNS CNAME.",
+  "filesChanged": [
+    "MISSION_UPDATES.md",
+    "deploy/release-checks.json",
+    "docs/operations/mde-status.md",
+    ".mde/failing-bdds.json",
+    ".mde/generations/2026-06-20-client-intake-production-check.json",
+    ".mde/progress.json",
+    ".mde/risk-register.json",
+    ".mde/state.json",
+    ".mde/validation-runs/2026-06-20-client-intake-production.json"
+  ],
+  "productionFilesChanged": [],
+  "testFilesChanged": [],
+  "documentationFilesChanged": [
+    "MISSION_UPDATES.md",
+    "docs/operations/mde-status.md"
+  ],
+  "validators": [
+    {
+      "tool": "npm run test:client-intake",
+      "category": "Functional",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "npm run lint",
+      "category": "Technical",
+      "result": "pass",
+      "usefulness": "medium"
+    },
+    {
+      "tool": "npm run typecheck",
+      "category": "Technical",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "npm run build",
+      "category": "Technical",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "production main-domain smoke test",
+      "category": "Usability",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "Cloudflare Pages custom-domain status check",
+      "category": "Deployment",
+      "result": "fail",
+      "usefulness": "high"
+    }
+  ],
+  "criticalFindings": [],
+  "highFindings": [
+    {
+      "id": "client-intake-subdomain",
+      "status": "open",
+      "summary": "Add DNS CNAME intake -> northvalleyintel-com.pages.dev and smoke-test https://intake.northvalleyintel.com."
+    }
+  ],
+  "validationGate": {
+    "result": "partial_pass",
+    "passCount": "0/2",
+    "evidenceQuality": "adequate_production_main_domain"
+  }
+}

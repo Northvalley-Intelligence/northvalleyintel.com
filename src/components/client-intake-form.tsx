@@ -10,7 +10,13 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-import type { ClientIntakeFieldErrors } from "@/lib/client-intake";
+import {
+  normalizeClientIntakeFormData,
+  normalizeWebsiteUrl,
+  validateClientIntakePayload,
+  type ClientIntakeFieldErrors,
+  type ClientIntakePayload,
+} from "@/lib/client-intake";
 
 declare global {
   interface Window {
@@ -30,6 +36,7 @@ declare global {
 }
 
 type SubmitStatus = "idle" | "submitting" | "sent" | "error";
+type FieldName = keyof ClientIntakePayload | "photos";
 
 const websiteStatusOptions = [
   "We already have a website",
@@ -44,6 +51,28 @@ const primaryActionOptions = [
   "Book a consultation",
   "Send a message",
   "Visit the store or location",
+];
+
+const orderedFieldNames: FieldName[] = [
+  "businessName",
+  "contactName",
+  "contactEmail",
+  "phone",
+  "currentWebsiteStatus",
+  "currentWebsiteUrl",
+  "oneSentenceDescription",
+  "primaryOfferings",
+  "bestFitCustomers",
+  "primaryMarket",
+  "primaryAction",
+  "photos",
+  "trustProof",
+  "photosPermission",
+  "goals",
+  "styleNotes",
+  "inspirationSites",
+  "optionalTechnicalNotes",
+  "consent",
 ];
 
 export function ClientIntakeForm() {
@@ -122,25 +151,115 @@ export function ClientIntakeForm() {
     return () => window.clearInterval(interval);
   }, [turnstileSiteKey]);
 
+  function getCurrentValidationErrors(): ClientIntakeFieldErrors {
+    if (!formRef.current) {
+      return {};
+    }
+
+    const formData = new FormData(formRef.current);
+    const payload = normalizeClientIntakeFormData(formData);
+    const validation = validateClientIntakePayload(payload);
+    const files = formData
+      .getAll("photos")
+      .filter((value) => value instanceof File);
+
+    if (files.length > 5) {
+      validation.errors.photos = "Choose up to 5 photos.";
+    }
+
+    return validation.errors;
+  }
+
+  function validateFields(fieldNames: FieldName[]) {
+    const validationErrors = getCurrentValidationErrors();
+
+    setErrors((current) => {
+      const next = { ...current };
+
+      for (const fieldName of fieldNames) {
+        if (validationErrors[fieldName]) {
+          next[fieldName] = validationErrors[fieldName];
+        } else {
+          delete next[fieldName];
+        }
+      }
+
+      return next;
+    });
+
+    return fieldNames.every((fieldName) => !validationErrors[fieldName]);
+  }
+
+  function validateFieldOnBlur(
+    event: React.FocusEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) {
+    const fieldName = event.currentTarget.name as FieldName;
+    const isValid = validateFields([fieldName]);
+
+    if (
+      fieldName === "currentWebsiteUrl" &&
+      isValid &&
+      event.currentTarget instanceof HTMLInputElement &&
+      event.currentTarget.value.trim()
+    ) {
+      event.currentTarget.value = normalizeWebsiteUrl(
+        event.currentTarget.value,
+      );
+    }
+  }
+
+  function focusFirstError(fieldErrors: ClientIntakeFieldErrors) {
+    const firstField = orderedFieldNames.find(
+      (fieldName) => fieldErrors[fieldName],
+    );
+
+    if (!firstField || !formRef.current) {
+      return;
+    }
+
+    const target = formRef.current.querySelector<HTMLElement>(
+      `[name="${firstField}"]`,
+    );
+    const details = target?.closest("details");
+
+    if (details instanceof HTMLDetailsElement) {
+      details.open = true;
+    }
+
+    requestAnimationFrame(() => {
+      target?.focus();
+      target?.scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+  }
+
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("submitting");
     setMessage("");
-    setErrors({});
 
     const formData = new FormData(event.currentTarget);
     formData.set("turnstileToken", turnstileToken);
+    const fieldErrors = getCurrentValidationErrors();
 
     try {
       const files = formData
         .getAll("photos")
         .filter((value) => value instanceof File);
       if (files.length > 5) {
-        setErrors({ photos: "Choose up to 5 photos." });
+        fieldErrors.photos = "Choose up to 5 photos.";
+      }
+
+      if (Object.keys(fieldErrors).length > 0) {
+        setErrors(fieldErrors);
         setStatus("error");
-        setMessage("Please adjust the photos and try again.");
+        setMessage("Please fix the highlighted fields before sending.");
+        focusFirstError(fieldErrors);
         return;
       }
+
+      setStatus("submitting");
+      setErrors({});
 
       const response = await fetch("/api/client-intake", {
         method: "POST",
@@ -153,7 +272,9 @@ export function ClientIntakeForm() {
       };
 
       if (!response.ok) {
-        setErrors(data.errors || {});
+        const serverErrors = data.errors || {};
+        setErrors(serverErrors);
+        focusFirstError(serverErrors);
         throw new Error(
           data.error || "The intake could not be sent. Please try again.",
         );
@@ -162,7 +283,7 @@ export function ClientIntakeForm() {
       setStatus("sent");
       setMessage(
         data.message ||
-          "Thanks. We received the intake and will use it to prepare the website launch package.",
+          "Thanks. We received the details. We will review them before we meet and follow up if anything important is missing.",
       );
       setFileNames([]);
       formRef.current?.reset();
@@ -189,8 +310,29 @@ export function ClientIntakeForm() {
       ref={formRef}
       className="grid gap-8"
       encType="multipart/form-data"
+      noValidate
       onSubmit={submit}
     >
+      {message ? (
+        <p
+          aria-live="polite"
+          className={`flex items-start gap-3 rounded-md px-4 py-3 text-sm font-bold leading-6 ${
+            status === "error"
+              ? "bg-[#fff0e8] text-[#9a3f18]"
+              : "bg-[#e8f6f1] text-[#236047]"
+          }`}
+        >
+          {status === "sent" ? (
+            <CheckCircle2
+              aria-hidden="true"
+              className="mt-0.5 shrink-0"
+              size={18}
+            />
+          ) : null}
+          <span>{message}</span>
+        </p>
+      ) : null}
+
       <section className="grid gap-5">
         <SectionHeading
           eyebrow="Start here"
@@ -201,6 +343,7 @@ export function ClientIntakeForm() {
             error={errors.businessName}
             label="Business name"
             name="businessName"
+            onBlur={validateFieldOnBlur}
             placeholder="Example: Resplendent Tea"
             required
           />
@@ -208,6 +351,7 @@ export function ClientIntakeForm() {
             error={errors.contactName}
             label="Best contact"
             name="contactName"
+            onBlur={validateFieldOnBlur}
             placeholder="Your name"
             required
           />
@@ -215,6 +359,7 @@ export function ClientIntakeForm() {
             error={errors.contactEmail}
             label="Email"
             name="contactEmail"
+            onBlur={validateFieldOnBlur}
             placeholder="owner@example.com"
             required
             type="email"
@@ -222,6 +367,7 @@ export function ClientIntakeForm() {
           <TextField
             label="Phone"
             name="phone"
+            onBlur={validateFieldOnBlur}
             placeholder="Best number, if useful"
             type="tel"
           />
@@ -235,21 +381,24 @@ export function ClientIntakeForm() {
             error={errors.currentWebsiteStatus}
             label="Current website status"
             name="currentWebsiteStatus"
+            onBlur={validateFieldOnBlur}
             options={websiteStatusOptions}
             required
           />
           <TextField
             error={errors.currentWebsiteUrl}
             label="Current website or domain"
+            inputMode="url"
             name="currentWebsiteUrl"
+            onBlur={validateFieldOnBlur}
             placeholder="example.com"
-            type="url"
           />
         </div>
         <TextAreaField
           error={errors.oneSentenceDescription}
           label="In one sentence, what does the business do?"
           name="oneSentenceDescription"
+          onBlur={validateFieldOnBlur}
           placeholder="We help..."
           required
           rows={3}
@@ -258,6 +407,7 @@ export function ClientIntakeForm() {
           error={errors.primaryOfferings}
           label="Main products or services"
           name="primaryOfferings"
+          onBlur={validateFieldOnBlur}
           placeholder="List the offers customers should understand first."
           required
           rows={4}
@@ -267,6 +417,7 @@ export function ClientIntakeForm() {
             error={errors.bestFitCustomers}
             label="Best-fit customers"
             name="bestFitCustomers"
+            onBlur={validateFieldOnBlur}
             placeholder="Who should this site attract?"
             required
             rows={4}
@@ -275,6 +426,7 @@ export function ClientIntakeForm() {
             error={errors.primaryMarket}
             label="Main city, neighborhood, or service area"
             name="primaryMarket"
+            onBlur={validateFieldOnBlur}
             placeholder="Example: Marietta and nearby Cobb County"
             required
             rows={4}
@@ -284,6 +436,7 @@ export function ClientIntakeForm() {
           error={errors.primaryAction}
           label="Most important action for visitors"
           name="primaryAction"
+          onBlur={validateFieldOnBlur}
           options={primaryActionOptions}
           required
         />
@@ -313,6 +466,12 @@ export function ClientIntakeForm() {
                     ...current,
                     photos: "Choose up to 5 photos.",
                   }));
+                } else {
+                  setErrors((current) => {
+                    const next = { ...current };
+                    delete next.photos;
+                    return next;
+                  });
                 }
               }}
               type="file"
@@ -330,6 +489,7 @@ export function ClientIntakeForm() {
           <TextAreaField
             label="Reviews, credentials, awards, or proof"
             name="trustProof"
+            onBlur={validateFieldOnBlur}
             placeholder="Anything customers should trust: reviews, years in business, certifications, press, results."
             rows={6}
           />
@@ -337,6 +497,7 @@ export function ClientIntakeForm() {
         <SelectField
           label="Can we use the uploaded photos on the website?"
           name="photosPermission"
+          onBlur={validateFieldOnBlur}
           options={[
             "Yes, we own or have permission to use them",
             "Please review permission first",
@@ -365,18 +526,21 @@ export function ClientIntakeForm() {
           <TextAreaField
             label="What should the new website help improve?"
             name="goals"
+            onBlur={validateFieldOnBlur}
             placeholder="Examples: more calls, clearer services, easier booking, better local visibility."
             rows={4}
           />
           <TextAreaField
             label="Style notes"
             name="styleNotes"
+            onBlur={validateFieldOnBlur}
             placeholder="Words that should describe the site: calm, premium, local, modern, warm, precise."
             rows={4}
           />
           <TextAreaField
             label="Websites you like or dislike"
             name="inspirationSites"
+            onBlur={validateFieldOnBlur}
             placeholder="Links are helpful, but a quick description is fine."
             rows={4}
           />
@@ -416,6 +580,7 @@ export function ClientIntakeForm() {
             error={errors.optionalTechnicalNotes}
             label="Anything we should know later?"
             name="optionalTechnicalNotes"
+            onBlur={validateFieldOnBlur}
             placeholder="Example: we use Shopify, Square, Google Business Profile, or an existing booking tool."
             rows={4}
           />
@@ -435,12 +600,13 @@ export function ClientIntakeForm() {
         <input
           className="mt-1 h-4 w-4 shrink-0 accent-north-teal"
           name="consent"
+          onChange={() => validateFields(["consent"])}
           required
           type="checkbox"
         />
         <span>
-          Northvalley can use this intake to prepare the website launch package
-          and follow up about missing details.
+          Northvalley can use this intake to prepare for our conversation and
+          follow up about missing details.
           {errors.consent ? <FieldError message={errors.consent} /> : null}
         </span>
       </label>
@@ -462,25 +628,6 @@ export function ClientIntakeForm() {
           </>
         )}
       </button>
-
-      {message ? (
-        <p
-          className={`flex items-start gap-3 rounded-md px-4 py-3 text-sm font-bold leading-6 ${
-            status === "error"
-              ? "bg-[#fff0e8] text-[#9a3f18]"
-              : "bg-[#e8f6f1] text-[#236047]"
-          }`}
-        >
-          {status === "sent" ? (
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 shrink-0"
-              size={18}
-            />
-          ) : null}
-          <span>{message}</span>
-        </p>
-      ) : null}
     </form>
   );
 }
@@ -510,19 +657,25 @@ function RequiredMarker() {
 
 function TextField({
   error,
+  inputMode,
   label,
   name,
+  onBlur,
   placeholder,
   required = false,
   type = "text",
 }: {
   error?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
   label: string;
   name: string;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
   placeholder: string;
   required?: boolean;
   type?: string;
 }) {
+  const errorId = `${name}-error`;
+
   return (
     <label className="grid gap-2 text-sm font-bold text-north-ink">
       <span className="flex items-center justify-between gap-3">
@@ -530,13 +683,19 @@ function TextField({
         {required ? <RequiredMarker /> : null}
       </span>
       <input
-        className="min-h-12 rounded-md border border-north-line bg-white px-3 text-base font-medium outline-none focus:border-north-teal"
+        aria-describedby={error ? errorId : undefined}
+        aria-invalid={Boolean(error)}
+        className={`min-h-12 rounded-md border bg-white px-3 text-base font-medium outline-none focus:border-north-teal ${
+          error ? "border-[#d8614c]" : "border-north-line"
+        }`}
+        inputMode={inputMode}
         name={name}
+        onBlur={onBlur}
         placeholder={placeholder}
         required={required}
         type={type}
       />
-      {error ? <FieldError message={error} /> : null}
+      {error ? <FieldError id={errorId} message={error} /> : null}
     </label>
   );
 }
@@ -545,6 +704,7 @@ function TextAreaField({
   error,
   label,
   name,
+  onBlur,
   placeholder,
   required = false,
   rows,
@@ -552,10 +712,13 @@ function TextAreaField({
   error?: string;
   label: string;
   name: string;
+  onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
   placeholder: string;
   required?: boolean;
   rows: number;
 }) {
+  const errorId = `${name}-error`;
+
   return (
     <label className="grid gap-2 text-sm font-bold text-north-ink">
       <span className="flex items-center justify-between gap-3">
@@ -563,13 +726,18 @@ function TextAreaField({
         {required ? <RequiredMarker /> : null}
       </span>
       <textarea
-        className="rounded-md border border-north-line bg-white px-3 py-3 text-base font-medium leading-7 outline-none focus:border-north-teal"
+        aria-describedby={error ? errorId : undefined}
+        aria-invalid={Boolean(error)}
+        className={`rounded-md border bg-white px-3 py-3 text-base font-medium leading-7 outline-none focus:border-north-teal ${
+          error ? "border-[#d8614c]" : "border-north-line"
+        }`}
         name={name}
+        onBlur={onBlur}
         placeholder={placeholder}
         required={required}
         rows={rows}
       />
-      {error ? <FieldError message={error} /> : null}
+      {error ? <FieldError id={errorId} message={error} /> : null}
     </label>
   );
 }
@@ -578,15 +746,19 @@ function SelectField({
   error,
   label,
   name,
+  onBlur,
   options,
   required = false,
 }: {
   error?: string;
   label: string;
   name: string;
+  onBlur?: React.FocusEventHandler<HTMLSelectElement>;
   options: string[];
   required?: boolean;
 }) {
+  const errorId = `${name}-error`;
+
   return (
     <label className="grid gap-2 text-sm font-bold text-north-ink">
       <span className="flex items-center justify-between gap-3">
@@ -594,9 +766,14 @@ function SelectField({
         {required ? <RequiredMarker /> : null}
       </span>
       <select
-        className="min-h-12 rounded-md border border-north-line bg-white px-3 text-base font-medium outline-none focus:border-north-teal"
+        aria-describedby={error ? errorId : undefined}
+        aria-invalid={Boolean(error)}
+        className={`min-h-12 rounded-md border bg-white px-3 text-base font-medium outline-none focus:border-north-teal ${
+          error ? "border-[#d8614c]" : "border-north-line"
+        }`}
         defaultValue=""
         name={name}
+        onBlur={onBlur}
         required={required}
       >
         <option value="" disabled>
@@ -608,11 +785,15 @@ function SelectField({
           </option>
         ))}
       </select>
-      {error ? <FieldError message={error} /> : null}
+      {error ? <FieldError id={errorId} message={error} /> : null}
     </label>
   );
 }
 
-function FieldError({ message }: { message: string }) {
-  return <span className="text-sm font-bold text-[#9a3f18]">{message}</span>;
+function FieldError({ id, message }: { id?: string; message: string }) {
+  return (
+    <span id={id} className="text-sm font-bold text-[#9a3f18]">
+      {message}
+    </span>
+  );
 }

@@ -55,6 +55,11 @@ Phase 1: Assessment-led growth and client intake entry points.
 - Passed: PR #15 `cloudflare-pages-preview` check
 - Passed: Cloudflare Pages preview rendered-page smoke test at `https://intake-portal.northvalleyintel-com.pages.dev/intake`
 - Passed: Cloudflare Pages preview API empty-submit smoke test returning 400
+- Passed: production rendered-page smoke test at `https://northvalleyintel.com/intake`
+- Passed: production API fail-closed smoke test for `POST https://northvalleyintel.com/api/client-intake` with no form data returning an error
+- Passed: local Pages smoke test for the intake usability release, including form-first rendering and successful test-mode submissions with `sample.com` and `www.sample.com`
+- Passed: local homepage smoke test for Terri Hitzig's "Website Genius" testimonial
+- Blocked: `https://intake.northvalleyintel.com` still returns NXDOMAIN because the Cloudflare Pages custom domain is pending with `CNAME record not set`
 - Passed: local rendered-page smoke test for Website Check copy
 - Passed: static export file inspection for source JSON, `llms.txt`, `robots.txt`, `sitemap.xml`, metadata alternates, and FAQ schema
 - Passed: local protected API smoke test, `GET /api/website-assessment-teaser` returns 405
@@ -67,4 +72,10 @@ Phase 1: Assessment-led growth and client intake entry points.
 
 ## Readiness
 
-The client intake implementation is locally validated and ready for PR preview. Production is not ready until it is merged/deployed from `main`, `intake.northvalleyintel.com` is configured in Cloudflare Pages, and the live URL plus delivery path are smoke-tested.
+The client intake implementation is live at `https://northvalleyintel.com/intake`. The form-first usability release and Terri testimonial release passed local validation and should continue through the required `main` production deployment path.
+
+The intended client-friendly subdomain is not ready yet. Cloudflare Pages has `intake.northvalleyintel.com` attached, but the custom domain remains pending because the DNS CNAME is missing. Add:
+
+`CNAME intake -> northvalleyintel-com.pages.dev`
+
+After DNS resolves and Pages marks the custom domain active, smoke-test `https://intake.northvalleyintel.com` before sharing it with clients.

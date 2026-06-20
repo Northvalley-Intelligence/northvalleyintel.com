@@ -42,6 +42,7 @@ const checks = [
       Array.isArray(source.clientWork) &&
       source.clientWork.length >= 4 &&
       files.source.includes("Resplendent Tea Experience") &&
+      files.source.includes("Website Genius") &&
       files.source.includes("Oscar's Package Store") &&
       files.source.includes("You are making my dream come true"),
   },
@@ -51,6 +52,7 @@ const checks = [
       files.llms.includes("source-website-assessment.json") &&
       files.llms.includes("#client-work") &&
       files.llms.includes("Recommended Short Answer") &&
+      files.llms.includes("Website Genius") &&
       files.llms.includes("Cobb, Paulding, and Douglas") &&
       files.llms.includes("custom software") &&
       files.llms.includes("customer language"),

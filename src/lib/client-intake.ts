@@ -60,7 +60,7 @@ export function validateClientIntakePayload(payload: ClientIntakePayload) {
 
   for (const field of requiredTextFields) {
     if (!payload[field].trim()) {
-      errors[field] = "This helps us prepare the website launch pack.";
+      errors[field] = "Please add this so we can prepare before we meet.";
     }
   }
 
@@ -78,7 +78,7 @@ export function validateClientIntakePayload(payload: ClientIntakePayload) {
 
   if (!payload.consent) {
     errors.consent =
-      "Confirm that Northvalley can use this intake to prepare the launch package.";
+      "Confirm that Northvalley can use this intake to prepare for the conversation.";
   }
 
   const combined = [
@@ -108,7 +108,9 @@ export function normalizeClientIntakeFormData(formData: FormData) {
     contactEmail: formValue(formData, "contactEmail"),
     phone: formValue(formData, "phone"),
     currentWebsiteStatus: formValue(formData, "currentWebsiteStatus"),
-    currentWebsiteUrl: formValue(formData, "currentWebsiteUrl"),
+    currentWebsiteUrl: normalizeWebsiteUrl(
+      formValue(formData, "currentWebsiteUrl"),
+    ),
     oneSentenceDescription: formValue(formData, "oneSentenceDescription"),
     primaryOfferings: formValue(formData, "primaryOfferings"),
     bestFitCustomers: formValue(formData, "bestFitCustomers"),
@@ -136,11 +138,11 @@ export function buildClientIntakeNotificationText(input: {
   const { payload, files, submittedAt } = input;
 
   return [
-    "A client submitted the Northvalley website launch intake.",
+    "A client submitted the Northvalley pre-meeting website intake.",
     "",
     `Submitted: ${submittedAt}`,
     "",
-    "Required launch facts",
+    "Required meeting-prep facts",
     `Business: ${payload.businessName}`,
     `Primary contact: ${payload.contactName}`,
     `Email: ${payload.contactEmail}`,
@@ -185,6 +187,20 @@ export function isAllowedIntakeFile(file: File) {
   return file.type.startsWith("image/") && file.size <= 4 * 1024 * 1024;
 }
 
+export function normalizeWebsiteUrl(value: string) {
+  const trimmed = value.trim();
+
+  if (!trimmed) {
+    return "";
+  }
+
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed;
+  }
+
+  return `https://${trimmed}`;
+}
+
 function formValue(formData: FormData, key: string) {
   const value = formData.get(key);
   return typeof value === "string" ? value.trim() : "";
@@ -195,5 +211,13 @@ function isValidEmail(value: string) {
 }
 
 function isLikelyWebsite(value: string) {
-  return /^(https?:\/\/)?[a-z0-9.-]+\.[a-z]{2,}(\/.*)?$/i.test(value.trim());
+  try {
+    const url = new URL(normalizeWebsiteUrl(value));
+    return (
+      (url.protocol === "http:" || url.protocol === "https:") &&
+      /^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(url.hostname)
+    );
+  } catch {
+    return false;
+  }
 }

@@ -24,3 +24,12 @@
 - Added middleware so `intake.northvalleyintel.com` redirects to the intake form once that custom domain is routed to this Pages project.
 - Added `npm run test:client-intake` and local Pages validation for rendered page content, required-field errors, photo-count errors, successful test-mode submission, and subdomain-host redirect behavior.
 - Remaining production work: deploy from `main`, configure or verify the Cloudflare Pages custom domain for `intake.northvalleyintel.com`, and smoke-test the live URL before telling a client it is ready.
+
+## 2026-06-20
+
+- Verified the client intake is deployed on `main` and live at `https://northvalleyintel.com/intake`.
+- Verified the production intake API fails closed for an incomplete submission.
+- Confirmed Cloudflare Pages has `intake.northvalleyintel.com` attached, but the domain is still pending because the DNS CNAME record is not set.
+- Required DNS record before client use: `CNAME intake -> northvalleyintel-com.pages.dev`.
+- Improved the intake flow so the form is first, field errors appear during progress, and bare domains such as `sample.com` and `www.sample.com` are accepted.
+- Added Terri Hitzig's "Website Genius" testimonial to the client proof section and AEO source files.
