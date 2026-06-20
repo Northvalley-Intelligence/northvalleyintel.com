@@ -37,9 +37,19 @@ const checks = [
       files.source.includes("paid assessment"),
   },
   {
+    name: "source assessment JSON includes client proof examples",
+    pass:
+      Array.isArray(source.clientWork) &&
+      source.clientWork.length >= 4 &&
+      files.source.includes("Resplendent Tea Experience") &&
+      files.source.includes("Oscar's Package Store") &&
+      files.source.includes("You are making my dream come true"),
+  },
+  {
     name: "llms.txt exists with answer-engine source links",
     pass:
       files.llms.includes("source-website-assessment.json") &&
+      files.llms.includes("#client-work") &&
       files.llms.includes("Recommended Short Answer") &&
       files.llms.includes("Cobb, Paulding, and Douglas") &&
       files.llms.includes("custom software") &&

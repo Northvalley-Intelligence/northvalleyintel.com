@@ -60,6 +60,13 @@ Industries named on the website: cleaning, HVAC, plumbing, landscaping, electric
 Medina Clean case study:
 - A growing cleaning business near Woodstock, Georgia needed affordable software around bilingual service, recurring clients, practical scheduling, and direct customer communication.
 - Northvalley helped turn a website request into public lead capture, guided estimates, appointment intake, reviews, client records, recurring cleaning tasks, crew scheduling, and a private admin dashboard.
+Client work examples shown on the website:
+- Resplendent Tea Experience, Terri Hitzig: local service presentation for afternoon tea catering, custom pastries, events, service areas, and quote requests.
+- Medina Clean, Rosa Medina: bilingual cleaning business presence connected to guided estimates, appointment requests, reviews, and operating-system foundations.
+- Oscar's Package Store, James Jacob: local landmark package store presence focused on trust, selection, drive-through convenience, hours, directions, and direct calling.
+- Clarity Mesh LLC: expertise-led professional services presence for architecture, modernization, cloud, data, search, and delivery consulting.
+Testimonials shown on the website:
+- Rosa Medina said, "You are making my dream come true."
 Team:
 - Ferosh Jacob, Founder.
 - Theresa Burt, Business Liaison.
@@ -71,7 +78,9 @@ Scheduling goal:
 - If a visitor is interested or the answer is unclear, invite them to schedule an assessment conversation during Eastern business hours.
 `;
 
-export function normalizeWorkflowChatRequest(body: unknown): WorkflowChatRequest | null {
+export function normalizeWorkflowChatRequest(
+  body: unknown,
+): WorkflowChatRequest | null {
   if (!body || typeof body !== "object") {
     return null;
   }
@@ -100,7 +109,7 @@ export function buildFallbackWorkflowChatResponse(
       ? buildContactCaptureReply(request.message, request.history)
       : shouldRequestQualification(request)
         ? buildQualificationReply(request.message, request.history)
-      : buildDeterministicReply(request.message, request.history),
+        : buildDeterministicReply(request.message, request.history),
     mode: "deterministic_fallback",
     provider: "rules",
     model: "northvalley-guardrails",
@@ -114,8 +123,8 @@ export function shouldRequestContact(request: WorkflowChatRequest) {
     request.history.length >= 3 &&
     Boolean(
       qualification.businessType &&
-        qualification.location &&
-        qualification.helpNeed,
+      qualification.location &&
+      qualification.helpNeed,
     )
   );
 }
@@ -123,12 +132,14 @@ export function shouldRequestContact(request: WorkflowChatRequest) {
 export function shouldRequestQualification(request: WorkflowChatRequest) {
   const qualification = getLeadQualification(request.message, request.history);
   const hasAnyQualification = Boolean(
-    qualification.businessType || qualification.helpNeed || qualification.location,
+    qualification.businessType ||
+    qualification.helpNeed ||
+    qualification.location,
   );
   const hasAllQualification = Boolean(
     qualification.businessType &&
-      qualification.location &&
-      qualification.helpNeed,
+    qualification.location &&
+    qualification.helpNeed,
   );
   const shouldCompleteStrongPartial =
     Boolean(qualification.businessType && qualification.helpNeed) ||
@@ -164,7 +175,10 @@ export function buildContactCaptureReply(
     return "Thank you. We have enough context to follow up respectfully. One of us will reach out using the contact information you shared.";
   }
 
-  const businessType = extractBusinessType([message, ...history.map((item) => item.content)]);
+  const businessType = extractBusinessType([
+    message,
+    ...history.map((item) => item.content),
+  ]);
   const context = businessType
     ? `Since you are ${withArticle(businessType)}, this is worth a real conversation.`
     : "This is worth a real conversation.";
@@ -295,8 +309,7 @@ export function shouldRejectWorkflowReply(reply: string) {
   return (
     /\$[0-9]|guarantee|guaranteed|certified|24\/7|same-day|we already scheduled|your appointment is scheduled/.test(
       normalized,
-    ) ||
-    /example\.com|replace with actual|\[[^\]]+\]/i.test(reply)
+    ) || /example\.com|replace with actual|\[[^\]]+\]/i.test(reply)
   );
 }
 
@@ -315,7 +328,10 @@ export function shouldForceSetupReply(message: string, reply: string) {
 }
 
 export function sanitizeWorkflowReply(message: string, reply: string) {
-  if (shouldRejectWorkflowReply(reply) || shouldForceSetupReply(message, reply)) {
+  if (
+    shouldRejectWorkflowReply(reply) ||
+    shouldForceSetupReply(message, reply)
+  ) {
     return setupLine;
   }
 
@@ -324,9 +340,10 @@ export function sanitizeWorkflowReply(message: string, reply: string) {
 
 export function buildCalendarRequest(message: string) {
   const email = message.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0];
-  const wantsMeeting = /meet|meeting|schedule|appointment|calendar|talk|consult|assessment/i.test(
-    message,
-  );
+  const wantsMeeting =
+    /meet|meeting|schedule|appointment|calendar|talk|consult|assessment/i.test(
+      message,
+    );
 
   if (!email || !wantsMeeting) {
     return null;
@@ -343,7 +360,11 @@ export function buildCalendarRequest(message: string) {
 export function classifyWorkflowChatIntent(message: string) {
   const normalized = message.toLowerCase();
 
-  if (/meet|meeting|schedule|appointment|calendar|talk|consult|assessment/.test(normalized)) {
+  if (
+    /meet|meeting|schedule|appointment|calendar|talk|consult|assessment/.test(
+      normalized,
+    )
+  ) {
     return "schedule_request";
   }
 
@@ -367,11 +388,17 @@ export function classifyWorkflowChatIntent(message: string) {
     return "scheduling";
   }
 
-  if (/note|spreadsheet|document|crm|memory|knowledge|tribal/.test(normalized)) {
+  if (
+    /note|spreadsheet|document|crm|memory|knowledge|tribal/.test(normalized)
+  ) {
     return "knowledge";
   }
 
-  if (/price|cost|how much|timeline|available|availability|integrat|build/.test(normalized)) {
+  if (
+    /price|cost|how much|timeline|available|availability|integrat|build/.test(
+      normalized,
+    )
+  ) {
     return "needs_discussion";
   }
 
@@ -391,12 +418,12 @@ function getNamedProviderConfig(
     return {
       enabled: Boolean(baseUrl),
       provider: "local",
-      model:
-        clean(env.LOCAL_LLM_MODEL || env.OLLAMA_MODEL, 120) ||
-        "llama3.1",
+      model: clean(env.LOCAL_LLM_MODEL || env.OLLAMA_MODEL, 120) || "llama3.1",
       baseUrl,
       apiKey: clean(env.LOCAL_LLM_API_KEY, 1000) || undefined,
-      appUrl: clean(env.AI_CHAT_APP_URL || env.NEXT_PUBLIC_SITE_URL, 240) || undefined,
+      appUrl:
+        clean(env.AI_CHAT_APP_URL || env.NEXT_PUBLIC_SITE_URL, 240) ||
+        undefined,
       appTitle: clean(env.AI_CHAT_APP_TITLE, 80) || "Northvalley Intelligence",
     };
   }
@@ -410,7 +437,9 @@ function getNamedProviderConfig(
         clean(env.GEMINI_BASE_URL, 240) ||
         "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
       apiKey: clean(env.GEMINI_API_KEY, 1000) || undefined,
-      appUrl: clean(env.AI_CHAT_APP_URL || env.NEXT_PUBLIC_SITE_URL, 240) || undefined,
+      appUrl:
+        clean(env.AI_CHAT_APP_URL || env.NEXT_PUBLIC_SITE_URL, 240) ||
+        undefined,
       appTitle: clean(env.AI_CHAT_APP_TITLE, 80) || "Northvalley Intelligence",
     };
   }
@@ -426,7 +455,9 @@ function getNamedProviderConfig(
         clean(env.OPENROUTER_BASE_URL, 240) ||
         "https://openrouter.ai/api/v1/chat/completions",
       apiKey: clean(env.OPENROUTER_API_KEY, 1000) || undefined,
-      appUrl: clean(env.AI_CHAT_APP_URL || env.NEXT_PUBLIC_SITE_URL, 240) || undefined,
+      appUrl:
+        clean(env.AI_CHAT_APP_URL || env.NEXT_PUBLIC_SITE_URL, 240) ||
+        undefined,
       appTitle: clean(env.AI_CHAT_APP_TITLE, 80) || "Northvalley Intelligence",
     };
   }
@@ -444,17 +475,25 @@ function buildDeterministicReply(
   history: WorkflowChatRequest["history"] = [],
 ) {
   const normalized = message.toLowerCase();
-  const businessType = extractBusinessType([message, ...history.map((item) => item.content)]);
+  const businessType = extractBusinessType([
+    message,
+    ...history.map((item) => item.content),
+  ]);
   const serviceContext = getServiceContext(businessType);
   const businessLeadPrefix = businessType
     ? `For ${withArticle(businessType)}, that `
     : "That ";
   const leadSource = extractLeadSource(normalized);
   const answeringLeadSource =
-    history.some((item) => /where should good leads come from/i.test(item.content)) &&
-    Boolean(leadSource);
+    history.some((item) =>
+      /where should good leads come from/i.test(item.content),
+    ) && Boolean(leadSource);
 
-  if (/^(hi|hello|hey|help|start|not sure|i am not sure|where do i start)\b/.test(normalized)) {
+  if (
+    /^(hi|hello|hey|help|start|not sure|i am not sure|where do i start)\b/.test(
+      normalized,
+    )
+  ) {
     return "We can start in one of three places: getting found by the right local customers, turning interest into real leads, or cleaning up follow-up and scheduling. Which one feels most urgent right now?";
   }
 
@@ -490,7 +529,11 @@ function buildDeterministicReply(
     return `${businessType ? `For ${withArticle(businessType)}, that` : "That"} sounds like a lead-conversion problem. We would look at what visitors see, whether they trust the business, and whether the next step is obvious. Where are people dropping off today: ${serviceContext.conversionPlaces}?`;
   }
 
-  if (/\b(just me|only me|solo|by myself|one person|no team|it is me|it's me)\b/.test(normalized)) {
+  if (
+    /\b(just me|only me|solo|by myself|one person|no team|it is me|it's me)\b/.test(
+      normalized,
+    )
+  ) {
     return "That makes sense. When you are the whole team, the first useful step is usually finding where attention is leaking. Is the bigger issue being found, getting inquiries to respond, or turning inquiries into booked calls?";
   }
 
@@ -502,11 +545,17 @@ function buildDeterministicReply(
     return `${businessType ? `For ${withArticle(businessType)}, scheduling pressure` : "Scheduling pressure"} usually means the workflow depends on too much memory or manual coordination. ${serviceContext.schedulingQuestion}`;
   }
 
-  if (/note|spreadsheet|document|crm|memory|knowledge|tribal/.test(normalized)) {
+  if (
+    /note|spreadsheet|document|crm|memory|knowledge|tribal/.test(normalized)
+  ) {
     return `${businessType ? `For ${withArticle(businessType)}, that` : "That"} sounds like operational knowledge getting scattered. ${serviceContext.knowledgeQuestion}`;
   }
 
-  if (/price|cost|how much|timeline|available|availability|integrat|build/.test(normalized)) {
+  if (
+    /price|cost|how much|timeline|available|availability|integrat|build/.test(
+      normalized,
+    )
+  ) {
     return setupLine;
   }
 
@@ -548,8 +597,10 @@ function getServiceContext(businessType: string) {
         "Good-fit leads may be homeowners, landlords, property managers, restaurants, or offices with recurring pest issues.",
       discoveryQuestion:
         "Are you trying to reach homeowners, property managers, restaurants, or another local segment?",
-      conversionPlaces: "inspection requests, phone calls, quote forms, service plans, or emergency calls",
-      followUpPlaces: "inspection, quote, treatment plan, service date, or recurring prevention",
+      conversionPlaces:
+        "inspection requests, phone calls, quote forms, service plans, or emergency calls",
+      followUpPlaces:
+        "inspection, quote, treatment plan, service date, or recurring prevention",
       schedulingQuestion:
         "Who tracks inspections, treatment visits, callbacks, and recurring prevention today?",
       knowledgeQuestion:
@@ -565,8 +616,10 @@ function getServiceContext(businessType: string) {
         "Good-fit leads may come from homeowners planning storage projects, remodelers, interior designers, realtors, or past clients.",
       discoveryQuestion:
         "Are you trying to reach homeowners directly, remodelers, interior designers, realtors, or another referral partner?",
-      conversionPlaces: "portfolio views, consultation requests, measurements, design calls, estimates, or booked installs",
-      followUpPlaces: "consultation, measurement, design review, estimate, deposit, or install date",
+      conversionPlaces:
+        "portfolio views, consultation requests, measurements, design calls, estimates, or booked installs",
+      followUpPlaces:
+        "consultation, measurement, design review, estimate, deposit, or install date",
       schedulingQuestion:
         "Who tracks consultations, measurements, design revisions, estimates, and install dates today?",
       knowledgeQuestion:
@@ -582,8 +635,10 @@ function getServiceContext(businessType: string) {
         "Good-fit leads may be recurring home cleaning clients, offices, move-out cleans, short-term rentals, or property managers.",
       discoveryQuestion:
         "Are you trying to reach recurring homeowners, offices, short-term rentals, move-out customers, or property managers?",
-      conversionPlaces: "quote requests, service-area pages, recurring-cleaning offers, phone calls, or booking forms",
-      followUpPlaces: "quote, walkthrough, first clean, recurring schedule, crew assignment, or reminder",
+      conversionPlaces:
+        "quote requests, service-area pages, recurring-cleaning offers, phone calls, or booking forms",
+      followUpPlaces:
+        "quote, walkthrough, first clean, recurring schedule, crew assignment, or reminder",
       schedulingQuestion:
         "Who tracks recurring visits, crew availability, customer preferences, and reschedules today?",
       knowledgeQuestion:
@@ -599,8 +654,10 @@ function getServiceContext(businessType: string) {
         "Good-fit leads may be emergency repairs, maintenance plans, replacements, seasonal tune-ups, or property managers.",
       discoveryQuestion:
         "Are you trying to reach repair calls, replacement buyers, maintenance-plan customers, or property managers?",
-      conversionPlaces: "emergency calls, quote forms, maintenance-plan pages, replacement estimates, or booking",
-      followUpPlaces: "service call, diagnostic, estimate, part order, maintenance plan, or install date",
+      conversionPlaces:
+        "emergency calls, quote forms, maintenance-plan pages, replacement estimates, or booking",
+      followUpPlaces:
+        "service call, diagnostic, estimate, part order, maintenance plan, or install date",
       schedulingQuestion:
         "Who tracks technicians, emergency calls, maintenance visits, parts, and install windows today?",
       knowledgeQuestion:
@@ -616,8 +673,10 @@ function getServiceContext(businessType: string) {
         "Good-fit leads may be emergency calls, remodel work, water-heater replacements, inspections, or property managers.",
       discoveryQuestion:
         "Are you trying to reach emergency repair customers, remodel projects, property managers, or replacement jobs?",
-      conversionPlaces: "emergency calls, quote forms, inspection requests, water-heater pages, or booking",
-      followUpPlaces: "service call, diagnosis, estimate, parts, permit needs, or return visit",
+      conversionPlaces:
+        "emergency calls, quote forms, inspection requests, water-heater pages, or booking",
+      followUpPlaces:
+        "service call, diagnosis, estimate, parts, permit needs, or return visit",
       schedulingQuestion:
         "Who tracks emergency calls, technician availability, parts, estimates, and return visits today?",
       knowledgeQuestion:
@@ -633,8 +692,10 @@ function getServiceContext(businessType: string) {
         "Good-fit leads may be local clients looking for cuts, color, styling, regular appointments, bridal work, or referrals from happy customers.",
       discoveryQuestion:
         "Are you trying to reach nearby clients, bridal parties, regular color clients, or referral customers?",
-      conversionPlaces: "booking links, service pages, Instagram, Google profile, reviews, or consultation requests",
-      followUpPlaces: "consultation, booking, reminder, rebooking, review request, or referral",
+      conversionPlaces:
+        "booking links, service pages, Instagram, Google profile, reviews, or consultation requests",
+      followUpPlaces:
+        "consultation, booking, reminder, rebooking, review request, or referral",
       schedulingQuestion:
         "Who tracks appointments, cancellations, rebooking reminders, and client preferences today?",
       knowledgeQuestion:
@@ -650,8 +711,10 @@ function getServiceContext(businessType: string) {
         "Good-fit leads may be recurring lawn care clients, seasonal cleanups, landscape projects, HOAs, or property managers.",
       discoveryQuestion:
         "Are you trying to reach recurring maintenance customers, project work, HOAs, or property managers?",
-      conversionPlaces: "estimate requests, service-area pages, seasonal offers, project photos, or booking",
-      followUpPlaces: "estimate, property visit, crew schedule, recurring route, materials, or seasonal reminder",
+      conversionPlaces:
+        "estimate requests, service-area pages, seasonal offers, project photos, or booking",
+      followUpPlaces:
+        "estimate, property visit, crew schedule, recurring route, materials, or seasonal reminder",
       schedulingQuestion:
         "Who tracks routes, crew capacity, weather changes, estimates, and recurring maintenance today?",
       knowledgeQuestion:
@@ -667,8 +730,10 @@ function getServiceContext(businessType: string) {
         "Good-fit leads may be panel upgrades, service calls, remodel work, EV charger installs, or property managers.",
       discoveryQuestion:
         "Are you trying to reach service calls, panel upgrades, EV charger installs, remodels, or property managers?",
-      conversionPlaces: "service calls, quote forms, project photos, inspection requests, or booking",
-      followUpPlaces: "service call, estimate, permit, parts, inspection, or install date",
+      conversionPlaces:
+        "service calls, quote forms, project photos, inspection requests, or booking",
+      followUpPlaces:
+        "service call, estimate, permit, parts, inspection, or install date",
       schedulingQuestion:
         "Who tracks electricians, estimates, parts, permits, inspections, and return visits today?",
       knowledgeQuestion:
@@ -681,8 +746,7 @@ function getServiceContext(businessType: string) {
   return {
     leadExample:
       "Good-fit leads should match the services, locations, and jobs the business actually wants more of.",
-    discoveryQuestion:
-      "What kind of local customer are you trying to reach?",
+    discoveryQuestion: "What kind of local customer are you trying to reach?",
     conversionPlaces: "website visits, calls, forms, estimates, or booking",
     followUpPlaces: "call, form, estimate, appointment, or follow-up",
     schedulingQuestion: "Who currently owns the schedule?",
@@ -713,7 +777,9 @@ function normalizeHistory(value: unknown): WorkflowChatRequest["history"] {
 
       return role && content ? { role, content } : null;
     })
-    .filter((item): item is WorkflowChatRequest["history"][number] => Boolean(item))
+    .filter((item): item is WorkflowChatRequest["history"][number] =>
+      Boolean(item),
+    )
     .slice(-8);
 }
 
@@ -733,7 +799,9 @@ function historyForPrompt(history: WorkflowChatRequest["history"]) {
   }
 
   return history
-    .map((message) => `${message.role}: ${redactSensitiveText(message.content)}`)
+    .map(
+      (message) => `${message.role}: ${redactSensitiveText(message.content)}`,
+    )
     .join("\n");
 }
 
@@ -847,7 +915,11 @@ function extractHelpNeed(values: string[]) {
   if (isWebsiteHelpQuestion(text)) {
     return "website";
   }
-  if (isNoLeadProblem(text) || isLeadGrowthQuestion(text) || isDiscoverabilityQuestion(text)) {
+  if (
+    isNoLeadProblem(text) ||
+    isLeadGrowthQuestion(text) ||
+    isDiscoverabilityQuestion(text)
+  ) {
     return "lead_generation";
   }
   if (isConversionProblem(text)) {
@@ -856,7 +928,11 @@ function extractHelpNeed(values: string[]) {
   if (/schedul|dispatch|crew|calendar|appointment|booking/.test(text)) {
     return "scheduling";
   }
-  if (/note|spreadsheet|document|crm|memory|knowledge|tribal|clutter|scattered/.test(text)) {
+  if (
+    /note|spreadsheet|document|crm|memory|knowledge|tribal|clutter|scattered/.test(
+      text,
+    )
+  ) {
     return "workflow_clutter";
   }
   if (/follow|inbox|call|text|quote request|inquir/.test(text)) {
@@ -867,7 +943,11 @@ function extractHelpNeed(values: string[]) {
 }
 
 function extractLeadSource(normalized: string) {
-  if (/\b(referral|referrals|word of mouth|past client|past clients)\b/.test(normalized)) {
+  if (
+    /\b(referral|referrals|word of mouth|past client|past clients)\b/.test(
+      normalized,
+    )
+  ) {
     return "referrals";
   }
   if (/\b(website|site)\b/.test(normalized)) {
@@ -907,7 +987,11 @@ function extractBusinessType(values: string[]) {
   if (/\b(plumbing|plumping)\b/.test(text)) {
     return "plumber";
   }
-  if (/\b(hair\s*dresser|hairdresser|hair stylist|hairstylist|salon|barber)\b/.test(text)) {
+  if (
+    /\b(hair\s*dresser|hairdresser|hair stylist|hairstylist|salon|barber)\b/.test(
+      text,
+    )
+  ) {
     return "hairdresser";
   }
 
@@ -936,7 +1020,9 @@ function withArticle(value: string) {
 
 function isMeetingRequest(normalized: string) {
   return (
-    /meet|meeting|consult|consultation|assessment|talk to|talk with/.test(normalized) ||
+    /meet|meeting|consult|consultation|assessment|talk to|talk with/.test(
+      normalized,
+    ) ||
     /schedule.{0,24}(time|call|meeting|assessment|consultation|appointment)/.test(
       normalized,
     ) ||
@@ -953,10 +1039,12 @@ function isAiSearchQuestion(normalized: string) {
 }
 
 function isWebsiteHelpQuestion(normalized: string) {
-  return /\b(website|site|web site|homepage|landing page)\b/.test(normalized) &&
+  return (
+    /\b(website|site|web site|homepage|landing page)\b/.test(normalized) &&
     /\b(fix|improve|update|redo|help|better|work|working|convert|conversion)\b/.test(
       normalized,
-    );
+    )
+  );
 }
 
 function isDiscoverabilityQuestion(normalized: string) {
@@ -989,7 +1077,9 @@ function isConversionProblem(normalized: string) {
 
 function extractPreferredEasternStart(message: string) {
   const normalized = message.toLowerCase();
-  const hourMatch = normalized.match(/\b(1[0-2]|0?[1-9])(?::([0-5][0-9]))?\s*(am|pm)\b/);
+  const hourMatch = normalized.match(
+    /\b(1[0-2]|0?[1-9])(?::([0-5][0-9]))?\s*(am|pm)\b/,
+  );
   if (!hourMatch) {
     return "";
   }

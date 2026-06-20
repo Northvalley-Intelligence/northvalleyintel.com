@@ -12,6 +12,7 @@ import {
   MapPinned,
   MessageSquareText,
   MousePointerClick,
+  Quote,
   Route,
   SearchCheck,
   ShieldCheck,
@@ -27,6 +28,8 @@ import { medinaCleanCaseStudy } from "@/lib/case-studies";
 import {
   aeoAnswers,
   assessments,
+  clientTestimonials,
+  clientWork,
   industries,
   leadDiscoveryPoints,
   medinaCaseStudy,
@@ -75,6 +78,18 @@ const jsonLd = {
     "Website Growth Assessment",
     "Workflow Intelligence Consulting",
   ],
+  review: clientTestimonials.map((testimonial) => ({
+    "@type": "Review",
+    author: {
+      "@type": "Person",
+      name: testimonial.client,
+    },
+    itemReviewed: {
+      "@type": "Organization",
+      name: siteConfig.name,
+    },
+    reviewBody: testimonial.quote,
+  })),
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Assessment-led implementation examples",
@@ -229,24 +244,26 @@ export default function Home() {
               </p>
             </div>
 
-
             <div className="mt-14 grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
               <div className="relative pl-8">
                 <div className="absolute bottom-8 left-[1.05rem] top-8 w-px bg-north-line" />
                 {[
                   {
                     label: "Get found",
-                    detail: "Google, AI search, referrals, local pages, and service questions",
+                    detail:
+                      "Google, AI search, referrals, local pages, and service questions",
                     icon: SearchCheck,
                   },
                   {
                     label: "Convert leads",
-                    detail: "Clear offers, trust signals, forms, calls, estimates, and booking",
+                    detail:
+                      "Clear offers, trust signals, forms, calls, estimates, and booking",
                     icon: MessageSquareText,
                   },
                   {
                     label: "Run the work",
-                    detail: "Follow-up, scheduling, customer details, handoffs, and repeat work",
+                    detail:
+                      "Follow-up, scheduling, customer details, handoffs, and repeat work",
                     icon: Route,
                   },
                 ].map((item, index) => {
@@ -263,9 +280,7 @@ export default function Home() {
                       <p className="text-xs font-black uppercase text-north-amber">
                         Step {index + 1}
                       </p>
-                      <h3 className="text-2xl font-extrabold">
-                        {item.label}
-                      </h3>
+                      <h3 className="text-2xl font-extrabold">{item.label}</h3>
                       <p className="max-w-md text-base leading-7 text-north-muted">
                         {item.detail}
                       </p>
@@ -276,11 +291,9 @@ export default function Home() {
 
               <div className="grid gap-7">
                 {services.map((service, index) => {
-                  const Icon = [
-                    SearchCheck,
-                    MousePointerClick,
-                    ClipboardList,
-                  ][index];
+                  const Icon = [SearchCheck, MousePointerClick, ClipboardList][
+                    index
+                  ];
 
                   return (
                     <article
@@ -344,7 +357,10 @@ export default function Home() {
                     </p>
                     <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
                       {assessment.items.map((item) => (
-                        <li key={item} className="flex gap-2 text-sm font-semibold text-[#384653]">
+                        <li
+                          key={item}
+                          className="flex gap-2 text-sm font-semibold text-[#384653]"
+                        >
                           <CheckCircle2
                             aria-hidden="true"
                             className="mt-0.5 shrink-0 text-north-green"
@@ -396,9 +412,7 @@ export default function Home() {
                       <Icon aria-hidden="true" size={22} />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-extrabold">
-                        {point.title}
-                      </h3>
+                      <h3 className="text-2xl font-extrabold">{point.title}</h3>
                       <p className="mt-3 text-base leading-7 text-north-muted">
                         {point.description}
                       </p>
@@ -429,10 +443,10 @@ export default function Home() {
                 quote.
               </p>
               <p className="mt-4 text-base leading-7 text-north-muted">
-                The teaser report gives a short read on local visibility,
-                trust, AI-answer readiness, and the path from interest to lead.
-                The complete paid assessment includes the evidence trail,
-                page-level findings, scoring logic, and a prioritized fix plan.
+                The teaser report gives a short read on local visibility, trust,
+                AI-answer readiness, and the path from interest to lead. The
+                complete paid assessment includes the evidence trail, page-level
+                findings, scoring logic, and a prioritized fix plan.
               </p>
 
               <div className="mt-8 grid gap-5 sm:grid-cols-3">
@@ -444,12 +458,14 @@ export default function Home() {
                   },
                   {
                     label: "AI discovery",
-                    detail: "Checks whether public pages are clear enough for answer engines.",
+                    detail:
+                      "Checks whether public pages are clear enough for answer engines.",
                     icon: Globe2,
                   },
                   {
                     label: "Lead path",
-                    detail: "Looks for trust proof, calls to action, and contact friction.",
+                    detail:
+                      "Looks for trust proof, calls to action, and contact friction.",
                     icon: FileCheck2,
                   },
                 ].map((item) => {
@@ -519,6 +535,144 @@ export default function Home() {
                   </p>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="client-work"
+          className="border-y border-north-line bg-[#f8faf9] px-5 py-20 md:px-10 md:py-28 lg:px-18"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+              <div>
+                <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                  Client Work
+                </p>
+                <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
+                  Public proof from real businesses.
+                </h2>
+              </div>
+              <p className="max-w-3xl text-lg leading-8 text-north-muted">
+                These are not shown as website trophies. They are examples of
+                practical customer-facing systems: clear offers, trust signals,
+                calls, quote paths, service details, and the first pieces of a
+                larger business workflow.
+              </p>
+            </div>
+
+            <div className="mt-14 grid gap-9 lg:grid-cols-2">
+              {clientWork.map((client) => (
+                <article
+                  key={client.name}
+                  className="border-t border-north-line pt-7"
+                >
+                  <a
+                    className="group block"
+                    href={client.url}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <div className="overflow-hidden rounded-lg border border-north-line bg-white shadow-[0_22px_55px_rgba(20,32,42,0.10)]">
+                      <div className="flex h-10 items-center gap-2 border-b border-north-line bg-[#f4f7f6] px-4">
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#d8614c]" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#e6c26e]" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-north-green" />
+                        <span className="ml-3 truncate text-xs font-bold text-north-muted">
+                          {client.url.replace(/^https?:\/\//, "")}
+                        </span>
+                      </div>
+                      <Image
+                        src={client.image}
+                        alt={client.alt}
+                        width={1440}
+                        height={1000}
+                        className="aspect-[16/10] w-full object-cover object-top transition duration-500 group-hover:scale-[1.015]"
+                      />
+                    </div>
+                  </a>
+
+                  <div className="mt-6 grid gap-4 md:grid-cols-[1fr_auto] md:items-start">
+                    <div>
+                      <p className="text-xs font-black uppercase text-north-amber">
+                        {client.focus}
+                      </p>
+                      <h3 className="mt-2 text-2xl font-extrabold">
+                        {client.name}
+                      </h3>
+                      <p className="mt-1 text-sm font-bold text-north-teal">
+                        {client.client}
+                      </p>
+                    </div>
+                    <a
+                      className="inline-flex items-center gap-2 text-sm font-bold text-north-ink hover:text-north-teal"
+                      href={client.url}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Visit site
+                      <ExternalLink
+                        aria-hidden="true"
+                        size={15}
+                        strokeWidth={2.4}
+                      />
+                    </a>
+                  </div>
+                  <p className="mt-4 text-base leading-7 text-north-muted">
+                    {client.outcome}
+                  </p>
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {client.signals.map((signal) => (
+                      <li
+                        key={signal}
+                        className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-[#384653] shadow-sm"
+                      >
+                        {signal}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-16 grid gap-8 border-t border-north-line pt-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+              <div>
+                <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                  What Clients Say
+                </p>
+                <h3 className="text-[clamp(1.8rem,3vw,2.7rem)] font-black leading-tight tracking-normal">
+                  The work should feel useful to the owner first.
+                </h3>
+              </div>
+              <div className="grid gap-6">
+                {clientTestimonials.map((testimonial) => (
+                  <figure
+                    key={testimonial.client}
+                    className="grid gap-6 rounded-lg border border-north-line bg-white p-5 shadow-[0_20px_50px_rgba(20,32,42,0.10)] md:grid-cols-[0.92fr_1.08fr] md:items-center"
+                  >
+                    <div>
+                      <Quote
+                        aria-hidden="true"
+                        className="text-north-teal"
+                        size={30}
+                      />
+                      <blockquote className="mt-4 text-2xl font-extrabold leading-tight text-north-ink">
+                        {testimonial.quote}
+                      </blockquote>
+                      <figcaption className="mt-4 text-sm font-bold text-north-muted">
+                        {testimonial.client}, {testimonial.company}
+                      </figcaption>
+                    </div>
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.alt}
+                      width={1300}
+                      height={698}
+                      className="w-full rounded-md border border-north-line object-cover"
+                    />
+                  </figure>
+                ))}
+              </div>
             </div>
           </div>
         </section>
