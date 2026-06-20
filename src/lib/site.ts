@@ -263,6 +263,13 @@ export const clientWork = [
 
 export const clientTestimonials = [
   {
+    client: "Terri Hitzig",
+    company: "Resplendent Tea Experience",
+    quote: "Website Genius",
+    image: "/client-work/terri-website-genius.png",
+    alt: "Screenshot of Terri Hitzig saying, Website Genius.",
+  },
+  {
     client: "Rosa Medina",
     company: "Medina Clean",
     quote: "You are making my dream come true.",

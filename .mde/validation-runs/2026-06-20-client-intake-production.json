@@ -1,0 +1,75 @@
+{
+  "validationRunId": "2026-06-20-client-intake-production",
+  "generation": 3,
+  "phase": "Phase 1",
+  "phaseGoal": "Verify the production client intake after main deployment and identify remaining subdomain work before client use.",
+  "startedAt": "2026-06-20T03:02:00Z",
+  "completedAt": "2026-06-20T03:03:00Z",
+  "validationsExecuted": [
+    {
+      "name": "npm run test:client-intake",
+      "category": "Functional",
+      "result": "pass",
+      "evidence": "Static validator confirmed the real /intake form, noindex metadata, minimal required fields, collapsed optional technical section, photo limit, private fail-closed endpoint, Turnstile handling, and subdomain middleware."
+    },
+    {
+      "name": "npm run lint",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "ESLint completed successfully."
+    },
+    {
+      "name": "npm run typecheck",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "TypeScript completed successfully."
+    },
+    {
+      "name": "npm run build",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "Next.js production build completed and included /intake."
+    },
+    {
+      "name": "production rendered-page smoke test",
+      "category": "Usability",
+      "result": "pass",
+      "evidence": "GET https://northvalleyintel.com/intake returned 200 and rendered the Website Launch Intake page with required fields, optional photos, and optional technical details."
+    },
+    {
+      "name": "production API fail-closed smoke test",
+      "category": "Functional",
+      "result": "pass",
+      "evidence": "POST https://northvalleyintel.com/api/client-intake with no form data returned an error instead of accepting an incomplete intake."
+    },
+    {
+      "name": "Cloudflare Pages custom-domain status check",
+      "category": "Deployment",
+      "result": "fail",
+      "evidence": "Cloudflare Pages lists intake.northvalleyintel.com, but the domain status is pending with verification error: CNAME record not set."
+    },
+    {
+      "name": "live intake subdomain DNS smoke test",
+      "category": "Deployment",
+      "result": "fail",
+      "evidence": "curl https://intake.northvalleyintel.com returned DNS resolution failure. Required DNS record: CNAME intake -> northvalleyintel-com.pages.dev."
+    }
+  ],
+  "validationsSkipped": [
+    {
+      "name": "successful production intake delivery smoke test",
+      "reason": "Deferred until subdomain DNS is active and recipient delivery is intentionally tested."
+    }
+  ],
+  "criticalFindings": [],
+  "highFindings": [
+    {
+      "id": "client-intake-subdomain",
+      "summary": "The production intake works on the main domain, but intake.northvalleyintel.com still needs the DNS CNAME and a live HTTPS smoke test before client use.",
+      "status": "open"
+    }
+  ],
+  "gateResult": "partial_pass",
+  "phaseExitPassCountAfterRun": 0,
+  "evidenceQuality": "adequate_production_main_domain"
+}

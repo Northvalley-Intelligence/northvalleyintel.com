@@ -1,10 +1,10 @@
 {
-  "generation": 3,
+  "generation": 4,
   "critical": [],
   "high": [
     {
       "id": "client-intake-subdomain",
-      "reason": "Local middleware routing is validated, but production DNS and HTTPS availability for intake.northvalleyintel.com must be configured and smoke-tested before client use."
+      "reason": "Cloudflare Pages custom domain exists for intake.northvalleyintel.com, but Pages reports status pending with verification error \"CNAME record not set\" and public DNS still returns NXDOMAIN. Required DNS record: CNAME intake -> northvalleyintel-com.pages.dev."
     }
   ],
   "low": [

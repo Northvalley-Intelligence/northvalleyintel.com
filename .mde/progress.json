@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-15",
+  "updatedAt": "2026-06-20",
   "completed": [
     "Assessment teaser request API",
     "Turnstile-gated frontend form",
@@ -17,13 +17,18 @@
     "SEO/AEO local validation",
     "Client website launch intake page at /intake",
     "Private client intake submission function",
-    "Local intake page, API, and subdomain-host validation"
+    "Local intake page, API, and subdomain-host validation",
+    "PR preview and main production deployment for the client intake",
+    "Production smoke test for https://northvalleyintel.com/intake",
+    "Production API fail-closed smoke test for /api/client-intake",
+    "Client intake usability fix with form-first layout and blur validation",
+    "Bare-domain intake website entries accepted and normalized",
+    "Terri Hitzig testimonial added to client proof signals"
   ],
   "remaining": [
-    "Deploy client intake branch to PR preview",
-    "Smoke-test /intake and /api/client-intake on staging",
-    "Merge and deploy from main after validation",
-    "Configure or verify intake.northvalleyintel.com custom domain",
-    "Smoke-test the live intake subdomain before client use"
+    "Create DNS CNAME intake.northvalleyintel.com -> northvalleyintel-com.pages.dev",
+    "Wait for Cloudflare Pages custom domain status to become active",
+    "Smoke-test https://intake.northvalleyintel.com before client use",
+    "Submit a controlled production intake and confirm private email delivery"
   ]
 }

@@ -2,9 +2,9 @@
   "project": "northvalleyintel.com",
   "currentPhase": "Phase 1",
   "currentPhaseGoal": "Integrate the Website Growth Assessment and client website launch intake as practical entry points while preserving paid assessment depth and private client data handling.",
-  "phaseReadiness": "locally_validated_pending_staging_and_dns",
-  "currentGeneration": 3,
+  "phaseReadiness": "release_validation_passed_pending_subdomain_dns",
+  "currentGeneration": 4,
   "missionVersion": "assessment-teaser-2026-06-12",
   "phaseGoalVersion": "client-intake-portal-2026-06-19",
-  "lastValidated": "2026-06-19T00:00:00-04:00"
+  "lastValidated": "2026-06-20T14:02:37Z"
 }

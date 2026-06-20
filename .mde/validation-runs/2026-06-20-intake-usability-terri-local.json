@@ -1,0 +1,70 @@
+{
+  "validationRunId": "2026-06-20-intake-usability-terri-local",
+  "generation": 4,
+  "phase": "Phase 1",
+  "phaseGoal": "Ship a combined intake usability and client proof update without weakening the production deployment path.",
+  "startedAt": "2026-06-20T13:50:00Z",
+  "completedAt": "2026-06-20T14:02:37Z",
+  "validationsExecuted": [
+    {
+      "name": "npm run test:client-intake",
+      "category": "Functional",
+      "result": "pass",
+      "evidence": "Static validator confirmed form-first intake layout, blur validation, bare-domain normalization, private delivery path, Turnstile handling, and subdomain middleware."
+    },
+    {
+      "name": "npm run test:seo-aeo",
+      "category": "Mission Coverage",
+      "result": "pass",
+      "evidence": "SEO/AEO validator confirmed Terri's testimonial appears in the client proof source signals."
+    },
+    {
+      "name": "npm run lint",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "ESLint completed successfully."
+    },
+    {
+      "name": "npm run typecheck",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "TypeScript completed successfully."
+    },
+    {
+      "name": "npm run build",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "Next.js production build completed."
+    },
+    {
+      "name": "npm run test:assessment-teaser",
+      "category": "Functional",
+      "result": "pass",
+      "evidence": "Assessment teaser validator completed successfully."
+    },
+    {
+      "name": "npm run test:chat",
+      "category": "Functional",
+      "result": "pass",
+      "evidence": "Workflow chat validator completed against local Cloudflare Pages dev server."
+    },
+    {
+      "name": "local Pages intake API smoke test",
+      "category": "Usability",
+      "result": "pass",
+      "evidence": "POST /api/client-intake accepted both currentWebsiteUrl=sample.com and currentWebsiteUrl=www.sample.com in test mode."
+    }
+  ],
+  "validationsSkipped": [],
+  "criticalFindings": [],
+  "highFindings": [
+    {
+      "id": "client-intake-subdomain",
+      "summary": "intake.northvalleyintel.com still needs DNS CNAME intake -> northvalleyintel-com.pages.dev and a live HTTPS smoke test before the subdomain is shared.",
+      "status": "open"
+    }
+  ],
+  "gateResult": "pass_with_known_subdomain_warning",
+  "phaseExitPassCountAfterRun": 1,
+  "evidenceQuality": "strong_local"
+}

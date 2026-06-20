@@ -1,0 +1,91 @@
+{
+  "generation": 4,
+  "generationId": "2026-06-20-intake-usability-terri",
+  "phase": "Phase 1",
+  "missionVersion": "assessment-teaser-2026-06-12",
+  "phaseGoalVersion": "client-intake-portal-2026-06-19",
+  "focus": "Combine client intake usability fixes with Terri Hitzig testimonial proof and prepare the release for the main production deployment path.",
+  "reasonGenerationStarted": "The user asked to combine the Terri testimonial with the pending intake fixes and push the release to production.",
+  "reasonGenerationEnded": "Local validation passed for intake usability, client proof source updates, build, assessment teaser, and workflow chat. Production deployment must proceed through PR checks and main.",
+  "filesChanged": [
+    "functions/api/client-intake.ts",
+    "public/client-work/terri-website-genius.png",
+    "public/llms.txt",
+    "public/source-website-assessment.json",
+    "scripts/validate-client-intake.mjs",
+    "scripts/validate-seo-aeo.mjs",
+    "src/app/intake/page.tsx",
+    "src/components/client-intake-form.tsx",
+    "src/lib/client-intake.ts",
+    "src/lib/site.ts"
+  ],
+  "productionFilesChanged": [
+    "functions/api/client-intake.ts",
+    "public/client-work/terri-website-genius.png",
+    "public/llms.txt",
+    "public/source-website-assessment.json",
+    "src/app/intake/page.tsx",
+    "src/components/client-intake-form.tsx",
+    "src/lib/client-intake.ts",
+    "src/lib/site.ts"
+  ],
+  "testFilesChanged": [
+    "scripts/validate-client-intake.mjs",
+    "scripts/validate-seo-aeo.mjs"
+  ],
+  "documentationFilesChanged": [
+    "MISSION_UPDATES.md",
+    "docs/operations/mde-status.md"
+  ],
+  "validators": [
+    {
+      "tool": "npm run test:client-intake",
+      "category": "Functional",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "npm run test:seo-aeo",
+      "category": "Mission Coverage",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "npm run lint",
+      "category": "Technical",
+      "result": "pass",
+      "usefulness": "medium"
+    },
+    {
+      "tool": "npm run typecheck",
+      "category": "Technical",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "npm run build",
+      "category": "Technical",
+      "result": "pass",
+      "usefulness": "high"
+    },
+    {
+      "tool": "local Pages intake API smoke test",
+      "category": "Usability",
+      "result": "pass",
+      "usefulness": "high"
+    }
+  ],
+  "criticalFindings": [],
+  "highFindings": [
+    {
+      "id": "client-intake-subdomain",
+      "status": "open",
+      "summary": "Add DNS CNAME intake -> northvalleyintel-com.pages.dev and smoke-test https://intake.northvalleyintel.com before sharing that subdomain."
+    }
+  ],
+  "validationGate": {
+    "result": "pass_with_known_subdomain_warning",
+    "passCount": "1/2",
+    "evidenceQuality": "strong_local"
+  }
+}
