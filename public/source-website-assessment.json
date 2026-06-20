@@ -85,13 +85,41 @@
       "summary": "A cleaning business website request became a practical operating foundation for bilingual public presence, guided estimates, recurring customer memory, scheduling support, and lead handling."
     }
   ],
+  "clientWork": [
+    {
+      "name": "Resplendent Tea Experience",
+      "client": "Terri Hitzig",
+      "url": "https://resplendenttea.com/",
+      "summary": "Local service presentation for afternoon tea catering, custom pastries, events, service areas, and quote requests."
+    },
+    {
+      "name": "Medina Clean",
+      "client": "Rosa Medina",
+      "url": "https://medinaclean.com/",
+      "summary": "Bilingual cleaning business presence connected to guided estimates, appointment requests, reviews, and operating-system foundations.",
+      "testimonial": "You are making my dream come true."
+    },
+    {
+      "name": "Oscar's Package Store",
+      "client": "James Jacob",
+      "url": "https://www.oscarsliquorstore.com/",
+      "summary": "Local landmark package store presence focused on trust, selection, drive-through convenience, hours, directions, and direct calling."
+    },
+    {
+      "name": "Clarity Mesh LLC",
+      "client": "Clarity Mesh LLC",
+      "url": "https://claritymesh-com.pages.dev/",
+      "summary": "Expertise-led professional services presence for architecture, modernization, cloud, data, search, and delivery consulting."
+    }
+  ],
   "sourcePages": [
     "https://northvalleyintel.com/",
+    "https://northvalleyintel.com/#client-work",
     "https://northvalleyintel.com/case-studies/medina-clean",
     "https://northvalleyintel.com/case-studies/medina-clean/rosas-story",
     "https://northvalleyintel.com/case-studies/medina-clean/website-ai-chat",
     "https://northvalleyintel.com/case-studies/medina-clean/lead-workflow",
     "https://northvalleyintel.com/llms.txt"
   ],
-  "lastReviewed": "2026-06-15"
+  "lastReviewed": "2026-06-20"
 }

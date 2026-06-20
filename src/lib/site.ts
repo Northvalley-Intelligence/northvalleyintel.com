@@ -210,6 +210,67 @@ export const teamMembers = [
   },
 ];
 
+export const clientWork = [
+  {
+    name: "Resplendent Tea Experience",
+    client: "Terri Hitzig",
+    url: "https://resplendenttea.com/",
+    image: "/client-work/resplendent-tea.jpg",
+    alt: "Resplendent Tea Experience website preview.",
+    focus: "Local service presentation",
+    outcome:
+      "A clear public presence for catered afternoon tea experiences, custom pastries, events, service areas, and quote requests.",
+    signals: ["Service clarity", "Event inquiries", "Local Atlanta reach"],
+  },
+  {
+    name: "Medina Clean",
+    client: "Rosa Medina",
+    url: "https://medinaclean.com/",
+    image: "/client-work/medina-clean.jpg",
+    alt: "Medina Clean website preview.",
+    focus: "Lead intake and operating foundation",
+    outcome:
+      "A bilingual service-business platform that connects public trust, appointment requests, guided estimates, reviews, and future scheduling support.",
+    signals: ["Bilingual service", "Guided estimates", "Operational memory"],
+  },
+  {
+    name: "Oscar's Package Store",
+    client: "James Jacob",
+    url: "https://www.oscarsliquorstore.com/",
+    image: "/client-work/oscars-liquor-store.jpg",
+    alt: "Oscar's Package Store website preview.",
+    focus: "Local landmark and customer convenience",
+    outcome:
+      "A practical local business presence around store trust, selection, drive-through convenience, hours, directions, and direct calling.",
+    signals: ["Local trust", "Directions and calls", "Store information"],
+  },
+  {
+    name: "Clarity Mesh LLC",
+    client: "Clarity Mesh LLC",
+    url: "https://claritymesh-com.pages.dev/",
+    image: "/client-work/clarity-mesh.jpg",
+    alt: "Clarity Mesh LLC website preview.",
+    focus: "Expertise-led positioning",
+    outcome:
+      "A focused professional services presence that explains architecture, modernization, cloud, data, search, and delivery expertise.",
+    signals: [
+      "Expert positioning",
+      "Service clarity",
+      "Consulting credibility",
+    ],
+  },
+];
+
+export const clientTestimonials = [
+  {
+    client: "Rosa Medina",
+    company: "Medina Clean",
+    quote: "You are making my dream come true.",
+    image: "/client-work/rosa-dream-come-true.jpg",
+    alt: "Screenshot of Rosa Medina saying, You are making my dream come true.",
+  },
+];
+
 export const medinaCaseStudy = {
   name: "Medina Clean",
   client: "Rosa Medina",

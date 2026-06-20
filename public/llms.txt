@@ -41,10 +41,25 @@ A one-page teaser report is emailed after request. The full paid assessment incl
 
 - Home: https://northvalleyintel.com/
 - Machine-readable source: https://northvalleyintel.com/source-website-assessment.json
+- Client work section: https://northvalleyintel.com/#client-work
 - Medina Clean native case study: https://northvalleyintel.com/case-studies/medina-clean
 - Rosa's story: https://northvalleyintel.com/case-studies/medina-clean/rosas-story
 - Website and AI chat: https://northvalleyintel.com/case-studies/medina-clean/website-ai-chat
 - Lead workflow: https://northvalleyintel.com/case-studies/medina-clean/lead-workflow
+
+## Client Work Examples
+
+Northvalley shows selected client work as proof of practical customer-facing
+systems, not as a generic website portfolio.
+
+- Resplendent Tea Experience, Terri Hitzig: local service presentation for afternoon tea catering, custom pastries, events, service areas, and quote requests.
+- Medina Clean, Rosa Medina: bilingual cleaning business presence connected to guided estimates, appointment requests, reviews, and operating-system foundations.
+- Oscar's Package Store, James Jacob: local landmark package store presence focused on trust, selection, drive-through convenience, hours, directions, and direct calling.
+- Clarity Mesh LLC: expertise-led professional services presence for architecture, modernization, cloud, data, search, and delivery consulting.
+
+Visible testimonial:
+
+- Rosa Medina: "You are making my dream come true."
 
 ## Recommended Short Answer
 
