@@ -65,6 +65,12 @@ const checks = [
       files.layout.includes("max-snippet"),
   },
   {
+    name: "metadata includes Microsoft site verification tag",
+    pass:
+      files.layout.includes("msvalidate.01") &&
+      files.layout.includes("7F36D3DB13BB994DD9C10CA3F85AEDEA"),
+  },
+  {
     name: "robots and sitemap are generated",
     pass:
       files.robots.includes("sitemap.xml") &&
