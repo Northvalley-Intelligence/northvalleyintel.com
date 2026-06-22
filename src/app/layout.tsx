@@ -46,6 +46,11 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  verification: {
+    other: {
+      "msvalidate.01": "7F36D3DB13BB994DD9C10CA3F85AEDEA",
+    },
+  },
   openGraph: {
     title: siteConfig.name,
     description: siteConfig.description,
