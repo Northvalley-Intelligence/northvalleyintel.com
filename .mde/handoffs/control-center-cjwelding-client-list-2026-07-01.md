@@ -65,13 +65,19 @@ The client-work card now appears in the existing `clientWork` data with:
 - `git diff --check`
   - Result: passed.
 
-Production verification was not run in this delegated local task.
+Production verification was completed after PR #19 merged to `main`.
 
 ## Blockers
 
 - None for the local content/data update.
-- Production verification remains outstanding because no commit, PR, merge to `main`, or Cloudflare Pages production deployment was requested or performed in this task.
+- None for production deployment of this client-list update.
 
 ## Exact Next Action
 
-Commit the local changes, open the normal PR path, wait for the required `cloudflare-pages-preview` status check, merge to `main` only after checks pass, then verify the live production `https://northvalleyintel.com/#client-work` section shows C&J Welding linking to `https://www.cjwelding.net/material-shapes`.
+No deployment action remains for this client-list update. PR #19 passed `quality` and `cloudflare-pages-preview`, merged to `main` as commit `476b37d`, deployed through the Cloudflare Pages production workflow, and production verification passed for:
+
+- `https://northvalleyintel.com/#client-work`
+- `https://www.northvalleyintel.com/#client-work`
+- `https://northvalleyintel.com/source-website-assessment.json`
+- `https://northvalleyintel.com/llms.txt`
+- `https://northvalleyintel.com/client-work/cj-welding-material-shapes.png`
