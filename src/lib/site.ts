@@ -259,6 +259,17 @@ export const clientWork = [
       "Consulting credibility",
     ],
   },
+  {
+    name: "C&J Welding",
+    client: "C&J Welding and Fabricating, Inc.",
+    url: "https://www.cjwelding.net/material-shapes",
+    image: "/client-work/cj-welding-material-shapes.png",
+    alt: "C&J Welding material shapes reference page preview.",
+    focus: "Service reference and quote support",
+    outcome:
+      "A practical reference page that helps welding and fabrication customers identify material shapes before a quote conversation.",
+    signals: ["Material references", "Quote preparation", "Smyrna shop"],
+  },
 ];
 
 export const clientTestimonials = [
