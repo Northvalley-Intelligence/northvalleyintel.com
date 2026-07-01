@@ -111,6 +111,12 @@
       "client": "Clarity Mesh LLC",
       "url": "https://claritymesh-com.pages.dev/",
       "summary": "Expertise-led professional services presence for architecture, modernization, cloud, data, search, and delivery consulting."
+    },
+    {
+      "name": "C&J Welding",
+      "client": "C&J Welding and Fabricating, Inc.",
+      "url": "https://www.cjwelding.net/material-shapes",
+      "summary": "Practical material-shapes reference for welding and fabrication customers preparing for quote conversations."
     }
   ],
   "sourcePages": [
@@ -122,5 +128,5 @@
     "https://northvalleyintel.com/case-studies/medina-clean/lead-workflow",
     "https://northvalleyintel.com/llms.txt"
   ],
-  "lastReviewed": "2026-06-20"
+  "lastReviewed": "2026-07-01"
 }
