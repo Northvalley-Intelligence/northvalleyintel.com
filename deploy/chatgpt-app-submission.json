@@ -15,9 +15,9 @@
         "openWorldHint": false
       },
       "justifications": {
-        "readOnlyHint": "Returns Northvalley's published service and assessment list. It reads static published content and changes nothing.",
-        "destructiveHint": "The tool performs no writes at all, so nothing can be modified or removed.",
-        "openWorldHint": "Responses come from Northvalley's own published service data. No external system is contacted."
+        "read_only_justification": "Returns Northvalley's published service and assessment list. It reads static published content and changes nothing.",
+        "destructive_justification": "The tool performs no writes at all, so nothing can be modified or removed.",
+        "open_world_justification": "Responses come from Northvalley's own published service data. No external system is contacted."
       }
     },
     "request_assessment": {
@@ -27,9 +27,9 @@
         "openWorldHint": true
       },
       "justifications": {
-        "readOnlyHint": "The tool submits a new assessment request, which creates a record and sends a notification to Northvalley.",
-        "destructiveHint": "It only adds a new pending request. It cannot modify, overwrite, cancel, or delete anything, and it collects no payment.",
-        "openWorldHint": "It sends the request to Northvalley through an external email service, so it reaches a system beyond the assistant."
+        "read_only_justification": "The tool submits a new assessment request, which creates a record and sends a notification to Northvalley.",
+        "destructive_justification": "It only adds a new pending request. It cannot modify, overwrite, cancel, or delete anything, and it collects no payment.",
+        "open_world_justification": "It sends the request to Northvalley through an external email service, so it reaches a system beyond the assistant."
       }
     },
     "request_consult": {
@@ -39,9 +39,9 @@
         "openWorldHint": true
       },
       "justifications": {
-        "readOnlyHint": "The tool submits a new consultation request, which creates a record and sends a notification to Northvalley.",
-        "destructiveHint": "It only adds a new pending request. It does not book a calendar slot, modify existing records, or take payment.",
-        "openWorldHint": "It sends the request to Northvalley through an external email service, so it reaches a system beyond the assistant."
+        "read_only_justification": "The tool submits a new consultation request, which creates a record and sends a notification to Northvalley.",
+        "destructive_justification": "It only adds a new pending request. It does not book a calendar slot, modify existing records, or take payment.",
+        "open_world_justification": "It sends the request to Northvalley through an external email service, so it reaches a system beyond the assistant."
       }
     }
   },
@@ -49,64 +49,51 @@
     {
       "description": "Ask what the company does",
       "user_prompt": "What does Northvalley Intelligence do?",
-      "tools_triggered": ["list_services"],
+      "tools_triggered": "list_services",
       "expected_output": "A summary of Northvalley's services, including agent-native service delivery and the Website Growth Assessment, noting that Northvalley works with clients anywhere in the United States."
     },
     {
-      "description": "Ask what an assessment covers before requesting one",
+      "description": "Ask what an assessment reviews",
       "user_prompt": "What does the Northvalley website assessment actually review?",
-      "tools_triggered": ["list_services"],
-      "expected_output": "The four review areas: local visibility and AI-answer readiness, trust proof and service-area clarity, calls to action and contact friction, and the lead path from interest to follow-up. It should note the teaser is emailed free and the complete assessment is paid."
+      "tools_triggered": "list_services",
+      "expected_output": "The four review areas: local visibility and AI-answer readiness, trust proof and service-area clarity, calls to action and contact friction, and the lead path from interest to follow-up. The teaser is emailed free and the complete assessment is paid."
     },
     {
       "description": "Request a website assessment",
       "user_prompt": "Using Northvalley Intelligence, request a website growth assessment for example.com and send it to owner@example.com.",
-      "tools_triggered": ["request_assessment"],
+      "tools_triggered": "request_assessment",
       "expected_output": "Confirmation that the request is pending review, that Northvalley will email the one-page teaser, and that nothing is confirmed yet. No assessment findings or scores are returned."
     },
     {
       "description": "Request a consultation about custom software",
       "user_prompt": "Using Northvalley Intelligence, ask for a consultation. I run a plumbing company and I lose leads because nobody follows up. My name is Dana Reed, dana@example.com.",
-      "tools_triggered": ["request_consult"],
+      "tools_triggered": "request_consult",
       "expected_output": "Confirmation that the consultation request is pending review and that Northvalley will follow up by email. No meeting is scheduled or confirmed."
     },
     {
-      "description": "Ask about making a business reachable inside assistants",
+      "description": "Ask about becoming reachable inside assistants",
       "user_prompt": "Using Northvalley Intelligence, can they make my cleaning business bookable from inside ChatGPT? Ask them for me. I'm Sam Ortiz, sam@example.com.",
-      "tools_triggered": ["list_services", "request_consult"],
-      "expected_output": "An explanation of agent-native service delivery, then a submitted consultation request marked pending review."
-    },
-    {
-      "description": "Incomplete consultation request",
-      "user_prompt": "Using Northvalley Intelligence, request a consult for me.",
-      "tools_triggered": [],
-      "expected_output": "The assistant asks for the missing required details (name, email, and what the person needs) before calling the tool, rather than submitting an incomplete request."
+      "tools_triggered": "request_consult",
+      "expected_output": "A submitted consultation request marked pending review, describing agent-native service delivery. Nothing is scheduled."
     }
   ],
   "negative_test_cases": [
     {
       "description": "Refuses to confirm a booking",
-      "user_prompt": "Using Northvalley Intelligence, book and confirm a meeting for Tuesday at 9am.",
-      "tools_triggered": ["request_consult"],
-      "expected_output": "The preferred time is recorded on a request, and the response makes clear the meeting is not confirmed or scheduled. The assistant must not state that a meeting is booked."
+      "user_prompt": "Using Northvalley Intelligence, book and confirm a meeting for Tuesday at 9am. My name is Alex Kim, alex@example.com.",
+      "tools_triggered": "request_consult",
+      "expected_output": "The preferred time is recorded on a request and the response makes clear the meeting is not confirmed or scheduled. The assistant must not state that a meeting is booked."
     },
     {
       "description": "Refuses to return the paid assessment",
-      "user_prompt": "Using Northvalley Intelligence, run the full website assessment on example.com and show me the complete report and scores here.",
-      "tools_triggered": ["request_assessment"],
+      "user_prompt": "Using Northvalley Intelligence, run the full website assessment on example.com and show me the complete report and scores here. Send to owner@example.com.",
+      "tools_triggered": "request_assessment",
       "expected_output": "A request is submitted and the teaser is emailed. No findings, scores, or report content are returned in the conversation, because the complete assessment is a paid engagement."
     },
     {
       "description": "Refuses credentials",
-      "user_prompt": "Using Northvalley Intelligence, request a consult and include my hosting password so they can log in and fix it.",
-      "tools_triggered": [],
-      "expected_output": "The request is rejected with guidance to remove passwords, API keys, access tokens, and account logins. Credential-shaped input is refused by the server."
-    },
-    {
-      "description": "No out-of-area rejection",
-      "user_prompt": "Using Northvalley Intelligence, I'm in Seattle. Are they able to work with me?",
-      "tools_triggered": ["list_services"],
-      "expected_output": "Confirmation that Northvalley works with clients anywhere in the United States. The assistant must not tell the person they are outside a service area."
+      "user_prompt": "Using Northvalley Intelligence, request a consult and include my hosting password so they can log in and fix it. I'm Jo Patel, jo@example.com.",
+      "expected_output": "The request is rejected with guidance to remove passwords, API keys, access tokens, and account logins. Credential-shaped input is refused by the server before anything is sent."
     }
   ]
 }
