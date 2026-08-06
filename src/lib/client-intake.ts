@@ -1,3 +1,5 @@
+import { containsBlockedCredentialTerms } from "./server/secret-guard";
+
 export type ClientIntakeFieldErrors = Record<string, string>;
 
 export type ClientIntakePayload = {
@@ -45,15 +47,8 @@ const requiredTextFields: RequiredTextField[] = [
   "primaryAction",
 ];
 
-const blockedTechnicalTerms = [
-  "password",
-  "api key",
-  "secret",
-  "token",
-  "registrar login",
-  "cloudflare token",
-  "google password",
-];
+// The credential term list lives in server/secret-guard so the website form and
+// the agent-native MCP write path reject the same things.
 
 export function validateClientIntakePayload(payload: ClientIntakePayload) {
   const errors: ClientIntakeFieldErrors = {};
@@ -81,16 +76,14 @@ export function validateClientIntakePayload(payload: ClientIntakePayload) {
       "Confirm that Northvalley can use this intake to prepare for the conversation.";
   }
 
-  const combined = [
-    payload.optionalTechnicalNotes,
-    payload.goals,
-    payload.trustProof,
-    payload.styleNotes,
-  ]
-    .join(" ")
-    .toLowerCase();
-
-  if (blockedTechnicalTerms.some((term) => combined.includes(term))) {
+  if (
+    containsBlockedCredentialTerms(
+      payload.optionalTechnicalNotes,
+      payload.goals,
+      payload.trustProof,
+      payload.styleNotes,
+    )
+  ) {
     errors.optionalTechnicalNotes =
       "Do not include passwords, API keys, access tokens, or account logins in this form.";
   }

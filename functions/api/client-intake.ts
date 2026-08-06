@@ -5,10 +5,19 @@ import {
   normalizeClientIntakeFormData,
   validateClientIntakePayload,
 } from "../../src/lib/client-intake";
+import {
+  base64Encode,
+  envString,
+  fetchWithTimeout,
+  jsonResponse,
+  safeFileName,
+  sendNotificationEmail,
+  type ServerEnv,
+} from "../../src/lib/server/notify";
 
 type FunctionContext = {
   request: Request;
-  env: Record<string, unknown>;
+  env: ServerEnv;
   waitUntil?: (promise: Promise<unknown>) => void;
 };
 
@@ -18,7 +27,7 @@ export async function onRequestPost({ request, env }: FunctionContext) {
   const formData = await request.formData().catch(() => null);
 
   if (!formData) {
-    return json(
+    return jsonResponse(
       { error: "Please complete the intake form and try again." },
       400,
     );
@@ -43,7 +52,7 @@ export async function onRequestPost({ request, env }: FunctionContext) {
   }
 
   if (Object.keys(validation.errors).length > 0) {
-    return json(
+    return jsonResponse(
       {
         error: "Please fix the highlighted fields and send the intake again.",
         errors: validation.errors,
@@ -59,29 +68,18 @@ export async function onRequestPost({ request, env }: FunctionContext) {
     clientIp,
   );
   if (!turnstile.ok) {
-    return json(
+    return jsonResponse(
       { error: "Please complete the verification and try again." },
       403,
     );
   }
 
   if (envString(env, "CLIENT_INTAKE_TEST_MODE") === "true") {
-    return json({
+    return jsonResponse({
       status: "sent",
       message:
         "Thanks. We received the details. We will review them before we meet and follow up if anything important is missing.",
     });
-  }
-
-  const apiKey = envString(env, "RESEND_API_KEY");
-  if (!apiKey) {
-    return json(
-      {
-        error:
-          "The intake form is not fully configured yet. Please email Northvalley directly.",
-      },
-      503,
-    );
   }
 
   const submittedAt = new Date().toISOString();
@@ -92,46 +90,35 @@ export async function onRequestPost({ request, env }: FunctionContext) {
     })),
   );
 
-  const response = await fetchWithTimeout(
-    "https://api.resend.com/emails",
-    {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${apiKey}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        from:
-          envString(env, "CLIENT_INTAKE_FROM") ||
-          envString(env, "CHAT_NOTIFY_FROM") ||
-          "Northvalley Intelligence <alerts@northvalleyintel.com>",
-        to: [
-          envString(env, "CLIENT_INTAKE_NOTIFY_TO") ||
-            envString(env, "CHAT_NOTIFY_TO") ||
-            envString(env, "ASSESSMENT_HOST_EMAIL") ||
-            "hello@northvalleyintel.com",
-        ],
-        reply_to: payload.contactEmail,
-        subject: `Website intake: ${payload.businessName}`,
-        text: buildClientIntakeNotificationText({
-          payload,
-          files: intakeFileSummary(files),
-          submittedAt,
-        }),
-        attachments,
-      }),
-    },
-    8000,
-  );
+  const delivery = await sendNotificationEmail({
+    env,
+    subject: `Website intake: ${payload.businessName}`,
+    text: buildClientIntakeNotificationText({
+      payload,
+      files: intakeFileSummary(files),
+      submittedAt,
+    }),
+    replyTo: payload.contactEmail,
+    attachments,
+  });
 
-  if (!response.ok) {
-    const errorBody = await response.text().catch(() => "");
+  if (!delivery.ok && delivery.reason === "not_configured") {
+    return jsonResponse(
+      {
+        error:
+          "The intake form is not fully configured yet. Please email Northvalley directly.",
+      },
+      503,
+    );
+  }
+
+  if (!delivery.ok) {
     console.warn("client_intake_resend_failed", {
-      status: response.status,
-      error: errorBody.slice(0, 240),
+      status: delivery.status,
+      error: delivery.detail,
     });
 
-    return json(
+    return jsonResponse(
       {
         error:
           "The intake could not be delivered. Please email Northvalley directly.",
@@ -140,7 +127,7 @@ export async function onRequestPost({ request, env }: FunctionContext) {
     );
   }
 
-  return json({
+  return jsonResponse({
     status: "sent",
     message:
       "Thanks. We received the details. We will review them before we meet and follow up if anything important is missing.",
@@ -148,11 +135,11 @@ export async function onRequestPost({ request, env }: FunctionContext) {
 }
 
 export function onRequestGet() {
-  return json({ error: "Method not allowed." }, 405);
+  return jsonResponse({ error: "Method not allowed." }, 405);
 }
 
 async function verifyTurnstile(
-  env: Record<string, unknown>,
+  env: ServerEnv,
   token: string,
   clientIp: string,
 ) {
@@ -194,53 +181,4 @@ async function verifyTurnstile(
     success?: boolean;
   };
   return { ok: data.success === true };
-}
-
-function json(body: unknown, status = 200) {
-  return new Response(JSON.stringify(body), {
-    headers: {
-      "cache-control": "no-store",
-      "content-type": "application/json",
-    },
-    status,
-  });
-}
-
-function envString(env: Record<string, unknown>, key: string) {
-  const value = env[key];
-  return typeof value === "string" ? value.trim() : "";
-}
-
-async function fetchWithTimeout(
-  url: string,
-  init: RequestInit,
-  timeoutMs: number,
-) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-    return await fetch(url, {
-      ...init,
-      signal: controller.signal,
-    });
-  } finally {
-    clearTimeout(timeout);
-  }
-}
-
-function base64Encode(bytes: Uint8Array) {
-  let binary = "";
-  const chunkSize = 0x8000;
-
-  for (let index = 0; index < bytes.length; index += chunkSize) {
-    const chunk = bytes.slice(index, index + chunkSize);
-    binary += String.fromCharCode(...chunk);
-  }
-
-  return btoa(binary);
-}
-
-function safeFileName(fileName: string) {
-  return fileName.replace(/[^a-z0-9._-]/gi, "_").slice(0, 120) || "photo";
 }
