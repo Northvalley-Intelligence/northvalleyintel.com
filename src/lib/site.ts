@@ -96,6 +96,18 @@ export const primaryPages = [
       "Native case-study article about lead intake, follow-up, and workflow support.",
   },
   {
+    url: `${siteConfig.url}/privacy`,
+    label: "Privacy policy",
+    description:
+      "What Northvalley collects, why, who receives it, how long it is kept, and how to ask for removal.",
+  },
+  {
+    url: `${siteConfig.url}/terms`,
+    label: "Terms of use",
+    description:
+      "Terms for the website and the agent-native surface, including that submitted requests are requests rather than confirmed commitments.",
+  },
+  {
     url: `${siteConfig.url}/source-website-assessment.json`,
     label: "Website assessment source data",
     description:
