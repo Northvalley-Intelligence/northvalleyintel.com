@@ -1,0 +1,69 @@
+{
+  "generation": 6,
+  "generationId": "2026-07-01-cj-welding-client-work",
+  "phase": "Phase 1",
+  "missionVersion": "assessment-teaser-2026-06-12",
+  "phaseGoalVersion": "client-intake-portal-2026-06-19",
+  "recordedAt": "2026-08-05",
+  "recordedRetroactively": true,
+  "recordSource": "Reconstructed from .mde/handoffs/control-center-cjwelding-client-list-2026-07-01.md and git commits 476b37d (PR #19) and 9d14f88 (PR #20) during the Phase 2 MDE hygiene pass. The handoff recorded checks and results; no generation record or validation run was written.",
+  "focus": "Add C&J Welding and Fabricating, Inc. to the client-work proof section across the rendered site and the machine-readable answer-engine surfaces.",
+  "reasonGenerationStarted": "The user asked to add cjwelding.net to the client list, highlighting the material-shapes page used for quote preparation.",
+  "reasonGenerationEnded": "Local gates passed, PR #19 passed required checks and merged to main, and production verification passed for all five target URLs.",
+  "filesChanged": [
+    "src/lib/site.ts",
+    "public/source-website-assessment.json",
+    "public/llms.txt",
+    "public/client-work/cj-welding-material-shapes.png",
+    ".mde/handoffs/control-center-cjwelding-client-list-2026-07-01.md"
+  ],
+  "productionFilesChanged": [
+    "src/lib/site.ts",
+    "public/source-website-assessment.json",
+    "public/llms.txt",
+    "public/client-work/cj-welding-material-shapes.png"
+  ],
+  "testFilesChanged": [],
+  "documentationFilesChanged": [".mde/handoffs/control-center-cjwelding-client-list-2026-07-01.md"],
+  "locContext": { "added": 96, "deleted": 1, "net": 95, "note": "Includes a binary screenshot asset." },
+  "validators": [
+    { "tool": "npm run test:seo-aeo", "category": "Mission Coverage", "result": "pass", "usefulness": "high" },
+    { "tool": "npm run typecheck", "category": "Technical", "result": "pass", "usefulness": "high" },
+    { "tool": "npm run lint", "category": "Technical", "result": "pass", "usefulness": "medium" },
+    { "tool": "npm run build", "category": "Technical", "result": "pass", "usefulness": "high" },
+    { "tool": "git diff --check", "category": "Technical", "result": "pass", "usefulness": "low" },
+    { "tool": "quality (CI)", "category": "Technical", "result": "pass", "usefulness": "high" },
+    { "tool": "cloudflare-pages-preview", "category": "Deployment", "result": "pass", "usefulness": "high" },
+    { "tool": "production URL verification", "category": "Deployment", "result": "pass", "usefulness": "high" }
+  ],
+  "validatorsSkipped": [
+    {
+      "tool": "npm run test:assessment-teaser",
+      "reason": "Not run. src/lib/site.ts is a shared surface, so this was a partial-suite run after a shared-surface edit — the same class of miss recorded twice in the medinaclean build."
+    },
+    { "tool": "npm run test:client-intake", "reason": "Not run. Same partial-suite gap." }
+  ],
+  "criticalFindings": [],
+  "highFindings": [],
+  "validationGate": {
+    "result": "pass",
+    "passCount": "1/2",
+    "evidenceQuality": "strong_production",
+    "note": "Production verification was genuine and covered five URLs. Only one gate pass is recorded; no second independent pass was run."
+  },
+  "productionVerification": [
+    "https://northvalleyintel.com/#client-work",
+    "https://www.northvalleyintel.com/#client-work",
+    "https://northvalleyintel.com/source-website-assessment.json",
+    "https://northvalleyintel.com/llms.txt",
+    "https://northvalleyintel.com/client-work/cj-welding-material-shapes.png"
+  ],
+  "lessons": [
+    "The client-work card pattern is now established across three surfaces: src/lib/site.ts, public/source-website-assessment.json, and public/llms.txt. Reuse it rather than inventing a new shape.",
+    "A networked screenshot capture of a client site needs explicit approval before it runs.",
+    "Editing src/lib/site.ts touches every page that reads it, so it warrants the full local suite rather than the seo-aeo validator alone."
+  ],
+  "downstreamImpacts": [
+    "Establishes the pattern the Medina Clean client-work card will follow in Phase 2 W3."
+  ]
+}

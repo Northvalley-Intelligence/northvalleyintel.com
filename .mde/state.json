@@ -2,9 +2,21 @@
   "project": "northvalleyintel.com",
   "currentPhase": "Phase 1",
   "currentPhaseGoal": "Integrate the Website Growth Assessment and client website launch intake as practical entry points while preserving paid assessment depth and private client data handling.",
-  "phaseReadiness": "release_validation_passed_pending_subdomain_dns",
-  "currentGeneration": 4,
+  "phaseReadiness": "phase_1_exit_blocked_on_intake_subdomain_dns",
+  "currentGeneration": 6,
   "missionVersion": "assessment-teaser-2026-06-12",
   "phaseGoalVersion": "client-intake-portal-2026-06-19",
-  "lastValidated": "2026-06-20T14:02:37Z"
+  "validationStrategyVersion": "phase-2-agent-native-2026-08-05",
+  "lastValidated": "2026-07-01T00:00:00Z",
+  "lastStateUpdate": "2026-08-05",
+  "phase2": {
+    "status": "prepared_not_opened",
+    "proposedName": "Phase 2 — Agent-native service delivery",
+    "opensWhen": "Phase 1 exits: the intake subdomain DNS record is live and one controlled production intake submission has been confirmed delivered.",
+    "blockedBy": ["client-intake-subdomain", "cloudflare-token-scope"]
+  },
+  "notes": [
+    "Generations 5 and 6 were backfilled on 2026-08-05 from git and the C&J handoff. Both shipped to production before any generation record existed.",
+    "validation-strategy.json is the project's first, written 2026-08-05 before any Phase 2 implementation."
+  ]
 }

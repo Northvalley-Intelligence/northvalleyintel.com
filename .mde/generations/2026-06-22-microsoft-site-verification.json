@@ -1,0 +1,45 @@
+{
+  "generation": 5,
+  "generationId": "2026-06-22-microsoft-site-verification",
+  "phase": "Phase 1",
+  "missionVersion": "assessment-teaser-2026-06-12",
+  "phaseGoalVersion": "client-intake-portal-2026-06-19",
+  "recordedAt": "2026-08-05",
+  "recordedRetroactively": true,
+  "recordSource": "Reconstructed from git commit fefc6a3 (PR #18) during the Phase 2 MDE hygiene pass. No contemporaneous generation record or validation run was written.",
+  "focus": "Add a Microsoft site verification meta tag so Bing and Microsoft webmaster tooling can verify domain ownership.",
+  "reasonGenerationStarted": "Not recorded at the time.",
+  "reasonGenerationEnded": "Not recorded at the time. Merged via PR #18.",
+  "filesChanged": ["src/app/layout.tsx", "scripts/validate-seo-aeo.mjs"],
+  "productionFilesChanged": ["src/app/layout.tsx"],
+  "testFilesChanged": ["scripts/validate-seo-aeo.mjs"],
+  "documentationFilesChanged": [],
+  "locContext": { "added": 11, "deleted": 0, "net": 11 },
+  "validators": [
+    {
+      "tool": "npm run test:seo-aeo",
+      "category": "Mission Coverage",
+      "result": "assumed_pass",
+      "usefulness": "high",
+      "note": "The commit added a matching assertion to the validator alongside the meta tag, which is the correct pattern. The run itself was not recorded."
+    },
+    {
+      "tool": "cloudflare-pages-preview",
+      "category": "Deployment",
+      "result": "assumed_pass",
+      "usefulness": "high",
+      "note": "Required status check on the repository, so merge implies it passed."
+    }
+  ],
+  "criticalFindings": [],
+  "highFindings": [],
+  "validationGate": {
+    "result": "not_recorded",
+    "passCount": "unknown",
+    "evidenceQuality": "reconstructed_from_git"
+  },
+  "lessons": [
+    "Adding the assertion in the same commit as the asserted content is the pattern to keep. It prevents the meta tag from silently disappearing later.",
+    "A unit of work that ships to production without a generation record leaves the MDE state lying about what is deployed."
+  ]
+}

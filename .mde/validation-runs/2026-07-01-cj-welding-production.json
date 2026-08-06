@@ -1,0 +1,72 @@
+{
+  "validationRunId": "2026-07-01-cj-welding-production",
+  "generation": 6,
+  "phase": "Phase 1",
+  "phaseGoal": "Add C&J Welding to the client-work proof section and verify it live in production.",
+  "recordedAt": "2026-08-05",
+  "recordedRetroactively": true,
+  "recordSource": "Reconstructed from .mde/handoffs/control-center-cjwelding-client-list-2026-07-01.md, which recorded each check and its result.",
+  "validationsExecuted": [
+    {
+      "name": "npm run test:seo-aeo",
+      "category": "Mission Coverage",
+      "result": "pass",
+      "evidence": "SEO/AEO validator passed with the new client-work entry present in the machine-readable surfaces."
+    },
+    { "name": "npm run typecheck", "category": "Technical", "result": "pass", "evidence": "TypeScript completed successfully." },
+    { "name": "npm run lint", "category": "Technical", "result": "pass", "evidence": "ESLint completed successfully." },
+    { "name": "npm run build", "category": "Technical", "result": "pass", "evidence": "Static export build completed." },
+    { "name": "git diff --check", "category": "Technical", "result": "pass", "evidence": "No whitespace errors." },
+    {
+      "name": "quality (CI)",
+      "category": "Technical",
+      "result": "pass",
+      "evidence": "PR #19 passed the required quality check."
+    },
+    {
+      "name": "cloudflare-pages-preview",
+      "category": "Deployment",
+      "result": "pass",
+      "evidence": "PR #19 passed the required Cloudflare Pages preview check before merge to main."
+    },
+    {
+      "name": "production rendered-page smoke test",
+      "category": "Usability",
+      "result": "pass",
+      "evidence": "https://northvalleyintel.com/#client-work and the www variant rendered the C&J Welding card after deployment from main at commit 476b37d."
+    },
+    {
+      "name": "production machine-readable surface check",
+      "category": "Mission Coverage",
+      "result": "pass",
+      "evidence": "https://northvalleyintel.com/source-website-assessment.json and /llms.txt served the new client entry."
+    },
+    {
+      "name": "production asset check",
+      "category": "Deployment",
+      "result": "pass",
+      "evidence": "https://northvalleyintel.com/client-work/cj-welding-material-shapes.png served the screenshot."
+    }
+  ],
+  "validationsSkipped": [
+    {
+      "name": "npm run test:assessment-teaser",
+      "reason": "Not run at the time. src/lib/site.ts is a shared surface, so this was a partial suite after a shared-surface edit. Recorded here as a gap, not a justified skip."
+    },
+    {
+      "name": "npm run test:client-intake",
+      "reason": "Not run at the time. Same gap."
+    },
+    {
+      "name": "second independent Validation Gate pass",
+      "reason": "Not run at the time. Phase exit pass count therefore did not advance."
+    }
+  ],
+  "criticalFindings": [],
+  "highFindings": [],
+  "gateResult": "pass",
+  "phaseExitPassCountAfterRun": 1,
+  "evidenceQuality": "strong_production_single_pass",
+  "cacheBustingApplied": "unknown",
+  "note": "Whether the production checks were cache-busted was not recorded. Under the Phase 2 validation strategy this is now mandatory for page and asset checks."
+}

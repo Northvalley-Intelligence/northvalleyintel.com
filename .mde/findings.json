@@ -1,0 +1,145 @@
+{
+  "updatedAt": "2026-08-05",
+  "generation": 6,
+  "findings": [
+    {
+      "id": "teaser-sender-undeliverable",
+      "severity": "Critical",
+      "status": "code_fixed_pending_config",
+      "openedAt": "2026-08-05",
+      "summary": "The Website Growth Assessment teaser is very likely not reaching prospects. Production mail sends from onboarding@resend.dev, a shared Resend sandbox sender that can only deliver to the Resend account owner. The teaser is addressed to the requester, so it is rejected, while the admin notification to Northvalley still arrives.",
+      "evidence": "The controlled production intake on 2026-08-05 arrived from 'Northvalley Intelligence <onboarding@resend.dev>'. The deployed code's fallback sender is alerts@northvalleyintel.com, so an env var is explicitly set to the sandbox sender. website-assessment-teaser.ts sends to: [input.request.email] with sender ASSESSMENT_TEASER_FROM || CHAT_NOTIFY_FROM || the sandbox address.",
+      "missionImpact": "Contradicts a What Matters Most line: 'Send the teaser PDF to the requester and copy Northvalley.' A feature marked complete since 2026-06-12 may never have worked for a real prospect, because every test to date used a Northvalley address.",
+      "codeFix": "The sandbox fallback is removed and any @resend.dev sender now throws instead of attempting delivery.",
+      "exactNextAction": "Verify a Northvalley sending domain in Resend, then set ASSESSMENT_TEASER_FROM and CHAT_NOTIFY_FROM to an address on it. Confirm via Resend Logs whether past teaser sends were rejected, and follow up manually with any stranded requesters.",
+      "blocks": ["W4 MCP write path, which mails arbitrary customers and would hit the same wall"]
+    },
+    {
+      "id": "teaser-failure-invisible",
+      "severity": "High",
+      "status": "resolved",
+      "openedAt": "2026-08-05",
+      "summary": "A failed teaser delivery was reported only through console.warn inside a waitUntil background task. In a Cloudflare Worker that is visible only to someone tailing logs at that moment, so a stranded requester produced no durable signal. There was also no retry.",
+      "relatedGap": "sendAssessmentEmail returned silently when RESEND_API_KEY was missing, making a missing key an invisible no-op.",
+      "resolution": "Delivery failures now email Northvalley through the shared notify helper with the requester address, website, scan id, and error. The alert is addressed to the Northvalley inbox precisely because that path still works when the sending domain is misconfigured. A missing API key now throws. Three validator assertions added.",
+      "resolvedAt": "2026-08-05"
+    },
+    {
+      "id": "weak-bdd-resend-failure-visibility",
+      "severity": "Medium",
+      "status": "open",
+      "openedAt": "2026-08-05",
+      "summary": "The BDD 'resend-failure-visibility' (High, implemented) expects only that failures 'raise a logged follow-up failure'. That passed green while prospects were stranded, because a log line satisfies it. A scenario that can pass while the mission outcome fails is an Anti-Demo violation.",
+      "exactNextAction": "Rewrite the scenario to require a signal a human actually receives, and audit the remaining BDDs for the same weakness.",
+      "blocks": []
+    },
+    {
+      "id": "client-intake-subdomain",
+      "severity": "High",
+      "status": "resolved",
+      "openedAt": "2026-06-20",
+      "resolvedAt": "2026-08-05",
+      "ageDaysAtResolution": 46,
+      "summary": "intake.northvalleyintel.com was attached to the Cloudflare Pages project but stuck pending because the required DNS record was never created.",
+      "resolution": "Founder created CNAME intake -> northvalleyintel-com.pages.dev and re-added the Pages custom domain. Verified in production: DNS resolves, 302 redirect to /intake preserving query string, 200 at the form with all six content assertions, TLS certificate issued for the subdomain, and fail-closed behavior confirmed on both hostnames.",
+      "rootCause": "A two-step setup where only the Pages attachment was done and the DNS record was never created. The pending status was treated as a warning rather than a failed deployment check, so unrelated work shipped past it for six weeks."
+    },
+    {
+      "id": "cloudflare-token-scope",
+      "severity": "High",
+      "status": "resolved_by_workaround",
+      "openedAt": "2026-08-05",
+      "resolvedAt": "2026-08-05",
+      "resolution": "Founder created the DNS record in the Cloudflare dashboard. No token in ~/code can write DNS on this zone: the northvalleyintel.com and cjwelding tokens cannot see the zone at all, and the jacob-family token carries account-level Zone:Read but is rejected on dns_records. Narrow scoping is correct practice; the lesson is to probe the specific resource during planning rather than trusting /user/tokens/verify.",
+      "summary": "CLOUDFLARE_API_TOKEN in .env.local verifies as active but can see zero zones and zero accounts, so it cannot create DNS records or manage Pages settings.",
+      "evidence": "GET /user/tokens/verify returns status active. GET /zones and GET /accounts both return empty result sets with no errors, indicating a Pages-deploy-scoped token without Zone:DNS:Edit.",
+      "exactNextAction": "Either create the CNAME in the Cloudflare dashboard, or mint a token carrying Zone:DNS:Edit on the northvalleyintel.com zone.",
+      "blocks": ["automated W1 DNS remediation"]
+    },
+    {
+      "id": "resend-sender-domain",
+      "severity": "High",
+      "status": "open",
+      "openedAt": "2026-06-12",
+      "severityChangedAt": "2026-08-05",
+      "severityChangeReason": "Raised from Medium. The Phase 2 MCP write path generates mail to arbitrary customer addresses, which is exactly the traffic an unverified sender domain fails to deliver.",
+      "summary": "Resend may reject delivery to arbitrary customer addresses until a verified Northvalley sender domain is configured.",
+      "exactNextAction": "Verify a Northvalley sender domain in Resend before the MCP write path is announced anywhere."
+    },
+    {
+      "id": "mcp-throttle-storage",
+      "severity": "High",
+      "status": "resolved_by_decision",
+      "openedAt": "2026-08-05",
+      "summary": "Northvalley has no persistence, so Medina's $0 Supabase row-count throttle has no analogue. A durable throttle requires new infrastructure.",
+      "resolution": "Founder selected Cloudflare KV on 2026-08-05. Recorded in decisions.jsonl.",
+      "exactNextAction": "Provision the KV namespace and binding before the MCP write path ships."
+    },
+    {
+      "id": "directory-submission-status-conflict",
+      "severity": "Medium",
+      "status": "open",
+      "openedAt": "2026-08-05",
+      "summary": "Two authorities disagree on whether the OpenAI directory submission happened for medinaclean.com. The handoff (2026-08-04) lists directory submissions under 'Not done / optional next steps'; the agent-native-mcp skill package metadata states 'OpenAI directory submitted'.",
+      "exactNextAction": "Confirm actual submission status before writing any directory claim into MISSION_UPDATES.md or any public copy. Until confirmed, claim nothing.",
+      "blocks": ["W5 status reporting"]
+    },
+    {
+      "id": "preview-runtime-secrets",
+      "severity": "Medium",
+      "status": "open",
+      "openedAt": "2026-06-12",
+      "summary": "Cloudflare Pages preview may not expose all production secrets, so preview cannot fully validate secret-dependent write paths.",
+      "exactNextAction": "Plan a controlled production test for the MCP write path rather than relying on preview."
+    },
+    {
+      "id": "assessment-service-availability",
+      "severity": "Medium",
+      "status": "open",
+      "openedAt": "2026-06-12",
+      "summary": "assessment.northvalleyintel.com must be reachable from the Pages Function for teaser generation, including via the MCP request_assessment path.",
+      "exactNextAction": "Include a reachability check in the MCP contract validator."
+    },
+    {
+      "id": "client-intake-delivery-path",
+      "severity": "Medium",
+      "status": "resolved",
+      "openedAt": "2026-06-20",
+      "resolvedAt": "2026-08-05",
+      "summary": "A controlled production intake submission confirming private delivery with attachments had never been run.",
+      "resolution": "Submitted through the real customer path in a browser on 2026-08-05: subdomain redirect, all nine required fields, live Turnstile challenge, PNG attachment. Founder confirmed receipt with the attachment intact at 69 bytes. A prior curl attempt returned 403, which also confirmed the turnstile-required Critical BDD against production for the first time."
+    },
+    {
+      "id": "floating-dependency-versions",
+      "severity": "Medium",
+      "status": "open",
+      "openedAt": "2026-08-05",
+      "summary": "Every dependency in package.json is pinned to \"latest\", including next and react. For a public MCP contract endpoint this makes builds non-reproducible and exposes the contract to upstream breakage.",
+      "exactNextAction": "Pin @modelcontextprotocol/sdk and zod explicitly when added. Consider pinning the existing set separately."
+    },
+    {
+      "id": "gate-list-incomplete",
+      "severity": "Medium",
+      "status": "resolved",
+      "openedAt": "2026-08-05",
+      "summary": "The working gate list omitted test:assessment-teaser and test:chat, both of which exist in package.json. W3 moves assessment content and directly implicates test:assessment-teaser.",
+      "resolution": "Both added to the Functional category in validation-strategy.json."
+    },
+    {
+      "id": "mde-state-drift",
+      "severity": "Medium",
+      "status": "resolved",
+      "openedAt": "2026-08-05",
+      "summary": "The 06-22 and 07-01 work produced a handoff document but no generation record, no validation run, and no state or progress bump. The generation counter read 4 while two further units of work had shipped to production.",
+      "resolution": "Generations 5 and 6 backfilled, state and progress brought current."
+    },
+    {
+      "id": "verified-sender-domain",
+      "severity": "Low",
+      "status": "open",
+      "openedAt": "2026-06-12",
+      "summary": "Resend temporary sender may not support arbitrary customer delivery.",
+      "note": "Subsumed by resend-sender-domain, retained for history."
+    }
+  ]
+}

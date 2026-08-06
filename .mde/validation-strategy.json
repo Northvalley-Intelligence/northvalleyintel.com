@@ -1,0 +1,156 @@
+{
+  "strategyVersion": "phase-2-agent-native-2026-08-05",
+  "project": "northvalleyintel.com",
+  "createdAt": "2026-08-05",
+  "phase": "Phase 2",
+  "rationale": "The project ran four generations without a written validation strategy. Phase 2 publishes a public MCP endpoint, which is a contract consumed by third-party clients that will never read release notes. Shipping that without a written strategy would repeat the intake-DNS failure at a larger blast radius.",
+  "principles": [
+    "Production deploys only from main. cloudflare-pages-preview must pass as a required check before merge.",
+    "Nothing is done until verified against the live public domain. Local pass and merge are not completion.",
+    "Never weaken or delete an assertion to make a build pass. Update assertions deliberately as part of the change.",
+    "Run the full local suite after any shared-page or config edit, not the subset that looks related.",
+    "Public write paths fail closed. An unvalidated or unthrottled write path is not shippable."
+  ],
+  "environments": {
+    "local": "Static Next.js export plus bespoke node validators under scripts/. No test runner is installed by design.",
+    "preview": "Cloudflare Pages PR preview. May not expose all production secrets, so it cannot fully validate secret-dependent write paths.",
+    "production": "Cloudflare Pages from main, served at northvalleyintel.com and www.northvalleyintel.com."
+  },
+  "cacheBustingRule": {
+    "rule": "Every production verification of a page or static asset must append a cache-busting query parameter.",
+    "reason": "Cloudflare serves with s-maxage=300, so for up to five minutes after deploy the bare URL can return the previous version and make a deploy check report a false result.",
+    "appliesTo": ["Usability", "Mission Coverage", "Deployment"],
+    "exempt": ["MCP JSON-RPC POST requests, which are not edge-cached"]
+  },
+  "categories": [
+    {
+      "category": "Technical",
+      "appliesTo": "every change",
+      "tools": ["npm run lint", "npm run typecheck", "npm run build"],
+      "productionVerification": null,
+      "passCriteria": "All three exit zero. build must emit the static export including every route under test."
+    },
+    {
+      "category": "Functional",
+      "appliesTo": "intake, assessment teaser, workflow chat, MCP tools",
+      "tools": [
+        "npm run test:client-intake",
+        "npm run test:assessment-teaser",
+        "npm run test:chat",
+        "npm run test:mcp-contract"
+      ],
+      "note": "test:assessment-teaser and test:chat were omitted from an earlier gate list. Both are in scope. Any change to homepage or services content implicates test:assessment-teaser.",
+      "productionVerification": {
+        "intakeFailClosed": "POST https://northvalleyintel.com/api/client-intake with incomplete payload returns an error, never an acceptance.",
+        "intakeDelivery": "One controlled submission with a real attachment, confirmed received privately with the attachment intact.",
+        "mcpWritePath": "Live call with incomplete payload is rejected; live call containing credential-shaped values is rejected."
+      },
+      "passCriteria": "Validators exit zero and each production check returns its stated result."
+    },
+    {
+      "category": "Contract",
+      "appliesTo": "the public MCP endpoint at /mcp",
+      "tools": ["npm run test:mcp-contract"],
+      "checks": [
+        "tools/list returns exactly the published tool set",
+        "every tool carries a description and a valid input schema",
+        "annotations are present and readOnly/destructive hints are accurate",
+        "write tools declare and return a pending status",
+        "no tool response contains complete assessment report content"
+      ],
+      "productionVerification": {
+        "statelessHandshake": "Drive the live production endpoint with sequential HTTP requests: initialize, then tools/list, then tools/call. Each is a separate connection hitting a fresh instance.",
+        "whyNotInMemory": "An in-memory MCP client test uses one persistent connection and cannot surface a stateless-handshake failure. It will pass while production is broken. In-memory testing alone never satisfies this check.",
+        "methodDisallowed": "GET /mcp returns 405. OPTIONS returns CORS headers."
+      },
+      "passCriteria": "All checks pass locally and the sequential live sequence completes against production."
+    },
+    {
+      "category": "Security",
+      "appliesTo": "every public write path",
+      "checks": [
+        "fail closed on missing or malformed required fields",
+        "reject credential-shaped input (passwords, API keys, tokens, registrar logins)",
+        "honeypot present and enforced",
+        "durable throttle enforced across isolates",
+        "trust invariant: no code path emits a confirmed state; write tools always return pending review"
+      ],
+      "note": "Turnstile cannot run inside an agent client. The MCP write path substitutes honeypot plus shared secret plus a Cloudflare KV throttle. A write path without a durable throttle is not shippable.",
+      "productionVerification": {
+        "throttle": "Repeated live submissions past the window limit are rejected.",
+        "trustInvariant": "Grep the built output for confirmed-state emission on write paths; confirm live responses return pending."
+      },
+      "passCriteria": "Every check enforced in code, not only in copy, and each production check returns its stated result."
+    },
+    {
+      "category": "Mission Coverage",
+      "appliesTo": "public content, positioning, machine-readable surfaces",
+      "tools": ["npm run test:seo-aeo"],
+      "checks": [
+        "source-website-assessment.json, llms.txt, robots.txt, sitemap.xml reflect current information architecture",
+        "FAQ structured data present and valid",
+        "no chatbot-first or autonomous-booking language on customer-facing pages",
+        "protocol, endpoint, and tool-schema detail confined to llms.txt and source-website-assessment.json",
+        "only shipped capabilities named"
+      ],
+      "productionVerification": {
+        "urls": [
+          "https://northvalleyintel.com/ (cache-busted)",
+          "https://www.northvalleyintel.com/ (cache-busted)",
+          "https://northvalleyintel.com/source-website-assessment.json",
+          "https://northvalleyintel.com/llms.txt",
+          "https://northvalleyintel.com/robots.txt",
+          "https://northvalleyintel.com/sitemap.xml"
+        ]
+      },
+      "passCriteria": "Validator exits zero against local build and the live URLs serve the current content."
+    },
+    {
+      "category": "Usability",
+      "appliesTo": "rendered pages",
+      "productionVerification": {
+        "method": "Fetch the live page cache-busted and assert on rendered content, not source.",
+        "urls": [
+          "https://northvalleyintel.com/intake",
+          "https://intake.northvalleyintel.com",
+          "https://northvalleyintel.com/#client-work"
+        ]
+      },
+      "passCriteria": "Each URL returns 200 and renders the expected content."
+    },
+    {
+      "category": "Deployment",
+      "appliesTo": "every merge to main",
+      "checks": [
+        "cloudflare-pages-preview passed as a required status check before merge",
+        "production reflects the current main commit",
+        "any Pages custom domain reports active, not pending"
+      ],
+      "note": "A custom domain attached but pending is a failed deployment check, not a warning. This is the failure mode that left intake.northvalleyintel.com unresolved for six weeks.",
+      "passCriteria": "All checks pass. A pending custom domain blocks phase exit."
+    }
+  ],
+  "severityPolicy": {
+    "Critical": "Must pass before merge. No deferral.",
+    "High": "Must pass, be explicitly accepted, or be explicitly deferred with a recorded exact next action.",
+    "Medium": "Recorded in findings.json; may ship.",
+    "Low": "Recorded; may ship."
+  },
+  "secondRunPolicy": {
+    "requirement": "Validation Gate must pass twice with no code, test, strategy, or validator changes between clean passes. Any such change resets the count.",
+    "mustRerun": [
+      "all Critical validations",
+      "anything that failed in run 1",
+      "anything affected by changes since run 1",
+      "validations tied to unresolved High risks",
+      "all production and network-dependent checks, which are environment-sensitive by nature"
+    ],
+    "maySkip": "Validations provably unaffected by changes since run 1, each with a recorded reason in the validation run.",
+    "neverSkip": "Production verification. It is non-deterministic and cache-sensitive."
+  },
+  "knownLimitations": [
+    "Preview cannot fully validate secret-dependent write paths, so the MCP write path requires a controlled production test.",
+    "assessment.northvalleyintel.com must be reachable from the Pages Function for teaser generation, including via the MCP path.",
+    "Resend sender-domain verification gates delivery to arbitrary customer addresses, which is precisely the traffic the MCP write path creates."
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "updatedAt": "2026-08-05",
+  "throughGeneration": 6,
+  "validators": [
+    {
+      "tool": "npm run test:seo-aeo",
+      "runs": 6,
+      "failuresCaught": 1,
+      "usefulness": "high",
+      "signal": "The highest-value validator in the project. Asserts against content that is easy to break silently and covers four public surfaces plus structured data.",
+      "risk": "Its assertions are content-coupled, so an information-architecture change tempts weakening them. The Phase 2 strategy forbids that explicitly.",
+      "keep": true
+    },
+    {
+      "tool": "npm run test:client-intake",
+      "runs": 3,
+      "failuresCaught": 1,
+      "usefulness": "high",
+      "signal": "Caught real fail-closed and required-field regressions. Validates behavior, not just rendering.",
+      "keep": true
+    },
+    {
+      "tool": "npm run typecheck",
+      "runs": 6,
+      "failuresCaught": 0,
+      "usefulness": "high",
+      "signal": "No caught failures on record, but it is cheap and guards the Pages Function contracts.",
+      "keep": true
+    },
+    {
+      "tool": "npm run build",
+      "runs": 6,
+      "failuresCaught": 0,
+      "usefulness": "high",
+      "signal": "Required for a static export project. Confirms every route is emitted.",
+      "keep": true
+    },
+    {
+      "tool": "npm run lint",
+      "runs": 6,
+      "failuresCaught": 0,
+      "usefulness": "medium",
+      "signal": "No caught failures on record. Cheap, keep.",
+      "keep": true
+    },
+    {
+      "tool": "git diff --check",
+      "runs": 1,
+      "failuresCaught": 0,
+      "usefulness": "low",
+      "signal": "Whitespace only. Subsumed by prettier and lint.",
+      "keep": false,
+      "recommendation": "Drop from the standard gate list."
+    },
+    {
+      "tool": "npm run test:assessment-teaser",
+      "runs": 2,
+      "failuresCaught": 0,
+      "usefulness": "unknown",
+      "signal": "Under-run. Skipped during generation 6 despite a shared-surface edit. Effectiveness cannot be judged until it runs consistently.",
+      "keep": true,
+      "recommendation": "Promote into the standard gate list. W3 moves assessment content and makes it load-bearing."
+    },
+    {
+      "tool": "npm run test:chat",
+      "runs": 1,
+      "failuresCaught": 0,
+      "usefulness": "unknown",
+      "signal": "Run once, during the assessment teaser generation. Effectively dormant.",
+      "keep": true,
+      "recommendation": "Include in the full-suite run after shared-page or config edits."
+    },
+    {
+      "tool": "cloudflare-pages-preview",
+      "runs": 4,
+      "failuresCaught": 0,
+      "usefulness": "high",
+      "signal": "Required status check. Its value is structural rather than in caught failures.",
+      "keep": true
+    },
+    {
+      "tool": "production URL verification",
+      "runs": 3,
+      "failuresCaught": 1,
+      "usefulness": "high",
+      "signal": "The only validator that caught the intake subdomain failure. Local and CI checks all passed while the subdomain was dead. This is the strongest argument for the production-verification rule.",
+      "keep": true
+    },
+    {
+      "tool": "Cloudflare Pages custom-domain status check",
+      "runs": 1,
+      "failuresCaught": 1,
+      "usefulness": "high",
+      "signal": "Caught the pending subdomain. Then the finding sat open for six weeks, which is a process failure rather than a validator failure.",
+      "keep": true,
+      "recommendation": "Under the Phase 2 strategy a pending custom domain is a failed deployment check that blocks phase exit, not a warning."
+    }
+  ],
+  "gaps": [
+    "No validator covers the MCP contract. scripts/validate-mcp-contract.mjs is required before the endpoint ships.",
+    "No validator drives a live endpoint with sequential requests, which is the only way to catch a stateless-handshake failure.",
+    "No validator confirms actual email delivery. Every delivery check to date has been fail-closed only.",
+    "Nothing enforces that the full local suite runs after a shared-surface edit. Both recorded process misses are of this kind."
+  ]
+}

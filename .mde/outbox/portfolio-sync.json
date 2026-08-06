@@ -1,72 +1,91 @@
 {
   "project_id": "northvalleyintel.com",
   "project_name": "Northvalley Intelligence Website",
-  "sync_generated_at": "2026-06-12T06:50:00Z",
+  "sync_generated_at": "2026-08-05T00:00:00Z",
   "central_mde_sync_status": "ready_for_import",
+  "previous_sync_at": "2026-06-12T06:50:00Z",
+  "sync_gap_note": "Outbox went unsynced for roughly seven weeks. Generations 5 and 6 shipped to production during that window and were backfilled on 2026-08-05.",
   "mission_version": "assessment-teaser-2026-06-12",
+  "validation_strategy_version": "phase-2-agent-native-2026-08-05",
   "phase": "Phase 1",
-  "phase_goal": "Integrate the Website Growth Assessment as an email-gated teaser report while preserving the complete report as a paid service.",
-  "phase_readiness": "ready_for_founder_review",
+  "phase_goal": "Integrate the Website Growth Assessment and client website launch intake as practical entry points while preserving paid assessment depth and private client data handling.",
+  "phase_readiness": "phase_1_exit_blocked_on_intake_subdomain_dns",
+  "current_generation": 6,
+  "next_phase": {
+    "name": "Phase 2 — Agent-native service delivery",
+    "status": "prepared_not_opened",
+    "summary": "Northvalley builds and operates agent-native service surfaces for operational SMBs, so a customer's service is reachable from the assistants their customers already use, with the owner still approving the work. medinaclean.com is the reference implementation; northvalleyintel.com becomes the second implementation and the live demo."
+  },
   "artifact_profiles": [
     "web_ui",
     "form_workflow",
     "public_content",
     "client_facing_workflow",
+    "content_publication",
     "pdf_generation",
-    "report_generation"
+    "agent_interface"
   ],
-  "context_packs": [
-    "ui-forms",
-    "pdf-generation"
-  ],
+  "context_packs": ["ui-forms", "pdf-generation", "agent-native-mcp"],
   "applicable_learning_check": {
     "artifact_type_touched": [
       "company website",
-      "assessment request form",
+      "client proof content",
+      "machine-readable answer-engine surfaces",
       "Pages Function",
-      "one-page teaser PDF",
-      "staging deployment"
+      "MDE state artifacts"
     ],
-    "context_packs_applied": [
-      "ui-forms",
-      "pdf-generation"
-    ],
+    "context_packs_applied": ["ui-forms", "agent-native-mcp"],
     "prior_issue_signatures_applied": [
-      "FORM_DATA_LOST_ON_VALIDATION_FAILURE",
-      "FAKE_BUTTON_OR_DEAD_ACTION",
-      "PDF_TEXT_OVERFLOW_MARGIN"
+      "PENDING_CUSTOM_DOMAIN_TREATED_AS_WARNING",
+      "PARTIAL_SUITE_AFTER_SHARED_SURFACE_EDIT",
+      "CDN_CACHE_MAKES_DEPLOY_CHECK_LIE",
+      "IN_MEMORY_MCP_TEST_HIDES_STATELESS_FAILURE"
     ],
     "validators_or_checks_included": [
       "lint",
       "typecheck",
-      "assessment teaser source validation",
-      "chat regression validation",
-      "static export build",
-      "PR preview deployment check",
-      "dedicated staging smoke test",
-      "actual staging hostname smoke test"
+      "build",
+      "test:seo-aeo",
+      "test:client-intake",
+      "test:assessment-teaser",
+      "test:chat",
+      "cloudflare-pages-preview",
+      "production URL verification"
     ],
-    "downstream_repos_or_projects_affected": [
-      "mde",
-      "local-website-growth-assessment",
-      "proposals",
-      "feroshjacob"
-    ]
+    "downstream_repos_or_projects_affected": ["mde", "medinaclean.com", "local-website-growth-assessment"]
   },
-  "upstream_dependencies": [
-    "mde",
-    "feroshjacob",
-    "local-website-growth-assessment"
+  "upstream_dependencies": ["mde", "feroshjacob", "local-website-growth-assessment"],
+  "downstream_dependencies": ["mde"],
+  "validation_strategy_status": "active",
+  "production_status": "current_with_main",
+  "open_high_findings": [
+    "client-intake-subdomain — DNS CNAME never created; open 46 days",
+    "cloudflare-token-scope — deploy token cannot create DNS records",
+    "resend-sender-domain — raised to High for the Phase 2 MCP write path"
   ],
-  "downstream_dependencies": [
-    "mde"
-  ],
-  "validation_strategy_status": "active_for_phase",
-  "production_status": "blocked_until_founder_validation",
   "staging_status": {
     "dedicated_project": "northvalleyintel-staging",
     "temporary_pages_url": "https://northvalleyintel-staging.pages.dev",
     "custom_hostname": "https://staging.northvalleyintel.com",
     "notes": "Staging Turnstile was disabled only on the dedicated staging project to allow founder review of website assessment submissions."
+  },
+  "corrections_requested_in_central": {
+    "file": "portfolio/PROJECTS.yaml",
+    "entry": "northvalleyintel.com",
+    "applied_at": "2026-08-05",
+    "wrong": {
+      "mde_status": "not_started",
+      "validation_strategy_status": "missing",
+      "central_sync_status": "not_started",
+      "skill_bootstrap_required": true,
+      "current_session_status": "unknown"
+    },
+    "correct": {
+      "mde_status": "active",
+      "validation_strategy_status": "active",
+      "central_sync_status": "active",
+      "skill_bootstrap_required": false,
+      "current_session_status": "existing_session_bridged"
+    }
   }
 }
