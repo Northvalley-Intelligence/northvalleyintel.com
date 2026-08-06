@@ -1,6 +1,8 @@
 name = "northvalleyintel-com"
 pages_build_output_dir = "out"
 compatibility_date = "2026-06-05"
+# Required so the MCP SDK bundles for the /mcp Pages Function.
+compatibility_flags = ["nodejs_compat"]
 
 [[d1_databases]]
 binding = "WORKFLOW_CHAT_DB"

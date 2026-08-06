@@ -52,7 +52,21 @@ An agent lane is added onto the intake a business already has, so there is one
 record, one notification, and one set of rules rather than a parallel booking
 system the owner has to check separately.
 
-Reference implementation, live today:
+Northvalley runs its own agent-native surface:
+
+- Endpoint: https://northvalleyintel.com/mcp (Model Context Protocol, public, no auth)
+- Tools: list_services, request_assessment, request_consult
+- request_assessment submits a request for a Website Growth Assessment. It never
+  returns assessment findings, scores, or report content. The one-page teaser is
+  emailed; the complete assessment is a paid engagement.
+- request_consult submits a request to talk about custom software or an
+  agent-native surface. It does not book or confirm a meeting.
+- Both write tools return a pending status for Northvalley to review.
+- Northvalley works with clients anywhere in the United States. There is no
+  service-area gate; the Cobb, Paulding, and Douglas county focus is an input to
+  the lead-growth analysis inside an assessment, not a limit on who it works with.
+
+Client reference implementation, live today:
 
 - Business: Medina Clean, a bilingual residential and small-business cleaning
   service near Woodstock, Georgia.
