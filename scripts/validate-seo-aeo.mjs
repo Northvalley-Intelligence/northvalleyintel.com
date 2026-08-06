@@ -4,8 +4,14 @@ const files = {
   layout: readFileSync("src/app/layout.tsx", "utf8"),
   page: readFileSync("src/app/page.tsx", "utf8"),
   site: readFileSync("src/lib/site.ts", "utf8"),
+  header: readFileSync("src/components/site-header.tsx", "utf8"),
   source: readFileSync("public/source-website-assessment.json", "utf8"),
   llms: readFileSync("public/llms.txt", "utf8"),
+  videoPage: readFileSync(
+    "src/app/case-studies/chatgpt-booking-medina-clean/page.tsx",
+    "utf8",
+  ),
+  videoData: readFileSync("src/lib/chatgpt-booking-demo.ts", "utf8"),
   robots: readFileSync("src/app/robots.ts", "utf8"),
   sitemap: readFileSync("src/app/sitemap.ts", "utf8"),
 };
@@ -101,7 +107,11 @@ const checks = [
     pass:
       files.site.includes('title: "Website Growth Assessment"') &&
       files.site.includes("complete assessment is a paid engagement") &&
-      files.llms.includes("Website Growth Assessment"),
+      files.llms.includes("Website Growth Assessment") &&
+      // Rendered inside the Services section, not as a competing top-level
+      // nav entry. The email gate and paid report are unchanged.
+      files.page.includes("featuredOffering.title") &&
+      !files.header.includes("Website Check"),
   },
   {
     name: "the live agent-native reference implementation is machine-readable",
@@ -118,6 +128,29 @@ const checks = [
       files.llms.includes("assistant submits a REQUEST and never confirms") &&
       source.agentNativeSurfaces[0].trustModel.includes("pending status") &&
       files.site.includes("owner approves every job"),
+  },
+  {
+    name: "the ChatGPT booking demo page is canonical, structured, and crawlable",
+    pass:
+      files.videoPage.includes("VideoObject") &&
+      files.videoPage.includes("FAQPage") &&
+      files.videoPage.includes("alternates: { canonical") &&
+      // The transcript and FAQ must be visible page content. Answer engines
+      // read text, not JSON-LD alone, and a <details> wrapper would hide it.
+      files.videoPage.includes("chatgptBookingTranscript.map") &&
+      files.videoPage.includes("chatgptBookingFaq.map") &&
+      !files.videoPage.includes("<details") &&
+      files.site.includes("chatgpt-booking-medina-clean"),
+  },
+  {
+    name: "the booking demo is described as a request, never a confirmation",
+    pass:
+      files.videoData.includes("not yet a confirmed appointment") &&
+      files.videoData.includes("Pending review") &&
+      files.videoData.includes("starting estimate") &&
+      files.videoData.includes("placeholder customer details") &&
+      !/books? (it )?automatically/i.test(files.videoData) &&
+      !/confirmed appointment\b(?! )/i.test(files.videoPage),
   },
   {
     name: "customer-facing copy carries no protocol or chatbot jargon",
