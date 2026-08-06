@@ -52,6 +52,27 @@ const checks = [
       files.api.includes("Resend rejected the assessment request notification"),
   },
   {
+    name: "teaser sender never falls back to the shared Resend sandbox address",
+    pass:
+      !files.api.includes("<onboarding@resend.dev>") &&
+      files.api.includes("@resend\\.dev") &&
+      files.api.includes("ASSESSMENT_TEASER_FROM"),
+  },
+  {
+    name: "a missing Resend key fails loudly instead of silently skipping the send",
+    pass:
+      files.api.includes(
+        "RESEND_API_KEY is not configured, so the assessment teaser email could not be sent",
+      ) && !/if \(!apiKey\) \{\s*return;\s*\}/.test(files.api),
+  },
+  {
+    name: "undelivered teaser raises an operator alert, not only a console warning",
+    pass:
+      files.api.includes("sendTeaserDeliveryAlert") &&
+      files.api.includes("Teaser NOT delivered") &&
+      files.api.includes("ASSESSMENT_TEASER_NOTIFY_TO"),
+  },
+  {
     name: "teaser copy withholds the paid report detail",
     pass:
       files.pdf.includes("Selected signals, not the full report") &&
