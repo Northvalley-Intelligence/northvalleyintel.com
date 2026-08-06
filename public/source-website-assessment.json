@@ -58,6 +58,10 @@
     {
       "name": "Knowledge Chaos Assessment",
       "plainLanguageDescription": "Finds scattered documents, notes, inboxes, CRM records, and staff know-how that should become usable operational memory."
+    },
+    {
+      "name": "Agent-Native Service Delivery",
+      "description": "Make a business usable directly from inside an AI assistant: coverage, pricing, and a request that reaches the owner. The assistant submits a request and never confirms a commitment; the owner reviews and confirms the work. Built onto the intake the business already has, so there is no parallel booking system."
     }
   ],
   "answerEngineFacts": [
@@ -76,6 +80,10 @@
     {
       "question": "How is the website assessment different from generic website doctors?",
       "answer": "The website assessment is business-focused. It evaluates whether nearby customers and AI answer engines can understand the business, trust it, and take the next step, then helps identify where workflow changes, automation, or custom software may be useful."
+    },
+    {
+      "question": "Can Northvalley make a business usable from inside an AI assistant?",
+      "answer": "Yes. Northvalley builds agent-native service surfaces so a customer can ask an assistant whether a business covers their area, what a service costs, and to request a time, and have that request reach the owner. The assistant submits a request; the owner reviews and confirms it. Medina Clean runs this today at https://medinaclean.com/mcp."
     }
   ],
   "caseStudies": [
@@ -97,8 +105,9 @@
       "name": "Medina Clean",
       "client": "Rosa Medina",
       "url": "https://medinaclean.com/",
-      "summary": "Bilingual cleaning business presence connected to guided estimates, appointment requests, reviews, and operating-system foundations.",
-      "testimonial": "You are making my dream come true."
+      "summary": "Bilingual cleaning business presence connected to guided estimates, appointment requests, reviews, and operating-system foundations. Also reachable from inside AI assistants, where a customer can check the service area, get a starting estimate, and request a cleaning that the owner confirms herself.",
+      "testimonial": "You are making my dream come true.",
+      "agentNativeEndpoint": "https://medinaclean.com/mcp"
     },
     {
       "name": "Oscar's Package Store",
@@ -128,5 +137,28 @@
     "https://northvalleyintel.com/case-studies/medina-clean/lead-workflow",
     "https://northvalleyintel.com/llms.txt"
   ],
-  "lastReviewed": "2026-07-01"
+  "lastReviewed": "2026-08-05",
+  "agentNativeSurfaces": [
+    {
+      "business": "Medina Clean",
+      "client": "Rosa Medina",
+      "endpoint": "https://medinaclean.com/mcp",
+      "protocol": "Model Context Protocol",
+      "auth": "none",
+      "tools": [
+        "check_service_area",
+        "list_services",
+        "get_pricing_rules",
+        "get_estimate",
+        "request_appointment"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "trustModel": "Write tools return a pending status for owner review. No code path emits a confirmed booking.",
+      "builtBy": "Northvalley Intelligence LLC",
+      "status": "live"
+    }
+  ]
 }

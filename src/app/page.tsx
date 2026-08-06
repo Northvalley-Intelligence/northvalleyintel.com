@@ -17,6 +17,7 @@ import {
   SearchCheck,
   ShieldCheck,
   Store,
+  Waypoints,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -291,9 +292,13 @@ export default function Home() {
 
               <div className="grid gap-7">
                 {services.map((service, index) => {
-                  const Icon = [SearchCheck, MousePointerClick, ClipboardList][
-                    index
-                  ];
+                  const Icon =
+                    [
+                      SearchCheck,
+                      MousePointerClick,
+                      ClipboardList,
+                      Waypoints,
+                    ][index] ?? SearchCheck;
 
                   return (
                     <article
@@ -721,12 +726,14 @@ export default function Home() {
             <div>
               <div className="grid gap-5">
                 {medinaOutcomes.map((outcome, index) => {
-                  const Icon = [
-                    Languages,
-                    MessageSquareText,
-                    ShieldCheck,
-                    CalendarCheck2,
-                  ][index];
+                  const Icon =
+                    [
+                      Languages,
+                      MessageSquareText,
+                      ShieldCheck,
+                      CalendarCheck2,
+                      Waypoints,
+                    ][index] ?? Languages;
 
                   return (
                     <article

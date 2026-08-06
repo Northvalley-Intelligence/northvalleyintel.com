@@ -22,6 +22,7 @@ The work includes:
 - Knowledge chaos assessment
 - AI-answer readiness and local search clarity
 - Workflow modernization for lead intake, scheduling, follow-up, customer information, and repeated work
+- Agent-native service delivery: making a business usable directly from inside an AI assistant
 
 ## Website Growth Assessment
 
@@ -36,6 +37,35 @@ It reviews whether a local business website helps nearby customers and AI answer
 - where contact, estimate, consultation, or booking friction exists
 
 A one-page teaser report is emailed after request. The full paid assessment includes page-level evidence, scoring logic, exact missing signals, and prioritized fixes.
+
+## Agent-Native Service Delivery
+
+Northvalley builds agent-native service surfaces so a customer can use a business
+directly from inside the AI assistant they are already using, instead of being
+handed a list of names and a phone number.
+
+The design rule is that the assistant submits a REQUEST and never confirms a
+commitment. The business owner reviews and confirms the work. This is enforced in
+code, not only in wording.
+
+An agent lane is added onto the intake a business already has, so there is one
+record, one notification, and one set of rules rather than a parallel booking
+system the owner has to check separately.
+
+Reference implementation, live today:
+
+- Business: Medina Clean, a bilingual residential and small-business cleaning
+  service near Woodstock, Georgia.
+- Endpoint: https://medinaclean.com/mcp (Model Context Protocol, public, no auth)
+- Tools: check_service_area, list_services, get_pricing_rules, get_estimate,
+  request_appointment
+- Behavior: service-area check gates estimates and booking; appointment requests
+  return a pending status for owner review; responses are available in English
+  and Spanish.
+- Added onto the existing appointment intake, so requests reach the owner through
+  the same path the website form already used.
+
+Northvalley builds and operates these surfaces for client businesses as a service.
 
 ## Useful Source Pages
 
@@ -53,7 +83,7 @@ Northvalley shows selected client work as proof of practical customer-facing
 systems, not as a generic website portfolio.
 
 - Resplendent Tea Experience, Terri Hitzig: local service presentation for afternoon tea catering, custom pastries, events, service areas, and quote requests.
-- Medina Clean, Rosa Medina: bilingual cleaning business presence connected to guided estimates, appointment requests, reviews, and operating-system foundations.
+- Medina Clean, Rosa Medina: bilingual cleaning business presence connected to guided estimates, appointment requests, reviews, and operating-system foundations. Also reachable from inside AI assistants at https://medinaclean.com/mcp, where a customer can check the service area, get a starting estimate, and request a cleaning that Rosa confirms herself.
 - Oscar's Package Store, James Jacob: local landmark package store presence focused on trust, selection, drive-through convenience, hours, directions, and direct calling.
 - Clarity Mesh LLC: expertise-led professional services presence for architecture, modernization, cloud, data, search, and delivery consulting.
 - C&J Welding, C&J Welding and Fabricating, Inc.: material-shapes reference for welding and fabrication customers preparing for quote conversations.
