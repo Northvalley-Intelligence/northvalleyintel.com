@@ -72,6 +72,12 @@ export const primaryPages = [
       "Native executive case study showing how a service-business website request became a practical operating foundation.",
   },
   {
+    url: `${siteConfig.url}/case-studies/chatgpt-booking-medina-clean`,
+    label: "Booking inside ChatGPT",
+    description:
+      "Recorded demonstration and full transcript of a cleaning business answering service-area, pricing, booking-request, and Spanish-language questions from inside ChatGPT.",
+  },
+  {
     url: `${siteConfig.url}/case-studies/medina-clean/rosas-story`,
     label: "Rosa's story",
     description:
@@ -103,6 +109,35 @@ export const primaryPages = [
   },
 ];
 
+/**
+ * How a visitor connects Northvalley's own agent surface to their assistant.
+ *
+ * This is the one place an endpoint URL belongs in customer-facing copy: it is
+ * a functional affordance, not positioning. Marketing copy elsewhere stays in
+ * customer language and carries no protocol detail.
+ */
+export const agentConnect = {
+  endpoint: "https://northvalleyintel.com/mcp",
+  summary:
+    "Northvalley runs the same kind of surface it builds for clients. Add it to your assistant and you can ask what we do, request a website assessment, or ask for a consultation without leaving the chat.",
+  note: "Requests come to us for review. Nothing is scheduled or confirmed automatically.",
+  steps: [
+    {
+      assistant: "Claude",
+      detail: "Settings → Connectors → Add custom connector → paste the URL.",
+    },
+    {
+      assistant: "ChatGPT",
+      detail:
+        "Settings → Connectors → Advanced → Developer mode → paste the URL.",
+    },
+    {
+      assistant: "Gemini",
+      detail: "Connected apps → add the URL.",
+    },
+  ],
+};
+
 export const industries = [
   "Cleaning",
   "HVAC",
@@ -133,13 +168,42 @@ export const services = [
     description:
       "We organize follow-up, scheduling, customer information, team handoffs, and repeated work so the business can keep up.",
   },
-  {
-    number: "04",
-    title: "Be Reachable Where Customers Ask",
-    description:
-      "Customers increasingly start with an AI assistant instead of a search box, and a list of names is a dead end. We make the business answer for itself there: what it covers, what it costs, and a request that reaches the owner. The owner approves every job.",
-  },
 ];
+
+/**
+ * The flagship offering. Presented ahead of the capability areas rather than as
+ * one item among them, because it is what Northvalley leads with.
+ */
+export const featuredService = {
+  eyebrow: "Flagship service",
+  title: "Be Reachable Where Customers Ask",
+  summary:
+    "Customers increasingly start with an AI assistant instead of a search box, and a list of names is a dead end. We make the business answer for itself there: what it covers, what it costs, and a request that reaches the owner. The owner approves every job.",
+  points: [
+    {
+      label: "Answers from your own system",
+      detail:
+        "Service area, pricing, and availability come out of the business's real rules, not a guess.",
+    },
+    {
+      label: "The owner still decides",
+      detail:
+        "Requests arrive for review. Nothing is confirmed or scheduled without the owner.",
+    },
+    {
+      label: "Built onto what you already have",
+      detail:
+        "It uses the intake the business already runs. No second system, no duplicate records.",
+    },
+    {
+      label: "In your customers' language",
+      detail:
+        "The same questions answered in English or Spanish, through the same rules.",
+    },
+  ],
+  proofHref: "#agent-native",
+  proofCta: "See it working",
+};
 
 export const leadDiscoveryPoints = [
   {
@@ -164,18 +228,28 @@ export const leadDiscoveryPoints = [
   },
 ];
 
+/**
+ * The Website Growth Assessment is presented as a named offering inside the
+ * Services section rather than as its own top-level entry point. The email
+ * gate, the emailed one-page teaser, and the paid complete report are
+ * unchanged; only where it sits in the information architecture moved.
+ */
+export const featuredOffering = {
+  title: "Website Growth Assessment",
+  summary:
+    "Review how nearby customers and AI answer engines find, understand, and trust the business, then show where the path from interest to contact breaks down.",
+  items: [
+    "Local visibility and AI-answer readiness",
+    "Trust proof and service-area clarity",
+    "Calls to action and contact friction",
+    "The lead path from interest to follow-up",
+  ],
+  note: "A one-page teaser is emailed free. The complete assessment is a paid engagement.",
+  href: "#website-assessment",
+  cta: "Request the free teaser",
+};
+
 export const assessments = [
-  {
-    title: "Website Growth Assessment",
-    description:
-      "Review how nearby customers and AI answer engines find, understand, and trust the business, then show where the path from interest to contact breaks down. A one-page teaser is emailed free; the complete assessment is a paid engagement.",
-    items: [
-      "Local visibility and AI-answer readiness",
-      "Trust proof and service-area clarity",
-      "Calls to action and contact friction",
-      "The lead path from interest to follow-up",
-    ],
-  },
   {
     title: "Operational AI Assessment",
     description:

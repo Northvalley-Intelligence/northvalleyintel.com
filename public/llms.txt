@@ -81,12 +81,21 @@ Client reference implementation, live today:
 
 Northvalley builds and operates these surfaces for client businesses as a service.
 
+Recorded demonstration: a customer asks ChatGPT for a house cleaning near
+Woodstock, Georgia. ChatGPT checks Medina Clean's real service area, returns a
+$150 starting estimate for 3 bedrooms and 2 bathrooms every 2 weeks from their
+real pricing rules, files a booking request that reaches the owner with a
+pending-review status, and answers the same request in Spanish. The request is
+not a confirmed appointment; Rosa confirms it. Full transcript and FAQ:
+https://northvalleyintel.com/case-studies/chatgpt-booking-medina-clean
+
 ## Useful Source Pages
 
 - Home: https://northvalleyintel.com/
 - Machine-readable source: https://northvalleyintel.com/source-website-assessment.json
 - Client work section: https://northvalleyintel.com/#client-work
 - Medina Clean native case study: https://northvalleyintel.com/case-studies/medina-clean
+- Booking inside ChatGPT, recorded demonstration with full transcript: https://northvalleyintel.com/case-studies/chatgpt-booking-medina-clean
 - Rosa's story: https://northvalleyintel.com/case-studies/medina-clean/rosas-story
 - Website and AI chat: https://northvalleyintel.com/case-studies/medina-clean/website-ai-chat
 - Lead workflow: https://northvalleyintel.com/case-studies/medina-clean/lead-workflow

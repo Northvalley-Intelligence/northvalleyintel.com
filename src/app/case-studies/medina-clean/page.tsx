@@ -97,7 +97,7 @@ export default function MedinaCleanCaseStudyPage() {
               The case study is organized around the business workflow.
             </h2>
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {medinaOutcomes.map((outcome) => (
               <article
                 key={outcome.label}

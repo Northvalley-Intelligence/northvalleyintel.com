@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navigation = [
+  // The Website Growth Assessment lives inside the Services section as a named
+  // offering, so it no longer needs a competing top-level entry.
   { href: "/#services", label: "Services" },
+  { href: "/#agent-native", label: "Agent-Native" },
   { href: "/#assessments", label: "Getting Started" },
-  { href: "/#website-assessment", label: "Website Check" },
   { href: "/#client-work", label: "Client Work" },
   { href: "/#case-study", label: "Real Example" },
   { href: "/#people", label: "People" },

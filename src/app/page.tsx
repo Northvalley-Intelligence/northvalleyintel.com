@@ -26,11 +26,15 @@ import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
 import { WebsiteAssessmentTeaserForm } from "@/components/website-assessment-teaser-form";
 import { medinaCleanCaseStudy } from "@/lib/case-studies";
+import { chatgptBookingDemo } from "@/lib/chatgpt-booking-demo";
 import {
   aeoAnswers,
+  agentConnect,
   assessments,
   clientTestimonials,
   clientWork,
+  featuredOffering,
+  featuredService,
   industries,
   leadDiscoveryPoints,
   medinaCaseStudy,
@@ -245,6 +249,42 @@ export default function Home() {
               </p>
             </div>
 
+            <div className="mt-12 rounded-lg border-2 border-north-teal bg-white p-7 shadow-[0_18px_45px_rgba(20,32,42,0.10)] md:p-9">
+              <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+                <div>
+                  <p className="text-xs font-black uppercase text-north-amber">
+                    {featuredService.eyebrow}
+                  </p>
+                  <h3 className="mt-2 text-[clamp(1.8rem,3vw,2.6rem)] font-black leading-tight">
+                    {featuredService.title}
+                  </h3>
+                  <p className="mt-4 text-base leading-7 text-north-muted">
+                    {featuredService.summary}
+                  </p>
+                  <div className="mt-7">
+                    <ButtonLink href={featuredService.proofHref}>
+                      {featuredService.proofCta}
+                    </ButtonLink>
+                  </div>
+                </div>
+                <div className="grid gap-4">
+                  {featuredService.points.map((point) => (
+                    <div
+                      key={point.label}
+                      className="border-t border-north-line pt-4 first:border-t-0 first:pt-0"
+                    >
+                      <p className="text-base font-extrabold text-north-ink">
+                        {point.label}
+                      </p>
+                      <p className="mt-1 text-sm leading-6 text-north-muted">
+                        {point.detail}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <div className="mt-14 grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
               <div className="relative pl-8">
                 <div className="absolute bottom-8 left-[1.05rem] top-8 w-px bg-north-line" />
@@ -322,6 +362,136 @@ export default function Home() {
                     </article>
                   );
                 })}
+              </div>
+            </div>
+
+            <div className="mt-14 rounded-lg border border-north-line bg-white p-7 md:p-9">
+              <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+                <div>
+                  <p className="text-xs font-black uppercase text-north-amber">
+                    Where most engagements start
+                  </p>
+                  <h3 className="mt-2 text-3xl font-extrabold">
+                    {featuredOffering.title}
+                  </h3>
+                  <p className="mt-4 text-base leading-7 text-north-muted">
+                    {featuredOffering.summary}
+                  </p>
+                  <p className="mt-4 text-base leading-7 text-north-muted">
+                    {featuredOffering.note}
+                  </p>
+                  <div className="mt-7">
+                    <ButtonLink href={featuredOffering.href}>
+                      {featuredOffering.cta}
+                    </ButtonLink>
+                  </div>
+                </div>
+                <ul className="grid gap-3">
+                  {featuredOffering.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 border-t border-north-line pt-3 text-base leading-7 text-north-muted first:border-t-0 first:pt-0"
+                    >
+                      <CheckCircle2
+                        aria-hidden="true"
+                        size={19}
+                        className="mt-1 shrink-0 text-north-teal"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="agent-native"
+          className="border-y border-north-line bg-north-ink px-5 py-16 text-white md:px-10 md:py-24 lg:px-18"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="mb-4 text-sm font-extrabold uppercase text-[#77c0b7]">
+                Agent-native service delivery
+              </p>
+              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
+                Your customers are already asking an assistant. Answer them
+                there.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-[#dbe5eb]">
+                A customer asks ChatGPT for a house cleaner near Woodstock,
+                Georgia. Instead of a list of names, Medina Clean answers for
+                itself: whether it covers the address, what it costs, and a
+                request that lands with the owner. Rosa confirms every job.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+              <div className="overflow-hidden rounded-lg border border-white/12 bg-black shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
+                <iframe
+                  className="aspect-video w-full"
+                  src={chatgptBookingDemo.embedUrl}
+                  title="Medina Clean taking a booking request inside ChatGPT"
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <div className="grid gap-5">
+                <p className="text-base leading-7 text-[#dbe5eb]">
+                  An unedited {chatgptBookingDemo.durationLabel} recording:
+                  service area, a $150 starting estimate from their own pricing
+                  rules, a booking request marked pending review, and the same
+                  request answered in Spanish.
+                </p>
+                <p className="text-base leading-7 text-[#dbe5eb]">
+                  It was built onto the booking process the business already
+                  had. No second system, no duplicate records, nothing to check
+                  in two places.
+                </p>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <ButtonLink
+                    href={`/case-studies/${chatgptBookingDemo.slug}`}
+                    variant="secondary"
+                  >
+                    Read the full breakdown
+                  </ButtonLink>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-12 rounded-lg border border-white/12 bg-white/8 p-7 md:p-9">
+              <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
+                <div>
+                  <h3 className="text-2xl font-extrabold">
+                    Try it on Northvalley
+                  </h3>
+                  <p className="mt-3 text-base leading-7 text-[#dbe5eb]">
+                    {agentConnect.summary}
+                  </p>
+                  <p className="mt-4 break-all rounded-md border border-white/15 bg-black/25 px-4 py-3 font-mono text-sm text-[#9fdcd0]">
+                    {agentConnect.endpoint}
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-[#aebecb]">
+                    {agentConnect.note}
+                  </p>
+                </div>
+                <div className="grid gap-4">
+                  {agentConnect.steps.map((step) => (
+                    <div
+                      key={step.assistant}
+                      className="border-t border-white/12 pt-4 first:border-t-0 first:pt-0"
+                    >
+                      <p className="text-base font-extrabold text-white">
+                        {step.assistant}
+                      </p>
+                      <p className="mt-1 text-sm leading-6 text-[#dbe5eb]">
+                        {step.detail}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -436,7 +606,7 @@ export default function Home() {
           <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.94fr_1.06fr] lg:items-start">
             <div>
               <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
-                Website Check
+                {featuredOffering.title}
               </p>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
                 See whether your website is helping local customers choose you.
