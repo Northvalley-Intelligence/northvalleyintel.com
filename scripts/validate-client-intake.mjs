@@ -6,6 +6,10 @@ const files = {
   api: readFileSync("functions/api/client-intake.ts", "utf8"),
   lib: readFileSync("src/lib/client-intake.ts", "utf8"),
   middleware: readFileSync("functions/_middleware.ts", "utf8"),
+  // Delivery and credential rejection were extracted into shared server helpers
+  // so the website form and the agent-native MCP write path use one path.
+  notify: readFileSync("src/lib/server/notify.ts", "utf8"),
+  secretGuard: readFileSync("src/lib/server/secret-guard.ts", "utf8"),
 };
 
 const requiredFields = [
@@ -63,8 +67,9 @@ const checks = [
       files.form.includes("<details") &&
       files.form.includes("Optional technical details") &&
       files.form.includes("Do not enter passwords") &&
-      files.lib.includes("api key") &&
-      files.lib.includes("cloudflare token"),
+      files.lib.includes("containsBlockedCredentialTerms") &&
+      files.secretGuard.includes("api key") &&
+      files.secretGuard.includes("cloudflare token"),
   },
   {
     name: "photo upload accepts up to five images",
@@ -78,11 +83,19 @@ const checks = [
   {
     name: "submission endpoint sends privately and fails closed",
     pass:
-      files.api.includes("RESEND_API_KEY") &&
-      files.api.includes("CLIENT_INTAKE_NOTIFY_TO") &&
-      files.api.includes("reply_to: payload.contactEmail") &&
+      files.notify.includes("RESEND_API_KEY") &&
+      files.notify.includes("CLIENT_INTAKE_NOTIFY_TO") &&
+      files.notify.includes("not_configured") &&
+      files.api.includes("replyTo: payload.contactEmail") &&
       files.api.includes("not fully configured yet") &&
       files.api.includes("review them before we meet"),
+  },
+  {
+    name: "intake delivery goes through the one shared helper, not a forked path",
+    pass:
+      files.api.includes("sendNotificationEmail") &&
+      !files.api.includes("api.resend.com") &&
+      files.notify.includes("api.resend.com"),
   },
   {
     name: "Turnstile verification is honored when configured",
