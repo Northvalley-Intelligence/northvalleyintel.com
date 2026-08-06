@@ -6,6 +6,7 @@ import {
   type AssessmentReportSummary,
   type AssessmentTeaserRequest,
 } from "../../src/lib/assessment-teaser";
+import { sendNotificationEmail } from "../../src/lib/server/notify";
 
 type FunctionContext = {
   request: Request;
@@ -83,10 +84,22 @@ export async function onRequestPost({ request, env, waitUntil }: FunctionContext
     teaserRequest,
     scanId: queued.scanId,
     statusUrl: queued.statusUrl || `/api/scans/${queued.scanId}`,
-  }).catch((error) => {
+  }).catch(async (error) => {
+    const message = error instanceof Error ? error.message : String(error);
+
     console.warn("assessment_teaser_followup_failed", {
-      error: error instanceof Error ? error.message : String(error),
+      error: message,
       websiteUrl: teaserRequest.websiteUrl,
+    });
+
+    // A console warning in a Worker is only visible to someone tailing logs at
+    // that moment. The requester has already been told the teaser is coming, so
+    // a silent failure strands them. Raise a signal a human actually receives.
+    await sendTeaserDeliveryAlert({
+      env,
+      teaserRequest,
+      scanId: queued.scanId,
+      error: message,
     });
   });
 
@@ -290,16 +303,28 @@ async function sendAssessmentEmail(input: {
   };
 }) {
   const apiKey = envString(input.env, "RESEND_API_KEY");
+  // Never fall back to a shared sandbox sender such as onboarding@resend.dev.
+  // That address only delivers to the Resend account owner, so a teaser bound
+  // for a prospect is rejected while the admin copy still lands — the failure
+  // then looks like success from inside Northvalley.
   const from =
     envString(input.env, "ASSESSMENT_TEASER_FROM") ||
     envString(input.env, "CHAT_NOTIFY_FROM") ||
-    "Northvalley Intelligence <onboarding@resend.dev>";
+    "Northvalley Intelligence <alerts@northvalleyintel.com>";
   const cc =
     envString(input.env, "ASSESSMENT_TEASER_CC") ||
     "contact@northvalleyintel.com";
 
   if (!apiKey) {
-    return;
+    throw new Error(
+      "RESEND_API_KEY is not configured, so the assessment teaser email could not be sent.",
+    );
+  }
+
+  if (/@resend\.dev/i.test(from)) {
+    throw new Error(
+      `The assessment teaser sender is still the shared Resend sandbox address (${from}). It cannot deliver to a requester. Verify a Northvalley sending domain and set ASSESSMENT_TEASER_FROM.`,
+    );
   }
 
   const body: Record<string, unknown> = {
@@ -332,6 +357,60 @@ async function sendAssessmentEmail(input: {
     throw new Error(
       `Resend rejected the assessment teaser email with status ${response.status}: ${errorBody.slice(0, 240)}`,
     );
+  }
+}
+
+/**
+ * Tells Northvalley when a teaser never reached the person who asked for it.
+ *
+ * Deliberately routed to the Northvalley inbox rather than the requester: when
+ * the sending domain is misconfigured, mail to Northvalley still works while
+ * mail to a prospect does not, so this alert survives the exact failure it
+ * reports. It must never throw — it already runs inside a failure handler.
+ */
+async function sendTeaserDeliveryAlert(input: {
+  env: Record<string, unknown>;
+  teaserRequest: AssessmentTeaserRequest;
+  scanId?: string;
+  error: string;
+}) {
+  try {
+    const result = await sendNotificationEmail({
+      env: input.env,
+      toEnvKeys: [
+        "ASSESSMENT_TEASER_NOTIFY_TO",
+        "ASSESSMENT_HOST_EMAIL",
+        "CHAT_NOTIFY_TO",
+      ],
+      subject: `Teaser NOT delivered: ${input.teaserRequest.websiteUrl}`,
+      text: [
+        "A Website Growth Assessment teaser failed to reach the requester.",
+        "",
+        "The requester was already told the teaser is on its way, so this needs a manual follow-up.",
+        "",
+        `Requester email: ${input.teaserRequest.email}`,
+        `Website: ${input.teaserRequest.websiteUrl}`,
+        `Scan id: ${input.scanId || "not assigned"}`,
+        "",
+        "Failure detail",
+        input.error,
+        "",
+        "If this mentions the shared Resend sandbox sender, verify a Northvalley sending domain in Resend and set ASSESSMENT_TEASER_FROM to an address on it.",
+      ].join("\n"),
+    });
+
+    if (!result.ok) {
+      console.warn("assessment_teaser_delivery_alert_failed", {
+        reason: result.reason,
+        websiteUrl: input.teaserRequest.websiteUrl,
+      });
+    }
+  } catch (alertError) {
+    console.warn("assessment_teaser_delivery_alert_threw", {
+      error:
+        alertError instanceof Error ? alertError.message : String(alertError),
+      websiteUrl: input.teaserRequest.websiteUrl,
+    });
   }
 }
 
