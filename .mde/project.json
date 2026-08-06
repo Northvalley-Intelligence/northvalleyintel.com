@@ -1,0 +1,48 @@
+{
+  "projectId": "northvalleyintel.com",
+  "projectName": "Northvalley Intelligence Website",
+  "repoPath": "~/code/northvalleyintel.com",
+  "type": "product",
+  "owner": "Ferosh",
+  "confidentiality": "private",
+  "businessRole": "Company website and lead surface for Northvalley Intelligence. Carries positioning, the email-gated Website Growth Assessment teaser, the client website launch intake, and from Phase 2 the public agent-native service surface.",
+  "mdeStatus": "active",
+  "createdAt": "2026-08-05",
+  "createdReason": "Backfilled during the Phase 2 MDE hygiene pass. The project ran four generations without project.json.",
+  "artifactProfiles": [
+    "web_ui",
+    "form_workflow",
+    "public_content",
+    "client_facing_workflow",
+    "content_publication",
+    "pdf_generation",
+    "agent_interface"
+  ],
+  "contextPacks": ["ui-forms", "pdf-generation", "agent-native-mcp"],
+  "upstreamDependencies": ["mde", "feroshjacob", "local-website-growth-assessment"],
+  "downstreamDependencies": ["mde"],
+  "siblingReferenceImplementations": [
+    {
+      "project": "medinaclean.com",
+      "relevance": "Reference implementation for the agent-native MCP lane. See AGENT_NATIVE_MCP_HANDOFF.md in that repo and the agent-native-mcp skill package in central mde.",
+      "stackDifference": "Medina runs Next.js App Router route handlers on Cloudflare Workers via OpenNext with Supabase persistence. Northvalley is a static export with Cloudflare Pages Functions and no persistence."
+    }
+  ],
+  "stack": {
+    "framework": "Next.js App Router, output: export (fully static)",
+    "language": "TypeScript",
+    "styling": "Tailwind CSS, shadcn/ui-style conventions",
+    "serverRuntime": "Cloudflare Pages Functions under functions/ (Web Request/Response)",
+    "hosting": "Cloudflare Pages, production from main",
+    "dns": "Cloudflare DNS",
+    "email": "Resend",
+    "botProtection": "Turnstile (browser paths only; does not run in agent clients)",
+    "persistence": "none in the current intake path",
+    "testRunner": "none by design; bespoke node validators under scripts/"
+  },
+  "notes": [
+    "There are no Next.js route handlers in this project. output: export means all server logic must be a Pages Function in functions/.",
+    "Dependencies are pinned to \"latest\" throughout. Contract-critical dependencies such as the MCP SDK should be pinned explicitly instead.",
+    "Cobb, Paulding, and Douglas county focus is an input to the lead-growth analysis inside the assessment. It is not a boundary on who Northvalley works with and must never become an eligibility gate."
+  ]
+}

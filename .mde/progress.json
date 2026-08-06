@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20",
+  "updatedAt": "2026-08-05",
   "completed": [
     "Assessment teaser request API",
     "Turnstile-gated frontend form",
@@ -23,12 +23,27 @@
     "Production API fail-closed smoke test for /api/client-intake",
     "Client intake usability fix with form-first layout and blur validation",
     "Bare-domain intake website entries accepted and normalized",
-    "Terri Hitzig testimonial added to client proof signals"
+    "Terri Hitzig testimonial added to client proof signals",
+    "Microsoft site verification meta tag with matching SEO/AEO assertion",
+    "C&J Welding client work across site data, source JSON, and llms.txt, production-verified",
+    "Generation records 5 and 6 backfilled from git and the C&J handoff",
+    "Validation run backfilled for the C&J production verification",
+    "First project validation strategy written (.mde/validation-strategy.json)",
+    "Missing MDE artifacts added: project.json, findings.json, validator-effectiveness.json",
+    "Phase 2 technical decisions recorded: apex MCP hosting, Cloudflare KV throttle, anonymous auth"
   ],
   "remaining": [
-    "Create DNS CNAME intake.northvalleyintel.com -> northvalleyintel-com.pages.dev",
+    "Create DNS CNAME intake.northvalleyintel.com -> northvalleyintel-com.pages.dev (blocked: current Cloudflare token has no zone access)",
     "Wait for Cloudflare Pages custom domain status to become active",
     "Smoke-test https://intake.northvalleyintel.com before client use",
-    "Submit a controlled production intake and confirm private email delivery"
+    "Submit a controlled production intake and confirm private email delivery with attachment",
+    "Refresh .mde/outbox and correct the central PROJECTS.yaml record",
+    "Write .mde/generation-summary.md",
+    "Close Phase 1 and open Phase 2 in MISSION.md",
+    "W3: agent-native service IA, assessment moved under Services, Medina Clean client card",
+    "W4: extract shared intake helper, build /mcp Pages Function, add validate-mcp-contract validator",
+    "W5: directory submission package for both domains",
+    "Verify a Northvalley sender domain in Resend before the MCP write path is announced",
+    "Confirm the medinaclean.com OpenAI directory submission status (two authorities disagree)"
   ]
 }
