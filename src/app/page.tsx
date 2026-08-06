@@ -20,6 +20,7 @@ import {
   Waypoints,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { EngagementChatMockup } from "@/components/engagement-chat-mockup";
 import { SiteHeader } from "@/components/site-header";
@@ -1110,9 +1111,19 @@ export default function Home() {
       </main>
 
       <footer className="bg-[#111820] px-5 py-6 text-sm text-[#cbd5dc] md:px-10 lg:px-18">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-2 sm:flex-row">
+        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-3 sm:flex-row sm:items-center">
           <span>{siteConfig.legalName}</span>
-          <span>Operational knowledge and workflow intelligence</span>
+          <span className="flex flex-wrap gap-x-5 gap-y-1">
+            <Link className="hover:text-white" href="/privacy">
+              Privacy
+            </Link>
+            <Link className="hover:text-white" href="/terms">
+              Terms
+            </Link>
+            <a className="hover:text-white" href={`mailto:${siteConfig.email}`}>
+              {siteConfig.email}
+            </a>
+          </span>
         </div>
       </footer>
 
