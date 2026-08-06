@@ -19,7 +19,16 @@ const legal = readFileSync("src/lib/legal.ts", "utf8");
 const middleware = readFileSync("functions/_middleware.ts", "utf8");
 const site = readFileSync("src/lib/site.ts", "utf8");
 
+// The submission schema mixes conventions inside the same tool object:
+// annotations are camelCase, justifications are snake_case with a
+// _justification suffix. Getting this wrong is rejected at upload time with
+// "must include non-empty string justifications.read_only_justification".
 const hints = ["readOnlyHint", "destructiveHint", "openWorldHint"];
+const justificationKeys = {
+  readOnlyHint: "read_only_justification",
+  destructiveHint: "destructive_justification",
+  openWorldHint: "open_world_justification",
+};
 const toolNames = Object.keys(manifest.tools || {});
 
 const checks = [
@@ -52,20 +61,30 @@ const checks = [
       ),
   },
   {
-    name: "every hint has a justification string",
+    name: "every hint has a non-empty snake_case justification the portal accepts",
     pass: toolNames.every((tool) =>
-      hints.every(
-        (hint) =>
-          typeof manifest.tools[tool].justifications?.[hint] === "string" &&
-          manifest.tools[tool].justifications[hint].length > 20,
+      Object.values(justificationKeys).every(
+        (key) =>
+          typeof manifest.tools[tool].justifications?.[key] === "string" &&
+          manifest.tools[tool].justifications[key].trim().length > 20,
       ),
     ),
   },
   {
-    name: "at least five test cases and three negative test cases",
+    name: "no camelCase justification keys remain (rejected at upload)",
+    pass: toolNames.every((tool) =>
+      hints.every(
+        (hint) => manifest.tools[tool].justifications?.[hint] === undefined,
+      ),
+    ),
+  },
+  {
+    name: "exactly five test cases and three negative test cases",
+    // The published schema says minItems 5 and 3, but the portal enforces an
+    // exact count and rejects a sixth with "must include exactly 5 entries".
     pass:
-      (manifest.test_cases || []).length >= 5 &&
-      (manifest.negative_test_cases || []).length >= 3,
+      (manifest.test_cases || []).length === 5 &&
+      (manifest.negative_test_cases || []).length === 3,
   },
   {
     name: "test cases are fully formed",
@@ -74,11 +93,28 @@ const checks = [
       ...(manifest.negative_test_cases || []),
     ].every(
       (testCase) =>
-        testCase.description &&
-        testCase.user_prompt &&
-        Array.isArray(testCase.tools_triggered) &&
-        testCase.expected_output,
+        testCase.description && testCase.user_prompt && testCase.expected_output,
     ),
+  },
+  {
+    // tools_triggered is a single non-empty STRING naming one tool, not an
+    // array. The portal rejects an array or an empty value with
+    // "tools_triggered must be a non-empty string", so a case that triggers no
+    // tool cannot be expressed here at all.
+    name: "every test case names exactly one tool as a non-empty string",
+    pass:
+      (manifest.test_cases || []).every(
+        (testCase) =>
+          typeof testCase.tools_triggered === "string" &&
+          testCase.tools_triggered.trim().length > 0 &&
+          toolNames.includes(testCase.tools_triggered),
+      ) &&
+      (manifest.negative_test_cases || []).every(
+        (testCase) =>
+          testCase.tools_triggered === undefined ||
+          (typeof testCase.tools_triggered === "string" &&
+            toolNames.includes(testCase.tools_triggered)),
+      ),
   },
   {
     name: "the listing is framed as lead capture, not commerce",
