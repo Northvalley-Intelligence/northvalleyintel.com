@@ -84,6 +84,50 @@ const checks = [
       files.page.includes("FAQPage") &&
       files.page.includes("LocalBusiness"),
   },
+  {
+    name: "agent-native service delivery is a named offering across surfaces",
+    pass:
+      files.site.includes("Be Reachable Where Customers Ask") &&
+      files.llms.includes("Agent-Native Service Delivery") &&
+      source.services.some((service) =>
+        service.name.includes("Agent-Native"),
+      ) &&
+      source.answerEngineFacts.some((fact) =>
+        fact.question.includes("inside an AI assistant"),
+      ),
+  },
+  {
+    name: "the Website Growth Assessment is a named offering under Services",
+    pass:
+      files.site.includes('title: "Website Growth Assessment"') &&
+      files.site.includes("complete assessment is a paid engagement") &&
+      files.llms.includes("Website Growth Assessment"),
+  },
+  {
+    name: "the live agent-native reference implementation is machine-readable",
+    pass:
+      Array.isArray(source.agentNativeSurfaces) &&
+      source.agentNativeSurfaces.length >= 1 &&
+      source.agentNativeSurfaces[0].endpoint === "https://medinaclean.com/mcp" &&
+      source.agentNativeSurfaces[0].tools.includes("request_appointment") &&
+      files.llms.includes("https://medinaclean.com/mcp"),
+  },
+  {
+    name: "agent surfaces are described as requesting, never confirming",
+    pass:
+      files.llms.includes("assistant submits a REQUEST and never confirms") &&
+      source.agentNativeSurfaces[0].trustModel.includes("pending status") &&
+      files.site.includes("owner approves every job"),
+  },
+  {
+    name: "customer-facing copy carries no protocol or chatbot jargon",
+    pass:
+      !files.site.includes("Model Context Protocol") &&
+      !files.site.includes("MCP") &&
+      !/chatbot/i.test(files.site) &&
+      !/\bAI books\b/i.test(files.site) &&
+      !/autonomous/i.test(files.site),
+  },
 ];
 
 const failures = checks.filter((check) => !check.pass);

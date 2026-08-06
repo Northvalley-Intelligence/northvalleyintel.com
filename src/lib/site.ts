@@ -50,6 +50,12 @@ export const aeoAnswers = [
     answer:
       "We email a one-page teaser report. The complete paid assessment includes page-level evidence, exact missing signals, scoring logic, and prioritized fixes.",
   },
+  {
+    question:
+      "Can Northvalley make a business usable from inside an AI assistant?",
+    answer:
+      "Yes. We build agent-native service surfaces so a customer can ask an assistant whether a business covers their area, what a service costs, and to request a time, and have that request reach the owner. The assistant submits a request; the owner reviews and confirms it. Medina Clean, a bilingual cleaning service near Woodstock, Georgia, runs this today.",
+  },
 ];
 
 export const primaryPages = [
@@ -127,6 +133,12 @@ export const services = [
     description:
       "We organize follow-up, scheduling, customer information, team handoffs, and repeated work so the business can keep up.",
   },
+  {
+    number: "04",
+    title: "Be Reachable Where Customers Ask",
+    description:
+      "Customers increasingly start with an AI assistant instead of a search box, and a list of names is a dead end. We make the business answer for itself there: what it covers, what it costs, and a request that reaches the owner. The owner approves every job.",
+  },
 ];
 
 export const leadDiscoveryPoints = [
@@ -153,6 +165,17 @@ export const leadDiscoveryPoints = [
 ];
 
 export const assessments = [
+  {
+    title: "Website Growth Assessment",
+    description:
+      "Review how nearby customers and AI answer engines find, understand, and trust the business, then show where the path from interest to contact breaks down. A one-page teaser is emailed free; the complete assessment is a paid engagement.",
+    items: [
+      "Local visibility and AI-answer readiness",
+      "Trust proof and service-area clarity",
+      "Calls to action and contact friction",
+      "The lead path from interest to follow-up",
+    ],
+  },
   {
     title: "Operational AI Assessment",
     description:
@@ -228,10 +251,14 @@ export const clientWork = [
     url: "https://medinaclean.com/",
     image: "/client-work/medina-clean.jpg",
     alt: "Medina Clean website preview.",
-    focus: "Lead intake and operating foundation",
+    focus: "Lead intake, operating foundation, and assistant reach",
     outcome:
-      "A bilingual service-business platform that connects public trust, appointment requests, guided estimates, reviews, and future scheduling support.",
-    signals: ["Bilingual service", "Guided estimates", "Operational memory"],
+      "A bilingual service-business platform that connects public trust, appointment requests, guided estimates, reviews, and future scheduling support. Customers can now also check the service area, get a starting price, and request a cleaning from inside an AI assistant, with the owner confirming every job.",
+    signals: [
+      "Bilingual service",
+      "Guided estimates",
+      "Reachable in AI assistants",
+    ],
   },
   {
     name: "Oscar's Package Store",
@@ -321,6 +348,11 @@ export const medinaOutcomes = [
     label: "Scheduling support",
     detail:
       "Admin tools help create the next recurring cleaning, find an available crew slot, block unavailable time, and review calendar activity.",
+  },
+  {
+    label: "Reachable inside AI assistants",
+    detail:
+      "A customer asking an assistant for a cleaner used to get a list of names and a dead end. Medina Clean now answers for itself: whether it covers the address, what services exist, how pricing works, a starting estimate, and a request for a time. Rosa reviews every request and confirms it herself, in English or Spanish. It was built onto the booking process she already had, so there is no second system to check.",
   },
 ];
 
