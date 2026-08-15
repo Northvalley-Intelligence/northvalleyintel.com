@@ -18,6 +18,13 @@ const files = {
 
 const source = JSON.parse(files.source);
 
+/** Remove line and block comments so checks see only shipped content. */
+function stripComments(code) {
+  return code
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|[^:])\/\/.*$/gm, "$1");
+}
+
 const checks = [
   {
     name: "source assessment JSON is crawlable and branded",
@@ -151,6 +158,38 @@ const checks = [
       files.videoData.includes("placeholder customer details") &&
       !/books? (it )?automatically/i.test(files.videoData) &&
       !/confirmed appointment\b(?! )/i.test(files.videoPage),
+  },
+  {
+    // Client confidentiality. The Canon retention board is described by
+    // outcome only: never how it obtains data, never the carriers, never the
+    // deployment hostnames. Those are commercially sensitive for the client.
+    // Relaxing this needs the client's say-so, not just a passing build.
+    name: "client work describes outcomes without exposing client internals",
+    pass:
+      // Test what actually ships. Comments are stripped at build, so a source
+      // comment documenting the constraint must not trip the check that
+      // enforces it.
+      [stripComments(files.site), files.llms, files.source].every(
+        (surface) =>
+          !/retention\.canonadvisers\.com/i.test(surface) &&
+          !/canon\.northvalleyintel\.com/i.test(surface) &&
+          !/\bcarrier(s)?\b/i.test(surface) &&
+          !/\bcrawl(ing|s|er)?\b/i.test(surface) &&
+          !/agent portal|carrier portal/i.test(surface) &&
+          !/\bpostgres(ql)?\b/i.test(surface),
+      ) &&
+      // The approved outcome wording must still be present.
+      files.site.includes("at risk of lapsing"),
+  },
+  {
+    name: "complimentary work is not presented as a paid engagement",
+    pass:
+      files.site.includes("Complimentary evaluation") &&
+      files.site.includes("complimentary website and experience evaluation") &&
+      files.llms.includes("not a paid engagement") &&
+      // The CFR always carries the article, never bare "CFR".
+      /name: "The CFR"/.test(files.site) &&
+      !/\bname: "CFR"/.test(files.site),
   },
   {
     name: "customer-facing copy carries no protocol or chatbot jargon",

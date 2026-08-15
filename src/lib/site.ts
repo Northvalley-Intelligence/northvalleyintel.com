@@ -383,6 +383,40 @@ export const clientWork = [
       "A practical reference page that helps welding and fabrication customers identify material shapes before a quote conversation.",
     signals: ["Material references", "Quote preparation", "Smyrna shop"],
   },
+  {
+    // Confidentiality constraint, do not relax without the client's say-so:
+    // describe the retention board by OUTCOME only. Never publish how it
+    // obtains its data, never name the carriers involved, and keep the
+    // deployment hostnames off public surfaces. Those details are
+    // commercially sensitive for Canon, not for Northvalley.
+    name: "Canon Insurance Advisers",
+    client: "Canon Insurance Advisers, LLC",
+    url: "https://canonadvisers.com/",
+    image: "/client-work/canon-insurance-advisers.jpg",
+    alt: "Canon Insurance Advisers website preview.",
+    focus: "Insurance practice presence and client retention",
+    outcome:
+      "A public website for a Georgia insurance practice covering trucking, home, auto, and life lines, with a clear path from a coverage question to a quote conversation. Alongside it, a retention board that surfaces policies at risk of lapsing, including pending cancellations, non-renewals, and steep renewal increases, so the agency can reach the client before the policy ends rather than after.",
+    signals: ["Coverage clarity", "Quote requests", "Retention before lapse"],
+  },
+  {
+    // The CFR is always written with the article, never as bare "CFR".
+    // This was a complimentary evaluation, not a paid engagement, and the
+    // wording must not imply otherwise.
+    name: "The CFR",
+    client: "The Center for Family Resources",
+    url: "https://thecfr.org/",
+    image: "/client-work/the-cfr.jpg",
+    alt: "The Center for Family Resources website preview.",
+    focus: "Complimentary evaluation for a Cobb County nonprofit",
+    outcome:
+      "A complimentary website and experience evaluation for a Marietta nonprofit serving families facing housing loss, along with a set of Google Business Profile photos to help neighbors find and recognize them.",
+    signals: [
+      "Complimentary evaluation",
+      "Nonprofit support",
+      "Cobb County families",
+    ],
+  },
 ];
 
 export const clientTestimonials = [
