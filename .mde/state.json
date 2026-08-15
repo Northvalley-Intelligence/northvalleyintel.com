@@ -1,22 +1,33 @@
 {
   "project": "northvalleyintel.com",
-  "currentPhase": "Phase 1",
-  "currentPhaseGoal": "Integrate the Website Growth Assessment and client website launch intake as practical entry points while preserving paid assessment depth and private client data handling.",
-  "phaseReadiness": "phase_1_exit_blocked_on_intake_subdomain_dns",
-  "currentGeneration": 6,
-  "missionVersion": "assessment-teaser-2026-06-12",
-  "phaseGoalVersion": "client-intake-portal-2026-06-19",
+  "currentPhase": "Phase 2",
+  "currentPhaseGoal": "Offer and operate agent-native service surfaces for operational small businesses, so a customer can get real answers, a starting price where one applies, and a request in front of the owner from inside the assistant they already use, with the owner still approving the work. Northvalley's own site runs the capability it sells.",
+  "phaseReadiness": "phase_2_shipped_pending_customer_facing_email_proof",
+  "currentGeneration": 8,
+  "missionVersion": "agent-native-service-delivery-2026-08-06",
+  "phaseGoalVersion": "agent-native-service-delivery-2026-08-06",
   "validationStrategyVersion": "phase-2-agent-native-2026-08-05",
-  "lastValidated": "2026-07-01T00:00:00Z",
-  "lastStateUpdate": "2026-08-05",
-  "phase2": {
-    "status": "prepared_not_opened",
-    "proposedName": "Phase 2 — Agent-native service delivery",
-    "opensWhen": "Phase 1 exits: the intake subdomain DNS record is live and one controlled production intake submission has been confirmed delivered.",
-    "blockedBy": ["client-intake-subdomain", "cloudflare-token-scope"]
+  "lastValidated": "2026-08-14T00:00:00Z",
+  "lastStateUpdate": "2026-08-14",
+  "phase1": {
+    "status": "closed",
+    "closedAt": "2026-08-06",
+    "closedBy": "intake subdomain DNS record created and a controlled production intake submission confirmed delivered with its attachment"
   },
+  "liveCapabilities": [
+    "https://northvalleyintel.com/mcp — three tools, verified in production",
+    "https://intake.northvalleyintel.com — client launch intake",
+    "/case-studies/chatgpt-booking-medina-clean — recorded demonstration with transcript",
+    "/privacy and /terms"
+  ],
+  "openItems": [
+    "Customer-facing teaser delivery is unproven to an address outside the Northvalley domain. Owner-facing mail succeeds, which is exactly what hid the original defect.",
+    "request_assessment submits a request but does not trigger the teaser pipeline. Deferred until customer-facing delivery is proven.",
+    "OpenAI directory submission is awaiting review.",
+    "Anthropic connector directory not started; requirements overlap heavily with the OpenAI package."
+  ],
   "notes": [
-    "Generations 5 and 6 were backfilled on 2026-08-05 from git and the C&J handoff. Both shipped to production before any generation record existed.",
-    "validation-strategy.json is the project's first, written 2026-08-05 before any Phase 2 implementation."
+    "Phase 2 shipped across 2026-08-05 and 2026-08-06. Generations 5 and 6 were backfilled from git; 7 covers the agent-native build and directory package, 8 covers The CFR and Canon Insurance Advisers client work.",
+    "Client confidentiality: the Canon retention board is described by outcome only. Its mechanism, vendors, and deployment hostnames are withheld and enforced by a build assertion."
   ]
 }
