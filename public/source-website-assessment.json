@@ -126,6 +126,19 @@
       "client": "C&J Welding and Fabricating, Inc.",
       "url": "https://www.cjwelding.net/material-shapes",
       "summary": "Practical material-shapes reference for welding and fabrication customers preparing for quote conversations."
+    },
+    {
+      "name": "Canon Insurance Advisers",
+      "client": "Canon Insurance Advisers, LLC",
+      "url": "https://canonadvisers.com/",
+      "summary": "Public website for a Georgia insurance practice covering trucking, home, auto, and life lines, with a clear path from a coverage question to a quote conversation. Alongside it, a retention board that surfaces policies at risk of lapsing, including pending cancellations, non-renewals, and steep renewal increases, so the agency can reach the client before the policy ends."
+    },
+    {
+      "name": "The CFR",
+      "client": "The Center for Family Resources",
+      "url": "https://thecfr.org/",
+      "summary": "Complimentary website and experience evaluation for a Cobb County nonprofit in Marietta serving families facing housing loss, plus a set of Google Business Profile photos. This was provided at no cost, not as a paid engagement.",
+      "engagementType": "complimentary"
     }
   ],
   "sourcePages": [
@@ -137,7 +150,7 @@
     "https://northvalleyintel.com/case-studies/medina-clean/lead-workflow",
     "https://northvalleyintel.com/llms.txt"
   ],
-  "lastReviewed": "2026-08-05",
+  "lastReviewed": "2026-08-14",
   "agentNativeSurfaces": [
     {
       "business": "Medina Clean",
