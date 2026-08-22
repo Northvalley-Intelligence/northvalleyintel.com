@@ -14,10 +14,29 @@ import { readFileSync } from "node:fs";
  *     This is the only way to catch a stateless-handshake regression: an
  *     in-memory client holds one connection open and would pass while
  *     production is broken.
+ *
+ *   MCP_CONTRACT_URL=... MCP_CONTRACT_LIVE_WRITE=1 npm run test:mcp-contract
+ *     Additionally submits ONE clearly-marked TEST request to
+ *     request_assessment and ONE to request_consult against the live
+ *     endpoint, to assert the write tools' confirmations against the
+ *     submission's own expected_output wording. This creates a real D1 row
+ *     and sends a real notification email marked "TEST — northvalley-mcp
+ *     H01, ignore" — opt in deliberately, do not wire this into routine CI.
+ *
+ * The submission's test_cases are the OpenAI directory contract: five
+ * user-facing scenarios, each mapped to a tool and an expected_output. This
+ * script does not grade prose like OpenAI's reviewers do; it checks that
+ * hand-picked key phrases quoted from each expected_output actually appear
+ * in the tool's real output (source text statically, live text once
+ * deployed), so a future edit that quietly drops one of those phrases fails
+ * here instead of at the next OpenAI review. A self-check confirms each key
+ * phrase really is a substring of the submission's own expected_output, so
+ * this file cannot drift from deploy/chatgpt-app-submission.json unnoticed.
  */
 
 const files = {
   server: readFileSync("src/lib/server/mcp-server.ts", "utf8"),
+  site: readFileSync("src/lib/site.ts", "utf8"),
   endpoint: readFileSync("functions/mcp.ts", "utf8"),
   abuse: readFileSync("src/lib/server/mcp-abuse.ts", "utf8"),
   throttle: readFileSync("src/lib/server/mcp-throttle.ts", "utf8"),
@@ -26,8 +45,99 @@ const files = {
   pkg: readFileSync("package.json", "utf8"),
 };
 
+const submission = JSON.parse(
+  readFileSync("deploy/chatgpt-app-submission.json", "utf8"),
+);
+
 const tools = ["list_services", "request_assessment", "request_consult"];
 const writeTools = ["request_assessment", "request_consult"];
+
+/**
+ * Key phrases quoted verbatim (case-insensitive) from each submitted
+ * test_cases[].expected_output, mapped to the tool whose output must carry
+ * them. `find` locates the matching test case by description so a reorder
+ * of test_cases in the submission does not silently misalign these.
+ */
+const contractTestCases = [
+  {
+    find: "Ask what the company does",
+    tool: "list_services",
+    keyPhrases: [
+      "agent-native service delivery",
+      "Website Growth Assessment",
+      "United States",
+    ],
+  },
+  {
+    find: "Ask what an assessment reviews",
+    tool: "list_services",
+    keyPhrases: [
+      "local visibility and AI-answer readiness",
+      "trust proof and service-area clarity",
+      "calls to action and contact friction",
+      "lead path from interest to follow-up",
+      "free",
+      "paid",
+    ],
+  },
+  {
+    find: "Request a website assessment",
+    tool: "request_assessment",
+    keyPhrases: ["pending review", "one-page teaser", "nothing is confirmed"],
+  },
+  {
+    find: "Request a consultation about custom software",
+    tool: "request_consult",
+    keyPhrases: ["pending review", "follow up", "by email"],
+  },
+  {
+    find: "Ask about becoming reachable inside assistants",
+    tool: "request_consult",
+    keyPhrases: ["pending review", "scheduled"],
+  },
+];
+
+for (const testCase of contractTestCases) {
+  const submitted = submission.test_cases.find(
+    (candidate) => candidate.description === testCase.find,
+  );
+  if (!submitted) {
+    throw new Error(
+      `Contract validator is out of sync: no submitted test case titled "${testCase.find}". ` +
+        "Update contractTestCases in scripts/validate-mcp-contract.mjs.",
+    );
+  }
+  for (const phrase of testCase.keyPhrases) {
+    if (!submitted.expected_output.toLowerCase().includes(phrase.toLowerCase())) {
+      throw new Error(
+        `Contract validator drift: key phrase "${phrase}" is not actually in ` +
+          `the submitted expected_output for "${testCase.find}". Update ` +
+          "contractTestCases to match deploy/chatgpt-app-submission.json.",
+      );
+    }
+  }
+}
+
+// Static source haystack per tool. list_services composes its response from
+// both mcp-server.ts (inline copy) and src/lib/site.ts (featuredOffering,
+// featuredService); the write tools' confirmations are inline in
+// mcp-server.ts only.
+const staticHaystack = {
+  list_services: files.server + files.site,
+  request_assessment: files.server,
+  request_consult: files.server,
+};
+
+const contractSourceChecks = contractTestCases.map((testCase) => {
+  const haystack = staticHaystack[testCase.tool].toLowerCase();
+  const missing = testCase.keyPhrases.filter(
+    (phrase) => !haystack.includes(phrase.toLowerCase()),
+  );
+  return {
+    name: `submission test case "${testCase.find}" (${testCase.tool}): key phrases present in source`,
+    pass: missing.length === 0,
+  };
+});
 
 const checks = [
   {
@@ -136,6 +246,7 @@ const checks = [
       /"@modelcontextprotocol\/sdk":\s*"\d+\.\d+\.\d+"/.test(files.pkg) &&
       /"zod":\s*"\d+\.\d+\.\d+"/.test(files.pkg),
   },
+  ...contractSourceChecks,
 ];
 
 for (const check of checks) {
@@ -154,7 +265,8 @@ if (!liveUrl) {
     "Static checks alone do NOT prove the deployed endpoint works. The handshake must be driven live before the endpoint is announced.",
   );
 } else {
-  failures += await runLiveChecks(liveUrl);
+  const allowLiveWrite = process.env.MCP_CONTRACT_LIVE_WRITE === "1";
+  failures += await runLiveChecks(liveUrl, allowLiveWrite);
 }
 
 if (failures) {
@@ -192,7 +304,19 @@ async function post(url, body, sessionId) {
   return { response, parsed, text };
 }
 
-async function runLiveChecks(url) {
+function phraseCheckReport(report, testCase, text) {
+  const haystack = text.toLowerCase();
+  const missing = testCase.keyPhrases.filter(
+    (phrase) => !haystack.includes(phrase.toLowerCase()),
+  );
+  report(
+    `live ${testCase.tool} satisfies submission test case "${testCase.find}"`,
+    missing.length === 0,
+    missing.length ? `missing: ${missing.join(", ")}` : "",
+  );
+}
+
+async function runLiveChecks(url, allowLiveWrite) {
   console.log(`\nLive endpoint: ${url}`);
   let failed = 0;
 
@@ -267,6 +391,80 @@ async function runLiveChecks(url) {
     call.response.ok && callText.includes("Northvalley"),
     `status ${call.response.status}`,
   );
+
+  for (const testCase of contractTestCases.filter(
+    (testCase) => testCase.tool === "list_services",
+  )) {
+    phraseCheckReport(report, testCase, callText);
+  }
+
+  if (allowLiveWrite) {
+    const testMarker = "TEST — northvalley-mcp H01, ignore";
+
+    const assessmentCall = await post(
+      url,
+      {
+        jsonrpc: "2.0",
+        id: 5,
+        method: "tools/call",
+        params: {
+          name: "request_assessment",
+          arguments: {
+            email: "h01-contract-test@example.com",
+            websiteUrl: "example.com",
+            businessName: testMarker,
+            location: "contract validator probe, ignore",
+          },
+        },
+      },
+      sessionId,
+    );
+    const assessmentText = JSON.stringify(assessmentCall.parsed?.result || {});
+    phraseCheckReport(
+      report,
+      contractTestCases.find(
+        (testCase) => testCase.find === "Request a website assessment",
+      ),
+      assessmentText,
+    );
+
+    const consultTestCases = contractTestCases.filter(
+      (testCase) => testCase.tool === "request_consult",
+    );
+    const consultNeeds = [
+      "I run a plumbing company and I lose leads because nobody follows up.",
+      "Can they make my cleaning business bookable from inside ChatGPT?",
+    ];
+
+    for (let index = 0; index < consultTestCases.length; index += 1) {
+      const consultCall = await post(
+        url,
+        {
+          jsonrpc: "2.0",
+          id: 6 + index,
+          method: "tools/call",
+          params: {
+            name: "request_consult",
+            arguments: {
+              name: `${testMarker} (probe ${index + 1})`,
+              email: `h01-contract-test-${index + 1}@example.com`,
+              business: "contract validator probe, ignore",
+              need: consultNeeds[index],
+            },
+          },
+        },
+        sessionId,
+      );
+      const consultText = JSON.stringify(consultCall.parsed?.result || {});
+      phraseCheckReport(report, consultTestCases[index], consultText);
+    }
+  } else {
+    console.log(
+      "\nSKIP live write-tool contract checks (test cases 3-5). Set " +
+        "MCP_CONTRACT_LIVE_WRITE=1 to submit one marked TEST request per " +
+        "write tool against the live endpoint (real D1 row + real notification email).",
+    );
+  }
 
   const badWrite = await post(
     url,
