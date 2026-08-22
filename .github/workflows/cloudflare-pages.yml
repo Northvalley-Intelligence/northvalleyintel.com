@@ -5,6 +5,9 @@ on:
     branches: [main]
   push:
     branches: [main]
+  # Manual redeploy lever (2026-08-22): live /mcp went stale while deploys
+  # were green; without this, the only rebuild trigger was a fresh push.
+  workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -43,7 +46,7 @@ jobs:
           --commit-message "$COMMIT_MESSAGE"
 
   cloudflare-pages-production:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
