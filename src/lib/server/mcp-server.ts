@@ -15,7 +15,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
-import { assessments, services, siteConfig } from "../site";
+import { featuredOffering, featuredService, services, siteConfig } from "../site";
 import { runAbuseGate } from "./mcp-abuse";
 import { sendNotificationEmail, type ServerEnv } from "./notify";
 
@@ -68,17 +68,25 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
             {
               company: siteConfig.legalName,
               positioning: siteConfig.positioning,
-              worksWith: "Clients anywhere in the United States.",
+              agentNativeServiceDelivery: {
+                title: featuredService.title,
+                summary:
+                  "Northvalley builds agent-native service delivery: a business becomes reachable from inside AI assistants such as Claude, ChatGPT, and Gemini, answering what it offers and submitting a request for the owner to review. This connector is Northvalley's own agent-native service delivery running live.",
+              },
+              worksWith:
+                "Northvalley works with clients anywhere in the United States. There is no service-area restriction on who can submit a request.",
               localAnalysisFocus: siteConfig.serviceArea,
               services: services.map((service) => ({
                 title: service.title,
                 description: service.description,
               })),
-              assessments: assessments.map((assessment) => ({
-                title: assessment.title,
-                description: assessment.description,
-                reviews: assessment.items,
-              })),
+              websiteGrowthAssessment: {
+                title: featuredOffering.title,
+                summary: featuredOffering.summary,
+                reviewAreas: featuredOffering.items,
+                pricing:
+                  "A one-page teaser is emailed free. The complete assessment is a paid engagement arranged separately, and its findings are never returned through this interface.",
+              },
               note: "The Website Growth Assessment teaser is emailed as a one-page PDF. The complete assessment is a paid engagement and is never returned through this interface.",
             },
             null,
@@ -172,7 +180,7 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
       await gate.commit();
 
       return pending(
-        `The assessment request for ${args.websiteUrl} is pending review. Northvalley will review it and email the one-page teaser to ${args.email}. Nothing is confirmed yet.`,
+        `The assessment request for ${args.websiteUrl} is pending review. Northvalley will review it and email the one-page teaser to ${args.email}. Nothing is confirmed yet. No assessment findings or scores are included in this response — the complete assessment is a separate paid engagement.`,
         { website: args.websiteUrl, email: args.email },
       );
     },
@@ -259,7 +267,7 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
       await gate.commit();
 
       return pending(
-        `The consultation request is pending review. Northvalley will follow up with ${args.name} at ${args.email}. Nothing is scheduled or confirmed yet.`,
+        `The consultation request about "${args.need}" is pending review. Northvalley will follow up with ${args.name} by email at ${args.email}. Nothing is scheduled or confirmed yet.`,
         { name: args.name, email: args.email },
       );
     },
