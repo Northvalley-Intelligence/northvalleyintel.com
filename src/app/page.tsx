@@ -334,12 +334,9 @@ export default function Home() {
               <div className="grid gap-7">
                 {services.map((service, index) => {
                   const Icon =
-                    [
-                      SearchCheck,
-                      MousePointerClick,
-                      ClipboardList,
-                      Waypoints,
-                    ][index] ?? SearchCheck;
+                    [SearchCheck, MousePointerClick, ClipboardList, Waypoints][
+                      index
+                    ] ?? SearchCheck;
 
                   return (
                     <article
@@ -403,6 +400,71 @@ export default function Home() {
                   ))}
                 </ul>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="advertising"
+          className="bg-white px-5 py-20 md:px-10 md:py-28 lg:px-18"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                Advertising
+              </p>
+              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
+                We plan and run Google Ads for the local businesses we manage.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-north-muted">
+                For the local businesses and non-profits Northvalley manages, we
+                plan, launch, run, and report on Google Ads campaigns &mdash;
+                Search and Performance Max &mdash; all under Northvalley&apos;s
+                own Google Ads manager account. It is a service we deliver for
+                our clients, built on our own internal tooling.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-7 md:grid-cols-3">
+              {[
+                {
+                  label: "Campaign management",
+                  detail:
+                    "We build, run, and report on Google Ads Search and Performance Max campaigns for the client accounts linked under our Google Ads manager account.",
+                  icon: MousePointerClick,
+                },
+                {
+                  label: "Keyword-demand research",
+                  detail:
+                    "We use Google Keyword Planner data — search volume, competition, and top-of-page bid ranges — for specific local geographies such as Cobb and Douglas counties, GA, to plan campaigns and advise clients on where real demand is.",
+                  icon: SearchCheck,
+                },
+                {
+                  label: "Responsible data use",
+                  detail:
+                    "This runs on Northvalley's own internal tooling built on the Google Ads API. The data is used only to run and advise on the accounts we manage — never resold or redistributed.",
+                  icon: ShieldCheck,
+                },
+              ].map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <article
+                    key={item.label}
+                    className="border-t border-north-line pt-5"
+                  >
+                    <div className="grid h-12 w-12 place-items-center rounded-full bg-[#eef3f3] text-north-teal">
+                      <Icon aria-hidden="true" size={22} />
+                    </div>
+                    <h3 className="mt-4 text-xl font-extrabold">
+                      {item.label}
+                    </h3>
+                    <p className="mt-3 text-base leading-7 text-north-muted">
+                      {item.detail}
+                    </p>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
