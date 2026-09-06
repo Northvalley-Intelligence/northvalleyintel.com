@@ -5,6 +5,7 @@ const navigation = [
   // The Website Growth Assessment lives inside the Services section as a named
   // offering, so it no longer needs a competing top-level entry.
   { href: "/#services", label: "Services" },
+  { href: "/#advertising", label: "Advertising" },
   { href: "/#agent-native", label: "Agent-Native" },
   { href: "/#assessments", label: "Getting Started" },
   { href: "/#client-work", label: "Client Work" },
