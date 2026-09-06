@@ -43,11 +43,12 @@ export const serverInstructions = [
   "Both request tools SUBMIT A REQUEST for Northvalley to review. They never confirm, schedule, or commit to anything. Always tell the person their request is pending review and that Northvalley will follow up by email. Never state or imply that a meeting, assessment, or engagement is confirmed.",
   "Northvalley works with clients anywhere in the United States. Never tell anyone they are outside a service area.",
   "Never ask anyone for a password, API key, access token, or account login.",
+  "Never ask for or accept sensitive personal data — no health, financial, Social Security, payment-card, or biometric information. Only collect the few details needed to follow up (an email, the website to review, and a short note on what is needed).",
 ].join("\n");
 
 export function buildMcpServer(env: ServerEnv, clientIp: string) {
   const server = new McpServer(
-    { name: "northvalley-intelligence", version: "1.0.0" },
+    { name: "northvalley-intelligence", version: "1.0.2" },
     { instructions: serverInstructions },
   );
 
@@ -102,26 +103,30 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
     {
       title: "Request a Website Growth Assessment",
       description:
-        "Submit a REQUEST for a Website Growth Assessment of a business website. Northvalley reviews the request and emails a one-page teaser report. This tool never returns assessment findings, scores, or report content — it only submits the request. Tell the person their request is pending review.",
+        "Submit a REQUEST for a Website Growth Assessment of a business website. Northvalley reviews the request and emails a one-page teaser report. This tool never returns assessment findings, scores, or report content — it only submits the request. Tell the person their request is pending review. Collect only the few fields defined below — never a transcript or chat log. Do not include sensitive personal data — no health, financial, Social Security, payment-card, or biometric information.",
       annotations: writeAnnotations,
       inputSchema: {
         email: z
           .string()
           .email()
-          .describe("Email address where Northvalley should send the teaser."),
+          .describe(
+            "The single email address where Northvalley should send the teaser. This is the only contact detail needed.",
+          ),
         websiteUrl: z
           .string()
           .min(3)
-          .describe("The business website to review, for example example.com."),
+          .describe(
+            "The one business website to review, for example example.com. A single URL only — not a list, notes, or pasted page content.",
+          ),
         businessName: z
           .string()
           .optional()
-          .describe("Business name, if known."),
+          .describe("The business name only, if known. Nothing else."),
         location: z
           .string()
           .optional()
           .describe(
-            "City or area the business serves. Used as context inside the analysis, never as an eligibility check.",
+            "Only the city or area the business serves, used as context inside the analysis, never as an eligibility check. Do not include sensitive personal data — no health, financial, Social Security, payment-card, or biometric information.",
           ),
         doNotFill: z
           .string()
@@ -191,26 +196,33 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
     {
       title: "Request a consultation with Northvalley",
       description:
-        "Submit a REQUEST to talk with Northvalley about custom software, workflow problems, or making a business reachable from inside AI assistants. This does not book or confirm a meeting. Northvalley reviews the request and follows up by email. Tell the person their request is pending review.",
+        "Submit a REQUEST to talk with Northvalley about custom software, workflow problems, or making a business reachable from inside AI assistants. This does not book or confirm a meeting. Northvalley reviews the request and follows up by email. Tell the person their request is pending review. Collect only the few fields defined below — never a transcript or chat log. Do not include sensitive personal data — no health, financial, Social Security, payment-card, or biometric information.",
       annotations: writeAnnotations,
       inputSchema: {
-        name: z.string().min(1).describe("Who is asking."),
-        email: z.string().email().describe("Where Northvalley should reply."),
+        name: z.string().min(1).describe("The name of the single person asking. Nothing else."),
+        email: z
+          .string()
+          .email()
+          .describe(
+            "The one email address where Northvalley should reply. This is the only contact detail needed.",
+          ),
         business: z
           .string()
           .optional()
-          .describe("Business name and what it does."),
+          .describe(
+            "The business name and a few words on what it does. Do not include sensitive personal data — no health, financial, Social Security, payment-card, or biometric information.",
+          ),
         need: z
           .string()
           .min(1)
           .describe(
-            "What the person wants help with, in their own words. Do not include credentials.",
+            "One or two sentences describing the single problem to discuss — not a transcript or chat log. Do not include credentials, and do not include sensitive personal data — no health, financial, Social Security, payment-card, or biometric information.",
           ),
         preferredTimes: z
           .string()
           .optional()
           .describe(
-            "Times that tend to work. This is a preference only; nothing is scheduled by this tool.",
+            "Times that tend to work, as a short preference only; nothing is scheduled by this tool.",
           ),
         doNotFill: z
           .string()
