@@ -12,6 +12,7 @@ import {
   MapPinned,
   MessageSquareText,
   MousePointerClick,
+  Phone,
   Quote,
   Route,
   SearchCheck,
@@ -22,7 +23,9 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import { ContactEmailLink } from "@/components/contact-email";
 import { EngagementChatMockup } from "@/components/engagement-chat-mockup";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
 import { WebsiteAssessmentTeaserForm } from "@/components/website-assessment-teaser-form";
@@ -54,9 +57,14 @@ const jsonLd = {
   alternateName: siteConfig.name,
   url: siteConfig.url,
   email: siteConfig.email,
+  telephone: siteConfig.telephone,
   logo: `${siteConfig.url}/northvalley-logo.png`,
-  image: `${siteConfig.url}/assessment-flow.png`,
-  sameAs: ["https://feroshjacob.github.io/posts/"],
+  image: `${siteConfig.url}/assessment-flow.webp`,
+  // The Google Business Profile. sameAs plus hasMap is the machine-readable
+  // half of the site-to-listing connection the 2026-09-07 evaluation reported
+  // as missing; the visible footer link is the other half.
+  sameAs: ["https://feroshjacob.github.io/posts/", siteConfig.mapsUrl],
+  hasMap: siteConfig.mapsUrl,
   areaServed: siteConfig.serviceArea.map((area) => ({
     "@type": area.includes("County") ? "AdministrativeArea" : "City",
     name: area,
@@ -140,11 +148,21 @@ export default function Home() {
       <main id="top">
         <section className="border-b border-north-line bg-north-ink">
           <div className="mx-auto max-w-[1600px]">
+            {/*
+              This is the LCP element on mobile. It was a 1.9 MB PNG served
+              unoptimized (next/image is unoptimized under output: export),
+              which measured a 13.9 s LCP and held mobile PageSpeed at 71.
+              Re-encoded to WebP at the same display size and marked priority
+              so it is preloaded rather than discovered late.
+            */}
             <Image
-              src="/assessment-flow.png"
+              src="/assessment-flow.webp"
               alt="A Northvalley assessment flow showing Understand, Qualify, and Schedule."
               width={1536}
               height={1024}
+              priority
+              fetchPriority="high"
+              sizes="100vw"
               className="w-full object-cover"
             />
           </div>
@@ -1152,7 +1170,14 @@ export default function Home() {
             <div className="max-w-3xl">
               <p className="mb-4 flex items-center gap-2 text-sm font-extrabold uppercase text-north-teal">
                 <MapPinned aria-hidden="true" size={17} />
-                {siteConfig.location}
+                {/*
+                  A crawlable link into the service-area pages. The evaluation
+                  found no location or service-area candidate links anywhere on
+                  the site, despite service-area language in the copy.
+                */}
+                <Link className="hover:text-north-ink" href="/service-areas">
+                  {siteConfig.location} — see service areas
+                </Link>
               </p>
               <h2 className="text-[clamp(2rem,4vw,3.2rem)] font-black leading-tight tracking-normal">
                 Start with an assessment conversation.
@@ -1161,33 +1186,34 @@ export default function Home() {
                 For operational businesses ready to modernize workflows and
                 knowledge systems with practical AI.
               </p>
+              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-lg font-bold">
+                {/*
+                  Click-to-call. The number is the one on the Google Business
+                  Profile, so the site and the listing match.
+                */}
+                <a
+                  className="inline-flex items-center gap-2 text-north-ink hover:text-north-teal"
+                  href={siteConfig.phoneHref}
+                >
+                  <Phone aria-hidden="true" size={19} strokeWidth={2.4} />
+                  {siteConfig.phone}
+                </a>
+                <ContactEmailLink className="text-north-teal hover:text-north-ink" />
+              </div>
             </div>
-            <ButtonLink
-              className="w-full sm:w-auto"
-              href={`mailto:${siteConfig.email}?subject=Operational AI Assessment`}
-            >
-              {siteConfig.email}
+            {/*
+              The primary contact path is the intake form, not a mailto. A
+              mailto CTA was being rewritten by Cloudflare Email Obfuscation
+              into a /cdn-cgi/l/email-protection URL that 404s.
+            */}
+            <ButtonLink className="w-full sm:w-auto" href="/intake">
+              Start the conversation
             </ButtonLink>
           </div>
         </section>
       </main>
 
-      <footer className="bg-[#111820] px-5 py-6 text-sm text-[#cbd5dc] md:px-10 lg:px-18">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-3 sm:flex-row sm:items-center">
-          <span>{siteConfig.legalName}</span>
-          <span className="flex flex-wrap gap-x-5 gap-y-1">
-            <Link className="hover:text-white" href="/privacy">
-              Privacy
-            </Link>
-            <Link className="hover:text-white" href="/terms">
-              Terms
-            </Link>
-            <a className="hover:text-white" href={`mailto:${siteConfig.email}`}>
-              {siteConfig.email}
-            </a>
-          </span>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <script
         type="application/ld+json"

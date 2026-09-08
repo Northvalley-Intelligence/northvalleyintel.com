@@ -4,6 +4,17 @@ export const siteConfig = {
   domain: "northvalleyintel.com",
   url: "https://northvalleyintel.com",
   email: "hello@northvalleyintel.com",
+  // The number published on the Google Business Profile. The site and the
+  // listing must show the same number or the two assets stop corroborating
+  // each other, which is what the 2026-09-07 evaluation flagged.
+  phone: "(470) 781-4143",
+  phoneHref: "tel:+14707814143",
+  // E.164 form, for schema.org telephone.
+  telephone: "+1-470-781-4143",
+  // The business's own Google Business Profile listing. Used for sameAs,
+  // hasMap, and the visible "Find us on Google" footer link, so the website
+  // and the listing point at each other.
+  mapsUrl: "https://maps.google.com/?cid=18103596615723406363",
   tagline: "Local growth systems and practical AI for service businesses",
   description:
     "Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.",
@@ -16,6 +27,151 @@ export const siteConfig = {
     "Paulding County",
     "Douglas County",
     "Atlanta metro",
+  ],
+};
+
+/**
+ * The four services, worded the same way here, on the service-area pages, and
+ * on the Google Business Profile. Google matches a query against a listed
+ * service, so the two surfaces must not drift apart.
+ */
+export const coreServices = [
+  {
+    name: "Custom software",
+    detail:
+      "Practical, workflow-shaped software built around how the business already runs, rather than a package it has to bend itself into.",
+  },
+  {
+    name: "Workflow automation",
+    detail:
+      "Follow-up, scheduling, customer information, team handoffs, and repeated work organized so the business can keep up with itself.",
+  },
+  {
+    name: "AI assistants and agents",
+    detail:
+      "Make the business answer for itself where customers now ask: what it covers, how pricing works, and a request that reaches the owner. The owner approves every job.",
+  },
+  {
+    name: "Website growth assessment",
+    detail:
+      "A review of how nearby customers and AI answer engines find, understand, and trust the business, and where the path from interest to contact breaks down.",
+  },
+];
+
+/**
+ * Crawlable service-area pages, one per city.
+ *
+ * Distinct from siteConfig.serviceArea, which is the coarse county-level list
+ * used for schema areaServed on the homepage. This list is the page-level one:
+ * a search engine or an answer engine needs a page it can point at to resolve
+ * the business to a place. The cities are the Cobb and Douglas ones the
+ * business actually serves; nothing here claims a client, a project, or a
+ * statistic in any of them.
+ */
+export const serviceAreas = [
+  {
+    slug: "marietta",
+    city: "Marietta",
+    county: "Cobb County",
+    note: "Marietta is where Northvalley is based, so a conversation here is a short drive rather than a ticket queue.",
+  },
+  {
+    slug: "smyrna",
+    city: "Smyrna",
+    county: "Cobb County",
+    note: "Smyrna is a short drive from the Marietta base, inside the same Cobb County service area.",
+  },
+  {
+    slug: "kennesaw",
+    city: "Kennesaw",
+    county: "Cobb County",
+    note: "Kennesaw sits just north of the Marietta base, inside the same Cobb County service area.",
+  },
+  {
+    slug: "acworth",
+    city: "Acworth",
+    county: "Cobb County",
+    note: "Acworth is at the northwest edge of Cobb County, within the area Northvalley works in person.",
+  },
+  {
+    slug: "powder-springs",
+    city: "Powder Springs",
+    county: "Cobb County",
+    note: "Powder Springs sits between the Cobb and Douglas parts of the service area.",
+  },
+  {
+    slug: "austell",
+    city: "Austell",
+    county: "Cobb County",
+    note: "Austell sits on the Cobb and Douglas county line, inside the service area on both sides.",
+  },
+  {
+    slug: "mableton",
+    city: "Mableton",
+    county: "Cobb County",
+    note: "Mableton is in south Cobb County, within the area Northvalley works in person.",
+  },
+  {
+    slug: "vinings",
+    city: "Vinings",
+    county: "Cobb County",
+    note: "Vinings is in southeast Cobb County, close to the Atlanta side of the service area.",
+  },
+  {
+    slug: "douglasville",
+    city: "Douglasville",
+    county: "Douglas County",
+    note: "Douglasville is the largest city in Douglas County and the western end of the service area.",
+  },
+  {
+    slug: "lithia-springs",
+    city: "Lithia Springs",
+    county: "Douglas County",
+    note: "Lithia Springs is in northeast Douglas County, between Douglasville and the Cobb line.",
+  },
+  {
+    slug: "winston",
+    city: "Winston",
+    county: "Douglas County",
+    note: "Winston is in southwest Douglas County, at the far end of the service area.",
+  },
+];
+
+/**
+ * The about / owner page.
+ *
+ * Credentials are only what is already published on a citable public source:
+ * Ferosh Jacob's own site, https://feroshjacob.github.io/, which the Person
+ * entry in teamMembers already links to. Nothing here is inferred.
+ *
+ * No founding year is stated. It could not be verified against the Georgia
+ * Secretary of State record (ecorp.sos.ga.gov and the Bizapedia mirror both
+ * sit behind a bot challenge), and the 2026-09-07 evaluation asked for years
+ * in business, not for a guess. Add the year here once the LLC registration
+ * date is confirmed from the state record.
+ */
+export const owner = {
+  name: "Ferosh Jacob",
+  role: "Founder",
+  location: "Marietta, Georgia",
+  url: "https://feroshjacob.github.io/",
+  blogUrl: "https://feroshjacob.github.io/posts/",
+  image: "/people-ferosh-jacob.webp",
+  summary:
+    "Northvalley Intelligence was founded in Marietta, Georgia by Ferosh Jacob, and he still does the work he sells. Every engagement starts with a conversation with him rather than an account manager.",
+  // Source for every line below: https://feroshjacob.github.io/ (self-published
+  // biography, linked from the Person entry on this site since launch).
+  credentials: [
+    "Ph.D. in computer science, The University of Alabama",
+    "M.S. in computer science, Clarkson University",
+    "Software engineering and AI leader working across search, relevance, data science, and practical AI systems",
+    "Career from software engineer to lead engineer, manager, and senior manager, in the retail, healthcare, and employment domains",
+  ],
+  approach: [
+    "Start from the business owner's real question, not a generic software package.",
+    "Keep public marketing, lead intake, and private operations connected.",
+    "Use low-cost infrastructure first, with deterministic rules around pricing, service area, and booking facts.",
+    "Build in the languages a business actually serves its customers in.",
   ],
 };
 
@@ -119,6 +275,23 @@ export const primaryPages = [
     description:
       "Plain-text guide for AI crawlers and answer engines summarizing Northvalley source pages.",
   },
+  {
+    url: `${siteConfig.url}/about`,
+    label: "About Northvalley Intelligence",
+    description:
+      "Who runs Northvalley Intelligence, the published credentials behind the work, and how an engagement starts.",
+  },
+  {
+    url: `${siteConfig.url}/service-areas`,
+    label: "Service areas",
+    description:
+      "The Cobb and Douglas county cities Northvalley Intelligence serves from Marietta, Georgia.",
+  },
+  ...serviceAreas.map((area) => ({
+    url: `${siteConfig.url}/service-areas/${area.slug}`,
+    label: `${area.city}, GA`,
+    description: `Custom software, workflow automation, AI assistants, and the free website growth assessment for ${area.city}, Georgia businesses in ${area.county}.`,
+  })),
 ];
 
 /**
@@ -297,7 +470,7 @@ export const teamMembers = [
         url: "https://feroshjacob.github.io/posts/",
       },
     ],
-    image: "/people-ferosh-jacob.png",
+    image: "/people-ferosh-jacob.webp",
     description:
       "Leads Northvalley Intelligence with a focus on practical AI systems, operational software, and assessment-led modernization.",
   },
@@ -305,7 +478,7 @@ export const teamMembers = [
     name: "Theresa Burt",
     role: "Business Liaison",
     url: "https://www.linkedin.com/in/theresaburt",
-    image: "/people-theresa-burt.png",
+    image: "/people-theresa-burt.webp",
     description:
       "Connects small-business conversations to practical next steps, helping owners explain where operations feel stuck and what support would be useful.",
   },
@@ -313,7 +486,7 @@ export const teamMembers = [
     name: "Glen Soans",
     role: "AI Expert",
     url: "https://www.linkedin.com/in/glen-soans-4a050923",
-    image: "/people-glen-soans.png",
+    image: "/people-glen-soans.webp",
     description:
       "Works across information retrieval and data science, with experience since 2015 in autocomplete and search systems for large retailers including Home Depot and GPC/NAPA.",
   },
