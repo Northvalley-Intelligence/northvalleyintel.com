@@ -58,6 +58,7 @@ const jsonLd = {
   url: siteConfig.url,
   email: siteConfig.email,
   telephone: siteConfig.telephone,
+  foundingDate: "2026-06",
   logo: `${siteConfig.url}/northvalley-logo.png`,
   image: `${siteConfig.url}/assessment-flow.webp`,
   // The Google Business Profile. sameAs plus hasMap is the machine-readable
