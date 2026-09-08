@@ -10,7 +10,12 @@ const navigation = [
   { href: "/#assessments", label: "Getting Started" },
   { href: "/#client-work", label: "Client Work" },
   { href: "/#case-study", label: "Real Example" },
-  { href: "/#people", label: "People" },
+  // Replaces the old "/#people" anchor. The evaluation's largest single gap
+  // was Trust Signals: no crawlable about/team/owner page existed at all. The
+  // /about page carries the same team section and is linkable and crawlable,
+  // so the nav points at it instead of the on-page anchor. Service areas are
+  // linked from the footer rather than here; this row is already full.
+  { href: "/about", label: "About" },
   { href: "/#contact", label: "Contact" },
 ];
 

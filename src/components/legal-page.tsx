@@ -1,6 +1,7 @@
+import { protectEmails } from "@/components/contact-email";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { legalUpdated } from "@/lib/legal";
-import { siteConfig } from "@/lib/site";
 
 type Section = {
   heading: string;
@@ -45,13 +46,21 @@ export function LegalPage({
                 <h2 className="text-2xl font-extrabold text-north-ink">
                   {section.heading}
                 </h2>
+                {/*
+                  The legal copy mentions the contact address inline. Rendered
+                  as plain text it would be rewritten into a
+                  /cdn-cgi/l/email-protection link by Cloudflare Email
+                  Obfuscation, which is the 404 the 2026-09-07 evaluation found.
+                  protectEmails wraps only the address in the opt-out markers.
+                */}
                 {section.body.map((paragraph) => (
                   <p
                     key={paragraph}
                     className="mt-4 text-base leading-7 text-north-muted"
-                  >
-                    {paragraph}
-                  </p>
+                    dangerouslySetInnerHTML={{
+                      __html: protectEmails(paragraph),
+                    }}
+                  />
                 ))}
                 {section.points ? (
                   <ul className="mt-4 grid gap-3">
@@ -59,9 +68,10 @@ export function LegalPage({
                       <li
                         key={point}
                         className="border-l-2 border-north-line pl-4 text-base leading-7 text-north-muted"
-                      >
-                        {point}
-                      </li>
+                        dangerouslySetInnerHTML={{
+                          __html: protectEmails(point),
+                        }}
+                      />
                     ))}
                   </ul>
                 ) : null}
@@ -70,12 +80,7 @@ export function LegalPage({
           </div>
         </section>
       </main>
-      <footer className="bg-[#111820] px-5 py-6 text-sm text-[#cbd5dc] md:px-10 lg:px-18">
-        <div className="mx-auto flex max-w-4xl flex-col justify-between gap-2 sm:flex-row">
-          <span>{siteConfig.legalName}</span>
-          <span>{siteConfig.email}</span>
-        </div>
-      </footer>
+      <SiteFooter width="max-w-4xl" />
     </>
   );
 }

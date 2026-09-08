@@ -3,6 +3,7 @@ import { ArrowLeft, Clock3, FileCheck2, HelpCircle } from "lucide-react";
 import Link from "next/link";
 
 import { ClientIntakeForm } from "@/components/client-intake-form";
+import { ContactEmailLink } from "@/components/contact-email";
 import { SiteHeader } from "@/components/site-header";
 import { siteConfig } from "@/lib/site";
 
@@ -124,10 +125,11 @@ export default function IntakePage() {
                 </p>
                 <a
                   className="mt-4 inline-flex min-h-11 items-center justify-center rounded-md bg-white px-4 text-sm font-extrabold text-north-ink hover:bg-[#edf7f5]"
-                  href={`mailto:${siteConfig.email}`}
+                  href={siteConfig.phoneHref}
                 >
-                  Email Northvalley
+                  Call {siteConfig.phone}
                 </a>
+                <ContactEmailLink className="mt-3 inline-flex text-sm font-extrabold text-[#8ee0d4] hover:text-white" />
               </div>
             </aside>
           </div>

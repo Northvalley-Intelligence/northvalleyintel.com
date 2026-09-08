@@ -2,6 +2,7 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
 import { medinaCleanArticles } from "@/lib/case-studies";
@@ -62,12 +63,7 @@ export function CaseStudyShell({
         </section>
         {children}
       </main>
-      <footer className="bg-[#111820] px-5 py-6 text-sm text-[#cbd5dc] md:px-10 lg:px-18">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-2 sm:flex-row">
-          <span>{siteConfig.legalName}</span>
-          <span>Operational knowledge and workflow intelligence</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }
@@ -122,11 +118,18 @@ export function ContactBand() {
           <h2 className="text-[clamp(2rem,4vw,3.2rem)] font-black leading-tight tracking-normal">
             Start with the workflow before choosing the software.
           </h2>
+          <p className="mt-3 text-base font-semibold text-north-muted">
+            Or call{" "}
+            <a
+              className="text-north-teal hover:text-north-ink"
+              href={siteConfig.phoneHref}
+            >
+              {siteConfig.phone}
+            </a>
+            .
+          </p>
         </div>
-        <ButtonLink
-          className="w-full sm:w-auto"
-          href={`mailto:${siteConfig.email}?subject=Operational AI Assessment`}
-        >
+        <ButtonLink className="w-full sm:w-auto" href="/intake">
           Schedule an assessment
         </ButtonLink>
       </div>
