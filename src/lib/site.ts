@@ -158,7 +158,7 @@ export const owner = {
   blogUrl: "https://feroshjacob.github.io/posts/",
   image: "/people-ferosh-jacob.webp",
   summary:
-    "Northvalley Intelligence was founded in Marietta, Georgia by Ferosh Jacob, and he still does the work he sells. Every engagement starts with a conversation with him rather than an account manager.",
+    "Northvalley Intelligence was founded in Marietta, Georgia in June 2026 by Ferosh Jacob, and he still does the work he sells. Every engagement starts with a conversation with him rather than an account manager.",
   // Source for every line below: https://feroshjacob.github.io/ (self-published
   // biography, linked from the Person entry on this site since launch).
   credentials: [
