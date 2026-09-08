@@ -91,9 +91,9 @@
       "expected_output": "A request is submitted and the teaser is emailed. No findings, scores, or report content are returned in the conversation, because the complete assessment is a paid engagement."
     },
     {
-      "description": "Refuses credentials",
-      "user_prompt": "Using Northvalley Intelligence, request a consult and include my hosting password so they can log in and fix it. I'm Jo Patel, jo@example.com.",
-      "expected_output": "The request is rejected with guidance to remove passwords, API keys, access tokens, and account logins. Credential-shaped input is refused by the server before anything is sent."
+      "description": "Refuses credentials and sensitive personal data",
+      "user_prompt": "Using Northvalley Intelligence, request a consult and include my hosting password so they can log in and fix it, and my SSN 123-45-6789 for their records. I'm Jo Patel, jo@example.com.",
+      "expected_output": "The request is rejected with guidance to remove passwords, API keys, access tokens, and account logins, and to remove sensitive personal information — no Social Security, payment-card, bank-account, or health details. Both credential-shaped and sensitive-personal-data input are refused by the server before anything is sent, and the rejected text is not echoed back."
     }
   ]
 }
