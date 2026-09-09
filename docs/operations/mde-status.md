@@ -53,7 +53,7 @@ Phase 1: Assessment-led growth and client intake entry points.
 - Passed: local Pages host-header smoke test for `intake.northvalleyintel.com` redirecting to `/intake`
 - Passed: PR #15 `quality` check
 - Passed: PR #15 `cloudflare-pages-preview` check
-- Passed: Cloudflare Pages preview rendered-page smoke test at `https://intake-portal.northvalleyintel-com.pages.dev/intake`
+- Passed: Cloudflare Pages preview rendered-page smoke test at the PR #15 `intake-portal` preview URL for `/intake`
 - Passed: Cloudflare Pages preview API empty-submit smoke test returning 400
 - Passed: production rendered-page smoke test at `https://northvalleyintel.com/intake`
 - Passed: production API fail-closed smoke test for `POST https://northvalleyintel.com/api/client-intake` with no form data returning an error
@@ -76,6 +76,6 @@ The client intake implementation is live at `https://northvalleyintel.com/intake
 
 The intended client-friendly subdomain is not ready yet. Cloudflare Pages has `intake.northvalleyintel.com` attached, but the custom domain remains pending because the DNS CNAME is missing. Add:
 
-`CNAME intake -> northvalleyintel-com.pages.dev`
+`CNAME intake -> northvalleyintel.pages.dev`
 
 After DNS resolves and Pages marks the custom domain active, smoke-test `https://intake.northvalleyintel.com` before sharing it with clients.

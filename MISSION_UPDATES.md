@@ -30,6 +30,6 @@
 - Verified the client intake is deployed on `main` and live at `https://northvalleyintel.com/intake`.
 - Verified the production intake API fails closed for an incomplete submission.
 - Confirmed Cloudflare Pages has `intake.northvalleyintel.com` attached, but the domain is still pending because the DNS CNAME record is not set.
-- Required DNS record before client use: `CNAME intake -> northvalleyintel-com.pages.dev`.
+- Required DNS record before client use: `CNAME intake -> northvalleyintel.pages.dev` (updated 2026-09-08: the Pages project moved to the Northvalley account and is now named `northvalleyintel`).
 - Improved the intake flow so the form is first, field errors appear during progress, and bare domains such as `sample.com` and `www.sample.com` are accepted.
 - Added Terri Hitzig's "Website Genius" testimonial to the client proof section and AEO source files.
