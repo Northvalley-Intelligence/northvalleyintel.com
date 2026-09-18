@@ -35,7 +35,11 @@ const jsonLd = {
 };
 
 export default function ServiceAreasPage() {
-  const counties = ["Cobb County", "Douglas County"];
+  // All three counties from the Google Business Profile description get a
+  // visible, matching header here (Cobb, Paulding, Douglas) — previously
+  // only Cobb and Douglas (the ones with city pages) had a section, and
+  // Paulding lived only in the schema's areaServed array and a footnote.
+  const counties = ["Cobb County", "Paulding County", "Douglas County"];
 
   return (
     <>
@@ -73,35 +77,47 @@ export default function ServiceAreasPage() {
 
         <section className="px-5 py-14 md:px-10 md:py-20 lg:px-18">
           <div className="mx-auto grid max-w-4xl gap-10">
-            {counties.map((county) => (
-              <div key={county}>
-                <h2 className="text-2xl font-extrabold text-north-ink">
-                  {county}
-                </h2>
-                <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                  {serviceAreas
-                    .filter((area) => area.county === county)
-                    .map((area) => (
-                      <Link
-                        key={area.slug}
-                        href={`/service-areas/${area.slug}`}
-                        className="rounded-md border border-north-line bg-white p-4 hover:border-north-teal"
-                      >
-                        <span className="font-extrabold text-north-ink">
-                          {area.city}, GA
-                        </span>
-                        <span className="mt-1 block text-sm leading-6 text-north-muted">
-                          {area.note}
-                        </span>
-                      </Link>
-                    ))}
+            {counties.map((county) => {
+              const areas = serviceAreas.filter(
+                (area) => area.county === county,
+              );
+
+              return (
+                <div key={county}>
+                  <h2 className="text-2xl font-extrabold text-north-ink">
+                    Software consultant &amp; AI consultant serving {county}
+                  </h2>
+                  {areas.length > 0 ? (
+                    <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                      {areas.map((area) => (
+                        <Link
+                          key={area.slug}
+                          href={`/service-areas/${area.slug}`}
+                          className="rounded-md border border-north-line bg-white p-4 hover:border-north-teal"
+                        >
+                          <span className="font-extrabold text-north-ink">
+                            {area.city}, GA
+                          </span>
+                          <span className="mt-1 block text-sm leading-6 text-north-muted">
+                            {area.note}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="mt-5 text-base leading-7 text-north-muted">
+                      Northvalley works with {county} businesses on the same
+                      custom software, workflow automation, and AI consulting
+                      path described above, from the Marietta base &mdash;
+                      there is no dedicated {county} city page yet.
+                    </p>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
             <p className="text-base leading-7 text-north-muted">
-              Northvalley also works with businesses in Paulding County and the
-              wider Atlanta metro, and remotely beyond it. If a city is not
-              listed, ask.
+              Northvalley also works with businesses in the wider Atlanta
+              metro, and remotely beyond it. If a city is not listed, ask.
             </p>
           </div>
         </section>

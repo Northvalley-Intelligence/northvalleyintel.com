@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   BrainCircuit,
   CalendarCheck2,
@@ -48,6 +49,20 @@ import {
   siteConfig,
   teamMembers,
 } from "@/lib/site";
+
+// Homepage-specific title/description override. Deliberately separate from
+// siteConfig.description (which still feeds the Organization JSON-LD below,
+// left unchanged) so the exact query terms "software consultant" and "AI
+// consultant" land in the homepage <title> and meta description without
+// altering the schema.
+export const metadata: Metadata = {
+  title: {
+    absolute:
+      "Northvalley Intelligence — software consultant & AI consultant for small businesses in Marietta, GA",
+  },
+  description:
+    "Northvalley Intelligence is a software consultant and AI consultant for local service businesses in Cobb, Paulding, and Douglas counties, helping them get found, convert leads, and clean up the workflows behind the work.",
+};
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -184,7 +199,8 @@ export default function Home() {
               <p className="mt-5 max-w-2xl text-lg leading-8 text-[#42505d] md:text-xl">
                 We help local businesses get found, turn interest into real
                 leads, and clean up the workflow that happens after someone
-                reaches out.
+                reaches out &mdash; as a software consultant and AI consultant
+                for small businesses in Marietta, GA.
               </p>
               <div className="mt-5 grid gap-3 text-sm font-semibold text-[#384653] sm:grid-cols-3">
                 {[
