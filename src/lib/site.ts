@@ -28,6 +28,26 @@ export const siteConfig = {
     "Douglas County",
     "Atlanta metro",
   ],
+  // Site-wide meta keywords, referenced from the root layout's metadata.
+  // "AI consultant" / "software consultant" (plus the geo-qualified variants)
+  // are the exact query terms competitors carry in their own names but this
+  // site did not carry anywhere in copy or meta prior to 2026-09-18.
+  keywords: [
+    "local business AI consulting",
+    "website growth assessment",
+    "AI search optimization",
+    "answer engine optimization",
+    "lead generation assessment",
+    "workflow automation",
+    "Cobb County business",
+    "Paulding County business",
+    "Douglas County business",
+    "Marietta business consultant",
+    "AI consultant",
+    "software consultant",
+    "AI consultant Marietta GA",
+    "software consultant Cobb County",
+  ],
 };
 
 /**

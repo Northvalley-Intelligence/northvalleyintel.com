@@ -16,18 +16,7 @@ export const metadata: Metadata = {
   creator: siteConfig.name,
   publisher: siteConfig.name,
   category: "Local business consulting",
-  keywords: [
-    "local business AI consulting",
-    "website growth assessment",
-    "AI search optimization",
-    "answer engine optimization",
-    "lead generation assessment",
-    "workflow automation",
-    "Cobb County business",
-    "Paulding County business",
-    "Douglas County business",
-    "Marietta business consultant",
-  ],
+  keywords: siteConfig.keywords,
   alternates: {
     canonical: "/",
     types: {

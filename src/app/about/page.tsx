@@ -75,10 +75,11 @@ export default function AboutPage() {
                 {owner.summary}
               </p>
               <p className="mt-4 text-lg leading-8 text-[#42505d]">
-                Northvalley Intelligence builds practical, workflow-shaped
-                software and AI-agent systems for service businesses, and works
-                across Cobb, Paulding, and Douglas counties and the wider
-                Atlanta metro. The published client work sits on the{" "}
+                Northvalley Intelligence works as a software consultant and AI
+                consultant for small businesses, building practical,
+                workflow-shaped software and AI-agent systems across Cobb,
+                Paulding, and Douglas counties and the wider Atlanta metro.
+                The published client work sits on the{" "}
                 <Link
                   className="font-bold text-north-teal"
                   href="/#client-work"
