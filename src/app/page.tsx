@@ -79,7 +79,11 @@ const jsonLd = {
   // The Google Business Profile. sameAs plus hasMap is the machine-readable
   // half of the site-to-listing connection the 2026-09-07 evaluation reported
   // as missing; the visible footer link is the other half.
-  sameAs: ["https://feroshjacob.github.io/posts/", siteConfig.mapsUrl],
+  sameAs: [
+    "https://feroshjacob.github.io/posts/",
+    siteConfig.mapsUrl,
+    siteConfig.linkedinUrl,
+  ],
   hasMap: siteConfig.mapsUrl,
   areaServed: siteConfig.serviceArea.map((area) => ({
     "@type": area.includes("County") ? "AdministrativeArea" : "City",

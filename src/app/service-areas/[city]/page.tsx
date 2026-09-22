@@ -77,7 +77,11 @@ export default async function ServiceAreaPage({
     email: siteConfig.email,
     logo: `${siteConfig.url}/northvalley-logo.png`,
     image: `${siteConfig.url}/assessment-flow.webp`,
-    sameAs: ["https://feroshjacob.github.io/posts/", siteConfig.mapsUrl],
+    sameAs: [
+      "https://feroshjacob.github.io/posts/",
+      siteConfig.mapsUrl,
+      siteConfig.linkedinUrl,
+    ],
     hasMap: siteConfig.mapsUrl,
     description: `Custom software, workflow automation, AI assistants, and website growth assessments for businesses in ${area.city}, Georgia.`,
     address: {

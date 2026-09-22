@@ -39,6 +39,14 @@ export function SiteFooter({ width = "max-w-7xl" }: { width?: string }) {
             >
               Find us on Google
             </a>
+            <a
+              className="hover:text-white"
+              href={siteConfig.linkedinUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              LinkedIn
+            </a>
           </span>
           <span className="flex flex-wrap gap-x-5 gap-y-1">
             <Link className="hover:text-white" href="/about">
