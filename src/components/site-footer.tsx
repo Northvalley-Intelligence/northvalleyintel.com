@@ -47,6 +47,14 @@ export function SiteFooter({ width = "max-w-7xl" }: { width?: string }) {
             >
               LinkedIn
             </a>
+            <a
+              className="hover:text-white"
+              href={siteConfig.clutchUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Clutch
+            </a>
           </span>
           <span className="flex flex-wrap gap-x-5 gap-y-1">
             <Link className="hover:text-white" href="/about">

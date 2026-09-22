@@ -83,6 +83,7 @@ const jsonLd = {
     "https://feroshjacob.github.io/posts/",
     siteConfig.mapsUrl,
     siteConfig.linkedinUrl,
+    siteConfig.clutchUrl,
   ],
   hasMap: siteConfig.mapsUrl,
   areaServed: siteConfig.serviceArea.map((area) => ({
