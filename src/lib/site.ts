@@ -15,6 +15,11 @@ export const siteConfig = {
   // hasMap, and the visible "Find us on Google" footer link, so the website
   // and the listing point at each other.
   mapsUrl: "https://maps.google.com/?cid=18103596615723406363",
+  // The business's LinkedIn company page. The numeric public company URL —
+  // no vanity slug is set yet. Used for sameAs and the footer link.
+  linkedinUrl: "https://www.linkedin.com/company/119623922/",
+  // The business's Clutch profile. Used for sameAs and the footer link.
+  clutchUrl: "https://clutch.co/profile/northvalley-intelligence",
   tagline: "Local growth systems and practical AI for service businesses",
   description:
     "Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.",

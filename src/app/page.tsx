@@ -68,8 +68,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": ["ProfessionalService", "LocalBusiness"],
   "@id": `${siteConfig.url}/#organization`,
-  name: siteConfig.legalName,
-  alternateName: siteConfig.name,
+  name: siteConfig.name,
+  legalName: siteConfig.legalName,
   url: siteConfig.url,
   email: siteConfig.email,
   telephone: siteConfig.telephone,
@@ -79,7 +79,12 @@ const jsonLd = {
   // The Google Business Profile. sameAs plus hasMap is the machine-readable
   // half of the site-to-listing connection the 2026-09-07 evaluation reported
   // as missing; the visible footer link is the other half.
-  sameAs: ["https://feroshjacob.github.io/posts/", siteConfig.mapsUrl],
+  sameAs: [
+    "https://feroshjacob.github.io/posts/",
+    siteConfig.mapsUrl,
+    siteConfig.linkedinUrl,
+    siteConfig.clutchUrl,
+  ],
   hasMap: siteConfig.mapsUrl,
   areaServed: siteConfig.serviceArea.map((area) => ({
     "@type": area.includes("County") ? "AdministrativeArea" : "City",
