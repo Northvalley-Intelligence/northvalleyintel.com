@@ -156,6 +156,25 @@ const checks = [
       files.server.includes("Call this before request_assessment"),
   },
   {
+    // Handoff 04 (OpenAI's second rejection, "input data that is overly
+    // broad [or] unnecessary"): the write tools' inputSchema must stay
+    // trimmed to contact + the one operational field each tool needs. A
+    // future edit that adds businessName/location/business/preferredTimes
+    // back (or reintroduces sharedSecret as a public tool argument, the
+    // exact pattern that got medinaclean.com's first submission rejected
+    // as "soliciting sensitive data") fails here instead of at the next
+    // OpenAI review.
+    name: "write-tool schemas stay trimmed: no reintroduced broad fields or a public sharedSecret argument",
+    pass:
+      !/\bbusinessName\s*:/.test(files.server) &&
+      !/\blocation\s*:/.test(files.server) &&
+      !/\bbusiness\s*:/.test(files.server) &&
+      !/\bpreferredTimes\s*:/.test(files.server) &&
+      !/\bsharedSecret\s*:\s*z\./.test(files.server) &&
+      files.server.includes("sharedSecret?:") &&
+      files.endpoint.includes("x-mcp-shared-secret"),
+  },
+  {
     name: "all three annotation hints are set explicitly on read and write tools",
     pass:
       /readOnlyHint: true/.test(files.server) &&
@@ -412,8 +431,7 @@ async function runLiveChecks(url, allowLiveWrite) {
           arguments: {
             email: "h01-contract-test@example.com",
             websiteUrl: "example.com",
-            businessName: testMarker,
-            location: "contract validator probe, ignore",
+            message: `${testMarker} — contract validator probe, ignore`,
           },
         },
       },
@@ -448,7 +466,6 @@ async function runLiveChecks(url, allowLiveWrite) {
             arguments: {
               name: `${testMarker} (probe ${index + 1})`,
               email: `h01-contract-test-${index + 1}@example.com`,
-              business: "contract validator probe, ignore",
               need: consultNeeds[index],
             },
           },

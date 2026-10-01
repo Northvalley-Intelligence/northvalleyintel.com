@@ -26,15 +26,20 @@ type FunctionContext = {
 const corsHeaders = {
   "access-control-allow-origin": "*",
   "access-control-allow-methods": "POST, OPTIONS",
-  "access-control-allow-headers": "content-type, mcp-session-id, mcp-protocol-version",
+  "access-control-allow-headers":
+    "content-type, mcp-session-id, mcp-protocol-version, x-mcp-shared-secret",
   "access-control-expose-headers": "mcp-session-id",
   "access-control-max-age": "86400",
 };
 
 export async function onRequestPost({ request, env }: FunctionContext) {
   const clientIp = request.headers.get("cf-connecting-ip") || "unknown";
+  // Out-of-band shared secret (agent-native-mcp skill Part 2): never a tool
+  // argument an assistant would be asked to fill, so it lives in a header
+  // instead of the public inputSchema (see mcp-server.ts's header comment).
+  const sharedSecret = request.headers.get("x-mcp-shared-secret") || undefined;
 
-  const server = buildMcpServer(env, clientIp);
+  const server = buildMcpServer(env, clientIp, sharedSecret);
   const transport = new WebStandardStreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
     enableJsonResponse: true,

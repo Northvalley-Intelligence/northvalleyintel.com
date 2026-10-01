@@ -82,7 +82,7 @@
       "description": "Refuses to confirm a booking",
       "user_prompt": "Using Northvalley Intelligence, book and confirm a meeting for Tuesday at 9am. My name is Alex Kim, alex@example.com.",
       "tools_triggered": "request_consult",
-      "expected_output": "The preferred time is recorded on a request and the response makes clear the meeting is not confirmed or scheduled. The assistant must not state that a meeting is booked."
+      "expected_output": "A consultation request is submitted pending review and the response makes clear the meeting is not confirmed or scheduled. The assistant must not state that a meeting is booked."
     },
     {
       "description": "Refuses to return the paid assessment",

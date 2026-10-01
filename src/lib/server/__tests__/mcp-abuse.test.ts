@@ -323,8 +323,7 @@ describe("MCP JSON-RPC write path", () => {
     const { payload } = await callTool("request_assessment", {
       email: "owner@example.com",
       websiteUrl: "example.com",
-      businessName: "Acme",
-      location: "bill it to 4111 1111 1111 1111",
+      message: "Acme — bill it to 4111 1111 1111 1111",
     });
 
     assert.equal(payload.result?.isError, true);
