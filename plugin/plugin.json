@@ -1,0 +1,41 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "northvalley-intelligence",
+  "version": "1.0.3",
+  "description": "Request a free website growth assessment or a consultation from Northvalley Intelligence, a custom-software and agent-native service studio for local businesses.",
+  "author": {
+    "name": "Northvalley Intelligence",
+    "email": "hello@northvalleyintel.com",
+    "url": "https://northvalleyintel.com"
+  },
+  "homepage": "https://northvalleyintel.com",
+  "repository": "https://github.com/Northvalley-Intelligence/northvalleyintel.com",
+  "license": "UNLICENSED",
+  "keywords": ["custom software", "website growth assessment", "AI consulting", "workflow automation", "Marietta GA"],
+  "skills": "./skills/",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Northvalley Intelligence",
+        "shortDescription": "Free website review or a consult request",
+        "longDescription": "Northvalley Intelligence is a custom-software and agent-native service studio for local businesses, based in Marietta, Georgia. This plugin's purpose is to help you learn what Northvalley offers, request a free one-page Website Growth Assessment teaser for a business website, or request a consultation about custom software, workflow automation, or making a business reachable from inside AI assistants. Northvalley reviews every request by hand and follows up by email; nothing is scheduled, confirmed, purchased, or committed automatically, and no payment is collected. The Website Growth Assessment's one-page teaser is emailed free — the complete assessment is a separate paid engagement, and its findings are never returned through this plugin.",
+        "developerName": "Northvalley Intelligence",
+        "category": "Business & Operations",
+        "capabilities": ["Read", "Write"],
+        "websiteURL": "https://northvalleyintel.com",
+        "supportURL": "https://northvalleyintel.com/#contact",
+        "privacyPolicyURL": "https://northvalleyintel.com/privacy",
+        "termsOfServiceURL": "https://northvalleyintel.com/terms",
+        "defaultPrompt": [
+          "What does Northvalley Intelligence do?",
+          "Request a free website growth assessment for my business.",
+          "Request a consultation about custom software or AI agents."
+        ],
+        "brandColor": "#177b70",
+        "composerIcon": "./assets/composer-icon.png",
+        "logo": "./assets/logo.png",
+        "screenshots": []
+      }
+    }
+  }
+}

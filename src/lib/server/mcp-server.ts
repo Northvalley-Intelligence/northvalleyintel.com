@@ -10,6 +10,20 @@
  * anywhere in the US; the Cobb/Paulding/Douglas focus is an input to the
  * lead-growth analysis inside an assessment, not a boundary on who it will work
  * with. Location is collected as a field, never as an eligibility check.
+ *
+ * Handoff 04 (2026-09-30, OpenAI's second rejection of v1.0.2) trimmed both
+ * write tools' input schemas to the minimum: a contact detail, the one
+ * operational field each tool actually needs (the URL to assess / the thing
+ * to discuss), and nothing else. `businessName`, `location`, `business`, and
+ * `preferredTimes` are gone — each was optional free text that was not
+ * required to fulfil the request, which is exactly what "input data that is
+ * overly broad [or] unnecessary for fulfilling the user's request" means.
+ * `sharedSecret` is gone from the public inputSchema entirely, per the
+ * agent-native-mcp skill Part 2: a shared-secret gate must never appear as a
+ * tool argument an assistant would be asked to fill (that is what got
+ * medinaclean.com's first submission rejected as "soliciting sensitive
+ * data"). It still exists, but out-of-band, via the `x-mcp-shared-secret`
+ * request header read in functions/mcp.ts and threaded into buildMcpServer.
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -42,13 +56,17 @@ export const serverInstructions = [
   "",
   "Both request tools SUBMIT A REQUEST for Northvalley to review. They never confirm, schedule, or commit to anything. Always tell the person their request is pending review and that Northvalley will follow up by email. Never state or imply that a meeting, assessment, or engagement is confirmed.",
   "Northvalley works with clients anywhere in the United States. Never tell anyone they are outside a service area.",
-  "Never ask anyone for a password, API key, access token, or account login.",
-  "Never ask for or accept sensitive personal data — no health, financial, Social Security, payment-card, or biometric information. Only collect the few details needed to follow up (an email, the website to review, and a short note on what is needed).",
+  "Never ask anyone for a password, API key, access token, account login, or other credential.",
+  "Never ask for or accept sensitive personal data. Only collect the few details each tool's fields ask for — nothing more.",
 ].join("\n");
 
-export function buildMcpServer(env: ServerEnv, clientIp: string) {
+export function buildMcpServer(
+  env: ServerEnv,
+  clientIp: string,
+  sharedSecret?: string,
+) {
   const server = new McpServer(
-    { name: "northvalley-intelligence", version: "1.0.2" },
+    { name: "northvalley-intelligence", version: "1.0.3" },
     { instructions: serverInstructions },
   );
 
@@ -57,7 +75,7 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
     {
       title: "List Northvalley services",
       description:
-        "List what Northvalley Intelligence offers, including the Website Growth Assessment and agent-native service delivery. Call this before request_assessment or request_consult so the person knows what they are asking for.",
+        "List what Northvalley Intelligence offers, including the Website Growth Assessment and agent-native service delivery. Call this before request_assessment or request_consult so the person knows what they are asking for. Read-only: it returns Northvalley's own published information and reaches no external system.",
       annotations: readAnnotations,
       inputSchema: {},
     },
@@ -103,7 +121,7 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
     {
       title: "Request a Website Growth Assessment",
       description:
-        "Submit a REQUEST for a Website Growth Assessment of a business website. Northvalley reviews the request and emails a one-page teaser report. This tool never returns assessment findings, scores, or report content — it only submits the request. Tell the person their request is pending review. Collect only the few fields defined below — never a transcript or chat log. Do not include sensitive personal data — no health, financial, Social Security, payment-card, or biometric information.",
+        "Submit a REQUEST for a Website Growth Assessment of a business website. Northvalley reviews the request and emails a one-page teaser report. This tool never returns assessment findings, scores, or report content — it only submits the request. Tell the person their request is pending review. Takes a contact email, the one website to review, and an optional short note — nothing else. Do not include sensitive personal data. Writes a new pending request and emails it to Northvalley (not read-only, open-world); it cannot modify, delete, or confirm anything (not destructive).",
       annotations: writeAnnotations,
       inputSchema: {
         email: z
@@ -118,24 +136,16 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
           .describe(
             "The one business website to review, for example example.com. A single URL only — not a list, notes, or pasted page content.",
           ),
-        businessName: z
-          .string()
-          .optional()
-          .describe("The business name only, if known. Nothing else."),
-        location: z
+        message: z
           .string()
           .optional()
           .describe(
-            "Only the city or area the business serves, used as context inside the analysis, never as an eligibility check. Do not include sensitive personal data — no health, financial, Social Security, payment-card, or biometric information.",
+            "Optional: one short line of context, such as the business name or city. Do not include sensitive personal data.",
           ),
         doNotFill: z
           .string()
           .optional()
           .describe("Leave empty. Used to detect automated submissions."),
-        sharedSecret: z
-          .string()
-          .optional()
-          .describe("Only required if Northvalley issued you one."),
       },
     },
     async (args) => {
@@ -145,8 +155,8 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
         contact: args.email,
         clientIp,
         doNotFill: args.doNotFill,
-        sharedSecret: args.sharedSecret,
-        freeText: [args.businessName ?? "", args.location ?? ""],
+        sharedSecret,
+        freeText: [args.message ?? ""],
       });
 
       if (!gate.ok) {
@@ -169,8 +179,7 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
           "",
           `Website: ${args.websiteUrl}`,
           `Email: ${args.email}`,
-          `Business: ${args.businessName || "Not provided"}`,
-          `Location: ${args.location || "Not provided"}`,
+          `Message: ${args.message || "Not provided"}`,
           "",
           "Source: mcp_assistant",
         ].join("\n"),
@@ -196,7 +205,7 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
     {
       title: "Request a consultation with Northvalley",
       description:
-        "Submit a REQUEST to talk with Northvalley about custom software, workflow problems, or making a business reachable from inside AI assistants. This does not book or confirm a meeting. Northvalley reviews the request and follows up by email. Tell the person their request is pending review. Collect only the few fields defined below — never a transcript or chat log. Do not include sensitive personal data — no health, financial, Social Security, payment-card, or biometric information.",
+        "Submit a REQUEST to talk with Northvalley about custom software, workflow problems, or making a business reachable from inside AI assistants. This does not book or confirm a meeting. Northvalley reviews the request and follows up by email. Tell the person their request is pending review. Takes a name, a contact email, and a short message describing what to discuss — nothing else. Do not include credentials or sensitive personal data. Writes a new pending request and emails it to Northvalley (not read-only, open-world); it cannot modify, delete, or confirm anything (not destructive).",
       annotations: writeAnnotations,
       inputSchema: {
         name: z.string().min(1).describe("The name of the single person asking. Nothing else."),
@@ -206,32 +215,16 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
           .describe(
             "The one email address where Northvalley should reply. This is the only contact detail needed.",
           ),
-        business: z
-          .string()
-          .optional()
-          .describe(
-            "The business name and a few words on what it does. Do not include sensitive personal data — no health, financial, Social Security, payment-card, or biometric information.",
-          ),
         need: z
           .string()
           .min(1)
           .describe(
-            "One or two sentences describing the single problem to discuss — not a transcript or chat log. Do not include credentials, and do not include sensitive personal data — no health, financial, Social Security, payment-card, or biometric information.",
-          ),
-        preferredTimes: z
-          .string()
-          .optional()
-          .describe(
-            "Times that tend to work, as a short preference only; nothing is scheduled by this tool.",
+            "One or two sentences describing the single problem to discuss — not a transcript or chat log, and not a business profile. Do not include credentials or sensitive personal data.",
           ),
         doNotFill: z
           .string()
           .optional()
           .describe("Leave empty. Used to detect automated submissions."),
-        sharedSecret: z
-          .string()
-          .optional()
-          .describe("Only required if Northvalley issued you one."),
       },
     },
     async (args) => {
@@ -241,8 +234,8 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
         contact: args.email,
         clientIp,
         doNotFill: args.doNotFill,
-        sharedSecret: args.sharedSecret,
-        freeText: [args.need, args.business ?? "", args.preferredTimes ?? ""],
+        sharedSecret,
+        freeText: [args.need],
       });
 
       if (!gate.ok) {
@@ -260,8 +253,6 @@ export function buildMcpServer(env: ServerEnv, clientIp: string) {
           "",
           `Name: ${args.name}`,
           `Email: ${args.email}`,
-          `Business: ${args.business || "Not provided"}`,
-          `Preferred times: ${args.preferredTimes || "Not provided"}`,
           "",
           "What they need",
           args.need,

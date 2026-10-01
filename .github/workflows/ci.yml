@@ -33,3 +33,15 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Unit tests (abuse gate)
+        run: npm run test:unit
+
+      - name: MCP contract (static)
+        run: npm run test:mcp-contract
+
+      - name: Directory submission readiness (static)
+        run: npm run test:directory
+
+      - name: Plugin package (static)
+        run: npm run test:plugin-package

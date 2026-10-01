@@ -14,6 +14,8 @@
     "test:chat": "node scripts/validate-workflow-chat.mjs",
     "test:mcp-contract": "node scripts/validate-mcp-contract.mjs",
     "test:directory": "node scripts/validate-directory-submission.mjs",
+    "test:plugin-package": "node scripts/validate-plugin-package.mjs",
+    "test:unit": "npx tsx --test src/lib/server/__tests__/*.test.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
