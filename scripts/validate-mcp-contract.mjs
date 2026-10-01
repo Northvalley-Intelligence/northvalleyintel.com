@@ -76,8 +76,8 @@ const contractTestCases = [
       "trust proof and service-area clarity",
       "calls to action and contact friction",
       "lead path from interest to follow-up",
-      "free",
-      "paid",
+      "teaser is emailed",
+      "separate engagement",
     ],
   },
   {

@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "app-6a73fe0b6b2c8191a31801bfab5599f2",
-  "version": "1.0.4",
-  "description": "Request a free website growth assessment or a consultation from Northvalley Intelligence, a custom-software and agent-native service studio for local businesses.",
+  "version": "1.0.5",
+  "description": "Request a one-page Website Growth Assessment or a consultation from Northvalley Intelligence, a custom-software and agent-native service studio for local businesses.",
   "author": {
     "name": "Northvalley Intelligence",
     "email": "hello@northvalleyintel.com",
@@ -17,8 +17,8 @@
     "com.openai": {
       "interface": {
         "displayName": "Northvalley Intelligence",
-        "shortDescription": "Free website review or a consult request",
-        "longDescription": "Northvalley Intelligence is a custom-software and agent-native service studio for local businesses, based in Marietta, Georgia. This plugin's purpose is to help you learn what Northvalley offers, request a free one-page Website Growth Assessment teaser for a business website, or request a consultation about custom software, workflow automation, or making a business reachable from inside AI assistants. Northvalley reviews every request by hand and follows up by email; nothing is scheduled, confirmed, purchased, or committed automatically, and no payment is collected. The Website Growth Assessment's one-page teaser is emailed free — the complete assessment is a separate paid engagement, and its findings are never returned through this plugin.",
+        "shortDescription": "Website review or a consult",
+        "longDescription": "Northvalley Intelligence is a custom-software and agent-native service studio for local businesses, based in Marietta, Georgia. This plugin's purpose is to help you learn what Northvalley offers, request a one-page Website Growth Assessment for a business website, or request a consultation about custom software, workflow automation, or making a business reachable from inside AI assistants. Northvalley reviews every request by hand and follows up by email; nothing is scheduled, confirmed, purchased, or committed automatically, and no payment is collected. The complete assessment is a separate engagement; its findings are never returned through this plugin.",
         "developerName": "Northvalley Intelligence",
         "category": "Business & Operations",
         "capabilities": ["Read", "Write"],
@@ -28,7 +28,7 @@
         "termsOfServiceURL": "https://northvalleyintel.com/terms",
         "defaultPrompt": [
           "What does Northvalley Intelligence do?",
-          "Request a free website growth assessment for my business.",
+          "Request a website growth assessment for my business.",
           "Request a consultation about custom software or AI agents."
         ],
         "brandColor": "#177b70",

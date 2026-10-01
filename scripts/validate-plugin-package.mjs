@@ -82,8 +82,8 @@ const checks = [
       /^[a-z0-9]+(-[a-z0-9]+)*$/.test(manifest.name),
   },
   {
-    name: "version is semantic versioning and matches the live server (1.0.4)",
-    pass: manifest.version === "1.0.4" && /^\d+\.\d+\.\d+$/.test(manifest.version),
+    name: "version is semantic versioning and matches the live server (1.0.5)",
+    pass: manifest.version === "1.0.5" && /^\d+\.\d+\.\d+$/.test(manifest.version),
   },
   {
     name: "has a non-empty description",
@@ -124,6 +124,38 @@ const checks = [
     pass: (() => {
       const prompts = manifest.extensions?.["com.openai"]?.interface?.defaultPrompt || [];
       return prompts.length <= 3 && prompts.every((prompt) => prompt.length <= 128);
+    })(),
+  },
+  {
+    // Portal message (Ferosh 2026-10-01 08:33): "Subtitle must be 30 characters or fewer."
+    name: "shortDescription (the portal's \"subtitle\") is 30 characters or fewer",
+    pass: (() => {
+      const shortDescription = manifest.extensions?.["com.openai"]?.interface?.shortDescription;
+      return typeof shortDescription === "string" && shortDescription.length <= 30;
+    })(),
+  },
+  {
+    // Portal message (Ferosh 2026-10-01 08:33): "Remove pricing, subscription offers, and
+    // temporary promotions from the description." Checked across every listing text field
+    // this package carries plus the skill's own description/body — a pricing word repeated
+    // anywhere in the listing surface is the same violation.
+    name: "no pricing/promotion words (free, paid, discount, promo, trial, subscription) in any listing text",
+    pass: (() => {
+      const BANNED = ["free", "paid", "discount", "promo", "trial", "subscription"];
+      const iface = manifest.extensions?.["com.openai"]?.interface || {};
+      const texts = [
+        manifest.description,
+        iface.shortDescription,
+        iface.longDescription,
+        ...(iface.defaultPrompt || []),
+      ];
+      const skillPath = path.join(PLUGIN_ROOT, "skills", "northvalley-intelligence", "SKILL.md");
+      if (existsSync(skillPath)) {
+        texts.push(readFileSync(skillPath, "utf8"));
+      }
+      const hit = (text) =>
+        typeof text === "string" && BANNED.some((word) => new RegExp(`\\b${word}\\b`, "i").test(text));
+      return !texts.some(hit);
     })(),
   },
   {

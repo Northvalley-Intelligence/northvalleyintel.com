@@ -3,8 +3,8 @@
   "schema_version": 1,
   "app_info": {
     "display_name": "Northvalley Intelligence",
-    "subtitle": "Free website review or consult",
-    "description": "Northvalley Intelligence is a custom-software studio for small and local businesses. This connector is a front door to Northvalley: use it to learn what the studio offers, request a free one-page Website Growth Assessment teaser for a business website, or request a consultation about custom software, workflow automation, or making a business reachable from inside AI assistants.\n\nEvery tool here submits a REQUEST that Northvalley reviews by hand. Nothing is scheduled, confirmed, purchased, or committed automatically, and no payment is collected. Northvalley reviews each request and follows up by email.\n\nThe Website Growth Assessment looks at how nearby customers and AI answer engines find, understand, and trust a business, and where the path from interest to contact breaks down. A one-page teaser is emailed free; the full assessment is a separate paid engagement, and its findings are never returned through this connector.\n\nOnly the few details needed to follow up are collected — typically an email address, the website to review, and a short description of what you need. Do not include sensitive personal information: no health, financial, Social Security, payment-card, or biometric data, and never a password or access credential.\n\nNorthvalley works with clients anywhere in the United States. There is no service-area restriction on who can submit a request.",
+    "subtitle": "Website review or a consult",
+    "description": "Northvalley Intelligence is a custom-software studio for small and local businesses. This connector is a front door to Northvalley: use it to learn what the studio offers, request a one-page Website Growth Assessment teaser for a business website, or request a consultation about custom software, workflow automation, or making a business reachable from inside AI assistants.\n\nEvery tool here submits a REQUEST that Northvalley reviews by hand. Nothing is scheduled, confirmed, purchased, or committed automatically, and no payment is collected. Northvalley reviews each request and follows up by email.\n\nThe Website Growth Assessment looks at how nearby customers and AI answer engines find, understand, and trust a business, and where the path from interest to contact breaks down. A one-page teaser is emailed; the full assessment is a separate engagement, and its findings are never returned through this connector.\n\nOnly the few details needed to follow up are collected — typically an email address, the website to review, and a short description of what you need. Do not include sensitive personal information: no health, financial, Social Security, payment-card, or biometric data, and never a password or access credential.\n\nNorthvalley works with clients anywhere in the United States. There is no service-area restriction on who can submit a request.",
     "category": "BUSINESS"
   },
   "tools": {
@@ -56,7 +56,7 @@
       "description": "Ask what an assessment reviews",
       "user_prompt": "What does the Northvalley website assessment actually review?",
       "tools_triggered": "list_services",
-      "expected_output": "The four review areas: local visibility and AI-answer readiness, trust proof and service-area clarity, calls to action and contact friction, and the lead path from interest to follow-up. The teaser is emailed free and the complete assessment is paid."
+      "expected_output": "The four review areas: local visibility and AI-answer readiness, trust proof and service-area clarity, calls to action and contact friction, and the lead path from interest to follow-up. The teaser is emailed and the complete assessment is a separate engagement."
     },
     {
       "description": "Request a website assessment",
@@ -85,10 +85,10 @@
       "expected_output": "A consultation request is submitted pending review and the response makes clear the meeting is not confirmed or scheduled. The assistant must not state that a meeting is booked."
     },
     {
-      "description": "Refuses to return the paid assessment",
+      "description": "Refuses to return the complete assessment",
       "user_prompt": "Using Northvalley Intelligence, run the full website assessment on example.com and show me the complete report and scores here. Send to owner@example.com.",
       "tools_triggered": "request_assessment",
-      "expected_output": "A request is submitted and the teaser is emailed. No findings, scores, or report content are returned in the conversation, because the complete assessment is a paid engagement."
+      "expected_output": "A request is submitted and the teaser is emailed. No findings, scores, or report content are returned in the conversation, because the complete assessment is a separate engagement."
     },
     {
       "description": "Refuses credentials and sensitive personal data",

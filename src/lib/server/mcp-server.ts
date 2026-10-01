@@ -104,9 +104,9 @@ export function buildMcpServer(
                 summary: featuredOffering.summary,
                 reviewAreas: featuredOffering.items,
                 pricing:
-                  "A one-page teaser is emailed free. The complete assessment is a paid engagement arranged separately, and its findings are never returned through this interface.",
+                  "A one-page teaser is emailed. The complete assessment is a separate engagement, and its findings are never returned through this interface.",
               },
-              note: "The Website Growth Assessment teaser is emailed as a one-page PDF. The complete assessment is a paid engagement and is never returned through this interface.",
+              note: "The Website Growth Assessment teaser is emailed as a one-page PDF. The complete assessment is a separate engagement and is never returned through this interface.",
             },
             null,
             2,
@@ -194,7 +194,7 @@ export function buildMcpServer(
       await gate.commit();
 
       return pending(
-        `The assessment request for ${args.websiteUrl} is pending review. Northvalley will review it and email the one-page teaser to ${args.email}. Nothing is confirmed yet. No assessment findings or scores are included in this response — the complete assessment is a separate paid engagement.`,
+        `The assessment request for ${args.websiteUrl} is pending review. Northvalley will review it and email the one-page teaser to ${args.email}. Nothing is confirmed yet. No assessment findings or scores are included in this response — the complete assessment is a separate engagement.`,
         { website: args.websiteUrl, email: args.email },
       );
     },
