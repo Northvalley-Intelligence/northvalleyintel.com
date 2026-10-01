@@ -76,14 +76,14 @@ const checks = [
     pass: manifest.$schema === "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   },
   {
-    name: "name is kebab-case and matches the live MCP server's name",
+    name: "name is kebab-case and matches the plugin name OpenAI's portal requires (app-6a73fe0b6b2c8191a31801bfab5599f2)",
     pass:
-      manifest.name === "northvalley-intelligence" &&
+      manifest.name === "app-6a73fe0b6b2c8191a31801bfab5599f2" &&
       /^[a-z0-9]+(-[a-z0-9]+)*$/.test(manifest.name),
   },
   {
-    name: "version is semantic versioning and matches the live server (1.0.3)",
-    pass: manifest.version === "1.0.3" && /^\d+\.\d+\.\d+$/.test(manifest.version),
+    name: "version is semantic versioning and matches the live server (1.0.4)",
+    pass: manifest.version === "1.0.4" && /^\d+\.\d+\.\d+$/.test(manifest.version),
   },
   {
     name: "has a non-empty description",

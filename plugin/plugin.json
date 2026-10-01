@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "northvalley-intelligence",
-  "version": "1.0.3",
+  "name": "app-6a73fe0b6b2c8191a31801bfab5599f2",
+  "version": "1.0.4",
   "description": "Request a free website growth assessment or a consultation from Northvalley Intelligence, a custom-software and agent-native service studio for local businesses.",
   "author": {
     "name": "Northvalley Intelligence",
