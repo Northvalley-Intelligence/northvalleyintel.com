@@ -76,9 +76,14 @@ const checks = [
     pass: manifest.$schema === "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   },
   {
-    name: "name is kebab-case and matches the plugin name OpenAI's portal requires (app-6a73fe0b6b2c8191a31801bfab5599f2)",
+    // r4 (2026-10-02): the portal refused to accept a plugin ZIP update against the old
+    // "app-6a73fe0b6b2c8191a31801bfab5599f2" entry — that entry wraps the pre-plugin "MCP app"
+    // (v1.0.2, rejected Sep 19, never published), which cannot take a plugin ZIP until it is
+    // published first. This package instead goes in as a FRESH plugin entry (as Horizon did),
+    // so the name reverts to the kebab-case plugin name, not the legacy app id.
+    name: "name is kebab-case and matches the fresh plugin entry name (northvalley-intelligence)",
     pass:
-      manifest.name === "app-6a73fe0b6b2c8191a31801bfab5599f2" &&
+      manifest.name === "northvalley-intelligence" &&
       /^[a-z0-9]+(-[a-z0-9]+)*$/.test(manifest.name),
   },
   {

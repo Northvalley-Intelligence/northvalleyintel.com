@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
   "mcpServers": {
-    "app-6a73fe0b6b2c8191a31801bfab5599f2": {
+    "northvalley-intelligence": {
       "type": "streamable-http",
       "url": "https://northvalleyintel.com/mcp"
     }
