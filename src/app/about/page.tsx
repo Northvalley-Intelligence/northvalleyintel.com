@@ -148,7 +148,7 @@ export default function AboutPage() {
                 award, certification, or client statistic is claimed that is not
                 already published somewhere citable.
               */}
-              <ul className="mt-5 grid gap-3">
+              <ul id="credentials" className="mt-5 grid gap-3">
                 {owner.credentials.map((item) => (
                   <li
                     key={item}

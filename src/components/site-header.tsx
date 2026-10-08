@@ -10,8 +10,9 @@ const navigation = [
   { href: "/#agent-native", label: "AI Assistants" },
   { href: "/#assessments", label: "Getting Started" },
   { href: "/#client-work", label: "Client Work" },
-  // "Real Example" dropped from the nav (handoff 02) so the row still fits at
-  // 1024-1280 px; its #case-study section and anchor stay on the page.
+  // "Real Example" was dropped from the nav (handoff 02) to make room for
+  // "Capabilities". The row is one line at 1280 px and wraps to two lines at
+  // 1024 px either way; the #case-study section and anchor stay on the page.
   // Replaces the old "/#people" anchor. The evaluation's largest single gap
   // was Trust Signals: no crawlable about/team/owner page existed at all. The
   // /about page carries the same team section and is linkable and crawlable,

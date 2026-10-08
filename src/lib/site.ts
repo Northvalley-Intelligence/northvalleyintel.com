@@ -127,7 +127,7 @@ export const capabilities = [
           "Search relevance, ranking and measurement for online catalogs: data science, analytics and machine learning applied to what shoppers type and what they find.",
         proof:
           "Founder Ferosh Jacob, Ph.D.: search relevance and product ranking at The Home Depot (2015–2021); 22 years in software, 12 in search, catalog and data-driven systems.",
-        proofHref: "/about",
+        proofHref: "/about#credentials",
         icon: "search",
       },
       {
@@ -294,7 +294,7 @@ export const aeoAnswers = [
   {
     question: "Where does Northvalley Intelligence work?",
     answer:
-      "Our local assessment work is focused on Cobb, Paulding, and Douglas counties, including Marietta and the surrounding Atlanta metro service areas.",
+      "Software consulting is done remotely for clients anywhere in the United States. Local assessment and marketing work is focused on Cobb, Paulding, and Douglas counties, including Marietta and the surrounding Atlanta metro service areas.",
   },
   {
     question: "How is the website assessment different from a website doctor?",

@@ -297,7 +297,7 @@ export default function Home() {
                   key={row.label}
                   className="grid gap-4 lg:grid-cols-[11rem_1fr] lg:gap-6"
                 >
-                  <h3 className="rounded-md bg-north-ink px-4 py-3 text-sm font-extrabold uppercase text-white lg:flex lg:items-start lg:py-5">
+                  <h3 className="rounded-md bg-north-ink px-4 py-3 text-sm font-extrabold uppercase text-white lg:flex lg:items-start lg:self-start lg:py-5">
                     {row.label}
                   </h3>
                   <div className="grid gap-5 md:grid-cols-2">
@@ -323,13 +323,13 @@ export default function Home() {
                             {tile.description}
                           </p>
                           <div className="mt-5 border-t border-north-line pt-4">
-                            <p className="text-xs font-black uppercase text-north-amber">
+                            <p className="text-xs font-black uppercase text-north-amber-dark">
                               Proof
                             </p>
                             {"proofHref" in tile && tile.proofHref ? (
                               <a
                                 href={tile.proofHref}
-                                className="mt-2 block text-sm leading-6 text-[#42505d] underline decoration-north-line underline-offset-4 hover:text-north-ink"
+                                className="mt-2 block text-sm leading-6 text-[#42505d] underline decoration-north-teal/60 underline-offset-4 hover:text-north-teal hover:decoration-north-teal"
                               >
                                 {tile.proof}
                               </a>
@@ -360,7 +360,7 @@ export default function Home() {
                     key={fact.label}
                     className={`min-w-0 bg-[#f8faf9] p-4 md:p-5 ${contact.wide ? "col-span-2 lg:col-span-1" : ""}`}
                   >
-                    <dt className="text-xs font-black uppercase text-north-amber">
+                    <dt className="text-xs font-black uppercase text-north-amber-dark">
                       {fact.label}
                     </dt>
                     <dd className="mt-1 text-sm font-semibold leading-6 text-north-ink">
