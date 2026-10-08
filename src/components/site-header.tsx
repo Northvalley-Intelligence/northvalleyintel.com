@@ -6,13 +6,13 @@ const navigation = [
   // offering, so it no longer needs a competing top-level entry.
   { href: "/#capabilities", label: "Capabilities" },
   { href: "/#services", label: "Local Business" },
-  { href: "/#advertising", label: "Advertising" },
   { href: "/#agent-native", label: "AI Assistants" },
   { href: "/#assessments", label: "Getting Started" },
   { href: "/#client-work", label: "Client Work" },
   // "Real Example" was dropped from the nav (handoff 02) to make room for
-  // "Capabilities". The row is one line at 1280 px and wraps to two lines at
-  // 1024 px either way; the #case-study section and anchor stay on the page.
+  // "Capabilities", and "Advertising" was removed at the owner's request; the
+  // #case-study and #advertising sections and anchors stay on the page. The row
+  // is one line at 1280 px and still wraps to two lines at 1024 px.
   // Replaces the old "/#people" anchor. The evaluation's largest single gap
   // was Trust Signals: no crawlable about/team/owner page existed at all. The
   // /about page carries the same team section and is linkable and crawlable,
