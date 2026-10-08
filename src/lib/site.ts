@@ -149,10 +149,16 @@ export const companyFacts = [
   {
     label: "Works with",
     value: "Clients anywhere in the United States, remotely",
+    wide: true,
   },
   {
     label: "Contact",
-    value: "Ferosh Jacob, Founder · hello@northvalleyintel.com · (470) 781-4143",
+    // Rendered as three lines: name, mailto link, tel link.
+    value: "Ferosh Jacob, Founder",
+    email: siteConfig.email,
+    phone: siteConfig.phone,
+    phoneHref: siteConfig.phoneHref,
+    wide: true,
   },
 ];
 

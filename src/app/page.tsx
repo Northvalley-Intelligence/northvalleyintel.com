@@ -348,16 +348,43 @@ export default function Home() {
             </div>
 
             <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-north-line bg-north-line lg:grid-cols-4">
-              {companyFacts.map((fact) => (
-                <div key={fact.label} className="min-w-0 break-words bg-[#f8faf9] p-4 md:p-5">
-                  <dt className="text-xs font-black uppercase text-north-amber">
-                    {fact.label}
-                  </dt>
-                  <dd className="mt-1 text-sm font-semibold leading-6 text-north-ink">
-                    {fact.value}
-                  </dd>
-                </div>
-              ))}
+              {companyFacts.map((fact) => {
+                const contact = fact as {
+                  email?: string;
+                  phone?: string;
+                  phoneHref?: string;
+                  wide?: boolean;
+                };
+                return (
+                  <div
+                    key={fact.label}
+                    className={`min-w-0 bg-[#f8faf9] p-4 md:p-5 ${contact.wide ? "col-span-2 lg:col-span-1" : ""}`}
+                  >
+                    <dt className="text-xs font-black uppercase text-north-amber">
+                      {fact.label}
+                    </dt>
+                    <dd className="mt-1 text-sm font-semibold leading-6 text-north-ink">
+                      <span className="block">{fact.value}</span>
+                      {contact.email ? (
+                        <a
+                          href={`mailto:${contact.email}`}
+                          className="block whitespace-nowrap hover:underline"
+                        >
+                          {contact.email}
+                        </a>
+                      ) : null}
+                      {contact.phone ? (
+                        <a
+                          href={contact.phoneHref}
+                          className="block whitespace-nowrap hover:underline"
+                        >
+                          {contact.phone}
+                        </a>
+                      ) : null}
+                    </dd>
+                  </div>
+                );
+              })}
             </dl>
           </div>
         </section>
