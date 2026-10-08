@@ -155,7 +155,7 @@ export const companyFacts = [
     label: "Contact",
     // Rendered as three lines: name, mailto link, tel link.
     value: "Ferosh Jacob, Founder",
-    email: siteConfig.email,
+    email: "ferosh@northvalleyintel.com",
     phone: siteConfig.phone,
     phoneHref: siteConfig.phoneHref,
     wide: true,
