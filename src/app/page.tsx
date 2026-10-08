@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import {
+  AppWindow,
   BrainCircuit,
+  Cable,
+  Cpu,
   CalendarCheck2,
   CheckCircle2,
   ClipboardList,
@@ -35,6 +38,9 @@ import { chatgptBookingDemo } from "@/lib/chatgpt-booking-demo";
 import {
   aeoAnswers,
   agentConnect,
+  capabilities,
+  capabilitiesIntro,
+  companyFacts,
   assessments,
   clientTestimonials,
   clientWork,
@@ -58,11 +64,18 @@ import {
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Northvalley Intelligence — software consultant & AI consultant for small businesses in Marietta, GA",
+      "Northvalley Intelligence | Software Consultant & AI Consultant — Marietta, GA",
   },
   description:
-    "Northvalley Intelligence is a software consultant and AI consultant for local service businesses in Cobb, Paulding, and Douglas counties, helping them get found, convert leads, and clean up the workflows behind the work.",
+    "Northvalley Intelligence is a software consultant in Marietta, Georgia: web applications, mobile apps, and system integrations, with specialist depth in e-commerce search and hands-on LLM fine-tuning. Also an AI consultant for local service businesses in Cobb, Paulding, and Douglas counties.",
 };
+
+const capabilityIcons = {
+  app: AppWindow,
+  integration: Cable,
+  search: SearchCheck,
+  model: Cpu,
+} as const;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -97,6 +110,12 @@ const jsonLd = {
     addressCountry: "US",
   },
   knowsAbout: [
+    "Custom software development",
+    "Web application development",
+    "Mobile app development (iOS and Android)",
+    "Systems integration",
+    "E-commerce search relevance",
+    "LLM fine-tuning",
     "Local business lead generation",
     "AI search optimization",
     "Answer engine optimization",
@@ -107,6 +126,9 @@ const jsonLd = {
   ],
   description: siteConfig.description,
   serviceType: [
+    "Custom software development",
+    "Systems integration",
+    "Mobile app development",
     "Local Business Lead Generation Assessment",
     "Lead Conversion Workflow Consulting",
     "Operational AI Assessment",
@@ -196,7 +218,7 @@ export default function Home() {
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
             <div>
               <p className="mb-3 text-sm font-extrabold uppercase text-north-teal">
-                Local growth and practical AI support
+                Software consultant · Marietta, Georgia
               </p>
               <h1 className="max-w-4xl text-[clamp(2.5rem,5vw,4.5rem)] font-black leading-[1] tracking-normal text-north-ink">
                 Let&apos;s untangle the work.
@@ -253,6 +275,94 @@ export default function Home() {
         </section>
 
         <section
+          id="capabilities"
+          className="bg-white px-5 py-16 md:px-10 md:py-20 lg:px-18"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
+                {capabilitiesIntro.eyebrow}
+              </p>
+              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
+                {capabilitiesIntro.title}
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-north-muted">
+                {capabilitiesIntro.lead}
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-8">
+              {capabilities.map((row) => (
+                <div
+                  key={row.label}
+                  className="grid gap-4 lg:grid-cols-[11rem_1fr] lg:gap-6"
+                >
+                  <h3 className="rounded-md bg-north-ink px-4 py-3 text-sm font-extrabold uppercase text-white lg:flex lg:items-start lg:py-5">
+                    {row.label}
+                  </h3>
+                  <div className="grid gap-5 md:grid-cols-2">
+                    {row.tiles.map((tile) => {
+                      const Icon =
+                        capabilityIcons[
+                          tile.icon as keyof typeof capabilityIcons
+                        ];
+                      return (
+                        <article
+                          key={tile.title}
+                          className="flex flex-col rounded-lg border border-north-line bg-white p-6"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-north-ink text-white">
+                              <Icon aria-hidden="true" size={21} />
+                            </span>
+                            <h4 className="text-xl font-black leading-tight text-north-ink">
+                              {tile.title}
+                            </h4>
+                          </div>
+                          <p className="mt-4 leading-7 text-north-muted">
+                            {tile.description}
+                          </p>
+                          <div className="mt-5 border-t border-north-line pt-4">
+                            <p className="text-xs font-black uppercase text-north-amber">
+                              Proof
+                            </p>
+                            {"proofHref" in tile && tile.proofHref ? (
+                              <a
+                                href={tile.proofHref}
+                                className="mt-2 block text-sm leading-6 text-[#42505d] underline decoration-north-line underline-offset-4 hover:text-north-ink"
+                              >
+                                {tile.proof}
+                              </a>
+                            ) : (
+                              <p className="mt-2 text-sm leading-6 text-[#42505d]">
+                                {tile.proof}
+                              </p>
+                            )}
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-north-line bg-north-line lg:grid-cols-4">
+              {companyFacts.map((fact) => (
+                <div key={fact.label} className="min-w-0 break-words bg-[#f8faf9] p-4 md:p-5">
+                  <dt className="text-xs font-black uppercase text-north-amber">
+                    {fact.label}
+                  </dt>
+                  <dd className="mt-1 text-sm font-semibold leading-6 text-north-ink">
+                    {fact.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        <section
           aria-label="Workflow divider"
           className="bg-white px-5 py-10 md:px-10 lg:px-18"
         >
@@ -278,7 +388,7 @@ export default function Home() {
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
               <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
-                Services
+                For local businesses
               </p>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
                 From getting found to getting the work done.

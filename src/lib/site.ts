@@ -20,7 +20,8 @@ export const siteConfig = {
   linkedinUrl: "https://www.linkedin.com/company/119623922/",
   // The business's Clutch profile. Used for sameAs and the footer link.
   clutchUrl: "https://clutch.co/profile/northvalley-intelligence",
-  tagline: "Local growth systems and practical AI for service businesses",
+  tagline:
+    "Custom software, built and integrated — web, mobile, and the systems behind them.",
   description:
     "Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.",
   positioning:
@@ -80,6 +81,78 @@ export const coreServices = [
     name: "Website growth assessment",
     detail:
       "A review of how nearby customers and AI answer engines find, understand, and trust the business, and where the path from interest to contact breaks down.",
+  },
+];
+
+/**
+ * The capability map on the homepage (#capabilities), plus the facts strip
+ * under it. Wording is the approved copy deck of 2026-10-08; llms.txt and
+ * source-website-assessment.json carry the same tiles word for word.
+ */
+export const capabilitiesIntro = {
+  eyebrow: "Capabilities",
+  title: "What we build.",
+  lead: "Northvalley Intelligence is a software consultancy. We design, build and integrate software for organizations that need it to work with the systems they already run. We work with clients anywhere in the United States, remotely from Marietta, Georgia.",
+};
+
+export const capabilities = [
+  {
+    label: "Core — software development",
+    tiles: [
+      {
+        title: "Web and mobile applications",
+        description:
+          "Browser-based applications, the phone apps (iOS and Android) that share their backend, and the services behind them: accounts, payments, data, reporting.",
+        proof:
+          "Northvalley built and operates its own Website Growth Assessment product: an automated analysis of a business's public pages, combined with search-demand and local-ranking data, delivered as a scored report.",
+        proofHref: "#website-assessment",
+        icon: "app",
+      },
+      {
+        title: "Custom integrations",
+        description:
+          "Software that connects to the systems you already use — external APIs, vendor platforms and line-of-business systems — and puts their data to work in one place.",
+        proof:
+          "For Canon Insurance Advisers: a retention board that surfaces policies at risk of lapsing before they end.",
+        icon: "integration",
+      },
+    ],
+  },
+  {
+    label: "Specialties — led by the founder",
+    tiles: [
+      {
+        title: "E-commerce and retail search",
+        description:
+          "Search relevance, ranking and measurement for online catalogs: data science, analytics and machine learning applied to what shoppers type and what they find.",
+        proof:
+          "Founder Ferosh Jacob, Ph.D.: search relevance and product ranking at The Home Depot (2015–2021); 22 years in software, 12 in search, catalog and data-driven systems.",
+        proofHref: "/about",
+        icon: "search",
+      },
+      {
+        title: "LLM fine-tuning",
+        description:
+          "Adapting open-source language models to a specific task, trained and run on local hardware (GPU or CPU) so data stays in-house.",
+        proof:
+          "A published experiment by the founder: a LoRA-tuned Llama-3.2-3B and a fine-tuned cross-encoder that grade e-commerce search relevance, both ahead of the prompted baseline on two public datasets; presented with Jiho Noh (Kennesaw State University) at SCD 2026.",
+        icon: "model",
+      },
+    ],
+  },
+];
+
+// A plain row of cells; append { label, value } entries to add more later.
+export const companyFacts = [
+  { label: "Legal name", value: "Northvalley Intelligence LLC" },
+  { label: "Based in", value: "Marietta, Georgia" },
+  {
+    label: "Works with",
+    value: "Clients anywhere in the United States, remotely",
+  },
+  {
+    label: "Contact",
+    value: "Ferosh Jacob, Founder · hello@northvalleyintel.com · (470) 781-4143",
   },
 ];
 
@@ -191,6 +264,7 @@ export const owner = {
     "M.S. in computer science, Clarkson University",
     "Software engineering and AI leader working across search, relevance, data science, and practical AI systems",
     "Career from software engineer to lead engineer, manager, and senior manager, in the retail, healthcare, and employment domains",
+    "Search relevance and product ranking at The Home Depot (2015–2021); 22 years in software, 12 in search, catalog and data-driven systems",
   ],
   approach: [
     "Start from the business owner's real question, not a generic software package.",
