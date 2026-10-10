@@ -68,9 +68,7 @@ Client work examples shown on the website:
 Testimonials shown on the website:
 - Rosa Medina said, "You are making my dream come true."
 Team:
-- Ferosh Jacob, Founder.
-- Theresa Burt, Business Liaison.
-- Glen Soans, AI Expert.
+- Ferosh Jacob, Founder. Northvalley Intelligence is run by Ferosh alone.
 Tone:
 - Calm, practical, welcoming to small-business owners.
 - Avoid hype, flashy AI claims, and pretending to know details not provided by the visitor.
