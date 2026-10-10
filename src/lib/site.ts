@@ -583,6 +583,19 @@ export const teamMembers = [
 
 export const clientWork = [
   {
+    name: "Smart Cash Sheet",
+    client: "Smart Cash Sheet",
+    url: "https://smartcashsheet.com",
+    focus: "Web and mobile application engineering",
+    outcome:
+      "A personal cash-flow app on the web, with iOS and Android apps that share its backend. Northvalley runs its engineering: bank-data import, subscriptions and billing, the safety rules around its in-app money coach, and a release process with a staging environment and scenario tests before each production release.",
+    signals: [
+      "Web and mobile app",
+      "Bank data and billing",
+      "Release engineering",
+    ],
+  },
+  {
     name: "Resplendent Tea Experience",
     client: "Terri Hitzig",
     url: "https://resplendenttea.com/",
@@ -683,6 +696,8 @@ export const clientWork = [
     name: "Horizon Pet Waste Solutions — Marietta, GA",
     client: "Horizon Pet Waste Solutions",
     url: "https://www.horizonpetwastesolutions.com",
+    image: "/client-work/horizon-pet-waste.jpg",
+    alt: "Horizon Pet Waste Solutions website home page preview.",
     focus: "Website rebuild and assistant reach",
     outcome:
       "A one-person pet waste removal business had a single Google Sites page. We rebuilt it as a fast, plain-spoken site: plans with starting prices, a service-area page for the towns he serves, articles answering the questions customers actually search, and a quote request that reaches his inbox. The site also answers AI assistants directly — plans, pricing and service area — and can prepare a quote request for the owner to review. Nothing is booked without him.",
