@@ -579,22 +579,6 @@ export const teamMembers = [
     description:
       "Leads Northvalley Intelligence with a focus on practical AI systems, operational software, and assessment-led modernization.",
   },
-  {
-    name: "Theresa Burt",
-    role: "Business Liaison",
-    url: "https://www.linkedin.com/in/theresaburt",
-    image: "/people-theresa-burt.webp",
-    description:
-      "Connects small-business conversations to practical next steps, helping owners explain where operations feel stuck and what support would be useful.",
-  },
-  {
-    name: "Glen Soans",
-    role: "AI Expert",
-    url: "https://www.linkedin.com/in/glen-soans-4a050923",
-    image: "/people-glen-soans.webp",
-    description:
-      "Works across information retrieval and data science, with experience since 2015 in autocomplete and search systems for large retailers including Home Depot and GPC/NAPA.",
-  },
 ];
 
 export const clientWork = [
@@ -694,6 +678,15 @@ export const clientWork = [
       "Nonprofit support",
       "Cobb County families",
     ],
+  },
+  {
+    name: "Horizon Pet Waste Solutions — Marietta, GA",
+    client: "Horizon Pet Waste Solutions",
+    url: "https://www.horizonpetwastesolutions.com",
+    focus: "Website rebuild and assistant reach",
+    outcome:
+      "A one-person pet waste removal business had a single Google Sites page. We rebuilt it as a fast, plain-spoken site: plans with starting prices, a service-area page for the towns he serves, articles answering the questions customers actually search, and a quote request that reaches his inbox. The site also answers AI assistants directly — plans, pricing and service area — and can prepare a quote request for the owner to review. Nothing is booked without him.",
+    signals: ["Website rebuild", "Local search content", "Agent-ready"],
   },
 ];
 

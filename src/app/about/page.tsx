@@ -201,9 +201,9 @@ export default function AboutPage() {
         >
           <div className="mx-auto max-w-5xl">
             <h2 className="text-2xl font-extrabold text-north-ink">
-              Who you will work with
+              Who you work with
             </h2>
-            <div className="mt-6 grid gap-5 md:grid-cols-3">
+            <div className="mt-6 grid max-w-sm gap-5">
               {teamMembers.map((member) => (
                 <article
                   key={member.name}

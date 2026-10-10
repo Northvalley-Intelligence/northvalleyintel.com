@@ -5,10 +5,11 @@ const navigation = [
   // The Website Growth Assessment lives inside the Services section as a named
   // offering, so it no longer needs a competing top-level entry.
   { href: "/#capabilities", label: "Capabilities" },
+  { href: "/#client-work", label: "Client Work" },
+  { href: "/about", label: "About" },
   { href: "/#services", label: "Local Business" },
   { href: "/#agent-native", label: "AI Assistants" },
   { href: "/#assessments", label: "Getting Started" },
-  { href: "/#client-work", label: "Client Work" },
   // "Real Example" was dropped from the nav (handoff 02) to make room for
   // "Capabilities", and "Advertising" was removed at the owner's request; the
   // #case-study and #advertising sections and anchors stay on the page. The row
@@ -18,7 +19,6 @@ const navigation = [
   // /about page carries the same team section and is linkable and crawlable,
   // so the nav points at it instead of the on-page anchor. Service areas are
   // linked from the footer rather than here; this row is already full.
-  { href: "/about", label: "About" },
   { href: "/#contact", label: "Contact" },
 ];
 
