@@ -586,6 +586,8 @@ export const clientWork = [
     name: "Smart Cash Sheet",
     client: "Smart Cash Sheet",
     url: "https://smartcashsheet.com",
+    image: "/client-work/smart-cash-sheet.jpg",
+    alt: "Smart Cash Sheet website preview.",
     focus: "Web and mobile application engineering",
     outcome:
       "A personal cash-flow app on the web, with iOS and Android apps that share its backend. Northvalley runs its engineering: bank-data import, subscriptions and billing, the safety rules around its in-app money coach, and a release process with a staging environment and scenario tests before each production release.",
