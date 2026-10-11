@@ -6,7 +6,7 @@
   "alternateName": "Northvalley Intelligence",
   "url": "https://northvalleyintel.com",
   "email": "hello@northvalleyintel.com",
-  "description": "Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.",
+  "description": "Northvalley Intelligence is a software consultancy with three services: software development, agentic applications, and data science, machine learning and data cleansing. We design, build and integrate software for organizations that need it to work with the systems they already run.",
   "positioning": "Northvalley Intelligence is a custom software company using AI agents to make practical, workflow-shaped software more accessible. The public website speaks in customer language because business owners usually start with lead, follow-up, scheduling, and workflow problems rather than software requirements.",
   "capabilities": {
     "summary": "Northvalley Intelligence is a software consultancy with three services: software development, agentic applications, and data science, machine learning and data cleansing. We design, build and integrate software for organizations that need it to work with the systems they already run. We work with clients anywhere in the United States, remotely from Marietta, Georgia.",
@@ -17,7 +17,7 @@
           {
             "name": "Web and mobile applications",
             "description": "Browser-based applications, the phone apps (iOS and Android) that share their backend, and the services behind them: accounts, payments, data, reporting.",
-            "proof": "Northvalley built and operates its own Website Growth Assessment product: an automated analysis of a business's public pages, combined with search-demand and local-ranking data, delivered as a scored report."
+            "proof": "Smart Cash Sheet: a personal cash-flow app on the web with iOS and Android apps that share its backend. Northvalley runs its engineering: bank-data import, subscriptions and billing, and the release process. See Client Work."
           },
           {
             "name": "Custom integrations",
@@ -32,7 +32,7 @@
         ]
       },
       {
-        "label": "Specialties — led by the founder",
+        "label": "Data science and cleansing — led by the founder",
         "capabilities": [
           {
             "name": "Data science, machine learning and data cleansing",
@@ -69,6 +69,18 @@
   ],
   "services": [
     {
+      "name": "Software development",
+      "plainLanguageDescription": "Web and mobile applications and custom integrations with the systems a client already runs."
+    },
+    {
+      "name": "Agentic applications",
+      "plainLanguageDescription": "Software agents that take actions inside a business's own systems, with voice and chat front ends and agent-callable backends."
+    },
+    {
+      "name": "Data science, machine learning and data cleansing",
+      "plainLanguageDescription": "Data cleansing, entity normalization and matching, ontology, ranking and search relevance, and machine learning models, on messy real-world data."
+    },
+    {
       "name": "Website Growth Assessment",
       "plainLanguageDescription": "Reviews whether a local business website helps nearby customers find the business, trust it, and take the next step. It is an entry point for understanding where better workflow, automation, or custom software could help.",
       "notA": [
@@ -85,29 +97,19 @@
         "contact friction",
         "lead conversion path"
       ],
-      "delivery": "A one-page teaser is emailed after request. The full paid assessment includes page-level evidence, scoring logic, exact missing signals, and prioritized fixes."
-    },
-    {
-      "name": "Local Lead Path Assessment",
-      "plainLanguageDescription": "Looks at how customers discover a business, what makes them reach out, and what has to happen after interest becomes a lead."
-    },
-    {
-      "name": "Operational AI Assessment",
-      "plainLanguageDescription": "Reviews workflows around intake, scheduling, customer communication, follow-up, handoffs, and repeated work to identify practical AI-agent and custom software opportunities."
-    },
-    {
-      "name": "Knowledge Chaos Assessment",
-      "plainLanguageDescription": "Finds scattered documents, notes, inboxes, CRM records, and staff know-how that should become usable operational memory."
+      "delivery": "A one-page teaser is emailed after request. The full paid assessment includes page-level evidence, scoring logic, exact missing signals, and prioritized fixes.",
+      "line": "Local business"
     },
     {
       "name": "Agent-Native Service Delivery",
-      "description": "Make a business usable directly from inside an AI assistant: coverage, pricing, and a request that reaches the owner. The assistant submits a request and never confirms a commitment; the owner reviews and confirms the work. Built onto the intake the business already has, so there is no parallel booking system."
+      "description": "Make a business usable directly from inside an AI assistant: coverage, pricing, and a request that reaches the owner. The assistant submits a request and never confirms a commitment; the owner reviews and confirms the work. Built onto the intake the business already has, so there is no parallel booking system.",
+      "line": "Local business"
     }
   ],
   "answerEngineFacts": [
     {
       "question": "What does Northvalley Intelligence do?",
-      "answer": "Northvalley Intelligence helps local service businesses improve the full path from being found, to converting leads, to organizing the work after a customer reaches out. Behind that customer-language entry point, Northvalley builds practical custom software and AI-agent systems around how the business actually operates."
+      "answer": "Northvalley Intelligence is a software consultancy in Marietta, Georgia with three services: software development (web and mobile, custom integrations), agentic applications, and data science, machine learning and data cleansing. For local service businesses it also improves the path from being found, to converting leads, to running the work."
     },
     {
       "question": "Who does Northvalley Intelligence help?",
@@ -184,6 +186,7 @@
   "sourcePages": [
     "https://northvalleyintel.com/",
     "https://northvalleyintel.com/#client-work",
+    "https://northvalleyintel.com/case-studies",
     "https://northvalleyintel.com/case-studies/medina-clean",
     "https://northvalleyintel.com/case-studies/medina-clean/rosas-story",
     "https://northvalleyintel.com/case-studies/medina-clean/website-ai-chat",

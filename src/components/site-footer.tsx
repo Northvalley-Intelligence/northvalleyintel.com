@@ -20,7 +20,7 @@ export function SiteFooter({ width = "max-w-7xl" }: { width?: string }) {
       >
         <div className="flex flex-col gap-1">
           <span className="font-bold text-white">{siteConfig.legalName}</span>
-          <span>Marietta, Georgia — Cobb, Paulding, and Douglas counties</span>
+          <span>Marietta, Georgia · clients anywhere in the United States</span>
         </div>
         <div className="flex flex-col gap-2 sm:items-end">
           <span className="flex flex-wrap gap-x-5 gap-y-1">
@@ -30,7 +30,9 @@ export function SiteFooter({ width = "max-w-7xl" }: { width?: string }) {
             >
               {siteConfig.phone}
             </a>
-            <ContactEmailLink className="hover:text-white" />
+            <span>
+              <ContactEmailLink className="hover:text-white" /> (general)
+            </span>
             <a
               className="hover:text-white"
               href={siteConfig.mapsUrl}

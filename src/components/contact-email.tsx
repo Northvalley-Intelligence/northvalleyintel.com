@@ -59,17 +59,20 @@ export function ContactEmailText({ className }: { className?: string }) {
 export function ContactEmailLink({
   className,
   subject,
+  address = siteConfig.email,
 }: {
   className?: string;
   subject?: string;
+  /** Defaults to the site-wide address; pass a named contact's address. */
+  address?: string;
 }) {
   const href = subject
-    ? `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}`
-    : `mailto:${siteConfig.email}`;
+    ? `mailto:${address}?subject=${encodeURIComponent(subject)}`
+    : `mailto:${address}`;
 
   const anchor = `<a class="${escapeHtml(className ?? "")}" href="${escapeHtml(
     href,
-  )}">${escapeHtml(siteConfig.email)}</a>`;
+  )}">${escapeHtml(address)}</a>`;
 
   return (
     <span

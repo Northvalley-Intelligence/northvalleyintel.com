@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { CheckCircle2, MapPinned, Phone } from "lucide-react";
+import Link from "next/link";
 
+import { ContactEmailLink } from "@/components/contact-email";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
@@ -87,6 +89,22 @@ export default function GovernmentPage() {
                 </article>
               ))}
             </div>
+            <h3 className="mt-10 text-xl font-extrabold text-north-ink">
+              How an engagement runs
+            </h3>
+            <ol className="mt-4 grid gap-3 md:grid-cols-2">
+              {governmentPage.process.map((step, index) => (
+                <li
+                  key={step}
+                  className="flex items-start gap-3 text-base leading-7 text-north-muted"
+                >
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-north-ink text-sm font-black text-white">
+                    {index + 1}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
@@ -154,10 +172,25 @@ export default function GovernmentPage() {
                   <h3 className="text-xl font-black leading-tight text-north-ink">
                     {item.name}
                   </h3>
-                  <p className="mt-3 leading-7 text-north-muted">{item.text}</p>
+                  <ul className="mt-3 grid gap-2">
+                    {item.lines.map((line) => (
+                      <li key={line} className="leading-7 text-north-muted">
+                        {line}
+                      </li>
+                    ))}
+                  </ul>
                 </article>
               ))}
             </div>
+            <p className="mt-5 text-base leading-7 text-north-muted">
+              Public write-ups:{" "}
+              <Link
+                className="font-bold text-north-teal hover:underline"
+                href="/#client-work"
+              >
+                Client Work
+              </Link>
+            </p>
           </div>
         </section>
 
@@ -200,12 +233,15 @@ export default function GovernmentPage() {
             {contact ? (
               <p className="mt-4 text-lg leading-8 text-north-ink">
                 <span className="block font-bold">{contact.value}</span>
-                <a
-                  className="block font-bold text-north-teal hover:underline"
-                  href={`mailto:${(contact as { email?: string }).email}`}
-                >
-                  {(contact as { email?: string }).email}
-                </a>
+                <span className="block">
+                  <ContactEmailLink
+                    address={(contact as { email?: string }).email}
+                    className="font-bold text-north-teal hover:underline"
+                  />{" "}
+                  <span className="text-base font-bold text-north-muted">
+                    (direct)
+                  </span>
+                </span>
                 <a
                   className="inline-flex items-center gap-2 font-bold text-north-teal hover:underline"
                   href={(contact as { phoneHref?: string }).phoneHref}

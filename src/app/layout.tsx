@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
   publisher: siteConfig.name,
-  category: "Local business consulting",
+  category: "Software consulting",
   keywords: siteConfig.keywords,
   alternates: {
     canonical: "/",

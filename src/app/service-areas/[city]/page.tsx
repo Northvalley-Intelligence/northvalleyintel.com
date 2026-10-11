@@ -154,12 +154,12 @@ export default async function ServiceAreaPage({
             <p className="mt-4 text-lg leading-8 text-[#42505d]">
               There is no {area.city}-specific product. The four services below
               are shaped around how each business actually operates. The free
-              website growth assessment is what tells us which one is worth
-              doing first.
+              one-page teaser of the website growth assessment is what tells us
+              which one is worth doing first.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <ButtonLink href="/#website-assessment">
-                Request the free assessment
+                Request the free teaser
               </ButtonLink>
               <a
                 className="inline-flex items-center gap-2 text-lg font-bold text-north-ink hover:text-north-teal"
