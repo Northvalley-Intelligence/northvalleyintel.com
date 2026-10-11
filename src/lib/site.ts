@@ -1,3 +1,6 @@
+const smartCashSheetOutcome =
+  "A personal cash-flow app on the web, with iOS and Android apps that share its backend. Northvalley runs its engineering: bank-data import, subscriptions and billing, the safety rules around its in-app money coach, and a release process with a staging environment and scenario tests before each production release.";
+
 export const siteConfig = {
   name: "Northvalley Intelligence",
   legalName: "Northvalley Intelligence LLC",
@@ -162,7 +165,7 @@ export const governmentPage = {
   description:
     "Custom software, agentic applications, and data science and data cleansing for federal, state and local buyers. NAICS 541511, PSC DA01, DH01 and DD01. Marietta, Georgia.",
   summary:
-    "Northvalley Intelligence designs, builds and integrates custom software, web and mobile, agentic applications, and data science, machine learning and data cleansing for organizations that need it to work with the systems they already run.",
+    "Northvalley Intelligence builds software for organizations that need it to work with the systems they already run: web and mobile applications with custom integrations, agentic applications, and data science, machine learning and data cleansing.",
   competencies: [
     {
       title: "Software development",
@@ -207,7 +210,7 @@ export const governmentPage = {
     },
     {
       name: "Smart Cash Sheet",
-      text: "Built and maintains the web and mobile app: a personal cash-flow app on the web, with iOS and Android apps that share its backend.",
+      text: smartCashSheetOutcome,
     },
   ],
   companyData: [
@@ -710,8 +713,7 @@ export const clientWork = [
     image: "/client-work/smart-cash-sheet.jpg",
     alt: "Smart Cash Sheet website preview.",
     focus: "Web and mobile application engineering",
-    outcome:
-      "A personal cash-flow app on the web, with iOS and Android apps that share its backend. Northvalley runs its engineering: bank-data import, subscriptions and billing, the safety rules around its in-app money coach, and a release process with a staging environment and scenario tests before each production release.",
+    outcome: smartCashSheetOutcome,
     signals: [
       "Web and mobile app",
       "Bank data and billing",
