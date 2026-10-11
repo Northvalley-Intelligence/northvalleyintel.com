@@ -67,13 +67,14 @@ export const metadata: Metadata = {
       "Northvalley Intelligence | Software Consultant & AI Consultant — Marietta, GA",
   },
   description:
-    "Northvalley Intelligence is a software consultant in Marietta, Georgia: web applications, mobile apps, and system integrations, with specialist depth in e-commerce search and hands-on LLM fine-tuning. Also an AI consultant for local service businesses in Cobb, Paulding, and Douglas counties.",
+    "Northvalley Intelligence is a software consultant in Marietta, Georgia: web applications, mobile apps, system integrations, and agentic applications, with specialist depth in data science, machine learning, data cleansing and search, and hands-on LLM fine-tuning. Also an AI consultant for local service businesses in Cobb, Paulding, and Douglas counties.",
 };
 
 const capabilityIcons = {
   app: AppWindow,
   integration: Cable,
   search: SearchCheck,
+  agent: BrainCircuit,
   model: Cpu,
 } as const;
 
@@ -114,7 +115,10 @@ const jsonLd = {
     "Web application development",
     "Mobile app development (iOS and Android)",
     "Systems integration",
-    "E-commerce search relevance",
+    "Agentic applications",
+    "Data science and machine learning",
+    "Data cleansing and entity normalization",
+    "Search relevance",
     "LLM fine-tuning",
     "Local business lead generation",
     "AI search optimization",
@@ -224,10 +228,10 @@ export default function Home() {
                 Let&apos;s untangle the work.
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-[#42505d] md:text-xl">
-                A software consultant and AI consultant in Marietta, GA
-                &mdash; we help local businesses get found, turn interest into
-                real leads, and clean up the workflow that happens after
-                someone reaches out.
+                A software consultant and AI consultant in Marietta, GA &mdash;
+                we help local businesses get found, turn interest into real
+                leads, and clean up the workflow that happens after someone
+                reaches out.
               </p>
               <div className="mt-5 grid gap-3 text-sm font-semibold text-[#384653] sm:grid-cols-3">
                 {[
@@ -300,7 +304,9 @@ export default function Home() {
                   <h3 className="rounded-md bg-north-ink px-4 py-3 text-sm font-extrabold uppercase text-white lg:flex lg:items-start lg:self-start lg:py-5">
                     {row.label}
                   </h3>
-                  <div className="grid gap-5 md:grid-cols-2">
+                  <div
+                    className={`grid gap-5 md:grid-cols-2 ${row.tiles.length > 2 ? "xl:grid-cols-3" : ""}`}
+                  >
                     {row.tiles.map((tile) => {
                       const Icon =
                         capabilityIcons[
@@ -386,6 +392,21 @@ export default function Home() {
                 );
               })}
             </dl>
+            <p className="mt-4 text-sm font-bold text-north-muted">
+              <Link
+                className="text-north-teal underline underline-offset-4 hover:text-north-ink"
+                href="/government"
+              >
+                For government buyers
+              </Link>
+              {" · "}
+              <Link
+                className="text-north-teal underline underline-offset-4 hover:text-north-ink"
+                href="/about#mission"
+              >
+                Our mission, vision and values
+              </Link>
+            </p>
           </div>
         </section>
 

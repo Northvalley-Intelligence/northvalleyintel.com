@@ -92,7 +92,7 @@ export const coreServices = [
 export const capabilitiesIntro = {
   eyebrow: "Capabilities",
   title: "What we build.",
-  lead: "Northvalley Intelligence is a software consultancy. We design, build and integrate software for organizations that need it to work with the systems they already run. We work with clients anywhere in the United States, remotely from Marietta, Georgia.",
+  lead: "Northvalley Intelligence is a software consultancy with three services: software development, agentic applications, and data science, machine learning and data cleansing. We design, build and integrate software for organizations that need it to work with the systems they already run. We work with clients anywhere in the United States, remotely from Marietta, Georgia.",
 };
 
 export const capabilities = [
@@ -116,17 +116,25 @@ export const capabilities = [
           "For Canon Insurance Advisers: a retention board that surfaces policies at risk of lapsing before they end.",
         icon: "integration",
       },
+      {
+        title: "Agentic applications",
+        description:
+          "Software agents that take actions inside a business's own systems, with voice and chat front ends and agent-callable backends (MCP).",
+        proof:
+          "A working demo of a voice-first field companion for a pest-control route: the technician speaks, the agent reads and updates the CRM through an agent-callable backend.",
+        icon: "agent",
+      },
     ],
   },
   {
     label: "Specialties — led by the founder",
     tiles: [
       {
-        title: "E-commerce and retail search",
+        title: "Data science, machine learning and data cleansing",
         description:
-          "Search relevance, ranking and measurement for online catalogs: data science, analytics and machine learning applied to what shoppers type and what they find.",
+          "Data cleansing, entity normalization and matching, ontology, ranking and search relevance, and machine learning models, on messy real-world data.",
         proof:
-          "Founder Ferosh Jacob, Ph.D.: search relevance and product ranking at The Home Depot (2015–2021); 22 years in software, 12 in search, catalog and data-driven systems.",
+          'Founder Ferosh Jacob, Ph.D.: at CareerBuilder (2013–2015), a machine learning-based school and company normalization system and candidate-profile matching across data sources; at The Home Depot (2015–2021), machine learning ranking models, a search-evaluation framework and a product ontology; at Genuine Parts Company (2024–2026), catalog, search and discovery with generative AI and classical machine learning; publications since 2010, including the 2016 Springer chapter "Data Science and Big Data Analytics at CareerBuilder".',
         proofHref: "/about#credentials",
         icon: "search",
       },
@@ -141,6 +149,88 @@ export const capabilities = [
     ],
   },
 ];
+
+/**
+ * The /government page (handoff 06). One page for federal, state and local
+ * buyers. Identifiers are never invented: UEI, CAGE and SAM status read
+ * "Registration in progress" until they exist. Past performance repeats only
+ * what the Client Work cards already say (outcome only, no client data).
+ */
+export const governmentPage = {
+  path: "/government",
+  title: "Northvalley Intelligence for Government Buyers",
+  description:
+    "Custom software, agentic applications, and data science and data cleansing for federal, state and local buyers. NAICS 541511, PSC DA01, DH01 and DD01. Marietta, Georgia.",
+  summary:
+    "Northvalley Intelligence designs, builds and integrates custom software, web and mobile, agentic applications, and data science, machine learning and data cleansing for organizations that need it to work with the systems they already run.",
+  competencies: [
+    {
+      title: "Software development",
+      description:
+        "Web and mobile applications plus custom integrations with the systems a buyer already runs.",
+    },
+    {
+      title: "Agentic applications",
+      description:
+        "Software agents that take actions inside a business's own systems, with voice and chat front ends and agent-callable backends (MCP).",
+    },
+    {
+      title: "Data science, machine learning and data cleansing",
+      description:
+        "Data cleansing, entity normalization and matching, ontology, ranking and search relevance, and machine learning models, on messy real-world data.",
+    },
+  ],
+  differentiators: [
+    "The founder does the hands-on work on every engagement.",
+    "Depth in data science and search: 12 years in search, catalog and data-driven systems, including machine learning ranking and data normalization.",
+    "Models can be trained and run on local hardware, so data stays in-house where a client needs it.",
+    "Software built to work with the tools and systems the client already runs.",
+  ],
+  buyers: [
+    {
+      label: "Federal",
+      text: "Eligibility information is in the company data below: NAICS and PSC codes now, with the Unique Entity ID, CAGE code and SAM.gov status to follow once registration completes.",
+    },
+    {
+      label: "State",
+      text: "Custom software, integrations and data work delivered remotely from Georgia to state agencies anywhere in the United States.",
+    },
+    {
+      label: "Local",
+      text: "A Marietta, Georgia firm. Local government buyers can meet in person and get a direct line to the founder.",
+    },
+  ],
+  pastPerformance: [
+    {
+      name: "Canon Insurance Advisers",
+      text: "A retention board that surfaces policies at risk of lapsing before they end.",
+    },
+    {
+      name: "Smart Cash Sheet",
+      text: "Built and maintains the web and mobile app: a personal cash-flow app on the web, with iOS and Android apps that share its backend.",
+    },
+  ],
+  companyData: [
+    { label: "Legal name", value: "Northvalley Intelligence LLC" },
+    { label: "Location", value: "Marietta, Georgia" },
+    {
+      label: "NAICS (primary)",
+      value: "541511 — Custom Computer Programming Services",
+    },
+    {
+      label: "NAICS (secondary)",
+      value: "541512 — Computer Systems Design Services",
+    },
+    {
+      label: "PSC",
+      value:
+        "DA01 — IT and Telecom - Business Application/Application Development Support Services (Labor); DH01 — IT and Telecom - Platform Support Services: Database, Mainframe, Middleware (Labor); DD01 — IT and Telecom - Service Delivery Support Services: ITSM, Operations Center, Project/PM (Labor)",
+    },
+    { label: "Unique Entity ID (UEI)", value: "Registration in progress" },
+    { label: "CAGE code", value: "Registration in progress" },
+    { label: "SAM.gov status", value: "Registration in progress" },
+  ],
+};
 
 // A plain row of cells; append { label, value } entries to add more later.
 export const companyFacts = [
@@ -254,6 +344,31 @@ export const serviceAreas = [
  * in business, not for a guess. Add the year here once the LLC registration
  * date is confirmed from the state record.
  */
+export const missionVisionValues = {
+  vision:
+    "Northvalley will be the software partner organizations trust to build systems that work with the tools they already run.",
+  mission:
+    "Northvalley Intelligence designs, builds and integrates custom software, web and mobile, for organizations that need it to work with the systems they already run.",
+  values: [
+    {
+      title: "Hands-on",
+      text: "The founder does the hands-on work on every engagement.",
+    },
+    {
+      title: "Start from the real question",
+      text: "We begin with the client's problem, not a package.",
+    },
+    {
+      title: "Claim only what we can show",
+      text: "Proof lines on the site come from real work; nothing is inferred.",
+    },
+    {
+      title: "Data stays yours",
+      text: "We run models on local hardware where the client needs data kept in-house, and we reject sensitive personal data at the system level.",
+    },
+  ],
+};
+
 export const owner = {
   name: "Ferosh Jacob",
   role: "Founder",
@@ -385,6 +500,12 @@ export const primaryPages = [
     label: "About Northvalley Intelligence",
     description:
       "Who runs Northvalley Intelligence, the published credentials behind the work, and how an engagement starts.",
+  },
+  {
+    url: `${siteConfig.url}/government`,
+    label: "Government buyers",
+    description:
+      "Capabilities, company data (NAICS, PSC), and past performance for federal, state and local buyers of custom software, agentic applications, and data science and data cleansing.",
   },
   {
     url: `${siteConfig.url}/service-areas`,
