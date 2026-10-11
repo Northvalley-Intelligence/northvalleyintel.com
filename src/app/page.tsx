@@ -53,7 +53,6 @@ import {
   medinaPrinciples,
   services,
   siteConfig,
-  teamMembers,
 } from "@/lib/site";
 
 // Homepage-specific title/description override. Deliberately separate from
@@ -550,83 +549,6 @@ export default function Home() {
                   </figure>
                 ))}
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="people"
-          className="border-t border-north-line bg-white px-5 py-20 md:px-10 md:py-28 lg:px-18"
-        >
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
-                Who you work with
-              </p>
-              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
-                Experienced builders for practical operational systems.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-north-muted">
-                Northvalley Intelligence combines product judgment, AI depth,
-                and hands-on implementation experience for businesses that need
-                clear systems more than software theater.
-              </p>
-            </div>
-            <div className="mt-10 grid max-w-md gap-8">
-              {teamMembers.map((member) => (
-                <article
-                  key={member.name}
-                  className="border-t border-north-line pt-6"
-                >
-                  <div className="mb-5 overflow-hidden rounded-lg bg-[#eef2f3]">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      width={628}
-                      height={835}
-                      className="aspect-[4/3] w-full object-cover object-top"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-extrabold">{member.name}</h3>
-                    <p className="mt-1 text-sm font-bold uppercase text-north-teal">
-                      {member.role}
-                    </p>
-                  </div>
-                  <p className="mt-4 text-sm leading-6 text-north-muted">
-                    {member.description}
-                  </p>
-                  <a
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-north-ink hover:text-north-teal"
-                    href={member.url}
-                  >
-                    View profile
-                    <ExternalLink
-                      aria-hidden="true"
-                      size={16}
-                      strokeWidth={2.4}
-                    />
-                  </a>
-                  {"links" in member && member.links?.length ? (
-                    <div className="mt-3 flex flex-wrap gap-3">
-                      {member.links.map((link) => (
-                        <a
-                          key={link.url}
-                          className="inline-flex items-center gap-2 text-sm font-bold text-north-teal hover:text-north-ink"
-                          href={link.url}
-                        >
-                          {link.label}
-                          <ExternalLink
-                            aria-hidden="true"
-                            size={15}
-                            strokeWidth={2.4}
-                          />
-                        </a>
-                      ))}
-                    </div>
-                  ) : null}
-                </article>
-              ))}
             </div>
           </div>
         </section>

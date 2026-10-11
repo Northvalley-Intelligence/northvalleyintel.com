@@ -11,7 +11,6 @@ import {
   missionVisionValues,
   owner,
   siteConfig,
-  teamMembers,
 } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -236,80 +235,6 @@ export default function AboutPage() {
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="people"
-          className="border-t border-north-line bg-[#f8faf9] px-5 py-14 md:px-10 md:py-16 lg:px-18"
-        >
-          <div className="mx-auto max-w-5xl">
-            <h2 className="text-2xl font-extrabold text-north-ink">
-              Who you work with
-            </h2>
-            <div className="mt-6 grid max-w-sm gap-5">
-              {teamMembers.map((member) => (
-                <article
-                  key={member.name}
-                  className="rounded-lg border border-north-line bg-white p-5"
-                >
-                  <Image
-                    src={member.image}
-                    alt={`${member.name}, ${member.role} at Northvalley Intelligence.`}
-                    width={628}
-                    height={835}
-                    sizes="(min-width: 768px) 300px, 100vw"
-                    className="aspect-[3/4] w-full rounded-md object-cover"
-                  />
-                  <p className="mt-4 text-lg font-extrabold text-north-ink">
-                    {member.name}
-                  </p>
-                  <p className="text-sm font-bold uppercase text-north-teal">
-                    {member.role}
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-north-muted">
-                    {member.description}
-                  </p>
-                  <a
-                    className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-north-teal hover:text-north-ink"
-                    href={member.url}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    Profile
-                    <ExternalLink
-                      aria-hidden="true"
-                      size={15}
-                      strokeWidth={2.4}
-                    />
-                  </a>
-                </article>
-              ))}
-            </div>
-
-            {/*
-              PHOTO SLOT — awaiting real photographs from Ferosh.
-
-              The 2026-09-07 evaluation flagged "real team, owner, project, or
-              gallery photos were not clear" as a Trust Signals failure. The
-              portraits above are the existing brand assets. What is still
-              missing is photographs of the actual work and workplace. When
-              Ferosh supplies them, drop them in public/work/ and replace this
-              block with the gallery; do not fill it with stock imagery.
-            */}
-            <div className="mt-8 rounded-lg border border-dashed border-north-line bg-white p-6">
-              <p className="text-sm font-extrabold uppercase text-north-teal">
-                Photos of the work
-              </p>
-              <p className="mt-2 text-base leading-7 text-north-muted">
-                Photographs from real engagements are being added here. Until
-                they are, the proof lives in the{" "}
-                <Link className="font-bold text-north-teal" href="/#case-study">
-                  case studies
-                </Link>{" "}
-                — full write-ups of what was actually built, for named clients.
-              </p>
             </div>
           </div>
         </section>
