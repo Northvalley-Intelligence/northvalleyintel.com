@@ -7,11 +7,7 @@ import { ContactEmailLink } from "@/components/contact-email";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
-import {
-  missionVisionValues,
-  owner,
-  siteConfig,
-} from "@/lib/site";
+import { missionVisionValues, owner, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Northvalley Intelligence",
@@ -79,11 +75,12 @@ export default function AboutPage() {
                 {owner.summary}
               </p>
               <p className="mt-4 text-lg leading-8 text-[#42505d]">
-                Northvalley Intelligence works as a software consultant and AI
-                consultant for small businesses, building practical,
-                workflow-shaped software and AI-agent systems across Cobb,
-                Paulding, and Douglas counties and the wider Atlanta metro. The
-                published client work sits on the{" "}
+                Northvalley Intelligence is a software consultancy: custom
+                software, web and mobile, integrations, agentic applications,
+                and data science and data cleansing, for organizations anywhere
+                in the United States. For local service businesses in Cobb,
+                Paulding and Douglas counties it also does the lead-path work
+                shown on the home page. The published client work sits on the{" "}
                 <Link
                   className="font-bold text-north-teal"
                   href="/#client-work"
@@ -180,7 +177,7 @@ export default function AboutPage() {
         </section>
 
         <section className="px-5 py-14 md:px-10 md:py-16 lg:px-18">
-          <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-2">
+          <div className="mx-auto max-w-5xl">
             <div>
               <h2 className="text-2xl font-extrabold text-north-ink">
                 Background and credentials
@@ -219,22 +216,6 @@ export default function AboutPage() {
                 </a>
                 .
               </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-extrabold text-north-ink">
-                How the work is approached
-              </h2>
-              <ul className="mt-5 grid gap-3">
-                {owner.approach.map((item) => (
-                  <li
-                    key={item}
-                    className="border-l-2 border-north-line pl-4 text-base leading-7 text-north-muted"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </section>

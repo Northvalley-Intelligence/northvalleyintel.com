@@ -10,12 +10,12 @@ import { serviceAreas, siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Service Areas",
   description:
-    "The Cobb and Douglas county cities Northvalley Intelligence serves from Marietta, Georgia, with a page for each.",
+    "The Cobb, Paulding and Douglas county service areas of Northvalley Intelligence in Marietta, Georgia, with a page for each city.",
   alternates: { canonical: "/service-areas" },
   openGraph: {
     title: "Service Areas | Northvalley Intelligence",
     description:
-      "The Cobb and Douglas county cities Northvalley Intelligence serves from Marietta, Georgia.",
+      "The Cobb, Paulding and Douglas county service areas of Northvalley Intelligence in Marietta, Georgia.",
     url: `${siteConfig.url}/service-areas`,
   },
 };
@@ -56,20 +56,21 @@ export default function ServiceAreasPage() {
             </h1>
             <p className="mt-6 text-lg leading-8 text-[#42505d]">
               Northvalley Intelligence is a custom software company based in
-              Marietta, Georgia. We work with service businesses across Cobb and
-              Douglas counties on the path from being found, to turning interest
-              into real leads, to organizing the work that happens after someone
-              reaches out.
+              Marietta, Georgia. We work with service businesses across Cobb,
+              Paulding and Douglas counties on the path from being found, to
+              turning interest into real leads, to organizing the work that
+              happens after someone reaches out.
             </p>
             <p className="mt-4 text-lg leading-8 text-[#42505d]">
               There is no city-specific product. Each page below says the same
               honest thing: what we do, that we do it from Marietta, and how to
-              start. The free website growth assessment is what tells us which
-              piece is worth doing first for a particular business.
+              start. The free one-page teaser of the Website Growth Assessment
+              is what tells us which piece is worth doing first for a particular
+              business.
             </p>
             <div className="mt-8">
               <ButtonLink href="/#website-assessment">
-                Request the free assessment
+                Request the free teaser
               </ButtonLink>
             </div>
           </div>
@@ -108,16 +109,16 @@ export default function ServiceAreasPage() {
                     <p className="mt-5 text-base leading-7 text-north-muted">
                       Northvalley works with {county} businesses on the same
                       custom software, workflow automation, and AI consulting
-                      path described above, from the Marietta base &mdash;
-                      there is no dedicated {county} city page yet.
+                      path described above, from the Marietta base &mdash; there
+                      is no dedicated {county} city page yet.
                     </p>
                   )}
                 </div>
               );
             })}
             <p className="text-base leading-7 text-north-muted">
-              Northvalley also works with businesses in the wider Atlanta
-              metro, and remotely beyond it. If a city is not listed, ask.
+              Northvalley also works with businesses in the wider Atlanta metro,
+              and remotely beyond it. If a city is not listed, ask.
             </p>
           </div>
         </section>

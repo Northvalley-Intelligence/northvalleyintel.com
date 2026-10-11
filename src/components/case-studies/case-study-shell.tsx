@@ -33,10 +33,10 @@ export function CaseStudyShell({
           <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
             <div>
               <Link
-                href="/#case-study"
+                href="/#client-work"
                 className="mb-6 inline-flex text-sm font-bold text-north-teal hover:text-north-ink"
               >
-                Back to case study
+                Back to client work
               </Link>
               <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
                 {eyebrow}

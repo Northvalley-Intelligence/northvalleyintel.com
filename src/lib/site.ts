@@ -26,7 +26,7 @@ export const siteConfig = {
   tagline:
     "Custom software, built and integrated — web, mobile, and the systems behind them.",
   description:
-    "Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.",
+    "Northvalley Intelligence is a software consultancy with three services: software development, agentic applications, and data science, machine learning and data cleansing. We design, build and integrate software for organizations that need it to work with the systems they already run.",
   positioning:
     "Northvalley Intelligence is a custom software company using AI agents to make practical, workflow-shaped software more accessible. The website speaks in customer language because owners usually start with lead, follow-up, scheduling, and workflow problems rather than software requirements.",
   location: "Marietta / Atlanta",
@@ -107,8 +107,8 @@ export const capabilities = [
         description:
           "Browser-based applications, the phone apps (iOS and Android) that share their backend, and the services behind them: accounts, payments, data, reporting.",
         proof:
-          "Northvalley built and operates its own Website Growth Assessment product: an automated analysis of a business's public pages, combined with search-demand and local-ranking data, delivered as a scored report.",
-        proofHref: "#website-assessment",
+          "Smart Cash Sheet: a personal cash-flow app on the web with iOS and Android apps that share its backend. Northvalley runs its engineering: bank-data import, subscriptions and billing, and the release process. See Client Work.",
+        proofHref: "#client-work",
         icon: "app",
       },
       {
@@ -130,7 +130,7 @@ export const capabilities = [
     ],
   },
   {
-    label: "Specialties — led by the founder",
+    label: "Data science and cleansing — led by the founder",
     tiles: [
       {
         title: "Data science, machine learning and data cleansing",
@@ -155,8 +155,8 @@ export const capabilities = [
 
 /**
  * The /government page (handoff 06). One page for federal, state and local
- * buyers. Identifiers are never invented: UEI, CAGE and SAM status read
- * "Registration in progress" until they exist. Past performance repeats only
+ * buyers. Identifiers are never invented: the UEI is shown (on file); CAGE and
+ * SAM status read "Registration in progress" until they exist. Past performance repeats only
  * what the Client Work cards already say (outcome only, no client data).
  */
 export const governmentPage = {
@@ -187,12 +187,18 @@ export const governmentPage = {
     "The founder does the hands-on work on every engagement.",
     "Depth in data science and search: 12 years in search, catalog and data-driven systems, including machine learning ranking and data normalization.",
     "Models can be trained and run on local hardware, so data stays in-house where a client needs it.",
-    "Software built to work with the tools and systems the client already runs.",
+  ],
+  // How an engagement runs (finding 8b, owner-approved wording).
+  process: [
+    "Conversation with the founder.",
+    "Written scope and acceptance criteria.",
+    "Build in short increments on a staging environment.",
+    "Release through CI, with documentation and handover.",
   ],
   buyers: [
     {
       label: "Federal",
-      text: "Eligibility information is in the company data below: NAICS and PSC codes now, with the Unique Entity ID, CAGE code and SAM.gov status to follow once registration completes.",
+      text: "NAICS, PSC and the Unique Entity ID are in the company data below. The CAGE code and SAM.gov status will be added when SAM registration completes.",
     },
     {
       label: "State",
@@ -206,15 +212,29 @@ export const governmentPage = {
   pastPerformance: [
     {
       name: "Canon Insurance Advisers",
-      text: "A retention board that surfaces policies at risk of lapsing before they end.",
+      lines: [
+        "Client: Canon Insurance Advisers, LLC (Georgia insurance agency).",
+        "Role: direct engagement, founder as sole developer.",
+        "Scope: a retention board that flags pending cancellations, non-renewals and steep renewal increases before the policy ends.",
+        "Reference: available on request.",
+      ],
     },
     {
       name: "Smart Cash Sheet",
-      text: smartCashSheetOutcome,
+      lines: [
+        "Client: Smart Cash Sheet.",
+        "Role: ongoing engineering.",
+        `Scope: ${smartCashSheetOutcome}`,
+        "Reference: available on request.",
+      ],
     },
   ],
   companyData: [
     { label: "Legal name", value: "Northvalley Intelligence LLC" },
+    {
+      label: "Entity",
+      value: "Georgia limited liability company, founded June 2026",
+    },
     { label: "Location", value: "Marietta, Georgia" },
     {
       label: "NAICS (primary)",
@@ -229,7 +249,7 @@ export const governmentPage = {
       value:
         "DA01 — IT and Telecom - Business Application/Application Development Support Services (Labor); DH01 — IT and Telecom - Platform Support Services: Database, Mainframe, Middleware (Labor); DD01 — IT and Telecom - Service Delivery Support Services: ITSM, Operations Center, Project/PM (Labor)",
     },
-    { label: "Unique Entity ID (UEI)", value: "Registration in progress" },
+    { label: "Unique Entity ID (UEI)", value: "JX76HA57NCJ8" },
     { label: "CAGE code", value: "Registration in progress" },
     { label: "SAM.gov status", value: "Registration in progress" },
   ],
@@ -339,7 +359,7 @@ export const serviceAreas = [
  *
  * Credentials are only what is already published on a citable public source:
  * Ferosh Jacob's own site, https://feroshjacob.github.io/, which the Person
- * entry in teamMembers already links to. Nothing here is inferred.
+ * owner.url link already points to. Nothing here is inferred.
  *
  * No founding year is stated. It could not be verified against the Georgia
  * Secretary of State record (ecorp.sos.ga.gov and the Bizapedia mirror both
@@ -380,21 +400,17 @@ export const owner = {
   blogUrl: "https://feroshjacob.github.io/posts/",
   image: "/people-ferosh-jacob.webp",
   summary:
-    "Northvalley Intelligence was founded in Marietta, Georgia in June 2026 by Ferosh Jacob, and he still does the work he sells. Every engagement starts with a conversation with him rather than an account manager.",
+    "Northvalley Intelligence was founded in Marietta, Georgia in June 2026 by Ferosh Jacob. Every engagement starts with a conversation with him, not an account manager.",
   // Source for every line below: https://feroshjacob.github.io/ (self-published
   // biography, linked from the Person entry on this site since launch).
   credentials: [
     "Ph.D. in computer science, The University of Alabama",
     "M.S. in computer science, Clarkson University",
     "Software engineering and AI leader working across search, relevance, data science, and practical AI systems",
-    "Career from software engineer to lead engineer, manager, and senior manager, in the retail, healthcare, and employment domains",
+    "Career from software engineer to staff engineer and senior engineering manager, in the retail, healthcare, recruiting and automotive-parts domains",
     "Search relevance and product ranking at The Home Depot (2015–2021); 22 years in software, 12 in search, catalog and data-driven systems",
-  ],
-  approach: [
-    "Start from the business owner's real question, not a generic software package.",
-    "Keep public marketing, lead intake, and private operations connected.",
-    "Use low-cost infrastructure first, with deterministic rules around pricing, service area, and booking facts.",
-    "Build in the languages a business actually serves its customers in.",
+    "Part-time Assistant Professor, Kennesaw State University, since 2017",
+    "Refereed publications since 2009, including a 2016 Springer chapter on data science at CareerBuilder; Ph.D. internship at Pacific Northwest National Laboratory (2012)",
   ],
 };
 
@@ -402,7 +418,7 @@ export const aeoAnswers = [
   {
     question: "What does Northvalley Intelligence do?",
     answer:
-      "Northvalley Intelligence helps local service businesses improve the full path from being found, to converting leads, to organizing the work after a customer reaches out. Behind that work, we build practical custom software and AI-agent systems around how the business actually operates.",
+      "Northvalley Intelligence is a software consultancy in Marietta, Georgia with three services: software development (web and mobile, custom integrations), agentic applications, and data science, machine learning and data cleansing. For local service businesses it also improves the path from being found, to converting leads, to running the work.",
   },
   {
     question: "Who is Northvalley Intelligence for?",
@@ -442,7 +458,13 @@ export const primaryPages = [
     url: siteConfig.url,
     label: "Home",
     description:
-      "Northvalley Intelligence company site for local growth, website assessment, practical AI, and workflow modernization.",
+      "Northvalley Intelligence is a software consultancy: software development, agentic applications, and data science and data cleansing, with a labelled local-business line.",
+  },
+  {
+    url: `${siteConfig.url}/case-studies`,
+    label: "Case studies",
+    description:
+      "Index of the Medina Clean write-ups: the operating-foundation case study and the recorded booking demonstration.",
   },
   {
     url: `${siteConfig.url}/case-studies/medina-clean`,
@@ -514,12 +536,12 @@ export const primaryPages = [
     url: `${siteConfig.url}/service-areas`,
     label: "Service areas",
     description:
-      "The Cobb and Douglas county cities Northvalley Intelligence serves from Marietta, Georgia.",
+      "The Cobb, Paulding and Douglas county service areas of Northvalley Intelligence in Marietta, Georgia.",
   },
   ...serviceAreas.map((area) => ({
     url: `${siteConfig.url}/service-areas/${area.slug}`,
     label: `${area.city}, GA`,
-    description: `Custom software, workflow automation, AI assistants, and the free website growth assessment for ${area.city}, Georgia businesses in ${area.county}.`,
+    description: `Custom software, workflow automation, AI assistants, and the free one-page teaser of the website growth assessment for ${area.city}, Georgia businesses in ${area.county}.`,
   })),
 ];
 
@@ -553,14 +575,15 @@ export const agentConnect = {
 };
 
 export const industries = [
-  "Cleaning",
-  "HVAC",
-  "Plumbing",
-  "Landscaping",
-  "Electrical",
-  "Restoration",
-  "Logistics",
-  "Field operations",
+  "Cleaners",
+  "Plumbers",
+  "HVAC companies",
+  "Electricians",
+  "Landscapers",
+  "Restoration teams",
+  "Consultants",
+  "Realtors",
+  "Field-service operators",
 ];
 
 export const services = [
@@ -619,27 +642,13 @@ export const featuredService = {
   proofCta: "See it working",
 };
 
-export const leadDiscoveryPoints = [
-  {
-    title: "Be findable before customers are ready to call",
-    description:
-      "Many customers search early: neighborhoods, local options, comparisons, costs, questions, and trusted providers. We look at whether the business shows up for those moments.",
-  },
-  {
-    title: "Be understandable to AI search and chat",
-    description:
-      "Google still matters, but people now ask ChatGPT, Gemini, Perplexity, and other assistants for local recommendations. We look at whether the website gives those systems clear, trustworthy information to work with.",
-  },
-  {
-    title: "Show why the local business is different",
-    description:
-      "Small service businesses should not compete only on generic pages. We help turn local experience, customer knowledge, and practical guidance into trust-building content.",
-  },
-  {
-    title: "Give visitors a clear next step",
-    description:
-      "A lead path should be simple: consultation request, estimate, guide, valuation, service check, or another action that matches how the business actually sells.",
-  },
+/**
+ * The two points from the former "When Leads Are Slow" section that were not
+ * already in the three service cards. Rendered under card 01.
+ */
+export const findabilityExtras = [
+  "Be understandable to AI search and chat: Google still matters, but people also ask ChatGPT, Gemini and Perplexity, so the website needs clear, trustworthy information for them to use.",
+  "Show why the local business is different: local experience, customer knowledge and practical guidance, turned into content that builds trust.",
 ];
 
 /**
@@ -658,35 +667,14 @@ export const featuredOffering = {
     "Calls to action and contact friction",
     "The lead path from interest to follow-up",
   ],
+  // Moved here from the Capabilities tile (finding 7): this product belongs to
+  // the local-business line.
+  productNote:
+    "Northvalley built and operates this product: an automated analysis of a business's public pages, combined with search-demand and local-ranking data, delivered as a scored report.",
   note: "A one-page teaser is emailed free. The complete assessment is a paid engagement.",
   href: "#website-assessment",
   cta: "Request the free teaser",
 };
-
-export const assessments = [
-  {
-    title: "Operational AI Assessment",
-    description:
-      "Review the workflows that drive revenue and service delivery, then identify where AI can support coordination, accuracy, and follow-through.",
-    items: [
-      "Lead intake and qualification",
-      "Scheduling and dispatch",
-      "Customer communication",
-      "Retention and recurring work",
-    ],
-  },
-  {
-    title: "Knowledge Chaos Assessment",
-    description:
-      "Find fragmented knowledge across documents, inboxes, CRMs, notes, and staff experience, then define a path toward searchable intelligence.",
-    items: [
-      "Institutional knowledge mapping",
-      "Information source analysis",
-      "Retrieval-ready knowledge bases",
-      "Operational memory systems",
-    ],
-  },
-];
 
 export const clientWork = [
   {
@@ -720,6 +708,7 @@ export const clientWork = [
     url: "https://medinaclean.com/",
     image: "/client-work/medina-clean.jpg",
     alt: "Medina Clean website preview.",
+    caseStudyHref: "/case-studies/medina-clean",
     focus: "Lead intake, operating foundation, and assistant reach",
     outcome:
       "A bilingual service-business platform that connects public trust, appointment requests, guided estimates, reviews, and future scheduling support. Customers can now also check the service area, get a starting price, and request a cleaning from inside an AI assistant, with the owner confirming every job.",
@@ -801,7 +790,7 @@ export const clientWork = [
     ],
   },
   {
-    name: "Horizon Pet Waste Solutions — Marietta, GA",
+    name: "Horizon Pet Waste Solutions",
     client: "Horizon Pet Waste Solutions",
     url: "https://www.horizonpetwastesolutions.com",
     image: "/client-work/horizon-pet-waste.jpg",

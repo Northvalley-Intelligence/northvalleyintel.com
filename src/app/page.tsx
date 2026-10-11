@@ -4,25 +4,16 @@ import {
   BrainCircuit,
   Cable,
   Cpu,
-  CalendarCheck2,
-  CheckCircle2,
   ClipboardList,
   ExternalLink,
   FileCheck2,
-  FileSearch,
   Globe2,
-  MessagesSquare,
-  Languages,
   MapPinned,
-  MessageSquareText,
   MousePointerClick,
   Phone,
   Quote,
-  Route,
   SearchCheck,
   ShieldCheck,
-  Store,
-  Waypoints,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,32 +32,27 @@ import {
   capabilities,
   capabilitiesIntro,
   companyFacts,
-  assessments,
   clientTestimonials,
   clientWork,
   featuredOffering,
   featuredService,
+  findabilityExtras,
   industries,
-  leadDiscoveryPoints,
-  medinaCaseStudy,
-  medinaOutcomes,
-  medinaPrinciples,
   services,
   siteConfig,
 } from "@/lib/site";
 
-// Homepage-specific title/description override. Deliberately separate from
-// siteConfig.description (which still feeds the Organization JSON-LD below,
-// left unchanged) so the exact query terms "software consultant" and "AI
-// consultant" land in the homepage <title> and meta description without
-// altering the schema.
+// Homepage-specific title/description override, so the exact query terms
+// "software consultant" and "AI consultant" land in the homepage <title> and
+// meta description. siteConfig.description (the Organization JSON-LD below)
+// now carries the same software-consultancy positioning (handoff 08).
 export const metadata: Metadata = {
   title: {
     absolute:
       "Northvalley Intelligence | Software Consultant & AI Consultant — Marietta, GA",
   },
   description:
-    "Northvalley Intelligence is a software consultant in Marietta, Georgia: web applications, mobile apps, system integrations, and agentic applications, with specialist depth in data science, machine learning, data cleansing and search, and hands-on LLM fine-tuning. Also an AI consultant for local service businesses in Cobb, Paulding, and Douglas counties.",
+    "Northvalley Intelligence is a software consultant in Marietta, Georgia: web applications, mobile apps, system integrations, and agentic applications, with specialist depth in data science, machine learning, data cleansing and search, and hands-on LLM fine-tuning. Also an AI consultant for local service businesses, with local work focused on Cobb, Paulding, and Douglas counties.",
 };
 
 const capabilityIcons = {
@@ -129,14 +115,12 @@ const jsonLd = {
   ],
   description: siteConfig.description,
   serviceType: [
-    "Custom software development",
-    "Systems integration",
-    "Mobile app development",
-    "Local Business Lead Generation Assessment",
-    "Lead Conversion Workflow Consulting",
-    "Operational AI Assessment",
-    "Website Growth Assessment",
-    "Workflow Intelligence Consulting",
+    "Software development (web and mobile, custom integrations)",
+    "Agentic applications",
+    "Data science, machine learning and data cleansing",
+    "Local business: Website Growth Assessment",
+    "Local business: Google Ads management",
+    "Local business: agent-native service surface",
   ],
   review: clientTestimonials.map((testimonial) => ({
     "@type": "Review",
@@ -224,33 +208,17 @@ export default function Home() {
                 Software consultant · Marietta, Georgia
               </p>
               <h1 className="max-w-4xl text-[clamp(2.5rem,5vw,4.5rem)] font-black leading-[1] tracking-normal text-north-ink">
-                Let&apos;s untangle the work.
+                Software that works with what you already run.
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-[#42505d] md:text-xl">
-                A software consultant and AI consultant in Marietta, GA &mdash;
-                we help local businesses get found, turn interest into real
-                leads, and clean up the workflow that happens after someone
+                Northvalley Intelligence is a software consultancy in Marietta,
+                Georgia: web and mobile applications, custom integrations,
+                agentic applications, and data science and data cleansing, for
+                organizations anywhere in the United States. For local service
+                businesses we also do the lead-path work: getting found,
+                converting interest, and cleaning up the work after someone
                 reaches out.
               </p>
-              <div className="mt-5 grid gap-3 text-sm font-semibold text-[#384653] sm:grid-cols-3">
-                {[
-                  "Find better leads",
-                  "Convert interest",
-                  "Clean up the work",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-2 rounded-md border border-north-line bg-white/70 px-3 py-2"
-                  >
-                    <CheckCircle2
-                      aria-hidden="true"
-                      className="shrink-0 text-north-green"
-                      size={17}
-                    />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <ButtonLink href="#workflow-chat">
                   Share what is not working
@@ -258,19 +226,6 @@ export default function Home() {
                 <ButtonLink href="#assessments" variant="secondary">
                   See how we start
                 </ButtonLink>
-              </div>
-              <p className="mt-8 text-xs font-extrabold uppercase text-north-teal">
-                Common service businesses we support
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {industries.map((industry) => (
-                  <span
-                    key={industry}
-                    className="rounded-md bg-[#eef3f3] px-3 py-2 text-sm font-semibold text-[#33414d]"
-                  >
-                    {industry}
-                  </span>
-                ))}
               </div>
             </div>
             <EngagementChatMockup />
@@ -356,8 +311,6 @@ export default function Home() {
               {companyFacts.map((fact) => {
                 const contact = fact as {
                   email?: string;
-                  phone?: string;
-                  phoneHref?: string;
                   wide?: boolean;
                 };
                 return (
@@ -371,20 +324,15 @@ export default function Home() {
                     <dd className="mt-1 text-sm font-semibold leading-6 text-north-ink">
                       <span className="block">{fact.value}</span>
                       {contact.email ? (
-                        <a
-                          href={`mailto:${contact.email}`}
-                          className="block whitespace-nowrap hover:underline"
-                        >
-                          {contact.email}
-                        </a>
-                      ) : null}
-                      {contact.phone ? (
-                        <a
-                          href={contact.phoneHref}
-                          className="block whitespace-nowrap hover:underline"
-                        >
-                          {contact.phone}
-                        </a>
+                        <>
+                          <ContactEmailLink
+                            address={contact.email}
+                            className="block whitespace-nowrap hover:underline"
+                          />
+                          <span className="block text-xs font-bold text-north-muted">
+                            (direct)
+                          </span>
+                        </>
                       ) : null}
                     </dd>
                   </div>
@@ -424,10 +372,10 @@ export default function Home() {
                 </h2>
               </div>
               <p className="max-w-3xl text-lg leading-8 text-north-muted">
-                These are not shown as website trophies. They are examples of
-                practical customer-facing systems: clear offers, trust signals,
-                calls, quote paths, service details, and the first pieces of a
-                larger business workflow.
+                Public proof from real work. The first card is a product whose
+                engineering Northvalley runs; the rest are customer-facing
+                systems for local businesses: clear offers, trust signals, quote
+                paths, and the first pieces of a larger workflow.
               </p>
             </div>
 
@@ -480,19 +428,29 @@ export default function Home() {
                         {client.client}
                       </p>
                     </div>
-                    <a
-                      className="inline-flex items-center gap-2 text-sm font-bold text-north-ink hover:text-north-teal"
-                      href={client.url}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Visit site
-                      <ExternalLink
-                        aria-hidden="true"
-                        size={15}
-                        strokeWidth={2.4}
-                      />
-                    </a>
+                    <div className="flex flex-col gap-2 md:items-end">
+                      <a
+                        className="inline-flex items-center gap-2 text-sm font-bold text-north-ink hover:text-north-teal"
+                        href={client.url}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Visit site
+                        <ExternalLink
+                          aria-hidden="true"
+                          size={15}
+                          strokeWidth={2.4}
+                        />
+                      </a>
+                      {"caseStudyHref" in client && client.caseStudyHref ? (
+                        <Link
+                          className="inline-flex items-center gap-2 text-sm font-bold text-north-teal hover:text-north-ink"
+                          href={client.caseStudyHref}
+                        >
+                          Read the case study
+                        </Link>
+                      ) : null}
+                    </div>
                   </div>
                   <p className="mt-4 text-base leading-7 text-north-muted">
                     {client.outcome}
@@ -585,123 +543,64 @@ export default function Home() {
                 From getting found to getting the work done.
               </h2>
               <p className="mt-5 text-lg leading-8 text-north-muted">
+                A clearly labelled commercial line alongside the software work.
                 We look at the full path for a local business: how customers
                 find you, what makes them reach out, and what has to happen
                 behind the scenes to serve them well.
               </p>
-            </div>
-
-            <div className="mt-12 rounded-lg border-2 border-north-teal bg-white p-7 shadow-[0_18px_45px_rgba(20,32,42,0.10)] md:p-9">
-              <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-                <div>
-                  <p className="text-xs font-black uppercase text-north-amber">
-                    {featuredService.eyebrow}
-                  </p>
-                  <h3 className="mt-2 text-[clamp(1.8rem,3vw,2.6rem)] font-black leading-tight">
-                    {featuredService.title}
-                  </h3>
-                  <p className="mt-4 text-base leading-7 text-north-muted">
-                    {featuredService.summary}
-                  </p>
-                  <div className="mt-7">
-                    <ButtonLink href={featuredService.proofHref}>
-                      {featuredService.proofCta}
-                    </ButtonLink>
-                  </div>
-                </div>
-                <div className="grid gap-4">
-                  {featuredService.points.map((point) => (
-                    <div
-                      key={point.label}
-                      className="border-t border-north-line pt-4 first:border-t-0 first:pt-0"
-                    >
-                      <p className="text-base font-extrabold text-north-ink">
-                        {point.label}
-                      </p>
-                      <p className="mt-1 text-sm leading-6 text-north-muted">
-                        {point.detail}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+              <p className="mt-6 text-xs font-extrabold uppercase text-north-teal">
+                Common service businesses we support
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {industries.map((industry) => (
+                  <span
+                    key={industry}
+                    className="rounded-md bg-[#eef3f3] px-3 py-2 text-sm font-semibold text-[#33414d]"
+                  >
+                    {industry}
+                  </span>
+                ))}
               </div>
             </div>
 
-            <div className="mt-14 grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-              <div className="relative pl-8">
-                <div className="absolute bottom-8 left-[1.05rem] top-8 w-px bg-north-line" />
-                {[
-                  {
-                    label: "Get found",
-                    detail:
-                      "Google, AI search, referrals, local pages, and service questions",
-                    icon: SearchCheck,
-                  },
-                  {
-                    label: "Convert leads",
-                    detail:
-                      "Clear offers, trust signals, forms, calls, estimates, and booking",
-                    icon: MessageSquareText,
-                  },
-                  {
-                    label: "Run the work",
-                    detail:
-                      "Follow-up, scheduling, customer details, handoffs, and repeat work",
-                    icon: Route,
-                  },
-                ].map((item, index) => {
-                  const Icon = item.icon;
+            <div className="mt-12 grid gap-7 md:grid-cols-3">
+              {services.map((service, index) => {
+                const Icon =
+                  [SearchCheck, MousePointerClick, ClipboardList][index] ??
+                  SearchCheck;
 
-                  return (
-                    <div
-                      key={item.label}
-                      className="relative grid gap-2 pb-10 last:pb-0"
-                    >
-                      <div className="absolute -left-8 top-0 grid h-9 w-9 place-items-center rounded-full border border-north-line bg-white text-north-teal shadow-sm">
-                        <Icon aria-hidden="true" size={18} />
-                      </div>
-                      <p className="text-xs font-black uppercase text-north-amber">
-                        Step {index + 1}
-                      </p>
-                      <h3 className="text-2xl font-extrabold">{item.label}</h3>
-                      <p className="max-w-md text-base leading-7 text-north-muted">
-                        {item.detail}
-                      </p>
+                return (
+                  <article
+                    key={service.title}
+                    className="border-t border-north-line pt-6"
+                  >
+                    <div className="grid h-12 w-12 place-items-center rounded-full bg-north-ink text-white">
+                      <Icon aria-hidden="true" size={22} />
                     </div>
-                  );
-                })}
-              </div>
-
-              <div className="grid gap-7">
-                {services.map((service, index) => {
-                  const Icon =
-                    [SearchCheck, MousePointerClick, ClipboardList, Waypoints][
-                      index
-                    ] ?? SearchCheck;
-
-                  return (
-                    <article
-                      key={service.title}
-                      className="grid gap-4 border-b border-north-line pb-7 last:border-b-0 last:pb-0 sm:grid-cols-[3.5rem_1fr]"
-                    >
-                      <div className="grid h-12 w-12 place-items-center rounded-full bg-north-ink text-white">
-                        <Icon aria-hidden="true" size={22} />
-                      </div>
-                      <div>
-                        <span className="text-sm font-black text-north-amber">
-                          {service.number}
-                        </span>
-                        <h3 className="mt-1 text-2xl font-extrabold">
-                          {service.title}
-                        </h3>
-                        <p className="mt-3 text-base leading-7 text-north-muted">
-                          {service.description}
-                        </p>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
+                    <span className="mt-4 block text-sm font-black text-north-amber">
+                      {service.number}
+                    </span>
+                    <h3 className="mt-1 text-2xl font-extrabold">
+                      {service.title}
+                    </h3>
+                    <p className="mt-3 text-base leading-7 text-north-muted">
+                      {service.description}
+                    </p>
+                    {index === 0 ? (
+                      <ul className="mt-4 grid gap-3">
+                        {findabilityExtras.map((item) => (
+                          <li
+                            key={item}
+                            className="text-sm leading-6 text-north-muted"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </article>
+                );
+              })}
             </div>
 
             <div className="mt-14 rounded-lg border border-north-line bg-white p-7 md:p-9">
@@ -717,7 +616,7 @@ export default function Home() {
                     {featuredOffering.summary}
                   </p>
                   <p className="mt-4 text-base leading-7 text-north-muted">
-                    {featuredOffering.note}
+                    {featuredOffering.productNote} {featuredOffering.note}
                   </p>
                   <div className="mt-7">
                     <ButtonLink href={featuredOffering.href}>
@@ -725,21 +624,6 @@ export default function Home() {
                     </ButtonLink>
                   </div>
                 </div>
-                <ul className="grid gap-3">
-                  {featuredOffering.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-3 border-t border-north-line pt-3 text-base leading-7 text-north-muted first:border-t-0 first:pt-0"
-                    >
-                      <CheckCircle2
-                        aria-hidden="true"
-                        size={19}
-                        className="mt-1 shrink-0 text-north-teal"
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </div>
@@ -849,11 +733,17 @@ export default function Home() {
                   rules, a booking request marked pending review, and the same
                   request answered in Spanish.
                 </p>
-                <p className="text-base leading-7 text-[#dbe5eb]">
-                  It was built onto the booking process the business already
-                  had. No second system, no duplicate records, nothing to check
-                  in two places.
-                </p>
+                <ul className="grid gap-3">
+                  {featuredService.points.map((point) => (
+                    <li
+                      key={point.label}
+                      className="border-t border-white/12 pt-3 text-sm leading-6 text-[#dbe5eb]"
+                    >
+                      <strong className="text-white">{point.label}.</strong>{" "}
+                      {point.detail}
+                    </li>
+                  ))}
+                </ul>
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <ButtonLink
                     href={`/case-studies/${chatgptBookingDemo.slug}`}
@@ -911,94 +801,20 @@ export default function Home() {
                 Getting Started
               </p>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
-                We start by understanding what is happening now.
-              </h2>
-            </div>
-            <div className="mt-10 grid gap-5 lg:grid-cols-2">
-              {assessments.map((assessment) => (
-                <article
-                  key={assessment.title}
-                  className="grid gap-5 border-t border-north-line pt-7 md:grid-cols-[3.5rem_1fr]"
-                >
-                  <div className="grid h-12 w-12 place-items-center rounded-full bg-white text-north-ink shadow-sm">
-                    {assessment.title.startsWith("Operational") ? (
-                      <BrainCircuit aria-hidden="true" size={24} />
-                    ) : (
-                      <SearchCheck aria-hidden="true" size={24} />
-                    )}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-extrabold">
-                      {assessment.title}
-                    </h3>
-                    <p className="mt-3 text-base leading-7 text-north-muted">
-                      {assessment.description}
-                    </p>
-                    <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
-                      {assessment.items.map((item) => (
-                        <li
-                          key={item}
-                          className="flex gap-2 text-sm font-semibold text-[#384653]"
-                        >
-                          <CheckCircle2
-                            aria-hidden="true"
-                            className="mt-0.5 shrink-0 text-north-green"
-                            size={17}
-                          />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-white px-5 py-20 md:px-10 md:py-28 lg:px-18">
-          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-            <div>
-              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
-                When Leads Are Slow
-              </p>
-              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
-                Sometimes the problem is being found and trusted.
+                How an engagement starts.
               </h2>
               <p className="mt-5 text-lg leading-8 text-north-muted">
-                For realtors, cleaners, contractors, consultants, and other
-                service businesses, more software will not fix a weak lead path.
-                We look at how people discover the business, what makes them
-                trust it, and what they are asked to do next.
+                Every engagement starts with a conversation with the founder,
+                then a written scope with acceptance criteria. For a local
+                service business, the Website Growth Assessment below is the
+                usual first step.
               </p>
-            </div>
-
-            <div className="grid gap-8">
-              {leadDiscoveryPoints.map((point, index) => {
-                const Icon = [
-                  FileSearch,
-                  MessagesSquare,
-                  Store,
-                  MousePointerClick,
-                ][index];
-
-                return (
-                  <article
-                    key={point.title}
-                    className="grid gap-4 border-b border-north-line pb-7 last:border-b-0 last:pb-0 sm:grid-cols-[3.5rem_1fr]"
-                  >
-                    <div className="grid h-12 w-12 place-items-center rounded-full bg-[#eef3f3] text-north-teal">
-                      <Icon aria-hidden="true" size={22} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-extrabold">{point.title}</h3>
-                      <p className="mt-3 text-base leading-7 text-north-muted">
-                        {point.description}
-                      </p>
-                    </div>
-                  </article>
-                );
-              })}
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="/intake">Start the conversation</ButtonLink>
+                <ButtonLink href="#website-assessment" variant="secondary">
+                  Request the free teaser
+                </ButtonLink>
+              </div>
             </div>
           </div>
         </section>
@@ -1119,158 +935,6 @@ export default function Home() {
         </section>
 
         <section
-          id="case-study"
-          className="bg-north-ink px-5 py-20 text-white md:px-10 md:py-28 lg:px-18"
-        >
-          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.92fr_1.08fr]">
-            <div>
-              <p className="mb-4 text-sm font-extrabold uppercase text-[#77c0b7]">
-                Real Example
-              </p>
-              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
-                {medinaCaseStudy.name}: from website request to operating
-                foundation
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-[#c6d0d8]">
-                {medinaCaseStudy.context}
-              </p>
-              <p className="mt-5 text-lg leading-8 text-[#c6d0d8]">
-                {medinaCaseStudy.summary}
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink
-                  href={medinaCaseStudy.url}
-                  variant="light"
-                  showIcon={false}
-                >
-                  View Medina Clean
-                  <ExternalLink
-                    aria-hidden="true"
-                    size={17}
-                    strokeWidth={2.4}
-                  />
-                </ButtonLink>
-                <ButtonLink
-                  href={medinaCleanCaseStudy.href}
-                  variant="light"
-                  showIcon={false}
-                >
-                  Read the case study
-                </ButtonLink>
-              </div>
-            </div>
-            <div>
-              <div className="grid gap-5">
-                {medinaOutcomes.map((outcome, index) => {
-                  const Icon =
-                    [
-                      Languages,
-                      MessageSquareText,
-                      ShieldCheck,
-                      CalendarCheck2,
-                      Waypoints,
-                    ][index] ?? Languages;
-
-                  return (
-                    <article
-                      key={outcome.label}
-                      className="grid gap-4 border-b border-white/12 pb-5 last:border-b-0 last:pb-0 sm:grid-cols-[3rem_1fr]"
-                    >
-                      <div className="grid h-11 w-11 place-items-center rounded-full bg-[#e6c26e] text-north-ink">
-                        <Icon aria-hidden="true" size={22} />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-extrabold text-white">
-                          {outcome.label}
-                        </h3>
-                        <p className="mt-2 text-sm leading-6 text-[#dbe5eb]">
-                          {outcome.detail}
-                        </p>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-              <div className="mt-8 border-t border-white/12 pt-6">
-                <h3 className="text-lg font-extrabold">
-                  What made it a Northvalley project
-                </h3>
-                <ul className="mt-4 grid gap-3">
-                  {medinaPrinciples.map((principle) => (
-                    <li
-                      key={principle}
-                      className="flex gap-3 text-sm leading-6 text-[#dbe5eb]"
-                    >
-                      <CheckCircle2
-                        aria-hidden="true"
-                        className="mt-0.5 shrink-0 text-[#77c0b7]"
-                        size={18}
-                      />
-                      <span>{principle}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="border-b border-north-line bg-white px-5 py-16 md:px-10 md:py-20 lg:px-18">
-          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.78fr_1.22fr]">
-            <div>
-              <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
-                Implementation Notes
-              </p>
-              <h2 className="text-[clamp(1.8rem,3vw,2.7rem)] font-black leading-tight tracking-normal">
-                The important work was operational shape, not just screens.
-              </h2>
-            </div>
-            <div className="grid gap-6 md:grid-cols-3">
-              {[
-                [
-                  "Assessment",
-                  "Clarified the real workflow around leads, pricing, recurring customers, language, and follow-up.",
-                ],
-                [
-                  "Build",
-                  "Delivered a practical public site and private admin surface on low-cost infrastructure.",
-                ],
-                [
-                  "Next layer",
-                  "Created a foundation for scheduling, reminders, calendar coordination, and customer memory to improve over time.",
-                ],
-              ].map(([title, body]) => (
-                <article
-                  key={title}
-                  className="border-l-2 border-north-teal pl-5"
-                >
-                  <h3 className="text-lg font-extrabold">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-north-muted">
-                    {body}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-5 py-20 md:px-10 md:py-28 lg:px-18">
-          <div className="mx-auto max-w-5xl">
-            <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
-              Brand Philosophy
-            </p>
-            <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-black leading-tight tracking-normal">
-              Modernization with respect for the people already doing the work.
-            </h2>
-            <p className="mt-5 max-w-4xl text-xl leading-8 text-north-muted">
-              The goal is not to replace judgment with automation. The goal is
-              operational clarity: preserved knowledge, cleaner handoffs,
-              stronger follow-through, and AI systems that support the business.
-            </p>
-          </div>
-        </section>
-
-        <section
           id="contact"
           className="border-t border-north-line bg-white px-5 py-14 md:px-10 lg:px-18"
         >
@@ -1306,7 +970,12 @@ export default function Home() {
                   <Phone aria-hidden="true" size={19} strokeWidth={2.4} />
                   {siteConfig.phone}
                 </a>
-                <ContactEmailLink className="text-north-teal hover:text-north-ink" />
+                <span>
+                  <ContactEmailLink className="text-north-teal hover:text-north-ink" />{" "}
+                  <span className="text-sm font-bold text-north-muted">
+                    (general)
+                  </span>
+                </span>
               </div>
             </div>
             {/*
