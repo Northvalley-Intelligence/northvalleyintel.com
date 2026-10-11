@@ -9,7 +9,7 @@
   "description": "Northvalley Intelligence helps local service businesses in Cobb, Paulding, and Douglas counties get found, convert leads, and clean up the workflows behind the work.",
   "positioning": "Northvalley Intelligence is a custom software company using AI agents to make practical, workflow-shaped software more accessible. The public website speaks in customer language because business owners usually start with lead, follow-up, scheduling, and workflow problems rather than software requirements.",
   "capabilities": {
-    "summary": "Northvalley Intelligence is a software consultancy. We design, build and integrate software for organizations that need it to work with the systems they already run. We work with clients anywhere in the United States, remotely from Marietta, Georgia.",
+    "summary": "Northvalley Intelligence is a software consultancy with three services: software development, agentic applications, and data science, machine learning and data cleansing. We design, build and integrate software for organizations that need it to work with the systems they already run. We work with clients anywhere in the United States, remotely from Marietta, Georgia.",
     "rows": [
       {
         "label": "Core — software development",
@@ -23,6 +23,11 @@
             "name": "Custom integrations",
             "description": "Software that connects to the systems you already use — external APIs, vendor platforms and line-of-business systems — and puts their data to work in one place.",
             "proof": "For Canon Insurance Advisers: a retention board that surfaces policies at risk of lapsing before they end."
+          },
+          {
+            "name": "Agentic applications",
+            "description": "Software agents that take actions inside a business's own systems, with voice and chat front ends and agent-callable backends (MCP).",
+            "proof": "A working demo of a voice-first field companion for a pest-control route: the technician speaks, the agent reads and updates the CRM through an agent-callable backend."
           }
         ]
       },
@@ -30,9 +35,9 @@
         "label": "Specialties — led by the founder",
         "capabilities": [
           {
-            "name": "E-commerce and retail search",
-            "description": "Search relevance, ranking and measurement for online catalogs: data science, analytics and machine learning applied to what shoppers type and what they find.",
-            "proof": "Founder Ferosh Jacob, Ph.D.: search relevance and product ranking at The Home Depot (2015–2021); 22 years in software, 12 in search, catalog and data-driven systems."
+            "name": "Data science, machine learning and data cleansing",
+            "description": "Data cleansing, entity normalization and matching, ontology, ranking and search relevance, and machine learning models, on messy real-world data.",
+            "proof": "Founder Ferosh Jacob, Ph.D.: at CareerBuilder (2013–2015), a machine learning-based school and company normalization system and candidate-profile matching across data sources; at The Home Depot (2015–2021), machine learning ranking models, a search-evaluation framework and a product ontology; at Genuine Parts Company (2024–2026), catalog, search and discovery with generative AI and classical machine learning; publications since 2010, including the 2016 Springer chapter \"Data Science and Big Data Analytics at CareerBuilder\"."
           },
           {
             "name": "LLM fine-tuning",

@@ -7,7 +7,12 @@ import { ContactEmailLink } from "@/components/contact-email";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
-import { owner, siteConfig, teamMembers } from "@/lib/site";
+import {
+  missionVisionValues,
+  owner,
+  siteConfig,
+  teamMembers,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Northvalley Intelligence",
@@ -78,8 +83,8 @@ export default function AboutPage() {
                 Northvalley Intelligence works as a software consultant and AI
                 consultant for small businesses, building practical,
                 workflow-shaped software and AI-agent systems across Cobb,
-                Paulding, and Douglas counties and the wider Atlanta metro.
-                The published client work sits on the{" "}
+                Paulding, and Douglas counties and the wider Atlanta metro. The
+                published client work sits on the{" "}
                 <Link
                   className="font-bold text-north-teal"
                   href="/#client-work"
@@ -132,6 +137,46 @@ export default function AboutPage() {
                 <ExternalLink aria-hidden="true" size={15} strokeWidth={2.4} />
               </a>
             </div>
+          </div>
+        </section>
+
+        <section id="mission" className="px-5 pt-14 md:px-10 md:pt-16 lg:px-18">
+          <div className="mx-auto max-w-5xl">
+            <h2 className="text-2xl font-extrabold text-north-ink">
+              Mission, vision and values
+            </h2>
+            <div className="mt-5 grid gap-6 lg:grid-cols-2">
+              <div>
+                <h3 className="text-sm font-black uppercase text-north-teal">
+                  Vision
+                </h3>
+                <p className="mt-2 text-lg leading-8 text-[#42505d]">
+                  {missionVisionValues.vision}
+                </p>
+              </div>
+              <div>
+                <h3 className="text-sm font-black uppercase text-north-teal">
+                  Mission
+                </h3>
+                <p className="mt-2 text-lg leading-8 text-[#42505d]">
+                  {missionVisionValues.mission}
+                </p>
+              </div>
+            </div>
+            <h3 className="mt-8 text-sm font-black uppercase text-north-teal">
+              Values
+            </h3>
+            <ul className="mt-3 grid gap-3 md:grid-cols-2">
+              {missionVisionValues.values.map((value) => (
+                <li
+                  key={value.title}
+                  className="border-l-2 border-north-line pl-4 text-base leading-7 text-north-muted"
+                >
+                  <strong className="text-north-ink">{value.title}.</strong>{" "}
+                  {value.text}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 

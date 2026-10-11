@@ -194,8 +194,13 @@ const checks = [
   {
     name: "customer-facing copy carries no protocol or chatbot jargon",
     pass:
+      // Handoff 06 (owner decision 2026-10-11): the Agentic applications tile
+      // names "agent-callable backends (MCP)" for government buyers. That one
+      // phrase is allowed; any other MCP mention still fails.
       !files.site.includes("Model Context Protocol") &&
-      !files.site.includes("MCP") &&
+      !files.site
+        .replaceAll("agent-callable backends (MCP)", "")
+        .includes("MCP") &&
       !/chatbot/i.test(files.site) &&
       !/\bAI books\b/i.test(files.site) &&
       !/autonomous/i.test(files.site),
