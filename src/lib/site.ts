@@ -215,6 +215,7 @@ export const governmentPage = {
       lines: [
         "Client: Canon Insurance Advisers, LLC (Georgia insurance agency).",
         "Role: direct engagement, founder as sole developer.",
+        "Period: July 2026 to present (currently active).",
         "Scope: a retention board that flags pending cancellations, non-renewals and steep renewal increases before the policy ends.",
         "Reference: available on request.",
       ],
@@ -224,6 +225,7 @@ export const governmentPage = {
       lines: [
         "Client: Smart Cash Sheet.",
         "Role: ongoing engineering.",
+        "Period: September 2026 to present (currently active).",
         `Scope: ${smartCashSheetOutcome}`,
         "Reference: available on request.",
       ],
@@ -249,6 +251,7 @@ export const governmentPage = {
       value:
         "DA01 — IT and Telecom - Business Application/Application Development Support Services (Labor); DH01 — IT and Telecom - Platform Support Services: Database, Mainframe, Middleware (Labor); DD01 — IT and Telecom - Service Delivery Support Services: ITSM, Operations Center, Project/PM (Labor)",
     },
+    { label: "Contracting role", value: "Prime contractor or subcontractor" },
     { label: "Unique Entity ID (UEI)", value: "JX76HA57NCJ8" },
     { label: "CAGE code", value: "Registration in progress" },
     { label: "SAM.gov status", value: "Registration in progress" },
