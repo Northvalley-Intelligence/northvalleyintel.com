@@ -83,6 +83,7 @@ const jsonLd = {
     siteConfig.mapsUrl,
     siteConfig.linkedinUrl,
     siteConfig.clutchUrl,
+    siteConfig.facebookUrl,
   ],
   hasMap: siteConfig.mapsUrl,
   areaServed: siteConfig.serviceArea.map((area) => ({
