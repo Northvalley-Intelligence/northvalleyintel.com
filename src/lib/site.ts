@@ -401,7 +401,7 @@ export const missionVisionValues = {
   vision:
     "A world where useful software improves people's lives and is within everyone's reach.",
   mission:
-    "Northvalley Intelligence brings Fortune 500 engineering experience, from The Home Depot, Kaiser Permanente and Genuine Parts Company, to small businesses and nonprofits: software that works, at a price they can afford, so they can grow.",
+    "Northvalley Intelligence brings Fortune 500 engineering experience, from The Home Depot and Genuine Parts Company, to small businesses and nonprofits: software that works, at a price they can afford, so they can grow.",
   values: [
     {
       title: "Hands-on",
