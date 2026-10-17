@@ -23,8 +23,7 @@ export const siteConfig = {
   linkedinUrl: "https://www.linkedin.com/company/119623922/",
   // The business's Clutch profile. Used for sameAs and the footer link.
   clutchUrl: "https://clutch.co/profile/northvalley-intelligence",
-  tagline:
-    "Custom software, built and integrated — web, mobile, and the systems behind them.",
+  tagline: "Software for everyone.",
   description:
     "Northvalley Intelligence is a software consultancy with three services: software development, agentic applications, and data science, machine learning and data cleansing. We design, build and integrate software for organizations that need it to work with the systems they already run.",
   positioning:
@@ -109,6 +108,10 @@ export const capabilities = [
         proof:
           "Smart Cash Sheet: a personal cash-flow app on the web with iOS and Android apps that share its backend. Northvalley runs its engineering: bank-data import, subscriptions and billing, and the release process. See Client Work.",
         proofHref: "#client-work",
+        reading: {
+          title: "Part 6: The Artist and the Algorithm: An Unlikely Friendship",
+          href: "https://feroshjacob.github.io/posts/2026/10/15/modern-software-for-small-businesses-and-nonprofits-part-6-the-artist-and-the-algorithm-an-unlikely-friendship",
+        },
         icon: "app",
       },
       {
@@ -117,6 +120,10 @@ export const capabilities = [
           "Software that connects to the systems you already use — external APIs, vendor platforms and line-of-business systems — and puts their data to work in one place.",
         proof:
           "For Canon Insurance Advisers: a retention board that surfaces policies at risk of lapsing before they end.",
+        reading: {
+          title: "Part 5: Scope Creep During the AI Age",
+          href: "https://feroshjacob.github.io/posts/2026/10/12/modern-software-for-small-businesses-and-nonprofits-part-5-scope-creep-during-the-ai-age",
+        },
         icon: "integration",
       },
       {
@@ -125,6 +132,11 @@ export const capabilities = [
           "Software agents that take actions inside a business's own systems, with voice and chat front ends and agent-callable backends (MCP).",
         proof:
           "A working demo of a voice-first field companion for a pest-control route: the technician speaks, the agent reads and updates the CRM through an agent-callable backend.",
+        proofHref: "#agent-native",
+        reading: {
+          title: "The Developer's Job in Five Years: Conductor, Not Coder",
+          href: "https://feroshjacob.github.io/posts/2026/09/26/developer-as-conductor-five-year-outlook",
+        },
         icon: "agent",
       },
     ],
@@ -139,6 +151,10 @@ export const capabilities = [
         proof:
           'Founder Ferosh Jacob, Ph.D.: at CareerBuilder (2013–2015), a machine learning-based school and company normalization system and candidate-profile matching across data sources; at The Home Depot (2015–2021), machine learning ranking models, a search-evaluation framework and a product ontology; at Genuine Parts Company (2024–2026), catalog, search and discovery with generative AI and classical machine learning; publications since 2010, including the 2016 Springer chapter "Data Science and Big Data Analytics at CareerBuilder".',
         proofHref: "/about#credentials",
+        reading: {
+          title: "Self-Learning Agent-Based Retail Search, Part 1: Why Retail Search Is Harder Than It Looks",
+          href: "https://feroshjacob.github.io/posts/2026/07/02/self-learning-agent-based-retail-search-part-1-why-retail-search-is-harder-than-it-looks",
+        },
         icon: "search",
       },
       {
@@ -147,6 +163,10 @@ export const capabilities = [
           "Adapting open-source language models to a specific task, trained and run on local hardware (GPU or CPU) so data stays in-house.",
         proof:
           "A published experiment by the founder: a LoRA-tuned Llama-3.2-3B and a fine-tuned cross-encoder that grade e-commerce search relevance, both ahead of the prompted baseline on two public datasets; presented with Jiho Noh (Kennesaw State University) at SCD 2026.",
+        reading: {
+          title: "CPU vs GPU battle, Round 1: adapt the generalist, read the logits",
+          href: "https://feroshjacob.github.io/posts/2026/09/06/cpu-vs-gpu-battle-part-3-adapt-the-generalist",
+        },
         icon: "model",
       },
     ],
@@ -155,8 +175,8 @@ export const capabilities = [
 
 /**
  * The /government page (handoff 06). One page for federal, state and local
- * buyers. Identifiers are never invented: the UEI is shown (on file); CAGE and
- * SAM status read "Registration in progress" until they exist. Past performance repeats only
+ * buyers. Identifiers are never invented: the UEI is shown (on file); other
+ * identifiers (CAGE, SAM.gov status) are shown only once they exist. Past performance repeats only
  * what the Client Work cards already say (outcome only, no client data).
  */
 export const governmentPage = {
@@ -184,10 +204,13 @@ export const governmentPage = {
     },
   ],
   differentiators: [
-    "The founder does the hands-on work on every engagement.",
-    "Depth in data science and search: 12 years in search, catalog and data-driven systems, including machine learning ranking and data normalization.",
+    "Entity recognition and natural-language processing on messy real-world data: normalization and matching systems at CareerBuilder, a product ontology and machine learning ranking at The Home Depot, and catalog search and discovery with generative AI at Genuine Parts Company.",
+    "Data cleansing as a repeatable method: profile, normalize, match and measure, with an evaluation set agreed before the cleanup starts.",
+    "Agent-callable delivery: systems built so a customer can reach them from the assistants they already use. See the live demo under Capabilities.",
+    "Enterprise release discipline at small-business scale: a staging environment, scenario tests and CI-gated deploys on every engagement, with the founder (Ph.D., 22 years in software) doing the hands-on work.",
     "Models can be trained and run on local hardware, so data stays in-house where a client needs it.",
   ],
+
   // How an engagement runs (finding 8b, owner-approved wording).
   process: [
     "Conversation with the founder.",
@@ -198,7 +221,7 @@ export const governmentPage = {
   buyers: [
     {
       label: "Federal",
-      text: "NAICS, PSC and the Unique Entity ID are in the company data below. The CAGE code and SAM.gov status will be added when SAM registration completes.",
+      text: "NAICS, PSC and the Unique Entity ID are in the company data below.",
     },
     {
       label: "State",
@@ -216,7 +239,10 @@ export const governmentPage = {
         "Client: Canon Insurance Advisers, LLC (Georgia insurance agency).",
         "Role: direct engagement, founder as sole developer.",
         "Period: July 2026 to present (currently active).",
-        "Scope: a retention board that flags pending cancellations, non-renewals and steep renewal increases before the policy ends.",
+        "Situation: a Georgia insurance agency quoted each home and auto prospect by hand, re-keying the same details for several hours per quote.",
+        "Task: cut quoting time without replacing the agency's existing tools.",
+        "Action: a one-page intake form feeds an automated quoting run that completes the rating steps unattended, with guard rails that never bind, purchase or order a report; an earlier phase added a retention board that flags policies at risk of lapsing before they end.",
+        "Result: several hours of manual quoting became a few seconds of form filling and a few minutes of automated quote generation.",
         "Reference: available on request.",
       ],
     },
@@ -226,7 +252,10 @@ export const governmentPage = {
         "Client: Smart Cash Sheet.",
         "Role: ongoing engineering.",
         "Period: September 2026 to present (currently active).",
-        `Scope: ${smartCashSheetOutcome}`,
+        "Situation: a personal cash-flow app on the web with iOS and Android apps, run by a solo founder, shipped about once a month, each release carrying weeks of accumulated change and risk.",
+        "Task: take over the engineering and ship faster without breaking production.",
+        "Action: a staging environment, scenario tests and a three-phase release process; bank-data import, subscriptions and billing, and the safety rules around the in-app money coach.",
+        "Result: the monthly cycle became two production releases in one week, turning the founder's roadmap into shipped features faster.",
         "Reference: available on request.",
       ],
     },
@@ -253,8 +282,6 @@ export const governmentPage = {
     },
     { label: "Contracting role", value: "Prime contractor or subcontractor" },
     { label: "Unique Entity ID (UEI)", value: "JX76HA57NCJ8" },
-    { label: "CAGE code", value: "Registration in progress" },
-    { label: "SAM.gov status", value: "Registration in progress" },
   ],
 };
 
@@ -372,9 +399,9 @@ export const serviceAreas = [
  */
 export const missionVisionValues = {
   vision:
-    "Northvalley will be the software partner organizations trust to build systems that work with the tools they already run.",
+    "A world where useful software improves people's lives and is within everyone's reach.",
   mission:
-    "Northvalley Intelligence designs, builds and integrates custom software, web and mobile, for organizations that need it to work with the systems they already run.",
+    "Northvalley Intelligence brings Fortune 500 engineering experience, from The Home Depot, Kaiser Permanente and Genuine Parts Company, to small businesses and nonprofits: software that works, at a price they can afford, so they can grow.",
   values: [
     {
       title: "Hands-on",

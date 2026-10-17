@@ -173,11 +173,23 @@ export default function GovernmentPage() {
                     {item.name}
                   </h3>
                   <ul className="mt-3 grid gap-2">
-                    {item.lines.map((line) => (
-                      <li key={line} className="leading-7 text-north-muted">
-                        {line}
-                      </li>
-                    ))}
+                    {item.lines.map((line) => {
+                      const split = line.indexOf(": ");
+                      return (
+                        <li key={line} className="leading-7 text-north-muted">
+                          {split === -1 ? (
+                            line
+                          ) : (
+                            <>
+                              <span className="font-bold text-north-ink">
+                                {line.slice(0, split)}:
+                              </span>{" "}
+                              {line.slice(split + 2)}
+                            </>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </article>
               ))}
