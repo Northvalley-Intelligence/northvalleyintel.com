@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { ContactEmailLink } from "@/components/contact-email";
-import { siteConfig } from "@/lib/site";
+import { owner, siteConfig } from "@/lib/site";
 
 /**
  * The one footer.
@@ -20,6 +20,7 @@ export function SiteFooter({ width = "max-w-7xl" }: { width?: string }) {
       >
         <div className="flex flex-col gap-1">
           <span className="font-bold text-white">{siteConfig.legalName}</span>
+          <span>{siteConfig.tagline}</span>
           <span>Marietta, Georgia · clients anywhere in the United States</span>
         </div>
         <div className="flex flex-col gap-2 sm:items-end">
@@ -56,6 +57,14 @@ export function SiteFooter({ width = "max-w-7xl" }: { width?: string }) {
               target="_blank"
             >
               Clutch
+            </a>
+            <a
+              className="hover:text-white"
+              href={owner.blogUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Founder&apos;s blog
             </a>
           </span>
           <span className="flex flex-wrap gap-x-5 gap-y-1">

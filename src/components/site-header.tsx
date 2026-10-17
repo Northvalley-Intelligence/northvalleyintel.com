@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { LatestPostPill } from "@/components/latest-post-pill";
+import { siteConfig } from "@/lib/site";
+
 const navigation = [
   // The Website Growth Assessment lives inside the Services section as a named
   // offering, so it no longer needs a competing top-level entry.
@@ -9,7 +12,6 @@ const navigation = [
   { href: "/#client-work", label: "Client Work" },
   { href: "/about", label: "About" },
   { href: "/#services", label: "Local Business" },
-  { href: "/#agent-native", label: "AI Assistants" },
   { href: "/#assessments", label: "Getting Started" },
   // "Real Example" was dropped from the nav (handoff 02) to make room for
   // "Capabilities", and "Advertising" was removed at the owner's request; the
@@ -40,19 +42,27 @@ export function SiteHeader() {
             priority
             className="rounded-md"
           />
-          <span>Northvalley Intelligence</span>
+          <span className="flex flex-col leading-tight">
+            <span>Northvalley Intelligence</span>
+            <span className="text-xs font-semibold text-north-muted">
+              {siteConfig.tagline}
+            </span>
+          </span>
         </Link>
-        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold text-north-muted">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="hover:text-north-ink"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold text-north-muted">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="hover:text-north-ink"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <LatestPostPill />
+        </div>
       </div>
     </header>
   );
