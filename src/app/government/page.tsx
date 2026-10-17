@@ -245,7 +245,7 @@ export default function GovernmentPage() {
               Download the capability statement (PDF)
             </ButtonLink>
             <p className="mt-3 text-sm leading-6 text-north-muted">
-              Two pages, mirrors this page. Updated when the page changes.
+              One page, mirrors this page. Updated when the page changes.
             </p>
           </div>
         </section>

@@ -1,27 +1,29 @@
 \documentclass[letterpaper,9pt]{article}
-\usepackage[letterpaper,margin=0.6in]{geometry}
+\usepackage[letterpaper,margin=0.5in,top=0.4in,bottom=0.4in]{geometry}
 \newcommand{\NorthvalleyAssetPath}{assets}
 \input{assets/northvalley-brand.sty}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=NVIAccentDark,urlcolor=NVIAccent}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{3pt}
+\setlength{\parskip}{2.5pt}
 \renewcommand{\familydefault}{\sfdefault}
-\newcommand{\NVIPanelTop}[1]{\begin{tikzpicture}[baseline=(current bounding box.north)]\node[draw=NVIRule,fill=NVIPanel,rounded corners=1pt,inner xsep=9pt,inner ysep=8pt,text width=\dimexpr\linewidth-20pt\relax,align=left,anchor=north west] at (0,0) {#1};\end{tikzpicture}}
-\newcommand{\SubH}[1]{{\fontsize{9.6}{11}\selectfont\bfseries\color{NVIInk}#1}\par\vspace{1pt}}
+\newcommand{\NVIPanelTop}[1]{\begin{tikzpicture}[baseline=(current bounding box.north)]\node[draw=NVIRule,fill=NVIPanel,rounded corners=1pt,inner xsep=8pt,inner ysep=7pt,text width=\dimexpr\linewidth-18pt\relax,align=left,anchor=north west] at (0,0) {#1};\end{tikzpicture}}
+\newcommand{\SubH}[1]{{\fontsize{9.4}{11}\selectfont\bfseries\color{NVIInk}#1}\par\vspace{1pt}}
+\renewcommand{\NVIBody}[1]{{\fontsize{8.7}{10.4}\selectfont\color{NVIInk}#1}}
+\renewcommand{\NVISection}[1]{\vspace{4pt}{\fontsize{10.4}{12}\selectfont\bfseries\color{NVIInk}#1}\\[-0.03in]\NVIRuleLine\vspace{2pt}}
 \begin{document}
-\noindent\NorthvalleyLogo[0.55in]\hspace{0.12in}%
-\begin{minipage}[c][0.55in][c]{0.5\linewidth}
+\noindent\NorthvalleyLogo[0.5in]\hspace{0.12in}%
+\begin{minipage}[c][0.5in][c]{0.5\linewidth}
 {\fontsize{15}{17}\selectfont\bfseries\color{NVIInk}Northvalley Intelligence}\\
 {\fontsize{9}{11}\selectfont\color{NVIMuted}Software for everyone.}
 \end{minipage}\hfill
-\begin{minipage}[c][0.55in][c]{0.3\linewidth}\raggedleft\NVIKicker{Capability statement}\end{minipage}
+\begin{minipage}[c][0.5in][c]{0.3\linewidth}\raggedleft\NVIKicker{Capability statement}\end{minipage}
 
 \vspace{3pt}\noindent\NVIRuleLine\par
-\vspace{2pt}
+\vspace{1pt}
 
-\noindent\begin{minipage}[t]{0.655\linewidth}
+\noindent\begin{minipage}[t]{0.715\linewidth}
 \NVISection{Capabilities}
 \NVIBody{Northvalley Intelligence builds software for organizations that need it to work with the systems they already run: web and mobile applications with custom integrations, agentic applications, and data science, machine learning and data cleansing.}\par
 \NVIBody{\textbf{Software development.} Web and mobile applications plus custom integrations with the systems a buyer already runs.}\par
@@ -33,39 +35,6 @@
 \NVIBody{\NVIItem{Agent-callable delivery: systems built so a customer can reach them from the assistants they already use. See the live demo under Capabilities.}}\par
 \NVIBody{\NVIItem{Enterprise release discipline at small-business scale: a staging environment, scenario tests and CI-gated deploys on every engagement, with the founder (Ph.D., 22 years in software) doing the hands-on work.}}\par
 \NVIBody{\NVIItem{Models can be trained and run on local hardware, so data stays in-house where a client needs it.}}\par
-\end{minipage}\hfill
-\begin{minipage}[t]{0.31\linewidth}
-\NVIPanelTop{%
-\NVIKicker{Company data}\\[3pt]
-\NVIFine{\textbf{Legal name}}\\
-\NVIBody{Northvalley Intelligence LLC}\\[4pt]
-\NVIFine{\textbf{Entity}}\\
-\NVIBody{Georgia limited liability company, founded June 2026}\\[4pt]
-\NVIFine{\textbf{Location}}\\
-\NVIBody{Marietta, Georgia}\\[4pt]
-\NVIFine{\textbf{NAICS (primary)}}\\
-\NVIBody{541511 --- Custom Computer Programming Services}\\[4pt]
-\NVIFine{\textbf{NAICS (secondary)}}\\
-\NVIBody{541512 --- Computer Systems Design Services}\\[4pt]
-\NVIFine{\textbf{PSC}}\\
-\NVIBody{DA01 --- IT and Telecom -- Business Application/Application Development Support Services (Labor)}\\
-\NVIBody{DH01 --- IT and Telecom -- Platform Support Services: Database, Mainframe, Middleware (Labor)}\\
-\NVIBody{DD01 --- IT and Telecom -- Service Delivery Support Services: ITSM, Operations Center, Project/PM (Labor)}\\[4pt]
-\NVIFine{\textbf{Contracting role}}\\
-\NVIBody{Prime contractor or subcontractor}\\[4pt]
-\NVIFine{\textbf{Unique Entity ID (UEI)}}\\
-\NVIBody{JX76HA57NCJ8}\\[4pt]
-}
-\end{minipage}
-
-\vfill
-\noindent\NVIRuleLine\par
-\NVIFine{Northvalley Intelligence LLC \textperiodcentered{} northvalleyintel.com \textperiodcentered{} Capability statement, October 2026 \textperiodcentered{} Mirrors northvalleyintel.com/government}
-\newpage
-\noindent\NorthvalleyLogo[0.4in]\hspace{0.1in}{\fontsize{12}{14}\selectfont\bfseries\color{NVIInk}Northvalley Intelligence}\hfill\NVIKicker{Capability statement (continued)}
-
-\vspace{2pt}\noindent\NVIRuleLine\par
-\noindent\begin{minipage}[t]{0.655\linewidth}
 \NVISection{Past performance}
 \SubH{Canon Insurance Advisers}
 \NVIBody{\textbf{Client:} Canon Insurance Advisers, LLC (Georgia insurance agency).}\par
@@ -76,7 +45,7 @@
 \NVIBody{\textbf{Action:} a one-page intake form feeds an automated quoting run that completes the rating steps unattended, with guard rails that never bind, purchase or order a report; an earlier phase added a retention board that flags policies at risk of lapsing before they end.}\par
 \NVIBody{\textbf{Result:} several hours of manual quoting became a few seconds of form filling and a few minutes of automated quote generation.}\par
 \NVIBody{\textbf{Reference:} available on request.}\par
-\vspace{2pt}
+\vspace{1pt}
 \SubH{Smart Cash Sheet}
 \NVIBody{\textbf{Client:} Smart Cash Sheet.}\par
 \NVIBody{\textbf{Role:} ongoing engineering.}\par
@@ -86,16 +55,35 @@
 \NVIBody{\textbf{Action:} a staging environment, scenario tests and a three-phase release process; bank-data import, subscriptions and billing, and the safety rules around the in-app money coach.}\par
 \NVIBody{\textbf{Result:} the monthly cycle became two production releases in one week, turning the founder's roadmap into shipped features faster.}\par
 \NVIBody{\textbf{Reference:} available on request.}\par
-\vspace{2pt}
+\vspace{1pt}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.31\linewidth}
+\begin{minipage}[t]{0.265\linewidth}
 \NVIPanelTop{%
-\NVIKicker{How an engagement runs}\\[3pt]
-\NVIBody{\textbf{1.} Conversation with the founder.}\\[2pt]
-\NVIBody{\textbf{2.} Written scope and acceptance criteria.}\\[2pt]
-\NVIBody{\textbf{3.} Build in short increments on a staging environment.}\\[2pt]
-\NVIBody{\textbf{4.} Release through CI, with documentation and handover.}\\[2pt]
-\vspace{4pt}\NVIKicker{Company contact}\\[3pt]
+\NVIKicker{Company data}\\[2pt]
+\NVIFine{\textbf{Legal name}}\\
+\NVIBody{Northvalley Intelligence LLC}\\[3pt]
+\NVIFine{\textbf{Entity}}\\
+\NVIBody{Georgia limited liability company, founded June 2026}\\[3pt]
+\NVIFine{\textbf{Location}}\\
+\NVIBody{Marietta, Georgia}\\[3pt]
+\NVIFine{\textbf{NAICS (primary)}}\\
+\NVIBody{541511 --- Custom Computer Programming Services}\\[3pt]
+\NVIFine{\textbf{NAICS (secondary)}}\\
+\NVIBody{541512 --- Computer Systems Design Services}\\[3pt]
+\NVIFine{\textbf{PSC}}\\
+\NVIBody{DA01 --- IT and Telecom -- Business Application/Application Development Support Services (Labor)}\\
+\NVIBody{DH01 --- IT and Telecom -- Platform Support Services: Database, Mainframe, Middleware (Labor)}\\
+\NVIBody{DD01 --- IT and Telecom -- Service Delivery Support Services: ITSM, Operations Center, Project/PM (Labor)}\\[3pt]
+\NVIFine{\textbf{Contracting role}}\\
+\NVIBody{Prime contractor or subcontractor}\\[3pt]
+\NVIFine{\textbf{Unique Entity ID (UEI)}}\\
+\NVIBody{JX76HA57NCJ8}\\[3pt]
+\vspace{2pt}\NVIKicker{How an engagement runs}\\[2pt]
+\NVIBody{\textbf{1.} Conversation with the founder.}\\[1pt]
+\NVIBody{\textbf{2.} Written scope and acceptance criteria.}\\[1pt]
+\NVIBody{\textbf{3.} Build in short increments on a staging environment.}\\[1pt]
+\NVIBody{\textbf{4.} Release through CI, with documentation and handover.}\\[1pt]
+\vspace{3pt}\NVIKicker{Company contact}\\[2pt]
 \NVIBody{Ferosh Jacob, Founder}\\
 \NVIBody{ferosh@northvalleyintel.com}\\
 \NVIBody{(470) 781-4143}\\
