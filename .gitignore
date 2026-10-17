@@ -10,3 +10,10 @@ dist/
 coverage/
 *.log
 *.tsbuildinfo
+capability-statement/*.aux
+capability-statement/*.log
+capability-statement/*.fls
+capability-statement/*.fdb_latexmk
+capability-statement/*.out
+capability-statement/*.synctex.gz
+capability-statement/*.pdf

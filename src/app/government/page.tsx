@@ -63,6 +63,14 @@ export default function GovernmentPage() {
             <p className="mt-6 max-w-3xl text-lg leading-8 text-[#42505d]">
               {governmentPage.summary}
             </p>
+            <p className="mt-4 text-sm font-bold">
+              <a
+                className="text-north-teal underline underline-offset-4 hover:text-north-ink"
+                href="/northvalley-capability-statement.pdf"
+              >
+                Download the capability statement (PDF)
+              </a>
+            </p>
           </div>
         </section>
 
@@ -229,9 +237,15 @@ export default function GovernmentPage() {
                 </div>
               ))}
             </dl>
-            <p className="mt-4 text-sm leading-6 text-north-muted">
-              A downloadable capability statement will be published here once
-              the registration identifiers are issued.
+            <ButtonLink
+              href="/northvalley-capability-statement.pdf"
+              variant="secondary"
+              className="mt-6"
+            >
+              Download the capability statement (PDF)
+            </ButtonLink>
+            <p className="mt-3 text-sm leading-6 text-north-muted">
+              Two pages, mirrors this page. Updated when the page changes.
             </p>
           </div>
         </section>
