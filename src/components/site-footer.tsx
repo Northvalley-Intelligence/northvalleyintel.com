@@ -60,6 +60,14 @@ export function SiteFooter({ width = "max-w-7xl" }: { width?: string }) {
             </a>
             <a
               className="hover:text-white"
+              href={siteConfig.facebookUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Facebook
+            </a>
+            <a
+              className="hover:text-white"
               href={owner.blogUrl}
               rel="noopener noreferrer"
               target="_blank"

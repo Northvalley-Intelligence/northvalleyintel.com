@@ -23,6 +23,8 @@ export const siteConfig = {
   linkedinUrl: "https://www.linkedin.com/company/119623922/",
   // The business's Clutch profile. Used for sameAs and the footer link.
   clutchUrl: "https://clutch.co/profile/northvalley-intelligence",
+  // The business's Facebook page. Used for sameAs and the footer link.
+  facebookUrl: "https://www.facebook.com/profile.php?id=61590572221356",
   tagline: "Software for everyone.",
   description:
     "Northvalley Intelligence is a software consultancy with three services: software development, agentic applications, and data science, machine learning and data cleansing. We design, build and integrate software for organizations that need it to work with the systems they already run.",

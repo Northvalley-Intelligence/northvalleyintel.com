@@ -82,6 +82,7 @@ export default async function ServiceAreaPage({
       siteConfig.mapsUrl,
       siteConfig.linkedinUrl,
       siteConfig.clutchUrl,
+      siteConfig.facebookUrl,
     ],
     hasMap: siteConfig.mapsUrl,
     description: `Custom software, workflow automation, AI assistants, and website growth assessments for businesses in ${area.city}, Georgia.`,
