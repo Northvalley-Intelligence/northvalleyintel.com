@@ -177,8 +177,8 @@ export const capabilities = [
 
 /**
  * The /government page (handoff 06). One page for federal, state and local
- * buyers. Identifiers are never invented: the UEI is shown (on file); other
- * identifiers (CAGE, SAM.gov status) are shown only once they exist. Past performance repeats only
+ * buyers. Identifiers are never invented: UEI, CAGE code and SAM.gov status
+ * are shown as registered in SAM.gov. Past performance repeats only
  * what the Client Work cards already say (outcome only, no client data).
  */
 export const governmentPage = {
@@ -284,6 +284,8 @@ export const governmentPage = {
     },
     { label: "Contracting role", value: "Prime contractor or subcontractor" },
     { label: "Unique Entity ID (UEI)", value: "JX76HA57NCJ8" },
+    { label: "CAGE code", value: "26B16" },
+    { label: "SAM.gov registration", value: "Active" },
   ],
 };
 

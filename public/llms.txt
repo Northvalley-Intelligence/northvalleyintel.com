@@ -104,7 +104,7 @@ https://northvalleyintel.com/case-studies/chatgpt-booking-medina-clean
 ## Useful Source Pages
 
 - Home: https://northvalleyintel.com/
-- Government buyers (capabilities, NAICS 541511, PSC DA01/DH01/DD01, past performance; UEI JX76HA57NCJ8; CAGE code and SAM status: registration in progress): https://northvalleyintel.com/government
+- Government buyers (capabilities, NAICS 541511, PSC DA01/DH01/DD01, past performance; UEI JX76HA57NCJ8; CAGE code 26B16; SAM.gov registration active): https://northvalleyintel.com/government
 - About, with mission, vision and values: https://northvalleyintel.com/about#mission
 - Capability statement (PDF, mirrors /government): https://northvalleyintel.com/northvalley-capability-statement.pdf
 - Machine-readable source: https://northvalleyintel.com/source-website-assessment.json
