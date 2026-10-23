@@ -231,7 +231,7 @@ export default function GovernmentPage() {
 
         <section
           id="contact"
-          className="border-t border-north-line bg-[#f8faf9] px-5 py-14 md:px-10 md:py-16 lg:px-18"
+          className="border-t border-north-line px-5 py-14 md:px-10 md:py-16 lg:px-18"
         >
           <div className="mx-auto max-w-5xl">
             <h2 className="text-2xl font-extrabold text-north-ink">Contact</h2>

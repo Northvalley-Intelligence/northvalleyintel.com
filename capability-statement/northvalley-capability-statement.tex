@@ -11,10 +11,10 @@
 \newcommand{\NVIPanelTop}[1]{\begin{tikzpicture}[baseline=(current bounding box.north)]\node[draw=NVIRule,fill=NVIPanel,rounded corners=1pt,inner xsep=8pt,inner ysep=7pt,text width=\dimexpr\linewidth-18pt\relax,align=left,anchor=north west] at (0,0) {#1};\end{tikzpicture}}
 \newcommand{\NVIAccentRule}[1]{\textcolor{NVIAccent}{\rule{\linewidth}{#1}}}
 \renewcommand{\NVIKicker}[1]{{\fontsize{7.8}{9}\selectfont\bfseries\color{NVIAccent}\MakeUppercase{#1}}}
-\newcommand{\NVILead}[1]{\textbf{\color{NVIAccentDark}#1}}
+\newcommand{\NVILead}[1]{\textbf{\color{NVIAccent}#1}}
 \newcommand{\SubH}[1]{\noindent\colorbox{NVIAccentSoft}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\fontsize{9.4}{11}\selectfont\bfseries\color{NVIAccentDark}#1}}\par\vspace{1pt}}
 \renewcommand{\NVIBody}[1]{{\fontsize{8.7}{10.4}\selectfont\color{NVIInk}#1}}
-\renewcommand{\NVISection}[1]{\vspace{4pt}{\fontsize{10.4}{12}\selectfont\bfseries\color{NVIAccentDark}#1}\\[-0.03in]\NVIAccentRule{0.8pt}\vspace{2pt}}
+\renewcommand{\NVISection}[1]{\vspace{4pt}{\fontsize{10.4}{12}\selectfont\bfseries\color{NVIAccent}#1}\\[-0.03in]\NVIAccentRule{1.0pt}\vspace{2pt}}
 \begin{document}
 \noindent\NorthvalleyLogo[0.5in]\hspace{0.12in}%
 \begin{minipage}[c][0.5in][c]{0.5\linewidth}
@@ -62,7 +62,7 @@
 \end{minipage}\hfill
 \begin{minipage}[t]{0.265\linewidth}
 \NVIPanelTop{%
-\NVIKicker{Company data}\\[2pt]
+\hspace*{-8pt}\colorbox{NVIAccent}{\parbox[c][9.5pt][c]{\dimexpr\linewidth+16pt-2\fboxsep\relax}{\hspace{8pt}{\fontsize{7.8}{9}\selectfont\bfseries\color{white}\MakeUppercase{Company data}}}}\\[2pt]
 \NVIFine{\textbf{Legal name}}\\
 \NVIBody{Northvalley Intelligence LLC}\\[3pt]
 \NVIFine{\textbf{Entity}}\\
@@ -82,13 +82,13 @@
 \NVIFine{\textbf{Unique Entity ID (UEI)}}\\
 \NVIBody{JX76HA57NCJ8}\\[3pt]
 \NVIFine{\textbf{CAGE code $\cdot$ SAM.gov}}\\
-\NVIBody{26B16 $\cdot$ registration active}\\[3pt]
+\NVIBody{26B16 $\cdot$ registration active}\\[1pt]
 \vspace{2pt}\NVIKicker{How an engagement runs}\\[2pt]
 \NVIBody{\textbf{1.} Conversation with the founder.}\\[1pt]
 \NVIBody{\textbf{2.} Written scope and acceptance criteria.}\\[1pt]
 \NVIBody{\textbf{3.} Build in short increments on a staging environment.}\\[1pt]
 \NVIBody{\textbf{4.} Release through CI, with documentation and handover.}\\[1pt]
-\vspace{3pt}\NVIKicker{Company contact}\\[2pt]
+\vspace{1pt}\NVIKicker{Company contact}\\[2pt]
 \NVIBody{Ferosh Jacob, Founder}\\
 \NVIBody{ferosh@northvalleyintel.com}\\
 \NVIBody{(470) 781-4143}\\
