@@ -9,9 +9,12 @@
 \setlength{\parskip}{2.5pt}
 \renewcommand{\familydefault}{\sfdefault}
 \newcommand{\NVIPanelTop}[1]{\begin{tikzpicture}[baseline=(current bounding box.north)]\node[draw=NVIRule,fill=NVIPanel,rounded corners=1pt,inner xsep=8pt,inner ysep=7pt,text width=\dimexpr\linewidth-18pt\relax,align=left,anchor=north west] at (0,0) {#1};\end{tikzpicture}}
-\newcommand{\SubH}[1]{{\fontsize{9.4}{11}\selectfont\bfseries\color{NVIInk}#1}\par\vspace{1pt}}
+\newcommand{\NVIAccentRule}[1]{\textcolor{NVIAccent}{\rule{\linewidth}{#1}}}
+\renewcommand{\NVIKicker}[1]{{\fontsize{7.8}{9}\selectfont\bfseries\color{NVIAccent}\MakeUppercase{#1}}}
+\newcommand{\NVILead}[1]{\textbf{\color{NVIAccentDark}#1}}
+\newcommand{\SubH}[1]{\noindent\colorbox{NVIAccentSoft}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\fontsize{9.4}{11}\selectfont\bfseries\color{NVIAccentDark}#1}}\par\vspace{1pt}}
 \renewcommand{\NVIBody}[1]{{\fontsize{8.7}{10.4}\selectfont\color{NVIInk}#1}}
-\renewcommand{\NVISection}[1]{\vspace{4pt}{\fontsize{10.4}{12}\selectfont\bfseries\color{NVIInk}#1}\\[-0.03in]\NVIRuleLine\vspace{2pt}}
+\renewcommand{\NVISection}[1]{\vspace{4pt}{\fontsize{10.4}{12}\selectfont\bfseries\color{NVIAccentDark}#1}\\[-0.03in]\NVIAccentRule{0.8pt}\vspace{2pt}}
 \begin{document}
 \noindent\NorthvalleyLogo[0.5in]\hspace{0.12in}%
 \begin{minipage}[c][0.5in][c]{0.5\linewidth}
@@ -20,15 +23,15 @@
 \end{minipage}\hfill
 \begin{minipage}[c][0.5in][c]{0.3\linewidth}\raggedleft\NVIKicker{Capability statement}\end{minipage}
 
-\vspace{3pt}\noindent\NVIRuleLine\par
+\vspace{3pt}\noindent\NVIAccentRule{1.6pt}\par
 \vspace{1pt}
 
 \noindent\begin{minipage}[t]{0.715\linewidth}
 \NVISection{Capabilities}
 \NVIBody{Northvalley Intelligence builds software for organizations that need it to work with the systems they already run: web and mobile applications with custom integrations, agentic applications, and data science, machine learning and data cleansing.}\par
-\NVIBody{\textbf{Software development.} Web and mobile applications plus custom integrations with the systems a buyer already runs.}\par
-\NVIBody{\textbf{Agentic applications.} Software agents that take actions inside a business's own systems, with voice and chat front ends and agent-callable backends (MCP).}\par
-\NVIBody{\textbf{Data science, machine learning and data cleansing.} Data cleansing, entity normalization and matching, ontology, ranking and search relevance, and machine learning models, on messy real-world data.}\par
+\NVIBody{\NVILead{Software development.} Web and mobile applications plus custom integrations with the systems a buyer already runs.}\par
+\NVIBody{\NVILead{Agentic applications.} Software agents that take actions inside a business's own systems, with voice and chat front ends and agent-callable backends (MCP).}\par
+\NVIBody{\NVILead{Data science, machine learning and data cleansing.} Data cleansing, entity normalization and matching, ontology, ranking and search relevance, and machine learning models, on messy real-world data.}\par
 \NVISection{Differentiators}
 \NVIBody{\NVIItem{Entity recognition and natural-language processing on messy real-world data: normalization and matching systems at CareerBuilder, a product ontology and machine learning ranking at The Home Depot, and catalog search and discovery with generative AI at Genuine Parts Company.}}\par
 \NVIBody{\NVIItem{Data cleansing as a repeatable method: profile, normalize, match and measure, with an evaluation set agreed before the cleanup starts.}}\par
@@ -95,6 +98,6 @@
 \end{minipage}
 
 \vfill
-\noindent\NVIRuleLine\par
+\noindent\NVIAccentRule{0.8pt}\par
 \NVIFine{Northvalley Intelligence LLC \textperiodcentered{} northvalleyintel.com \textperiodcentered{} Capability statement, October 2026 \textperiodcentered{} Mirrors northvalleyintel.com/government}
 \end{document}

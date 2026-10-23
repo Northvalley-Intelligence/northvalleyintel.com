@@ -142,24 +142,39 @@ export default function GovernmentPage() {
           </div>
         </section>
 
-        <section id="buyers" className="px-5 py-14 md:px-10 md:py-16 lg:px-18">
+        <section
+          id="company-data"
+          className="px-5 py-14 md:px-10 md:py-16 lg:px-18"
+        >
           <div className="mx-auto max-w-5xl">
             <h2 className="text-2xl font-extrabold text-north-ink">
-              Federal, state and local
+              Company data
             </h2>
-            <div className="mt-5 grid gap-5 md:grid-cols-3">
-              {governmentPage.buyers.map((item) => (
+            <dl className="mt-5 grid gap-px overflow-hidden rounded-lg border border-north-line bg-north-line">
+              {governmentPage.companyData.map((row) => (
                 <div
-                  key={item.label}
-                  className="border-l-2 border-north-line pl-4"
+                  key={row.label}
+                  className="grid gap-1 bg-[#f8faf9] p-4 md:grid-cols-[14rem_1fr] md:p-5"
                 >
-                  <h3 className="text-sm font-black uppercase text-north-teal">
-                    {item.label}
-                  </h3>
-                  <p className="mt-2 leading-7 text-north-muted">{item.text}</p>
+                  <dt className="text-xs font-black uppercase text-north-amber-dark">
+                    {row.label}
+                  </dt>
+                  <dd className="text-sm font-semibold leading-6 text-north-ink">
+                    {row.value}
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
+            <ButtonLink
+              href="/northvalley-capability-statement.pdf"
+              variant="secondary"
+              className="mt-6"
+            >
+              Download the capability statement (PDF)
+            </ButtonLink>
+            <p className="mt-3 text-sm leading-6 text-north-muted">
+              One page, mirrors this page. Updated when the page changes.
+            </p>
           </div>
         </section>
 
@@ -210,42 +225,6 @@ export default function GovernmentPage() {
               >
                 Client Work
               </Link>
-            </p>
-          </div>
-        </section>
-
-        <section
-          id="company-data"
-          className="px-5 py-14 md:px-10 md:py-16 lg:px-18"
-        >
-          <div className="mx-auto max-w-5xl">
-            <h2 className="text-2xl font-extrabold text-north-ink">
-              Company data
-            </h2>
-            <dl className="mt-5 grid gap-px overflow-hidden rounded-lg border border-north-line bg-north-line">
-              {governmentPage.companyData.map((row) => (
-                <div
-                  key={row.label}
-                  className="grid gap-1 bg-[#f8faf9] p-4 md:grid-cols-[14rem_1fr] md:p-5"
-                >
-                  <dt className="text-xs font-black uppercase text-north-amber-dark">
-                    {row.label}
-                  </dt>
-                  <dd className="text-sm font-semibold leading-6 text-north-ink">
-                    {row.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <ButtonLink
-              href="/northvalley-capability-statement.pdf"
-              variant="secondary"
-              className="mt-6"
-            >
-              Download the capability statement (PDF)
-            </ButtonLink>
-            <p className="mt-3 text-sm leading-6 text-north-muted">
-              One page, mirrors this page. Updated when the page changes.
             </p>
           </div>
         </section>
