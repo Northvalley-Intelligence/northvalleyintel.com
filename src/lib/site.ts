@@ -220,20 +220,6 @@ export const governmentPage = {
     "Build in short increments on a staging environment.",
     "Release through CI, with documentation and handover.",
   ],
-  buyers: [
-    {
-      label: "Federal",
-      text: "NAICS, PSC and the Unique Entity ID are in the company data below.",
-    },
-    {
-      label: "State",
-      text: "Custom software, integrations and data work delivered remotely from Georgia to state agencies anywhere in the United States.",
-    },
-    {
-      label: "Local",
-      text: "A Marietta, Georgia firm. Local government buyers can meet in person and get a direct line to the founder.",
-    },
-  ],
   pastPerformance: [
     {
       name: "Canon Insurance Advisers",
