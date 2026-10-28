@@ -248,6 +248,72 @@ export const governmentPage = {
       ],
     },
   ],
+  // Key personnel (handoff 09; L1 2026-10-28 11:47, owner answers 11:52).
+  // Every date, title, employer and city below is copied from the founder's own
+  // published CV, https://feroshjacob.github.io/files/resume.pdf. Approved copy of
+  // record: streams/drl-group-government-contracts/attachments/key-personnel-copy-2026-10-28.md
+  // on the board. Do not reword; scripts/validate-seo-aeo.mjs bans several words
+  // that the CV itself uses (see that file's header).
+  keyPersonnel: {
+    name: "Ferosh Jacob, Ph.D.",
+    role: "Founder and technical lead",
+    intro:
+      "Northvalley Intelligence's work is performed by its founder. Before founding the company in June 2026 he spent 22 years in software, moving from software engineer to senior engineering manager leading cross-functional teams of more than 40 engineers, managers, data scientists and machine learning engineers, across the retail, healthcare, recruiting and automotive-parts domains.",
+    roles: [
+      {
+        title: "Senior Engineering Manager",
+        org: "Genuine Parts Company, Atlanta, GA",
+        period: "July 2024 – June 2026",
+        description:
+          "Led a cross-functional domain of four squads on catalog, search and discovery, using generative AI and classical machine learning. Built a first-of-its-kind agent-based auto-parts assistant on an Agent Development Kit, working with UX and platform teams through A/B testing and production rollout.",
+      },
+      {
+        title: "Senior Engineering Manager",
+        org: "Kaiser Permanente, Atlanta, GA",
+        period: "January 2021 – June 2024",
+        description:
+          "Led a cross-functional team of managers, data scientists, machine learning engineers and software engineers responsible for search relevance and platform performance for internal and external clients. Directed the migration of KP.org search from a vendor product to a homegrown open-source solution, transitioning the endpoints with minimal disruption to other services. Two refereed papers followed on automated search-relevance evaluation (AMIA 2022; CIKM 2022).",
+      },
+      {
+        title: "Staff Software Engineer",
+        org: "The Home Depot, Smyrna, GA",
+        period: "September 2015 – January 2021",
+        description:
+          "Led data-driven initiatives in search relevance, product ranking and ontology development for the online store: machine learning ranking models, a search-evaluation framework that measured feature impact before deployment, and a product ontology that improved search precision and recall from customer behaviour and external datasets.",
+      },
+      {
+        title: "Senior Software Engineer",
+        org: "CareerBuilder, Norcross, GA",
+        period: "September 2013 – September 2015",
+        description:
+          "Led a machine learning school and company normalization system that identified and standardized educational institutions, companies and other entities from unstructured text, and developed profile merging and matching across multiple data sources for the Recruitment Edge project. Co-author of the 2016 Springer chapter \"Data Science and Big Data Analytics at CareerBuilder\".",
+      },
+      {
+        title: "Software Engineer",
+        org: "Stabilix Private Solutions Ltd., Trivandrum, India",
+        period: "June 2004 – July 2007",
+        description:
+          "First professional role, supporting a United States insurance client from India and building the security module of Health Companion, a generic application and claim-processing system for insurance companies.",
+      },
+    ],
+    record: [
+      {
+        label: "Education and research",
+        value:
+          "Ph.D. in computer science, The University of Alabama (2009–2013) — thesis \"Modeling Computation-Intensive Problems for Heterogeneous Computing and Improved Source Code Maintenance\", advisor Dr. Jeff Gray; the research was supported by an Air Force Research Laboratory STTR grant. M.S. in computer science, Clarkson University (2007–2009) — thesis \"CSeR: A Code Editor for Tracking and Visualizing Detailed Clone Differences\". B.Tech. in electronics and communication, National Institute of Technology Calicut, India (2000–2004). Ph.D. intern at Pacific Northwest National Laboratory (2012): two domain-specific languages that let scientists describe and deploy signature-discovery workflows, integrated into the laboratory's pipeline and published in IEEE Computing in Science & Engineering (2014).",
+      },
+      {
+        label: "Teaching",
+        value:
+          "Part-time Assistant Professor of computer science, Kennesaw State University, since May 2017 — information retrieval, big-data analytics, text mining, data warehousing and mining, requirements engineering, software testing, software project management and algorithm analysis.",
+      },
+      {
+        label: "Publication record",
+        value:
+          "Twenty-seven published items since 2009: five refereed journal articles, a Springer book chapter, sixteen refereed conference papers, four refereed workshop papers and a conference tutorial — in IEEE Computing in Science & Engineering, The Journal of Supercomputing, Computer Physics Communications, the Journal of Parallel and Distributed Computing, IEEE Big Data, the AAAI industry track, AMIA and CIKM. Full list at feroshjacob.github.io.",
+      },
+    ],
+  },
   companyData: [
     { label: "Legal name", value: "Northvalley Intelligence LLC" },
     {

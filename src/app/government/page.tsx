@@ -173,7 +173,7 @@ export default function GovernmentPage() {
               Download the capability statement (PDF)
             </ButtonLink>
             <p className="mt-3 text-sm leading-6 text-north-muted">
-              One page, mirrors this page. Updated when the page changes.
+              Two pages, mirrors this page. Updated when the page changes.
             </p>
           </div>
         </section>
@@ -226,6 +226,62 @@ export default function GovernmentPage() {
                 Client Work
               </Link>
             </p>
+          </div>
+        </section>
+
+        <section
+          id="key-personnel"
+          className="border-t border-north-line px-5 py-14 md:px-10 md:py-16 lg:px-18"
+        >
+          <div className="mx-auto max-w-5xl">
+            <h2 className="text-2xl font-extrabold text-north-ink">
+              Key personnel
+            </h2>
+            <p className="mt-4 text-lg leading-8">
+              <span className="font-black text-north-ink">
+                {governmentPage.keyPersonnel.name}
+              </span>{" "}
+              <span className="text-north-muted">
+                {governmentPage.keyPersonnel.role}
+              </span>
+            </p>
+            <p className="mt-3 text-base leading-7 text-north-muted">
+              {governmentPage.keyPersonnel.intro}
+            </p>
+            <div className="mt-5 grid gap-5">
+              {governmentPage.keyPersonnel.roles.map((role) => (
+                <article
+                  key={`${role.org}-${role.period}`}
+                  className="rounded-lg border border-north-line bg-white p-6"
+                >
+                  <h3 className="text-xl font-black leading-tight text-north-ink">
+                    {role.title}
+                  </h3>
+                  <p className="mt-1 text-sm font-semibold text-north-amber-dark">
+                    {role.period}
+                  </p>
+                  <p className="mt-1 text-sm text-north-muted">{role.org}</p>
+                  <p className="mt-3 leading-7 text-north-muted">
+                    {role.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+            <dl className="mt-5 grid gap-px overflow-hidden rounded-lg border border-north-line bg-north-line">
+              {governmentPage.keyPersonnel.record.map((row) => (
+                <div
+                  key={row.label}
+                  className="grid gap-1 bg-[#f8faf9] p-4 md:grid-cols-[14rem_1fr] md:p-5"
+                >
+                  <dt className="text-xs font-black uppercase text-north-amber-dark">
+                    {row.label}
+                  </dt>
+                  <dd className="text-sm font-semibold leading-6 text-north-ink">
+                    {row.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
