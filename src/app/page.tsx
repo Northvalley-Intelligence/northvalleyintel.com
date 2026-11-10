@@ -660,7 +660,12 @@ export default function Home() {
                         alt={testimonial.alt}
                         width={1300}
                         height={698}
-                        className="w-full rounded-md border border-north-line object-cover"
+                        className="w-full rounded-md border border-north-line object-cover md:justify-self-center"
+                        style={
+                          "displayWidth" in testimonial
+                            ? { maxWidth: testimonial.displayWidth }
+                            : undefined
+                        }
                       />
                     ) : null}
                   </figure>

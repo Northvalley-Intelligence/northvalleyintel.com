@@ -963,6 +963,9 @@ export const clientTestimonials = [
     company: "Naomi Organizing",
     quote:
       "What stands out to me is his genuine passion for what he does. He loves finding solutions that make life easier for business owners and their customers.",
+    image: "/client-work/naomi-business-shout-out.png",
+    alt: "Screenshot of Naomi Organizing's Business Shout-Out post about Ferosh Jacob of Northvalley Intelligence.",
+    displayWidth: 346,
   },
 ];
 
