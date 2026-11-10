@@ -34,6 +34,8 @@ import {
   companyFacts,
   clientTestimonials,
   clientWork,
+  clientWorkGroups,
+  dataScienceWork,
   featuredOffering,
   featuredService,
   findabilityExtras,
@@ -492,7 +494,16 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-14 grid gap-9 lg:grid-cols-2">
+            <div className="mt-14 max-w-4xl">
+              <h3 className="text-[clamp(1.5rem,2.6vw,2.2rem)] font-black leading-tight tracking-normal">
+                {clientWorkGroups.software.title}
+              </h3>
+              <p className="mt-4 text-base leading-7 text-north-muted">
+                {clientWorkGroups.software.intro}
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-9 lg:grid-cols-2">
               {clientWork.map((client) => (
                 <article
                   key={client.name}
@@ -582,6 +593,39 @@ export default function Home() {
               ))}
             </div>
 
+            <div className="mt-16 border-t border-north-line pt-10">
+              <div className="max-w-4xl">
+                <h3 className="text-[clamp(1.5rem,2.6vw,2.2rem)] font-black leading-tight tracking-normal">
+                  {clientWorkGroups.dataScience.title}
+                </h3>
+                <p className="mt-4 text-base leading-7 text-north-muted">
+                  {clientWorkGroups.dataScience.intro}
+                </p>
+              </div>
+              <ul className="mt-10 grid gap-6 md:grid-cols-2">
+                {dataScienceWork.map((item) => (
+                  <li
+                    key={item.title}
+                    className="rounded-lg border border-north-line bg-white p-6 shadow-sm"
+                  >
+                    <h4 className="text-xl font-extrabold">{item.title}</h4>
+                    <p className="mt-3 text-base leading-7 text-north-muted">
+                      {item.description}
+                    </p>
+                    <a
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-north-teal hover:text-north-ink"
+                      href={item.href}
+                      {...(item.href.startsWith("http")
+                        ? { rel: "noreferrer", target: "_blank" }
+                        : {})}
+                    >
+                      {item.cta}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <div className="mt-16 grid gap-8 border-t border-north-line pt-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
               <div>
                 <p className="mb-4 text-sm font-extrabold uppercase text-north-teal">
@@ -610,13 +654,15 @@ export default function Home() {
                         {testimonial.client}, {testimonial.company}
                       </figcaption>
                     </div>
-                    <Image
-                      src={testimonial.image}
-                      alt={testimonial.alt}
-                      width={1300}
-                      height={698}
-                      className="w-full rounded-md border border-north-line object-cover"
-                    />
+                    {"image" in testimonial && testimonial.image ? (
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.alt}
+                        width={1300}
+                        height={698}
+                        className="w-full rounded-md border border-north-line object-cover"
+                      />
+                    ) : null}
                   </figure>
                 ))}
               </div>

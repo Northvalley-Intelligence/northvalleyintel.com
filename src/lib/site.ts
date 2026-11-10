@@ -886,6 +886,61 @@ export const clientWork = [
       "A one-person pet waste removal business had a single Google Sites page. We rebuilt it as a fast, plain-spoken site: plans with starting prices, a service-area page for the towns he serves, articles answering the questions customers actually search, and a quote request that reaches his inbox. The site also answers AI assistants directly — plans, pricing and service area — and can prepare a quote request for the owner to review. Nothing is booked without him.",
     signals: ["Website rebuild", "Local search content", "Agent-ready"],
   },
+  {
+    name: "Naomi Organizing",
+    client: "Naomi",
+    url: "https://www.naomiorganizing.com/",
+    image: "/client-work/naomi-organizing.jpg",
+    alt: "Naomi Organizing website home page preview.",
+    focus: "Website rebuild for a professional organizer",
+    outcome:
+      "A professional organizer in Marietta had her site on Squarespace. We rebuilt it from scratch as a fast, mobile-first site: her services, a page for each Cobb County town she serves, her blog posts moved over with the old links redirected, and a contact form that reaches her inbox.",
+    signals: ["Website rebuild", "Local search content", "Contact form"],
+  },
+];
+
+export const clientWorkGroups = {
+  software: {
+    title: "Software development, the agentic way",
+    intro:
+      "Every site and app here is built from scratch, not on WordPress or a page-builder vendor, so a client's site is limited only by their imagination. The websites run on the providers' free tiers within their traffic, so those website clients pay no monthly hosting or maintenance fee, yet the sites are feature-rich: admin pages to upload photos and articles and to approve or reject reviews, an admin page to manage the YouTube videos shown on the site, traffic analytics, and an endpoint built for AI assistants, so they can answer questions about the business.",
+  },
+  dataScience: {
+    title: "Data science",
+    intro:
+      "Search relevance, ranking and machine learning work, from the founder's earlier career and from published research.",
+  },
+};
+
+export const dataScienceWork = [
+  {
+    title: "Poster accepted at SCD 2026, Georgia State University",
+    description:
+      "With Jiho Noh of Kennesaw State University: a reproducible CPU/GPU benchmark of search-relevance judges, accepted as a poster at the Science and Cyberinfrastructure for Discovery (SCD) 2026 conference at Georgia State University.",
+    href: "https://feroshjacob.github.io/posts/2026/09/13/cpu-vs-gpu-battle-part-4-leave-the-laptop",
+    cta: "Read the write-up",
+  },
+  {
+    title: "Self-learning, agent-based retail search",
+    description:
+      "A published series on why retail search is hard and how agents can learn to improve it, from the baseline to hybrid search.",
+    href: "https://feroshjacob.github.io/posts/2026/07/02/self-learning-agent-based-retail-search-part-1-why-retail-search-is-harder-than-it-looks",
+    cta: "Read Part 1",
+  },
+  {
+    title: "Artificial Intelligent Retail Search",
+    description:
+      "An earlier series on the legacy approach to retail search and the data science era that followed.",
+    href: "https://feroshjacob.github.io/posts/2026/01/31/artificial-intelligent-search-1",
+    cta: "Read Part 1",
+  },
+  {
+    title: "Machine learning in industry, since 2013",
+    description:
+      "At CareerBuilder, a school and company normalization system; at The Home Depot, ranking models, a search-evaluation framework and a product ontology; at Genuine Parts Company, catalog search with generative AI and classical machine learning.",
+    href: "/about#credentials",
+    cta: "See credentials",
+  },
 ];
 
 export const clientTestimonials = [
@@ -902,6 +957,12 @@ export const clientTestimonials = [
     quote: "You are making my dream come true.",
     image: "/client-work/rosa-dream-come-true.jpg",
     alt: "Screenshot of Rosa Medina saying, You are making my dream come true.",
+  },
+  {
+    client: "Naomi",
+    company: "Naomi Organizing",
+    quote:
+      "What stands out to me is his genuine passion for what he does. He loves finding solutions that make life easier for business owners and their customers.",
   },
 ];
 
