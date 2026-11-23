@@ -247,6 +247,19 @@ export const governmentPage = {
         "Reference: available on request.",
       ],
     },
+    {
+      name: "AquaIntel",
+      lines: [
+        "Client: AquaIntel, Inc. (water-industry software).",
+        "Role: direct engagement, founder as lead developer with AI-assisted engineering.",
+        "Period: November 2026 to present (currently active).",
+        "Situation: Florida water use permit applications are assembled by hand from district records, maps and site data, and each of the state's five water management districts has its own rules and records.",
+        "Task: automate preparing the application while the permit consultant stays in control of every value.",
+        "Action: PermitWorks looks up a permit number in the South Florida Water Management District's public permit records and pre-fills the project intake, showing the source and confidence of each pre-filled value; a pipeline gathers the site data and drafts the application sections; a project chat answers from the records and names its sources; hosted on Cloudflare with automated release checks. South Florida is the first district; the design keeps district rules as configuration so the other four can be added.",
+        "Result to date: a consultant can start a project from a permit number and review a pre-filled, sourced intake instead of typing it. The build is deployed to the client's staging environment and is not yet in production use.",
+        "Reference: available on request.",
+      ],
+    },
   ],
   // Key personnel (handoff 09; L1 2026-10-28 11:47, owner answers 11:52).
   // Every date, title, employer and city below is copied from the founder's own
@@ -775,6 +788,21 @@ export const clientWork = [
       "Web and mobile app",
       "Bank data and billing",
       "Release engineering",
+    ],
+  },
+  {
+    name: "PermitWorks by AquaIntel",
+    client: "AquaIntel, Inc.",
+    url: "https://www.waterutility.ai/about",
+    image: "/client-work/aquaintel.jpg",
+    alt: "AquaIntel website preview.",
+    focus: "Permit application automation",
+    outcome:
+      "South Florida water use permit applications started from a permit number, with each pre-filled value sourced and the consultant in control. In staging with the client.",
+    signals: [
+      "Permit automation",
+      "Public records with sources",
+      "Cloudflare staging",
     ],
   },
   {
