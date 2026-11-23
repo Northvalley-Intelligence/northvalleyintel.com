@@ -247,6 +247,19 @@ export const governmentPage = {
         "Reference: available on request.",
       ],
     },
+    {
+      name: "AquaIntel",
+      lines: [
+        "Client: AquaIntel, Inc. (water utility and permitting software).",
+        "Role: direct engagement, founder as lead developer with AI-assisted engineering.",
+        "Period: November 2026 to present (currently active).",
+        "Situation: Florida environmental resource permit applications are assembled by hand from district records, maps and site data, under the rules of five water management districts.",
+        "Task: automate preparing the application while the permit consultant stays in control of every value.",
+        "Action: PermitWorks looks up a permit number in the district's public permit service and pre-fills the project intake, showing the source and confidence of every value; a pipeline gathers the site data and drafts the application sections; a project chat answers from the records and names its sources; hosted on Cloudflare with automated release checks.",
+        "Result: a consultant starts a project from a permit number and reviews a pre-filled, sourced intake instead of typing it, now running in the client's staging environment.",
+        "Reference: available on request.",
+      ],
+    },
   ],
   // Key personnel (handoff 09; L1 2026-10-28 11:47, owner answers 11:52).
   // Every date, title, employer and city below is copied from the founder's own
@@ -775,6 +788,21 @@ export const clientWork = [
       "Web and mobile app",
       "Bank data and billing",
       "Release engineering",
+    ],
+  },
+  {
+    name: "PermitWorks by AquaIntel",
+    client: "AquaIntel, Inc.",
+    url: "https://www.waterutility.ai/about",
+    image: "/client-work/aquaintel.jpg",
+    alt: "AquaIntel website preview.",
+    focus: "Permit application automation",
+    outcome:
+      "Florida water-permit applications prepared from a permit number, with every value sourced and the consultant in control.",
+    signals: [
+      "Permit automation",
+      "Public records with sources",
+      "Cloudflare staging",
     ],
   },
   {
