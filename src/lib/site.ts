@@ -793,7 +793,7 @@ export const clientWork = [
   {
     name: "PermitWorks by AquaIntel",
     client: "AquaIntel, Inc.",
-    url: "https://www.waterutility.ai/about",
+    url: "https://www.waterutility.ai/permit-works",
     image: "/client-work/aquaintel.jpg",
     alt: "AquaIntel website preview.",
     focus: "Permit application automation",
