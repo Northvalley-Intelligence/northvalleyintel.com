@@ -245,6 +245,7 @@ export const governmentPage = {
         "Action: a staging environment, scenario tests and a three-phase release process; bank-data import, subscriptions and billing, and the safety rules around the in-app money coach.",
         "Result: the monthly cycle became two production releases in one week, turning the founder's roadmap into shipped features faster.",
         "Reference: available on request.",
+        "Website: https://www.smartcashsheet.com/",
       ],
     },
     {
@@ -258,6 +259,7 @@ export const governmentPage = {
         "Action: PermitWorks looks up a permit number in the South Florida Water Management District's public permit records and pre-fills the project intake, showing the source and confidence of each pre-filled value; a pipeline gathers the site data and drafts the application sections; a project chat answers from the records and names its sources; hosted on Cloudflare with automated release checks. South Florida is the first district; the design keeps district rules as configuration so the other four can be added.",
         "Result to date: a consultant can start a project from a permit number and review a pre-filled, sourced intake instead of typing it. The build is deployed to the client's staging environment and is not yet in production use.",
         "Reference: available on request.",
+        "Website: https://www.waterutility.ai/permit-works",
       ],
     },
   ],
