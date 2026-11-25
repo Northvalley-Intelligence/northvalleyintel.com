@@ -207,7 +207,17 @@ export default function GovernmentPage() {
                               <span className="font-bold text-north-ink">
                                 {line.slice(0, split)}:
                               </span>{" "}
-                              {line.slice(split + 2)}
+                              {line.slice(split + 2).startsWith("https://") ? (
+                                <a
+                                  href={line.slice(split + 2)}
+                                  rel="noopener noreferrer"
+                                  className="font-bold text-north-teal hover:underline"
+                                >
+                                  {line.slice(split + 2)}
+                                </a>
+                              ) : (
+                                line.slice(split + 2)
+                              )}
                             </>
                           )}
                         </li>
